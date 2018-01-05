@@ -1,0 +1,62 @@
+{% load i18n static %}{% get_current_language as LANG %}
+<!DOCTYPE html>
+<html lang={{ LANG }}>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="Berlin Vegan">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Berlin Vegan</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/jumbotron.css' %}" rel="stylesheet">
+
+    {% block css %}
+    {% endblock %}
+
+  </head>
+  {% block navbar %}
+  {% endblock %}
+  <body>
+
+  {% block content %}
+  {% endblock %}
+  {% block footer %}
+      <hr>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col">
+                        <div class="text-center">
+                            <a  href="https://creativecommons.org/licenses/by-nc/4.0/">
+                                <img src="{% static 'images/cc-by-nc.png' %}">
+                            </a>
+                            <a href="https://www.berlin-vegan.de/">
+                                <p class="text-muted">Berlin Vegan</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col d-flex align-items-end justify-content-end">
+                        <div class="">
+                            <a href="{{ git.url }}" class="badge badge-secondary">
+                            {{ git.id_short }}{% if git.tag %}, {{ git.tag }}{% endif %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+  {% endblock %}
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    {% block script %}{% endblock %}
+  </body>
+</html>

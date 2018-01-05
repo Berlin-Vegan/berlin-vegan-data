@@ -1,0 +1,11 @@
+*.pyc
+.idea/
+venv/
+collectstatic/
+.DS_Store
+gastro.json
+env/
+*.sqlite3
+static/
+.env
+bvdata/settings/docker.py

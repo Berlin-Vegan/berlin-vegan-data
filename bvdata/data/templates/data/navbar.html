@@ -1,0 +1,32 @@
+{% extends "data/base.html" %}
+{% load i18n static %}
+{% block navbar %}
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="/">
+      <img src="{% static 'images/berlin-vegan-logo.png' %}" width="30" height="30" alt="">
+      Berlin Vegan Data</a>
+
+    <div class="collapse navbar-collapse">
+    {% if user.is_authenticated %}
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item {% if page_name == 'dashboard' %}active{% endif %}">
+                <a class="nav-link" href="/dashboard/">{% trans 'dashboard' %}</a>
+            </li>
+            <li class="nav-item {% if page_name == 'gastro-new' %}active{% endif %}">
+                <a class="nav-link" href="/gastro-new/">{% trans 'new' %}</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_superuser %}
+                <li class="nav-item align-left">
+                    <a class="nav-link" href="/admin/">{% trans 'admin' %}</a>
+                </li>
+            {% endif %}
+        </ul>
+
+            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'logout' %}?next=/accounts/login/">{% trans 'logout' %}</a>
+    {% endif %}
+    </div>
+</nav>
+{% endblock %}
+

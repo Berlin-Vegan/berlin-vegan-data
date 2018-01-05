@@ -1,0 +1,26 @@
+{% extends 'data/gastro.html' %}
+{% load i18n static crispy_forms_tags %}
+
+{% block content %}
+<nav class="nav flex-column sticky-top" id="sidebar">
+  <a class="nav-link" href="#general">{% trans 'general' %}</a>
+  <a class="nav-link" href="#opening-hours">{% trans 'opening hours' %}</a>
+  <a class="nav-link" href="#details">{% trans 'details' %}</a>
+  <a class="nav-link" href="#tags">{% trans 'tags' %}</a>
+</nav>
+<div class="container" id="container-edit">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md">
+                <h1>{% trans 'new' %}</h1>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {% include 'data/includes/gastro-form-new.html' %}
+</div>
+{% endblock %}
+
+{% block script-gastro %}
+<script src="{% static 'js/map-new.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,150 @@
+{% load i18n crispy_forms_tags %}
+
+<form method="POST" class="post-form">{% csrf_token %}
+    <h4 id="general">{% trans 'general' %}</h4>
+    <div class="row">
+        <div class="col">
+            {{ form.name|as_crispy_field }}
+            {{ form.street|as_crispy_field }}
+            <div class="row">
+                <div class="col">
+                    {{ form.city|as_crispy_field }}
+                </div>
+                <div class="col">
+                    {{ form.cityCode|as_crispy_field }}
+                </div>
+            </div>
+            {{ form.district|as_crispy_field }}
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    {{ form.latCoord|as_crispy_field }}
+                </div>
+                <div class="col">
+                     {{ form.longCoord|as_crispy_field }}
+                </div>
+            </div>
+            <div id="map">
+            </div>
+        </div>
+        <div class="col">
+            {{ form.email|as_crispy_field }}
+            {{ form.telephone|as_crispy_field }}
+            {{ form.vegan|as_crispy_field }}
+            <div class="row">
+                {% block button_address %}
+                {% endblock %}
+                <div class="col">
+                    {{ form.closed|as_crispy_field }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <hr>
+    <h4 id="opening-hours">{% trans 'opening hours' %}</h4>
+    <div class="row">
+        <div class="col">
+            <h6>{% trans 'Monday' %}</h6>
+            {{ form.openingMon|as_crispy_field }}
+            {{ form.closingMon|as_crispy_field }}
+        </div>
+        <div class="col">
+            <h6>{% trans 'Tuesday' %}</h6>
+            {{ form.openingTue|as_crispy_field }}
+            {{ form.closingTue|as_crispy_field }}
+        </div>
+        <div class="col">
+            <h6>{% trans 'Wednesday' %}</h6>
+            {{ form.openingWed|as_crispy_field }}
+            {{ form.closingWed|as_crispy_field }}
+        </div>
+        <div class="col">
+            <h6>{% trans 'Thursday' %}</h6>
+            {{ form.openingThu|as_crispy_field }}
+            {{ form.closingThu|as_crispy_field }}
+        </div>
+        <div class="col">
+            <h6>{% trans 'Friday' %}</h6>
+            {{ form.openingFri|as_crispy_field }}
+            {{ form.closingFri|as_crispy_field }}
+        </div>
+        <div class="col">
+            <h6>{% trans 'Saturday' %}</h6>
+            {{ form.openingSat|as_crispy_field }}
+            {{ form.closingSat|as_crispy_field }}
+        </div>
+        <div class="col">
+            <h6>{% trans 'Sunday' %}</h6>
+            {{ form.openingSun|as_crispy_field }}
+            {{ form.closingSun|as_crispy_field }}
+        </div>
+    </div>
+    <hr>
+    <h4 id="details">{% trans 'details' %}</h4>
+    <div class="row">
+        <div class="col">
+            {{ form.review_link|as_crispy_field }}
+        </div>
+        <div class="col">
+            {{ form.comment|as_crispy_field }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{ form.commentEnglish|as_crispy_field }}
+        </div>
+        <div class="col">
+            {{ form.text_intern|as_crispy_field }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{ form.publicTransport|as_crispy_field }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{ form.handicappedAccessible|as_crispy_field }}
+            {{ form.handicappedAccessibleWc|as_crispy_field }}
+            {{ form.dog|as_crispy_field }}
+            {{ form.childChair|as_crispy_field }}
+        </div>
+        <div class="col">
+            {{ form.catering|as_crispy_field }}
+            {{ form.delivery|as_crispy_field }}
+            {{ form.organic|as_crispy_field }}
+            {{ form.wlan|as_crispy_field }}
+        </div>
+        <div class="col">
+            {{ form.glutenFree|as_crispy_field }}
+            {{ form.breakfast|as_crispy_field }}
+            {{ form.brunch|as_crispy_field }}
+        </div>
+        <div class="col">
+            {{ form.seatsOutdoor|as_crispy_field }}
+            {{ form.seatsIndoor|as_crispy_field }}
+        </div>
+    </div>
+    <hr>
+    <h4 id="tags">{% trans 'tags' %}</h4>
+    <div class="row">
+        <div class="col">
+            {{ form.restaurant|as_crispy_field }}
+        </div>
+        <div class="col">
+            {{ form.imbiss|as_crispy_field }}
+        </div>
+        <div class="col">
+            {{ form.eiscafe|as_crispy_field }}
+        </div>
+        <div class="col">
+            {{ form.cafe|as_crispy_field }}
+        </div>
+        <div class="col">
+            {{ form.bar|as_crispy_field }}
+        </div>
+    </div>
+  <button type="submit" name="gastro_edit" class="save btn btn-primary">Save</button>
+</form>

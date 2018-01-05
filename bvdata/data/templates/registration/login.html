@@ -1,0 +1,50 @@
+{% extends 'data/navbar.html' %}
+{% load i18n static crispy_forms_tags %}
+
+{% block css %}
+    <link href="{% static 'bootstrap/css/signin.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+      <form class="form-signin" method="post" action="{% url 'login' %}">{% csrf_token %}
+        <h2 class="form-signin-heading">Please sign in</h2>
+            {{ form.username|as_crispy_field }}
+            {{ form.password|as_crispy_field }}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">{% trans 'login' %}</button>
+      </form>
+
+    </div> <!-- /container -->
+  </body>
+{% endblock %}
+
+{% block footer %}
+     <div class="fixed-bottom">
+        <hr>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col">
+                        <div class="text-center">
+                            <a  href="https://creativecommons.org/licenses/by-nc/4.0/">
+                                <img src="{% static 'images/cc-by-nc.png' %}">
+                            </a>
+                            <a href="https://www.berlin-vegan.de/">
+                                <p class="text-muted">Berlin Vegan</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col d-flex align-items-end justify-content-end">
+                        <div class="">
+                            <a href="{{ git.url }}" class="badge badge-secondary">
+                            {{ git.id_short }}{% if git.tag %}, {{ git.tag }}{% endif %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+{% endblock %}

@@ -1,0 +1,174 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Data"
+msgstr ""
+
+msgid "unique id"
+msgstr ""
+
+msgid "location name"
+msgstr ""
+
+msgid "street"
+msgstr ""
+
+msgid "citycode"
+msgstr ""
+
+msgid "city"
+msgstr ""
+
+msgid "latitude"
+msgstr ""
+
+msgid "longitude"
+msgstr ""
+
+msgid "telephone"
+msgstr ""
+
+msgid "website"
+msgstr ""
+
+msgid "email"
+msgstr ""
+
+msgid "opening monday"
+msgstr ""
+
+msgid "closing monday"
+msgstr ""
+
+msgid "opening tuesday"
+msgstr ""
+
+msgid "closing tuesday"
+msgstr ""
+
+msgid "opening wednesday"
+msgstr ""
+
+msgid "closing wednesday"
+msgstr ""
+
+msgid "opening thursday"
+msgstr ""
+
+msgid "closing thursday"
+msgstr ""
+
+msgid "opening friday"
+msgstr ""
+
+msgid "closing friday"
+msgstr ""
+
+msgid "opening saturday"
+msgstr ""
+
+msgid "closing saturday"
+msgstr ""
+
+msgid "omnivore (vegan declared)"
+msgstr ""
+
+msgid "vegetarian (vegan declared)"
+msgstr ""
+
+msgid "100% vegan"
+msgstr ""
+
+msgid "vegan"
+msgstr ""
+
+msgid "comment"
+msgstr ""
+
+msgid "comment english"
+msgstr ""
+
+msgid "review link"
+msgstr ""
+
+msgid "closed"
+msgstr ""
+
+msgid "text intern"
+msgstr ""
+
+msgid "district"
+msgstr ""
+
+msgid "public transport"
+msgstr ""
+
+msgid "unknown"
+msgstr ""
+
+msgid "yes"
+msgstr ""
+
+msgid "no"
+msgstr ""
+
+msgid "handicapped accessible"
+msgstr ""
+
+msgid "handicapped accessible wc"
+msgstr ""
+
+msgid "dog"
+msgstr ""
+
+msgid "child's chair"
+msgstr ""
+
+msgid "catering"
+msgstr ""
+
+msgid "delivery"
+msgstr ""
+
+msgid "organic"
+msgstr ""
+
+msgid "wlan"
+msgstr ""
+
+msgid "gluten free"
+msgstr ""
+
+msgid "breakfast"
+msgstr ""
+
+msgid "brunch"
+msgstr ""
+
+msgid "seats outdoor"
+msgstr ""
+
+msgid "seats indoor"
+msgstr ""
+
+msgid "restaurant"
+msgstr ""
+
+msgid "takeaway"
+msgstr ""
+
+msgid "ice cream parlor"
+msgstr ""
+
+msgid "coffee shop"
+msgstr ""
+
+msgid "bar"
+msgstr ""
+
+msgid "name"
+msgstr ""
+
+msgid "city code"
+msgstr ""

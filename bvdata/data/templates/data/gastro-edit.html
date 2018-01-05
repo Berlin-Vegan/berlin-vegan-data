@@ -1,0 +1,38 @@
+{% extends 'data/gastro.html' %}
+{% load i18n static crispy_forms_tags %}
+
+
+{% block content %}
+<nav class="nav flex-column sticky-top" id="sidebar">
+  <a class="nav-link" href="#general">{% trans 'general' %}</a>
+  <a class="nav-link" href="#opening-hours">{% trans 'opening hours' %}</a>
+  <a class="nav-link" href="#details">{% trans 'details' %}</a>
+  <a class="nav-link" href="#tags">{% trans 'tags' %}</a>
+</nav>
+<div class="container" id="container-edit">
+    <div class="page-header">
+        {% if gastro.closed %}
+            <div class="alert alert-danger text-center" role="alert" id="alert-top">
+              {% trans 'This location is marked as closed!' %}
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col">
+                <h1 class="display-4">{{ gastro.name }}</h1>
+                <h6 class="float-left text-muted">{{ gastro.id_string }}</h6>
+            </div>
+            <div class="col d-flex align-items-end justify-content-end">
+                <div class="float-right">
+                    <p class="small margin-bottom-0-5 text-size-0-7">{% trans 'created:' %} {{ gastro.created|date:'' }}, {% trans 'updated:' %} {{ gastro.updated|date:'' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="margin-top-0">
+    {% include 'data/includes/gastro-form.html' %}
+</div>
+{% endblock %}
+
+{% block script-gastro %}
+<script src="{% static 'js/map-edit.js' %}"></script>
+{% endblock %}
