@@ -10,6 +10,7 @@ WORKDIR /code
 ADD requirements.txt /code
 ADD bvdata /code
 ADD .git /code
+
 RUN apk add --update --no-cache gettext git libffi-dev libpq libjpeg-turbo-dev libxslt-dev && \
     apk add --no-cache --virtual .build-deps gcc libc-dev linux-headers musl-dev postgresql-dev python3-dev && \
     pip install --no-cache-dir -r requirements.txt && \
@@ -17,16 +18,6 @@ RUN apk add --update --no-cache gettext git libffi-dev libpq libjpeg-turbo-dev l
 
 ENV DJANGO_SETTINGS_MODULE=bvdata.settings.docker
 
-# migrations
-CMD python manage.py migrate
-
-#compilemessages
-CMD python manage.py compilemessages
-
-# collecstatic
-#CMD python manage.py collectstatic
-
-#CMD python manage.py runserver 0.0.0.0:8000
 # uWSGI
 ENV UWSGI_WSGI_FILE=bvdata/wsgi.py UWSGI_HTTP=:8000 UWSGI_MASTER=1 UWSGI_WORKERS=2 UWSGI_THREADS=8 UWSGI_UID=1000 UWSGI_GID=2000 UWSGI_LAZY_APPS=1 UWSGI_WSGI_ENV_BEHAVIOR=holy
 

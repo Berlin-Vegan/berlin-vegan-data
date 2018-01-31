@@ -12,7 +12,6 @@ $(document).ready(function() {
         var geocode = 'https://nominatim.openstreetmap.org/search?format=json&limit=1&q='
             + street + ',' + citycode + ',' + city;
         $.getJSON(geocode, function(data) {
-            console.log(data);
             lat = data[0].lat;
             lon = data[0].lon;
 
