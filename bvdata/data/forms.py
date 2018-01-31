@@ -93,5 +93,5 @@ class GastroForm(ModelForm):
         timepicker = open + close
         for t in timepicker:
             self.fields[t].widget.attrs.update({'data-picker': 'timepicker'})
+            self.fields[t].widget.attrs.update({'placeholder': 'HH:MM'})
             self.fields[t].widget.format = '%H:%M'
-

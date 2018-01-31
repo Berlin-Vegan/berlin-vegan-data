@@ -10,7 +10,7 @@ def commit(request):
         id=id,
         id_short=id_short,
         tag=tag,
-        url=f'https://github.com/Berlin-Vegan/berlin-vegan-data/commit/{id}'
+        url=f'https://github.com/Berlin-Vegan/berlin-vegan-data/commits/master'
     )
 
     return dict(git=git)

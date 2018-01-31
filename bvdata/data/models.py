@@ -202,6 +202,9 @@ class Gastro(BaseLocationID, BaseGastro):
     def get_absolute_url(self):
         return reverse('gastro-update', args=[self.id_string])
 
+    class Meta:
+        ordering = ['name']
+
     # creates a dict of the model object
     def as_dict(self):
         gastro_dict = {}
@@ -215,7 +218,7 @@ class Gastro(BaseLocationID, BaseGastro):
             latCoord=self.latCoord,
             longCoord=self.longCoord,
             vegan=self.vegan,
-            district=self.district,
+            district=self.get_district_display(),
         )
         # opening hours
         if self.telephone is not None:

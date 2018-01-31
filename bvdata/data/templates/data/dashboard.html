@@ -26,7 +26,7 @@
     </thead>
     <tbody class="searchable">
     {% for gastro in gastros %}
-          <tr class="clickable-row {% if gastro.closed %}table-danger{% endif %}" data-href="/location/gastro/{{ gastro.id_string }}/edit/">
+          <tr class="clickable-row {% if gastro.closed %}table-danger{% endif %}" data-href="{{ gastro.get_absolute_url }}">
             <td>{{ gastro.name }}</td>
             <td>{{ gastro.street }}</td>
             <td>{{ gastro.cityCode }}</td>

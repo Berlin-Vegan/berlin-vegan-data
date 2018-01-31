@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 
 services:
     django:
@@ -19,7 +19,6 @@ services:
             - DATABASE_PASSWORD=${DBPASSWORD}
 
             - SECRET_KEY=${SECRET_KEY}
-            - DEBUG=${DEBUG}
             - ALLOWED_HOSTS=${ALLOWED_HOSTS}
     postgres:
         image: postgres:10.1-alpine
