@@ -43,3 +43,7 @@ p.margin-bottom-0-5 {
 p.text-size-0-7 {
     font-size: .7rem;
 }
+
+table tbody tr.clickable-row {
+    cursor: pointer;
+}

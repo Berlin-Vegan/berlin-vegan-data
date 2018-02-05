@@ -19,7 +19,6 @@ services:
             - DATABASE_PASSWORD=${DBPASSWORD}
 
             - SECRET_KEY=${SECRET_KEY}
-            - ALLOWED_HOSTS=${ALLOWED_HOSTS}
     postgres:
         image: postgres:10.1-alpine
         restart: always

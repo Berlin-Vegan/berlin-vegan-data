@@ -33,6 +33,7 @@ class GastroForm(ModelForm):
             'vegan',
             'comment',
             'commentEnglish',
+            'commentOpen',
             'review_link',
             'closed',
             'text_intern',

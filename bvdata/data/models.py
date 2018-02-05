@@ -108,31 +108,55 @@ class BaseLocation(models.Model):
 class BaseGastro(BaseLocation):
     # districts
     # we are using the old berlin districts: https://de.wikipedia.org/wiki/Berliner_Bezirke#Zeit_der_Teilung_Berlins
-    DISTRICT_CHOICES = (
-        ('MITTE', 'Mitte'),
-        ('TIERGARTEN', 'Tiergarten'),
-        ('WEDDING', 'Wedding'),
-        ('PRENZLAUER BERG', 'Prenzlauer Berg'),
-        ('FRIEDRICHSHAIN', 'Friedrichshain'),
-        ('KREUZBERG', 'Kreuzberg'),
-        ('CHARLOTTENBURG', 'Charlottenburg'),
-        ('SPANDAU', 'Spandau'),
-        ('WILMERSDORF', 'Wilmersdorf'),
-        ('ZEHLENDORF', 'Zehlendorf'),
-        ('SCHÖNEBERG', 'Schöneberg'),
-        ('STEGLITZ', 'Steglitz'),
-        ('TEMPELHOF', 'Tempelhof'),
-        ('NEUKÖLLN', 'Neukölln'),
-        ('TREPTOW', 'Treptow'),
-        ('KÖPENICK', 'Köpenick'),
-        ('LICHTENBERG', 'Lichtenberg'),
-        ('WEISSENSEE', 'Weißensee'),
-        ('PANKOW', 'Pankow'),
-        ('REINICKENDORF', 'Reinickendorf'),
-        ('MARZAHN', 'Marzahn'),
-        ('HOHENSCHÖNHAUSEN', 'Hohenschönhausen'),
-        ('HELLERSDORF', 'Hellersdorf'),
-    )
+    CHOICE_CHA = 'CHARLOTTENBURG'
+    CHOICE_FRI = 'FRIEDRICHSHAIN'
+    CHOICE_HEL = 'HELLERSDORF'
+    CHOICE_HOH = 'HOHENSCHÖNHAUSEN'
+    CHOICE_KRE = 'KREUZBERG'
+    CHOICE_KOP = 'KÖPENICK'
+    CHOICE_LIC = 'LICHTENBERG'
+    CHOICE_MAR = 'MARZAHN'
+    CHOICE_MIT = 'MITTE'
+    CHOICE_NEU = 'NEUKÖLLN'
+    CHOICE_PAN = 'PANKOW'
+    CHOICE_PRE = 'PRENZLAUER BERG'
+    CHOICE_REI = 'REINICKENDORF'
+    CHOICE_SCH = 'SCHÖNEBERG'
+    CHOICE_SPA = 'SPANDAU'
+    CHOICE_STE = 'STEGLITZ'
+    CHOICE_TEM = 'TEMPELHOF'
+    CHOICE_TIE = 'TIERGARTEN'
+    CHOICE_TRE = 'TREPTOW'
+    CHOICE_WED = 'WEDDING'
+    CHOICE_WEI = 'WEISSENSEE'
+    CHOICE_WIL = 'WILMERSDORF'
+    CHOICE_ZEH = 'ZEHLENDORF'
+
+    DISTRICT_CHOICES = [
+        (CHOICE_CHA, 'Charlottenburg'),
+        (CHOICE_FRI, 'Friedrichshain'),
+        (CHOICE_HEL, 'Hellersdorf'),
+        (CHOICE_HOH, 'Hohenschönhausen'),
+        (CHOICE_KRE, 'Kreuzberg'),
+        (CHOICE_KOP, 'Köpenick'),
+        (CHOICE_LIC, 'Lichtenberg'),
+        (CHOICE_MAR, 'Marzahn'),
+        (CHOICE_MIT, 'Mitte'),
+        (CHOICE_NEU, 'Neukölln'),
+        (CHOICE_PAN, 'Pankow'),
+        (CHOICE_PRE, 'Prenzlauer Berg'),
+        (CHOICE_REI, 'Reinickendorf'),
+        (CHOICE_SCH, 'Schöneberg'),
+        (CHOICE_SPA, 'Spandau'),
+        (CHOICE_STE, 'Steglitz'),
+        (CHOICE_TEM, 'Tempelhof'),
+        (CHOICE_TIE, 'Tiergarten'),
+        (CHOICE_TRE, 'Treptow'),
+        (CHOICE_WED, 'Wedding'),
+        (CHOICE_WEI, 'Weißensee'),
+        (CHOICE_WIL, 'Wilmersdorf'),
+        (CHOICE_ZEH, 'Zehlendorf')
+    ]
 
     district = models.CharField(_('district'), max_length=30, null=True, choices=DISTRICT_CHOICES)
 
@@ -190,6 +214,9 @@ class BaseGastro(BaseLocation):
     # Bar
     bar = models.BooleanField(_('bar'), default=False)
 
+    # comment open
+    commentOpen = models.TextField(_('comment open'), null=True, blank=True)
+
     class Meta:
         abstract = True
 
@@ -241,14 +268,19 @@ class Gastro(BaseLocationID, BaseGastro):
             gastro_dict.update(otSat=str(self.openingSat) + " - " + str(self.closingSat))
         if self.openingSun is not None:
             gastro_dict.update(otSun=str(self.openingSun) + " - " + str(self.closingSun))
+
         # gastro comments
         if self.comment is not None:
             gastro_dict.update(comment=self.comment)
         if self.commentEnglish is not None:
             gastro_dict.update(commentEnglish=self.commentEnglish)
+        if self.commentOpen is not None:
+            gastro_dict.update(openComment=self.commentOpen)
+
         # gastro public transport
         if self.publicTransport is not None:
             gastro_dict.update(publicTransport=self.publicTransport)
+
         # gastro description
         if self.handicappedAccessible is None:
             gastro_dict.update(handicappedAccessible=-1)

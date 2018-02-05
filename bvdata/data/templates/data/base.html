@@ -15,8 +15,8 @@
     <!-- Bootstrap core CSS -->
     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'bootstrap/css/jumbotron.css' %}" rel="stylesheet">
-
     {% block css %}
+
     {% endblock %}
 
   </head>
@@ -27,7 +27,8 @@
   {% block content %}
   {% endblock %}
   {% block footer %}
-      <hr>
+      <div class="footer">
+        <hr>
         <footer>
             <div class="container">
                 <div class="row">
@@ -52,6 +53,8 @@
                 </div>
             </div>
         </footer>
+      </div>
+
   {% endblock %}
     <!-- Bootstrap core JavaScript
     ================================================== -->
