@@ -9,3 +9,4 @@ env/
 static/
 .env
 bvdata/settings/docker.py
+*.mo

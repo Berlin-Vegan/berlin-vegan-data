@@ -1,6 +1,5 @@
 from django.db import models, transaction, IntegrityError
 from django.urls import reverse
-from django.utils import timezone
 from django.utils.translation import gettext as _
 
 from bvdata.data.utils import get_random_string_32
@@ -35,7 +34,7 @@ class BaseLocation(models.Model):
     # update date
     updated = models.DateTimeField(_('updated'), auto_now=True)
     # name
-    name = models.CharField(_('location name'), max_length=100)
+    name = models.CharField(_('name'), max_length=100)
     # street
     street = models.CharField(_('street'), max_length=100)
     # cityCode
@@ -72,8 +71,8 @@ class BaseLocation(models.Model):
     openingSat = models.TimeField(_('opening saturday'), null=True, blank=True)
     closingSat = models.TimeField(_('closing saturday'), null=True, blank=True)
     # otSun
-    openingSun = models.TimeField(_('opening monday'), null=True, blank=True)
-    closingSun = models.TimeField(_('opening monday'), null=True, blank=True)
+    openingSun = models.TimeField(_('opening sunday'), null=True, blank=True)
+    closingSun = models.TimeField(_('closing sunday'), null=True, blank=True)
 
     # vegan
     OMNIVORE_VEGAN = 2
@@ -81,9 +80,9 @@ class BaseLocation(models.Model):
     VEGAN_VEGAN = 5
 
     VEGAN_CHOICE = (
-        (OMNIVORE_VEGAN, _('omnivore (vegan declared)')),
-        (VEGETARIAN_VEGAN, _('vegetarian (vegan declared)')),
-        (VEGAN_VEGAN, _('100% vegan')),
+        (OMNIVORE_VEGAN, 'omnivore (vegan declared)'),
+        (VEGETARIAN_VEGAN, 'vegetarian (vegan declared)'),
+        (VEGAN_VEGAN, '100% vegan'),
     )
 
     vegan = models.IntegerField(_('vegan'), choices=VEGAN_CHOICE)
@@ -179,7 +178,7 @@ class BaseGastro(BaseLocation):
     # handicappedAccessibleWc
     handicappedAccessibleWc = models.NullBooleanField(_('handicapped accessible wc'), choices=NULLBOOLEAN_CHOICE)
     # dog
-    dog = models.NullBooleanField(_('dog'), choices=NULLBOOLEAN_CHOICE)
+    dog = models.NullBooleanField(_('dogs allowed'), choices=NULLBOOLEAN_CHOICE)
     # childChair
     childChair = models.NullBooleanField(_("""child's chair"""), choices=NULLBOOLEAN_CHOICE)
     # catering
@@ -210,12 +209,12 @@ class BaseGastro(BaseLocation):
     # Eiscafe
     eiscafe = models.BooleanField(_('ice cream parlor'), default=False)
     # Cafe
-    cafe = models.BooleanField(_('coffee shop'), default=False)
+    cafe = models.BooleanField(_('Café'), default=False)
     # Bar
     bar = models.BooleanField(_('bar'), default=False)
 
     # comment open
-    commentOpen = models.TextField(_('comment open'), null=True, blank=True)
+    commentOpen = models.TextField(_('comment opening hours'), null=True, blank=True)
 
     class Meta:
         abstract = True

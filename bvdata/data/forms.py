@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+from django.utils.translation import gettext as _
 
 from .models import *
 
@@ -84,11 +85,11 @@ class GastroForm(ModelForm):
 
         # change label opening
         for o in open:
-            self.fields[o].label = 'opens'
+            self.fields[o].label = _('opens')
 
         # change label closing
         for c in close:
-            self.fields[c].label = 'closes'
+            self.fields[c].label = _('closes')
 
         # add timepicker and format hh:mm
         timepicker = open + close

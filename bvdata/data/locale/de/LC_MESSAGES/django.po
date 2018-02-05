@@ -1,174 +1,255 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-05 20:30+0100\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 
 msgid "Data"
 msgstr ""
 
+msgid "opens"
+msgstr "öffnet"
+
+msgid "closes"
+msgstr "schließt"
+
 msgid "unique id"
 msgstr ""
 
-msgid "location name"
-msgstr ""
+msgid "created"
+msgstr "erstellt"
+
+msgid "updated"
+msgstr "aktualisiert"
+
+msgid "name"
+msgstr "Name"
 
 msgid "street"
-msgstr ""
+msgstr "Straße"
 
 msgid "citycode"
-msgstr ""
+msgstr "PLZ"
 
 msgid "city"
-msgstr ""
+msgstr "Stadt"
 
 msgid "latitude"
-msgstr ""
+msgstr "Latitude"
 
 msgid "longitude"
-msgstr ""
+msgstr "Longitude"
 
 msgid "telephone"
-msgstr ""
+msgstr "Telefon"
 
 msgid "website"
-msgstr ""
+msgstr "Webseite"
 
 msgid "email"
-msgstr ""
+msgstr "EMail"
 
 msgid "opening monday"
-msgstr ""
+msgstr "öffnet Montags"
 
 msgid "closing monday"
-msgstr ""
+msgstr "schließt Montags"
 
 msgid "opening tuesday"
-msgstr ""
+msgstr "öffnet Dienstags"
 
 msgid "closing tuesday"
-msgstr ""
+msgstr "schließt Dienstags"
 
 msgid "opening wednesday"
-msgstr ""
+msgstr "öffnet Mittwochs"
 
 msgid "closing wednesday"
-msgstr ""
+msgstr "schließt Mittwochs"
 
 msgid "opening thursday"
-msgstr ""
+msgstr "öffnet Donnerstags"
 
 msgid "closing thursday"
-msgstr ""
+msgstr "schließt Donnerstags"
 
 msgid "opening friday"
-msgstr ""
+msgstr "öffnet Freitags"
 
 msgid "closing friday"
-msgstr ""
+msgstr "schließt Freitags"
 
 msgid "opening saturday"
-msgstr ""
+msgstr "öffnet Samstags"
 
 msgid "closing saturday"
-msgstr ""
+msgstr "schließt Samstags"
 
-msgid "omnivore (vegan declared)"
-msgstr ""
+msgid "opening sunday"
+msgstr "öffnet Sonntags"
 
-msgid "vegetarian (vegan declared)"
-msgstr ""
-
-msgid "100% vegan"
-msgstr ""
+msgid "closing sunday"
+msgstr "schließt Sonntags"
 
 msgid "vegan"
-msgstr ""
+msgstr "Vegan"
 
 msgid "comment"
-msgstr ""
+msgstr "Kommentar"
 
 msgid "comment english"
-msgstr ""
+msgstr "Kommentar Englisch"
 
 msgid "review link"
-msgstr ""
+msgstr "Rezensionslink"
 
 msgid "closed"
-msgstr ""
+msgstr "geschlossen"
 
 msgid "text intern"
 msgstr ""
 
 msgid "district"
-msgstr ""
+msgstr "Bezirk"
 
 msgid "public transport"
-msgstr ""
+msgstr "Öffentlichernahverkehr"
 
 msgid "unknown"
-msgstr ""
+msgstr "unbekannt"
 
 msgid "yes"
-msgstr ""
+msgstr "ja"
 
 msgid "no"
-msgstr ""
+msgstr "nein"
 
 msgid "handicapped accessible"
-msgstr ""
+msgstr "rollstuhlgerecht"
 
 msgid "handicapped accessible wc"
-msgstr ""
+msgstr "rollstuhlgerechtes WC"
 
-msgid "dog"
-msgstr ""
+msgid "dogs allowed"
+msgstr "Hunde erlaubt"
 
 msgid "child's chair"
-msgstr ""
+msgstr "Kinderstuhl"
 
 msgid "catering"
-msgstr ""
+msgstr "Catering"
 
 msgid "delivery"
-msgstr ""
+msgstr "Lieferdienst"
 
 msgid "organic"
-msgstr ""
+msgstr "Bio"
 
 msgid "wlan"
-msgstr ""
+msgstr "WLAN"
 
 msgid "gluten free"
-msgstr ""
+msgstr "glutenfreie Speisen"
 
 msgid "breakfast"
-msgstr ""
+msgstr "Frühstück"
 
 msgid "brunch"
-msgstr ""
+msgstr "Brunch"
 
 msgid "seats outdoor"
-msgstr ""
+msgstr "Sitzplätze aussen"
 
 msgid "seats indoor"
-msgstr ""
+msgstr "Sitzplätze innen"
 
 msgid "restaurant"
-msgstr ""
+msgstr "Restaurant"
 
 msgid "takeaway"
-msgstr ""
+msgstr "Zum Mitnehmen"
 
 msgid "ice cream parlor"
-msgstr ""
+msgstr "Eiscafé"
 
-msgid "coffee shop"
+msgid "Café"
 msgstr ""
 
 msgid "bar"
-msgstr ""
+msgstr "Bar"
 
-msgid "name"
-msgstr ""
+msgid "comment opening hours"
+msgstr "Kommentar Öffnungszeiten"
+
+msgid "dashboard"
+msgstr "Dashboard"
+
+#, python-format
+msgid "At the moment there are %(gastros_count)s entries."
+msgstr "Momentan gibt es  %(gastros_count)s Einträge."
 
 msgid "city code"
+msgstr "PLZ"
+
+msgid "general"
+msgstr "Allgemein"
+
+msgid "opening hours"
+msgstr "Öffnungszeiten"
+
+msgid "details"
+msgstr "Details"
+
+msgid "tags"
+msgstr "Tags"
+
+msgid "This location is marked as closed!"
 msgstr ""
+
+msgid "created:"
+msgstr "erstellt:"
+
+msgid "updated:"
+msgstr "aktualisiert:"
+
+msgid "new"
+msgstr "neu"
+
+msgid "get adress"
+msgstr ""
+
+msgid "Monday"
+msgstr "Montag"
+
+msgid "Tuesday"
+msgstr "Dienstag"
+
+msgid "Wednesday"
+msgstr "Mittwoch"
+
+msgid "Thursday"
+msgstr "Donnerstag"
+
+msgid "Friday"
+msgstr "Freitag"
+
+msgid "Saturday"
+msgstr "Samstag"
+
+msgid "Sunday"
+msgstr "Sonntag"
+
+msgid "admin"
+msgstr "Admin"
+
+msgid "logout"
+msgstr "ausloggen"
+
+msgid "login"
+msgstr "einloggen"
+
+msgid "gastro edit"
+msgstr "Gastro bearbeiten"
+
+msgid "gastro new"
+msgstr "Gastro neu"
