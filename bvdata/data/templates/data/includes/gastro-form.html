@@ -85,10 +85,10 @@
     <h4 id="details">{% trans 'details' %}</h4>
     <div class="row">
         <div class="col">
-             {{ form.commentEnglish|as_crispy_field }}
+            {{ form.comment|as_crispy_field }}
         </div>
         <div class="col">
-            {{ form.comment|as_crispy_field }}
+            {{ form.commentEnglish|as_crispy_field }}
         </div>
     </div>
     <div class="row">
@@ -103,7 +103,15 @@
     <div class="row">
         <div class="col">
             {{ form.publicTransport|as_crispy_field }}
-            {{ form.review_link|as_crispy_field }}
+            <div class="row">
+                <div class="col">
+                    {{ form.review_link|as_crispy_field }}
+                </div>
+                <div class="col">
+                    {{ form.website|as_crispy_field }}
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="row">

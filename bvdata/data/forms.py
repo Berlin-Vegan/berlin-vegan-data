@@ -1,10 +1,22 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, BooleanField
+from django.utils import timezone
 from django.utils.translation import gettext as _
 
 from .models import *
 
 
+class TimeDateAsBooleanField(BooleanField):
+    def clean(self, value):
+        value = super(TimeDateAsBooleanField, self).clean(value)
+        if value:
+            return timezone.now()
+        else:
+            return None
+
+
 class GastroForm(ModelForm):
+    closed = TimeDateAsBooleanField(required=False)
+
     class Meta:
         model = Gastro
         fields = [

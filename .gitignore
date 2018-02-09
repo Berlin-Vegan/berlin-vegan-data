@@ -1,7 +1,6 @@
 *.pyc
 .idea/
 venv/
-collectstatic/
 .DS_Store
 gastro.json
 env/

@@ -60,6 +60,11 @@ class GastroUpdateView(AuthMixin, UpdateView):
     def get_object(self, queryset=None):
         return get_object_or_404(Gastro, id_string=self.kwargs['id_string'])
 
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.last_editor = self.request.user
+        return super(GastroUpdateView, self).form_valid(form)
+
 
 class GastroNewView(AuthMixin, CreateView):
     model = Gastro
@@ -76,6 +81,11 @@ class GastroNewView(AuthMixin, CreateView):
             **self.extra_context_data,
             **kwargs,
         )
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.last_editor = self.request.user
+        return super(GastroNewView, self).form_valid(form)
 
 
 class ApiGastroLocationsJson(ListView):

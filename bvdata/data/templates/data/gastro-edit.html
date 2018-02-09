@@ -13,17 +13,24 @@
     <div class="page-header">
         {% if gastro.closed %}
             <div class="alert alert-danger text-center" role="alert" id="alert-top">
-              {% trans 'This location is marked as closed!' %}
+              {% trans 'This location is marked as closed! -' %} {{ gastro.closed }}
             </div>
         {% endif %}
         <div class="row">
             <div class="col">
                 <h1 class="display-4">{{ gastro.name }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
                 <h6 class="float-left text-muted">{{ gastro.id_string }}</h6>
             </div>
             <div class="col d-flex align-items-end justify-content-end">
                 <div class="float-right">
-                    <p class="small margin-bottom-0-5 text-size-0-7">{% trans 'created:' %} {{ gastro.created|date:'' }}, {% trans 'updated:' %} {{ gastro.updated|date:'' }}</p>
+                    <p class="small margin-bottom-0-5 text-size-0-7">
+                        {% trans 'created:' %} {{ gastro.created|date:'' }},
+                        {% trans 'updated:' %} {{ gastro.updated|date:'' }},
+                        {% trans 'last editor:' %} {{ gastro.last_editor }}</p>
                 </div>
             </div>
         </div>

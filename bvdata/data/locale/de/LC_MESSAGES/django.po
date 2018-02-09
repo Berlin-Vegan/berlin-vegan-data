@@ -1,7 +1,5 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-05 20:30+0100\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 
 msgid "Data"
@@ -47,7 +45,7 @@ msgid "website"
 msgstr "Webseite"
 
 msgid "email"
-msgstr "EMail"
+msgstr "E-Mail"
 
 msgid "opening monday"
 msgstr "öffnet Montags"
@@ -113,7 +111,7 @@ msgid "district"
 msgstr "Bezirk"
 
 msgid "public transport"
-msgstr "Öffentlichernahverkehr"
+msgstr "Öffentlicher Nahverkehr"
 
 msgid "unknown"
 msgstr "unbekannt"
@@ -167,7 +165,7 @@ msgid "restaurant"
 msgstr "Restaurant"
 
 msgid "takeaway"
-msgstr "Zum Mitnehmen"
+msgstr "Imbiss"
 
 msgid "ice cream parlor"
 msgstr "Eiscafé"
@@ -180,6 +178,9 @@ msgstr "Bar"
 
 msgid "comment opening hours"
 msgstr "Kommentar Öffnungszeiten"
+
+msgid "last editor"
+msgstr "letzte*r Bearbeiter*in"
 
 msgid "dashboard"
 msgstr "Dashboard"
@@ -203,8 +204,8 @@ msgstr "Details"
 msgid "tags"
 msgstr "Tags"
 
-msgid "This location is marked as closed!"
-msgstr ""
+msgid "This location is marked as closed! -"
+msgstr "Dieser Ort is als geschlossen markiert! -"
 
 msgid "created:"
 msgstr "erstellt:"
@@ -212,11 +213,14 @@ msgstr "erstellt:"
 msgid "updated:"
 msgstr "aktualisiert:"
 
+msgid "last editor:"
+msgstr "letzte*r Bearbeiter*in"
+
 msgid "new"
 msgstr "neu"
 
-msgid "get adress"
-msgstr ""
+msgid "get geodata"
+msgstr "Geodaten holen"
 
 msgid "Monday"
 msgstr "Montag"

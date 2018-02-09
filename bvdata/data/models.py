@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models, transaction, IntegrityError
 from django.urls import reverse
 from django.utils.translation import gettext as _
@@ -96,7 +97,7 @@ class BaseLocation(models.Model):
     # review link
     review_link = models.URLField(_('review link'), max_length=255, null=True, blank=True)
     # if gastro is closed
-    closed = models.BooleanField(_('closed'), default=False)
+    closed = models.DateField(_('closed'), null=True, default=None)
     # textfield for internal comments
     text_intern = models.TextField(_('text intern'), null=True, blank=True)
 
@@ -221,6 +222,13 @@ class BaseGastro(BaseLocation):
 
 
 class Gastro(BaseLocationID, BaseGastro):
+    last_editor = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name=_('last editor')
+    )
 
     def __str__(self):
         return self.name
