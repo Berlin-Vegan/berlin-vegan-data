@@ -23,7 +23,11 @@ class Migration(migrations.Migration):
             name='cafe',
             field=models.BooleanField(default=False, verbose_name='Café'),
         ),
-        migrations.AlterField(
+        migrations.RemoveField(
+            model_name='gastro',
+            name='closed',
+        ),
+        migrations.AddField(
             model_name='gastro',
             name='closed',
             field=models.DateField(default=None, null=True, verbose_name='closed'),
