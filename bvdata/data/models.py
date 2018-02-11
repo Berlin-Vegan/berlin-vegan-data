@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models, transaction, IntegrityError
 from django.urls import reverse
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from bvdata.data.utils import get_random_string_32
 
