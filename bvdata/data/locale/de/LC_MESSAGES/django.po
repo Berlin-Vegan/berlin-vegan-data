@@ -5,11 +5,11 @@ msgstr ""
 msgid "Data"
 msgstr ""
 
-msgid "opens"
-msgstr "öffnet"
+msgid "Opens at"
+msgstr "öffnet um"
 
-msgid "closes"
-msgstr "schließt"
+msgid "Closes at"
+msgstr "schließt um"
 
 msgid "unique id"
 msgstr ""
@@ -20,16 +20,16 @@ msgstr "erstellt"
 msgid "updated"
 msgstr "aktualisiert"
 
-msgid "name"
-msgstr "Name"
+msgid "Name of location"
+msgstr "Name des Lokals"
 
-msgid "street"
-msgstr "Straße"
+msgid "Street / No"
+msgstr "Straße / Hausnr."
 
-msgid "citycode"
+msgid "Postal code"
 msgstr "PLZ"
 
-msgid "city"
+msgid "City"
 msgstr "Stadt"
 
 msgid "latitude"
@@ -38,13 +38,13 @@ msgstr "Latitude"
 msgid "longitude"
 msgstr "Longitude"
 
-msgid "telephone"
+msgid "Telephone"
 msgstr "Telefon"
 
-msgid "website"
+msgid "Website"
 msgstr "Webseite"
 
-msgid "email"
+msgid "E-mail"
 msgstr "E-Mail"
 
 msgid "opening monday"
@@ -89,14 +89,14 @@ msgstr "öffnet Sonntags"
 msgid "closing sunday"
 msgstr "schließt Sonntags"
 
-msgid "vegan"
-msgstr "Vegan"
+msgid "Vegan friendly"
+msgstr "Veganfreundlichkeit"
 
-msgid "comment"
-msgstr "Kommentar"
+msgid "Comment in German"
+msgstr "Kommentar auf Deutsch"
 
-msgid "comment english"
-msgstr "Kommentar Englisch"
+msgid "Comment in English"
+msgstr "Kommentar auf Englisch"
 
 msgid "review link"
 msgstr "Rezensionslink"
@@ -105,12 +105,12 @@ msgid "closed"
 msgstr "geschlossen"
 
 msgid "text intern"
-msgstr ""
+msgstr "Text intern"
 
-msgid "district"
+msgid "District"
 msgstr "Bezirk"
 
-msgid "public transport"
+msgid "Public transport"
 msgstr "Öffentlicher Nahverkehr"
 
 msgid "unknown"
@@ -122,65 +122,71 @@ msgstr "ja"
 msgid "no"
 msgstr "nein"
 
-msgid "handicapped accessible"
-msgstr "rollstuhlgerecht"
+msgid "Wheelchair accessible"
+msgstr "Rollstuhlgerecht"
 
-msgid "handicapped accessible wc"
-msgstr "rollstuhlgerechtes WC"
+msgid "Wheelchair accessible toilet"
+msgstr "Rollstuhlgerechtes WC"
 
-msgid "dogs allowed"
+msgid "Dogs allowed"
 msgstr "Hunde erlaubt"
 
-msgid "child's chair"
+msgid "High chair"
 msgstr "Kinderstuhl"
 
-msgid "catering"
+msgid "Catering"
 msgstr "Catering"
 
-msgid "delivery"
-msgstr "Lieferdienst"
+msgid "Delivery service"
+msgstr "Leiferservice"
 
-msgid "organic"
+msgid "Organic"
 msgstr "Bio"
 
-msgid "wlan"
+msgid "Wi-Fi"
 msgstr "WLAN"
 
-msgid "gluten free"
+msgid "Gluten-free options"
 msgstr "glutenfreie Speisen"
 
-msgid "breakfast"
+msgid "Breakfast"
 msgstr "Frühstück"
 
-msgid "brunch"
+msgid "Brunch"
 msgstr "Brunch"
 
-msgid "seats outdoor"
+msgid "Seats outdoor"
 msgstr "Sitzplätze aussen"
 
-msgid "seats indoor"
+msgid "Seats indoor"
 msgstr "Sitzplätze innen"
 
-msgid "restaurant"
+msgid "Restaurant"
 msgstr "Restaurant"
 
-msgid "takeaway"
+msgid "Snack bar"
 msgstr "Imbiss"
 
-msgid "ice cream parlor"
+msgid "Ice cream parlor"
 msgstr "Eiscafé"
 
 msgid "Café"
 msgstr ""
 
-msgid "bar"
+msgid "Bar"
 msgstr "Bar"
 
-msgid "comment opening hours"
+msgid "Comment opening hours"
 msgstr "Kommentar Öffnungszeiten"
 
 msgid "last editor"
-msgstr "letzte*r Bearbeiter*in"
+msgstr "letzte*r Bearbeiter*in:"
+
+msgid "gastro foreignkey"
+msgstr ""
+
+msgid "Submitter e-mail"
+msgstr "E-Mail Einreichender"
 
 msgid "dashboard"
 msgstr "Dashboard"
@@ -189,8 +195,17 @@ msgstr "Dashboard"
 msgid "At the moment there are %(gastros_count)s entries."
 msgstr "Momentan gibt es  %(gastros_count)s Einträge."
 
+msgid "name"
+msgstr "Name"
+
+msgid "street"
+msgstr "Straße"
+
 msgid "city code"
 msgstr "PLZ"
+
+msgid "vegan"
+msgstr "Vegan"
 
 msgid "general"
 msgstr "Allgemein"
@@ -214,13 +229,58 @@ msgid "updated:"
 msgstr "aktualisiert:"
 
 msgid "last editor:"
-msgstr "letzte*r Bearbeiter*in"
+msgstr "letzte*r Bearbeiter*in:"
+
+msgid "Delete"
+msgstr "Löschen"
 
 msgid "new"
 msgstr "neu"
 
-msgid "get geodata"
-msgstr "Geodaten holen"
+msgid "Gastro Submit Edit"
+msgstr "Gastro  bearbeiten"
+
+msgid "Submit"
+msgstr "einreichen"
+
+msgid "Take"
+msgstr "übernehmen"
+
+msgid "Submitter e-mail:"
+msgstr "E-Mail Einreichender:"
+
+msgid "Update"
+msgstr "Aktualisieren"
+
+msgid "Create"
+msgstr "Erstellen"
+
+msgid "Submit an entry for the Berlin-Vegan map"
+msgstr "Vorschlag für die Berlin-Vegan-Karte"
+
+msgid "General"
+msgstr "Allgemeines"
+
+msgid "Please note that we only include places in the gastro map of our website and in the Berlin-Vegan app if they have at least three clearly declared vegan dishes on offer."
+msgstr "Bitte beachte, dass wir nur Lokale in die Gastrokarte unserer Webseite und in die Berlin-Vegan-App aufnehmen, wenn es mindestens drei klar als vegan deklarierte Speisen im Angebot gibt."
+
+msgid "next"
+msgstr "weiter"
+
+msgid "Location"
+msgstr ""
+
+msgid "Is this marker at the correct location? If not please drag and drop it to the right position."
+msgstr "Ist der Ort auf der Karte richtig markiert? Wenn nicht, ziehe ihn per Drang und Drop auf die richtige Position."
+
+msgid "Please select the district and type the closest public transport station in the field below the map."
+msgstr "Bitte wähle den Bezirk aus und nenne uns die nächste Haltestelle."
+
+msgid "previous"
+msgstr "zurück"
+
+msgid "Opening hours"
+msgstr "Öffnungszeiten"
 
 msgid "Monday"
 msgstr "Montag"
@@ -243,6 +303,51 @@ msgstr "Samstag"
 msgid "Sunday"
 msgstr "Sonntag"
 
+msgid "What is served?"
+msgstr "Küchenrichtung?"
+
+msgid "Kind of location"
+msgstr "Art des Lokals"
+
+msgid "What kind of cuisine? Name 2-3 examples (optional)"
+msgstr "Küchenrichtung? Bitte nenne 2-3 Beispiele (optional)"
+
+msgid "Details"
+msgstr "Details"
+
+msgid "Can you share a few details about the location?"
+msgstr "Weißt noch ein paar Details mehr?"
+
+msgid "Your e-mail address (will not be published and deleted after we processed your submit)"
+msgstr "Deine E-Mailadresse (wird nicht veröffentlicht und nach dem Bearbeiten deiner Einreichung gelöscht)"
+
+msgid "send"
+msgstr "abschicken"
+
+msgid "Gastro Submits"
+msgstr "Gastro einreichen"
+
+msgid "At the moment there are %(gastros_count)s submissions."
+msgstr "Momentan gibt es  %(gastros_count)s Einreichungen."
+
+msgid "status"
+msgstr "Status"
+
+msgid "New"
+msgstr "Neu"
+
+msgid "get geodata"
+msgstr "Geodaten holen"
+
+msgid "Save"
+msgstr "speichern"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Submissions"
+msgstr "Einreichungen"
+
 msgid "admin"
 msgstr "Admin"
 
@@ -257,3 +362,9 @@ msgstr "Gastro bearbeiten"
 
 msgid "gastro new"
 msgstr "Gastro neu"
+
+msgid "gastro submit"
+msgstr "Gastro einreichen"
+
+msgid "gastros-submit"
+msgstr "gastros-submit"

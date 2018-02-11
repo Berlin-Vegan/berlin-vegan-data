@@ -1,0 +1,45 @@
+body {
+    padding-top: 0.5rem;
+}
+
+#gastro-submit fieldset:not(:first-of-type) {
+    display: none;
+  }
+
+.progress-bar {
+    width:0px;
+    box-shadow: none;
+    background: #8BC34A;
+    border-color: #8BC34A;
+}
+
+input.next {
+    float: right;
+    background:  #8BC34A;
+    border-color: #8BC34A;
+}
+
+input.getgeo {
+    float: right;
+    background:  #8BC34A;
+    border-color: #8BC34A;
+
+}
+
+input.map {
+    float: right;
+    background:  #8BC34A;
+    border-color: #8BC34A;
+
+}
+
+button.save {
+    float: right;
+}
+
+#map {
+    height: 20rem;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 0.5rem;
+ }

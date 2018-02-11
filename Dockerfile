@@ -8,8 +8,9 @@ RUN mkdir /code
 WORKDIR /code
 
 ADD requirements.txt /code
-ADD bvdata /code
+ADD bvdata/ /code/bvdata
 ADD .git /code
+ADD manage.py /code
 
 RUN apk add --update --no-cache gettext git libffi-dev libpq libjpeg-turbo-dev libxslt-dev && \
     apk add --no-cache --virtual .build-deps gcc libc-dev linux-headers musl-dev postgresql-dev python3-dev && \

@@ -5,7 +5,7 @@ venv/
 gastro.json
 env/
 *.sqlite3
-static/
+/static/
 .env
 bvdata/settings/docker.py
 *.mo

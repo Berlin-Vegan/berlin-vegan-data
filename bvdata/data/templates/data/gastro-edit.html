@@ -36,10 +36,28 @@
         </div>
     </div>
     <hr class="margin-top-0">
-    {% include 'data/includes/gastro-form.html' %}
+    <div class="row">
+        <div class="col">
+             <form action="{% url 'data:gastro-update' gastro.id_string %}" method="POST" class="post-form" style="display: inline-block;">
+            {% csrf_token %}
+            {% include 'data/includes/gastro-form.html' %}
+        </div>
+    </form>
+    </div>
+    <div class="row">
+        <div class="col offset-md-11">
+            <form action="{% url 'data:gastro-delete' gastro.id_string %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">{% trans 'Delete' %}</button>
+            </form>
+        </div>
+
+    </div>
+
 </div>
 {% endblock %}
 
-{% block script-gastro %}
+{% block script %}
+    {{ block.super }}
 <script src="{% static 'js/map-edit.js' %}"></script>
 {% endblock %}

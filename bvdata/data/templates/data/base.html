@@ -15,16 +15,17 @@
     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'bootstrap/css/jumbotron.css' %}" rel="stylesheet">
     {% block css %}
-
     {% endblock %}
-
   </head>
+
   {% block navbar %}
   {% endblock %}
+
   <body>
 
   {% block content %}
   {% endblock %}
+
   {% block footer %}
       <div class="footer">
         <hr>
@@ -53,7 +54,6 @@
             </div>
         </footer>
       </div>
-
   {% endblock %}
     <!-- Bootstrap core JavaScript
     ================================================== -->

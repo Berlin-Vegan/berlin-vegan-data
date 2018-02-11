@@ -9,10 +9,9 @@ services:
         ports:
             - 8000:8000
         volumes:
-            - .:/code
+            - ./static:/code/static
         environment:
             - PORT=8000
-            - DATABASE_URL=postgres://${DBPASSWORD}:${DBNAME}@postgres:5432/${DBUSER}
 
             - DATABASE_NAME=${DBNAME}
             - DATABASE_USER=${DBUSER}

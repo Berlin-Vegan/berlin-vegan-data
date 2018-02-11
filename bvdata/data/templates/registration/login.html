@@ -8,7 +8,7 @@
 {% block content %}
     <div class="container">
 
-      <form class="form-signin" method="post" action="{% url 'login' %}">{% csrf_token %}
+      <form class="form-signin" method="post" action="{% url 'data:login' %}">{% csrf_token %}
         <h2 class="form-signin-heading">Please sign in</h2>
             {{ form.username|as_crispy_field }}
             {{ form.password|as_crispy_field }}

@@ -1,0 +1,69 @@
+{% extends 'data/gastro.html' %}
+{% load i18n static crispy_forms_tags %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <div class="row">
+                <div class="col">
+                    <h1>{% trans 'Gastro Submit Edit' %}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <form action="{% url 'data:gastros-submit-edit' gastro_submit.id %}" method="POST"
+                          id="gastro-submit-edit">
+                        {% csrf_token %}
+                        <table class="table table-hove table-sm">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="col-4">{{ gastros_modelchoice.gastros|as_crispy_field }}</th>
+                                <th>{% trans 'Submit' %}</th>
+                                <th>{% trans 'Take' %}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for label, id, submit, check in forms_tupel_list %}
+                                <tr>
+                                    <td>{{ label }}</td>
+                                    <td id="{{ id }}" class="gastro"></td>
+                                    <td>{{ submit|as_crispy_field }}</td>
+                                    <td>{{ check|as_crispy_field }}</td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <td></td>
+                                <td>{% trans 'Submitter e-mail:' %}</td>
+                                <td>{{ gastro_submit.submit_email|default_if_none:'❌' }}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <button type="submit" class="save btn btn-primary"
+                                            name="update">{% trans 'Update' %}</button>
+                                </td>
+                                <td>
+                                    <button type="submit" class="save btn btn-success"
+                                            name="create">{% trans 'Create' %}</button>
+                                </td>
+                                <td>
+                                    <button type="submit" class="save btn btn-danger"
+                                            name="delete">{% trans 'Delete' %}</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    {{ block.super }}
+    <!-- location-list search and row click -->
+    <script src="{% static "js/gastro-submit-edit.js" %}"></script>
+{% endblock %}

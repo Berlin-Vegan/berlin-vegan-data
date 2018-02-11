@@ -3,8 +3,11 @@
 {% block content %}
 <div class="jumbotron">
   <div class="container">
-    <h1>{% trans 'dashboard' %}</h1>
-    <p>{% blocktrans with gastros_count=gastros|length %}At the moment there are {{ gastros_count }} entries.{% endblocktrans %}</p>
+    <h1>{% trans 'Gastro Submits' %}</h1>
+    <p>
+        {% blocktrans trimmed with gastros_count=gastros_submit|length %}
+            At the moment there are {{ gastros_count }} submissions.
+        {% endblocktrans %}</p>
   </div>
 </div>
 {% block topoflocationlist %}
@@ -24,15 +27,23 @@
         <th>{% trans 'street' %}</th>
         <th>{% trans 'city code' %}</th>
         <th>{% trans 'vegan' %}</th>
+        <th>{% trans 'status' %}</th>
       </tr>
     </thead>
     <tbody class="searchable">
-    {% for gastro in gastros %}
-          <tr class="clickable-row {% if gastro.closed %}table-danger{% endif %}" data-href="{% url 'data:gastro-update' gastro.id_string %}">
+    {% for gastro in gastros_submit %}
+          <tr class="clickable-row {% if gastro.closed %}table-danger{% endif %}" data-href="{% url 'data:gastros-submit-edit' gastro.id %}">
             <td>{{ gastro.name }}</td>
             <td>{{ gastro.street }}</td>
             <td>{{ gastro.cityCode }}</td>
             <td>{{ gastro.get_vegan_display }}</td>
+            <td>
+                {% if gastro.gastro %}
+                    <span class="badge badge-primary">{% trans 'Update' %}</span>
+                {% else %}
+                <span class="badge badge-success">{% trans 'New' %}</span>
+                {% endif %}
+            </td>
           </tr>
     {% endfor %}
     </tbody>

@@ -1,3 +1,4 @@
+from bvdata.data.models import GastroSubmit
 from .utils import commit_hash, tag_name
 
 
@@ -14,3 +15,7 @@ def commit(request):
     )
 
     return dict(git=git)
+
+
+def submit_count(request):
+    return dict(submit_count=GastroSubmit.objects.all().count())

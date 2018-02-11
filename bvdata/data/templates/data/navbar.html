@@ -10,21 +10,27 @@
     {% if user.is_authenticated %}
         <ul class="navbar-nav mr-auto">
             <li class="nav-item {% if page_name == 'dashboard' %}active{% endif %}">
-                <a class="nav-link" href="/dashboard/">{% trans 'dashboard' %}</a>
+                <a class="nav-link" href="{% url 'data:dashboard' %}">{% trans 'Dashboard' %}</a>
             </li>
             <li class="nav-item {% if page_name == 'gastro-new' %}active{% endif %}">
-                <a class="nav-link" href="/gastro-new/">{% trans 'new' %}</a>
+                <a class="nav-link" href="{% url 'data:gastro-new' %}">{% trans 'New' %}</a>
+            </li>
+            <li class="nav-item {% if page_name == 'gastros-submit' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'data:gastro-submit-list' %}">
+                    {% trans 'Submissions' %}
+                    <span class="badge badge-light">{{ submit_count }}</span>
+                </a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
             {% if user.is_superuser %}
                 <li class="nav-item align-left">
-                    <a class="nav-link" href="/admin/">{% trans 'admin' %}</a>
+                    <a class="nav-link" href="{% url 'admin:index' %}">{% trans 'admin' %}</a>
                 </li>
             {% endif %}
         </ul>
 
-            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'logout' %}?next=/accounts/login/">{% trans 'logout' %}</a>
+            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'data:logout' %}?next=/accounts/login/">{% trans 'logout' %}</a>
     {% endif %}
     </div>
 </nav>

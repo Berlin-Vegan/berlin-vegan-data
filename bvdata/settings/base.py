@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'crispy_forms',
+    'rest_framework',
 
     'bvdata.data',
 ]
@@ -66,13 +67,24 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'bvdata.data.context_processors.commit'
+                'bvdata.data.context_processors.commit',
+                'bvdata.data.context_processors.submit_count'
             ],
         },
     },
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+            'rest_framework.permissions.IsAuthenticated',
+    ),
+
+}
 
 WSGI_APPLICATION = 'bvdata.wsgi.application'
 

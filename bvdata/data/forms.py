@@ -1,4 +1,4 @@
-from django.forms import ModelForm, BooleanField
+from django.forms import ModelForm, BooleanField, HiddenInput, Form, ModelChoiceField
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
@@ -97,11 +97,11 @@ class GastroForm(ModelForm):
 
         # change label opening
         for o in open:
-            self.fields[o].label = _('opens')
+            self.fields[o].label = _('Opens at')
 
         # change label closing
         for c in close:
-            self.fields[c].label = _('closes')
+            self.fields[c].label = _('Closes at')
 
         # add timepicker and format hh:mm
         timepicker = open + close
@@ -109,3 +109,102 @@ class GastroForm(ModelForm):
             self.fields[t].widget.attrs.update({'data-picker': 'timepicker'})
             self.fields[t].widget.attrs.update({'placeholder': 'HH:MM'})
             self.fields[t].widget.format = '%H:%M'
+
+
+class GastroSubmitBaseForm(GastroForm):
+    class Meta:
+        model = GastroSubmit
+        fields = [
+            'name',
+            'street',
+            'cityCode',
+            'city',
+            'latCoord',
+            'longCoord',
+            'telephone',
+            'website',
+            'email',
+            'openingMon',
+            'closingMon',
+            'openingTue',
+            'closingTue',
+            'openingWed',
+            'closingWed',
+            'openingThu',
+            'closingThu',
+            'openingFri',
+            'closingFri',
+            'openingSat',
+            'closingSat',
+            'openingSun',
+            'closingSun',
+            'vegan',
+            'comment',
+            'commentEnglish',
+            'commentOpen',
+            'closed',
+            'district',
+            'publicTransport',
+            'handicappedAccessible',
+            'handicappedAccessibleWc',
+            'dog',
+            'childChair',
+            'catering',
+            'delivery',
+            'organic',
+            'wlan',
+            'glutenFree',
+            'breakfast',
+            'brunch',
+            'seatsOutdoor',
+            'seatsIndoor',
+            'restaurant',
+            'imbiss',
+            'eiscafe',
+            'cafe',
+            'bar',
+            'submit_email',
+        ]
+
+
+class GastroSubmitForm(GastroSubmitBaseForm):
+    class Meta(GastroSubmitBaseForm.Meta):
+        model = GastroSubmit
+        fields = GastroSubmitBaseForm.Meta.fields
+
+    def __init__(self, *args, **kwargs):
+        super(GastroSubmitForm, self).__init__(*args, **kwargs)
+
+        self.fields['latCoord'].widget = HiddenInput()
+        self.fields['longCoord'].widget = HiddenInput()
+        self.fields['city'].widget.attrs['readonly'] = True
+
+
+class GastroSubmitEditForm(GastroSubmitBaseForm):
+    class Meta(GastroSubmitBaseForm.Meta):
+        model = GastroSubmit
+        fields = GastroSubmitBaseForm.Meta.fields
+
+    def __init__(self, *args, **kwargs):
+        super(GastroSubmitEditForm, self).__init__(*args, **kwargs)
+        self.fields.pop('submit_email')
+
+        for field in self.fields:
+            self.fields[field].label = ''
+
+
+class GastroSubmitCheckForm(Form):
+    def __init__(self, *args, **kwargs):
+        super(GastroSubmitCheckForm, self).__init__(*args, **kwargs)
+        # add for every modelform field a BoolenField
+        checkboxes = {f'{field}': BooleanField(required=False, label='') for field in GastroSubmitBaseForm.Meta.fields}
+        self.fields.update(checkboxes)
+        self.fields.pop('submit_email')
+
+
+class GastroModelChoiceForm(Form):
+    gastros = ModelChoiceField(queryset=Gastro.objects.all(), label='', required=False)
+
+
+class GastroModelChoiceRequiredForm(Form):
+    gastros = ModelChoiceField(queryset=Gastro.objects.all(), label='')

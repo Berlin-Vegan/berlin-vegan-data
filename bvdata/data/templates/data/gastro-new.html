@@ -17,10 +17,14 @@
         </div>
     </div>
     <hr>
-    {% include 'data/includes/gastro-form-new.html' %}
+    <form action="{% url 'data:gastro-new' %}" method="POST" class="post-form">
+        {% csrf_token %}
+        {% include 'data/includes/gastro-form-new.html' %}
+    </form>
 </div>
 {% endblock %}
 
-{% block script-gastro %}
+{% block script %}
+   {{ block.super }}
 <script src="{% static 'js/map-new.js' %}"></script>
 {% endblock %}

@@ -35,23 +35,23 @@ class BaseLocation(models.Model):
     # update date
     updated = models.DateTimeField(_('updated'), auto_now=True)
     # name
-    name = models.CharField(_('name'), max_length=100)
+    name = models.CharField(_('Name of location'), max_length=100)
     # street
-    street = models.CharField(_('street'), max_length=100)
+    street = models.CharField(_('Street / No'), max_length=100)
     # cityCode
-    cityCode = models.CharField(_('citycode'), max_length=5)
+    cityCode = models.CharField(_('Postal code'), max_length=5)
     # city
-    city = models.CharField(_('city'), max_length=20)
+    city = models.CharField(_('City'), max_length=20, default='Berlin')
     # latCoord
     latCoord = models.FloatField(_('latitude'))
     # longCoord
     longCoord = models.FloatField(_('longitude'))
     # telephone
-    telephone = models.CharField(_('telephone'), max_length=25, null=True, blank=True)
+    telephone = models.CharField(_('Telephone'), max_length=25, null=True, blank=True)
     # website
-    website = models.URLField(_('website'), null=True, blank=True)
+    website = models.URLField(_('Website'), null=True, blank=True)
     # email
-    email = models.EmailField(_('email'), null=True, blank=True)
+    email = models.EmailField(_('E-mail'), null=True, blank=True)
 
     # otMon
     openingMon = models.TimeField(_('opening monday'), null=True, blank=True)
@@ -81,16 +81,16 @@ class BaseLocation(models.Model):
     VEGAN_VEGAN = 5
 
     VEGAN_CHOICE = (
-        (OMNIVORE_VEGAN, 'omnivore (vegan declared)'),
-        (VEGETARIAN_VEGAN, 'vegetarian (vegan declared)'),
-        (VEGAN_VEGAN, '100% vegan'),
+        (OMNIVORE_VEGAN, 'Ominvore (vegan labeled)'),
+        (VEGETARIAN_VEGAN, 'Vegetarian (vegan labeled)'),
+        (VEGAN_VEGAN, 'Vegan'),
     )
 
-    vegan = models.IntegerField(_('vegan'), choices=VEGAN_CHOICE)
+    vegan = models.IntegerField(_('Vegan friendly'), choices=VEGAN_CHOICE)
     # comment
-    comment = models.TextField(_('comment'), null=True, blank=True)
+    comment = models.TextField(_('Comment in German'), null=True, blank=True)
     # commentEnglish
-    commentEnglish = models.TextField(_('comment english'), null=True, blank=True)
+    commentEnglish = models.TextField(_('Comment in English'), null=True, blank=True)
 
     # not public
 
@@ -158,10 +158,10 @@ class BaseGastro(BaseLocation):
         (CHOICE_ZEH, 'Zehlendorf')
     ]
 
-    district = models.CharField(_('district'), max_length=30, null=True, choices=DISTRICT_CHOICES)
+    district = models.CharField(_('District'), max_length=30, null=True, choices=DISTRICT_CHOICES)
 
     # publicTransport
-    publicTransport = models.CharField(_('public transport'), max_length=255, null=True, blank=True)
+    publicTransport = models.CharField(_('Public transport'), max_length=255, null=True, blank=True)
 
     # NullBoolean Choices
     NULLBOOLEAN_NULL = None
@@ -175,47 +175,47 @@ class BaseGastro(BaseLocation):
     )
 
     # handicappedAccessible
-    handicappedAccessible = models.NullBooleanField(_('handicapped accessible'), choices=NULLBOOLEAN_CHOICE)
+    handicappedAccessible = models.NullBooleanField(_('Wheelchair accessible'), choices=NULLBOOLEAN_CHOICE)
     # handicappedAccessibleWc
-    handicappedAccessibleWc = models.NullBooleanField(_('handicapped accessible wc'), choices=NULLBOOLEAN_CHOICE)
+    handicappedAccessibleWc = models.NullBooleanField(_('Wheelchair accessible toilet'), choices=NULLBOOLEAN_CHOICE)
     # dog
-    dog = models.NullBooleanField(_('dogs allowed'), choices=NULLBOOLEAN_CHOICE)
+    dog = models.NullBooleanField(_('Dogs allowed'), choices=NULLBOOLEAN_CHOICE)
     # childChair
-    childChair = models.NullBooleanField(_("""child's chair"""), choices=NULLBOOLEAN_CHOICE)
+    childChair = models.NullBooleanField(_('High chair'), choices=NULLBOOLEAN_CHOICE)
     # catering
-    catering = models.NullBooleanField(_('catering'), choices=NULLBOOLEAN_CHOICE)
+    catering = models.NullBooleanField(_('Catering'), choices=NULLBOOLEAN_CHOICE)
     # delivery
-    delivery = models.NullBooleanField(_('delivery'), choices=NULLBOOLEAN_CHOICE)
+    delivery = models.NullBooleanField(_('Delivery service'), choices=NULLBOOLEAN_CHOICE)
     # organic
-    organic = models.NullBooleanField(_('organic'), choices=NULLBOOLEAN_CHOICE)
+    organic = models.NullBooleanField(_('Organic'), choices=NULLBOOLEAN_CHOICE)
     # wlan
-    wlan = models.NullBooleanField(_('wlan'), choices=NULLBOOLEAN_CHOICE)
+    wlan = models.NullBooleanField(_('Wi-Fi'), choices=NULLBOOLEAN_CHOICE)
     # glutenFree
-    glutenFree = models.NullBooleanField(_('gluten free'), choices=NULLBOOLEAN_CHOICE)
+    glutenFree = models.NullBooleanField(_('Gluten-free options'), choices=NULLBOOLEAN_CHOICE)
     # breakfast
-    breakfast = models.NullBooleanField(_('breakfast'), choices=NULLBOOLEAN_CHOICE)
+    breakfast = models.NullBooleanField(_('Breakfast'), choices=NULLBOOLEAN_CHOICE)
     # brunch
-    brunch = models.NullBooleanField(_('brunch'), choices=NULLBOOLEAN_CHOICE)
+    brunch = models.NullBooleanField(_('Brunch'), choices=NULLBOOLEAN_CHOICE)
     # seatsOutdoor
-    seatsOutdoor = models.IntegerField(_('seats outdoor'), null=True, blank=True)
+    seatsOutdoor = models.IntegerField(_('Seats outdoor'), null=True, blank=True)
     # seatsIndoor
-    seatsIndoor = models.IntegerField(_('seats indoor'), null=True, blank=True)
+    seatsIndoor = models.IntegerField(_('Seats indoor'), null=True, blank=True)
 
     # Tags
 
     # Restaurant
-    restaurant = models.BooleanField(_('restaurant'), default=False)
+    restaurant = models.BooleanField(_('Restaurant'), default=False)
     # Imbiss
-    imbiss = models.BooleanField(_('takeaway'), default=False)
+    imbiss = models.BooleanField(_('Snack bar'), default=False)
     # Eiscafe
-    eiscafe = models.BooleanField(_('ice cream parlor'), default=False)
+    eiscafe = models.BooleanField(_('Ice cream parlor'), default=False)
     # Cafe
     cafe = models.BooleanField(_('Café'), default=False)
     # Bar
-    bar = models.BooleanField(_('bar'), default=False)
+    bar = models.BooleanField(_('Bar'), default=False)
 
     # comment open
-    commentOpen = models.TextField(_('comment opening hours'), null=True, blank=True)
+    commentOpen = models.TextField(_('Comment opening hours'), null=True, blank=True)
 
     class Meta:
         abstract = True
@@ -234,7 +234,7 @@ class Gastro(BaseLocationID, BaseGastro):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('gastro-update', args=[self.id_string])
+        return reverse('data:gastro-update', args=[self.id_string])
 
     class Meta:
         ordering = ['name']
@@ -386,3 +386,18 @@ class Gastro(BaseLocationID, BaseGastro):
         gastro_dict.update(tags=tags)
 
         return gastro_dict
+
+
+class GastroSubmit(BaseGastro):
+    gastro = models.ForeignKey(
+        Gastro,
+        on_delete=models.SET_NULL,
+        verbose_name=_('gastro foreignkey'),
+        null=True,
+        blank=True,
+    )
+
+    submit_email = models.EmailField(_('Submitter e-mail'), null=True, blank=True)
+
+    def __str__(self):
+        return self.name
