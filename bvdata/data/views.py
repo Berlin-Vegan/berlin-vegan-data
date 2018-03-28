@@ -218,7 +218,7 @@ class ApiGastroLocationsJson(ListView):
     model = Gastro
 
     def get_queryset(self):
-        return Gastro.objects.filter(closed=False)
+        return Gastro.objects.filter(closed__isnull=True)
 
     def get(self, request, *args, **kwargs):
         results = [gastro.as_dict() for gastro in self.get_queryset()]
@@ -226,7 +226,6 @@ class ApiGastroLocationsJson(ListView):
 
 
 # restframework
-
 class GastroViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Gastro.objects.all()
     serializer_class = GastroSerializer
