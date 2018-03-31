@@ -8,7 +8,7 @@ var options = {
 
 var map = L.map('map', options);
 
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: 'OSM'}).addTo(map);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: 'OSM'}).addTo(map);
 
 
 var myMarker = L.marker([latdata, longdata], {draggable: true})

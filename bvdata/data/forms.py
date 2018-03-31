@@ -1,4 +1,4 @@
-from django.forms import ModelForm, BooleanField, HiddenInput, Form, ModelChoiceField
+from django.forms import ModelForm, BooleanField, HiddenInput, Form, ModelChoiceField, NumberInput
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
@@ -109,6 +109,7 @@ class GastroForm(ModelForm):
             self.fields[t].widget.attrs.update({'data-picker': 'timepicker'})
             self.fields[t].widget.attrs.update({'placeholder': 'HH:MM'})
             self.fields[t].widget.format = '%H:%M'
+            self.fields['cityCode'].widget = NumberInput()
 
 
 class GastroSubmitBaseForm(GastroForm):
@@ -178,6 +179,7 @@ class GastroSubmitForm(GastroSubmitBaseForm):
         self.fields['latCoord'].widget = HiddenInput()
         self.fields['longCoord'].widget = HiddenInput()
         self.fields['city'].widget.attrs['readonly'] = True
+        self.fields['cityCode'].widget = NumberInput()
 
 
 class GastroSubmitEditForm(GastroSubmitBaseForm):

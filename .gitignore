@@ -3,6 +3,7 @@
 venv/
 .DS_Store
 gastro.json
+gastro_kurz.json
 env/
 *.sqlite3
 /static/

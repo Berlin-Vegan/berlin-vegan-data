@@ -353,18 +353,18 @@ class Gastro(BaseLocationID, BaseGastro):
             gastro_dict.update(glutenFree=0)
 
         if self.breakfast is None:
-            gastro_dict.update(glutenFree=-1)
+            gastro_dict.update(breakfast=-1)
         elif self.breakfast is True:
-            gastro_dict.update(glutenFree=1)
+            gastro_dict.update(breakfast=1)
         elif self.breakfast is False:
-            gastro_dict.update(glutenFree=0)
+            gastro_dict.update(breakfast=0)
 
         if self.brunch is None:
-            gastro_dict.update(glutenFree=-1)
+            gastro_dict.update(brunch=-1)
         elif self.brunch is True:
-            gastro_dict.update(glutenFree=1)
+            gastro_dict.update(brunch=1)
         elif self.brunch is False:
-            gastro_dict.update(glutenFree=0)
+            gastro_dict.update(brunch=0)
 
         if self.seatsOutdoor is not None:
             gastro_dict.update(seatsOutdoor=self.seatsOutdoor)

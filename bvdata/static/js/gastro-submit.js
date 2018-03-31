@@ -129,7 +129,7 @@ var options = {
 
 var map = L.map('map', options);
 
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: 'OSM'}).addTo(map);
+L.tileLayer('http://{s}.tile.openstreetmap.org.org/{z}/{x}/{y}.png', {attribution: 'OSM'}).addTo(map);
 
 var myMarker = L.marker([52.52194895, 13.4134887482193], {draggable: true})
         .addTo(map)
