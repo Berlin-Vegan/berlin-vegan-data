@@ -262,19 +262,19 @@ class Gastro(BaseLocationID, BaseGastro):
         if self.email is not None:
             gastro_dict.update(email=self.email)
         if self.openingMon is not None:
-            gastro_dict.update(otMon=str(self.openingMon) + " - " + str(self.closingMon))
+            gastro_dict.update(otMon=str(self.openingMon.strftime('%H:%M')) + " - " + str(self.closingMon.strftime('%H:%M')))
         if self.openingTue is not None:
-            gastro_dict.update(otTue=str(self.openingTue) + " - " + str(self.closingTue))
+            gastro_dict.update(otTue=str(self.openingTue.strftime('%H:%M')) + " - " + str(self.closingTue.strftime('%H:%M')))
         if self.openingWed is not None:
-            gastro_dict.update(otWed=str(self.openingWed) + " - " + str(self.closingWed))
+            gastro_dict.update(otWed=str(self.openingWed.strftime('%H:%M')) + " - " + str(self.closingWed.strftime('%H:%M')))
         if self.openingThu is not None:
-            gastro_dict.update(otThu=str(self.openingThu) + " - " + str(self.closingThu))
+            gastro_dict.update(otThu=str(self.openingThu.strftime('%H:%M')) + " - " + str(self.closingThu.strftime('%H:%M')))
         if self.openingFri is not None:
-            gastro_dict.update(otFri=str(self.openingFri) + " - " + str(self.closingFri))
+            gastro_dict.update(otFri=str(self.openingFri.strftime('%H:%M')) + " - " + str(self.closingFri.strftime('%H:%M')))
         if self.openingSat is not None:
-            gastro_dict.update(otSat=str(self.openingSat) + " - " + str(self.closingSat))
+            gastro_dict.update(otSat=str(self.openingSat.strftime('%H:%M')) + " - " + str(self.closingSat.strftime('%H:%M')))
         if self.openingSun is not None:
-            gastro_dict.update(otSun=str(self.openingSun) + " - " + str(self.closingSun))
+            gastro_dict.update(otSun=str(self.openingSun.strftime('%H:%M')) + " - " + str(self.closingSun.strftime('%H:%M')))
 
         # gastro comments
         if self.comment is not None:
@@ -384,6 +384,9 @@ class Gastro(BaseLocationID, BaseGastro):
         if self.bar is True:
             tags.append('Bar')
         gastro_dict.update(tags=tags)
+
+        if self.review_link is not None:
+            gastro_dict.update(reviewURL=self.review_link.split('/')[-2])
 
         return gastro_dict
 
