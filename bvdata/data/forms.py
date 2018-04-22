@@ -98,15 +98,16 @@ class GastroForm(ModelForm):
         # change label opening
         for o in open:
             self.fields[o].label = _('Opens at')
+            self.fields[o].widget.attrs.update({'data-picker': 'timepicker-opens'})
 
         # change label closing
         for c in close:
             self.fields[c].label = _('Closes at')
+            self.fields[c].widget.attrs.update({'data-picker': 'timepicker-closes'})
 
         # add timepicker and format hh:mm
         timepicker = open + close
         for t in timepicker:
-            self.fields[t].widget.attrs.update({'data-picker': 'timepicker'})
             self.fields[t].widget.attrs.update({'placeholder': 'HH:MM'})
             self.fields[t].widget.format = '%H:%M'
             self.fields['cityCode'].widget = NumberInput()

@@ -32,7 +32,7 @@
     </thead>
     <tbody class="searchable">
     {% for gastro in gastros_submit %}
-          <tr class="clickable-row {% if gastro.closed %}table-danger{% endif %}" data-href="{% url 'data:gastros-submit-edit' gastro.id %}">
+          <tr class="clickable-row {% if gastro.closed %}table-danger{% endif %}" data-href="{% url 'data:gastro-submit-edit' gastro.id %}">
             <td>{{ gastro.name }}</td>
             <td>{{ gastro.street }}</td>
             <td>{{ gastro.cityCode }}</td>

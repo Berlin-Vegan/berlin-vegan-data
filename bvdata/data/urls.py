@@ -14,7 +14,7 @@ from .views import (
     GastroSubmitListView,
     GastroSubmitEditView,
     GastroViewSet,
-)
+    GastrosClosedView)
 
 app_name = 'data'
 
@@ -25,14 +25,18 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('api/GastroLocations.json', ApiGastroLocationsJson.as_view(), name='api'),
 
+    # listviews
+    # open
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
+    #closed
+    path('gastros-closed/', GastrosClosedView.as_view(), name='gastros-closed'),
 
     path('gastro-new/', GastroNewView.as_view(), name='gastro-new'),
     path('location/gastro/<str:id_string>/edit/', GastroUpdateView.as_view(), name='gastro-update'),
     path('location/gastro/<str:id_string>/delete/', GastroDeleteView.as_view(), name='gastro-delete'),
 
     path('gastro-submit-list/', GastroSubmitListView.as_view(), name='gastro-submit-list'),
-    path('gastro-submit/<slug:pk>/edit/', GastroSubmitEditView.as_view(), name='gastros-submit-edit'),
+    path('gastro-submit/<int:id>/edit/', GastroSubmitEditView.as_view(), name='gastro-submit-edit'),
 
     # public
     path('gastro-submit/', GastroSubmitView.as_view(), name='gastro-submit'),

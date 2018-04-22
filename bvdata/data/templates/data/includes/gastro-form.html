@@ -32,8 +32,9 @@
         {{ form.telephone|as_crispy_field }}
         {{ form.vegan|as_crispy_field }}
         <div class="row">
-            {% block button_address %}
-            {% endblock %}
+            <div class="col">
+                <button type="button" id="getadress" class="btn btn-success">{% trans 'get geodata' %}</button>
+            </div>
             <div class="col">
                 {{ form.closed|as_crispy_field }}
             </div>

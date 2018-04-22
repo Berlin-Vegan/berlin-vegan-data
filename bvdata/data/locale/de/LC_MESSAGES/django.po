@@ -93,10 +93,10 @@ msgid "Vegan friendly"
 msgstr "Veganfreundlichkeit"
 
 msgid "Comment in German"
-msgstr "Kommentar auf Deutsch"
+msgstr "Beschreibung auf Deutsch"
 
 msgid "Comment in English"
-msgstr "Kommentar auf Englisch"
+msgstr "Beschreibung auf Englisch"
 
 msgid "review link"
 msgstr "Rezensionslink"
@@ -149,8 +149,8 @@ msgstr "WLAN"
 msgid "Gluten-free options"
 msgstr "glutenfreie Speisen"
 
-msgid "Breakfast"
-msgstr "Frühstück"
+msgid "Vegan Breakfast"
+msgstr "Veganes Frühstück"
 
 msgid "Brunch"
 msgstr "Brunch"
@@ -188,9 +188,6 @@ msgstr ""
 msgid "Submitter e-mail"
 msgstr "E-Mail Einreichender"
 
-msgid "dashboard"
-msgstr "Dashboard"
-
 #, python-format
 msgid "At the moment there are %(gastros_count)s entries."
 msgstr "Momentan gibt es  %(gastros_count)s Einträge."
@@ -219,8 +216,8 @@ msgstr "Details"
 msgid "tags"
 msgstr "Tags"
 
-msgid "This location is marked as closed! -"
-msgstr "Dieser Ort is als geschlossen markiert! -"
+msgid "This location is marked as closed! - since"
+msgstr "Dieser Ort ist als geschlossen markiert! - seit"
 
 msgid "created:"
 msgstr "erstellt:"
@@ -238,22 +235,7 @@ msgid "new"
 msgstr "neu"
 
 msgid "Gastro Submit Edit"
-msgstr "Gastro  bearbeiten"
-
-msgid "Submit"
-msgstr "einreichen"
-
-msgid "Take"
-msgstr "übernehmen"
-
-msgid "Submitter e-mail:"
-msgstr "E-Mail Einreichender:"
-
-msgid "Update"
-msgstr "Aktualisieren"
-
-msgid "Create"
-msgstr "Erstellen"
+msgstr "Gastro-Einreichung bearbeiten"
 
 msgid "Submit an entry for the Berlin-Vegan map"
 msgstr "Vorschlag für die Berlin-Vegan-Karte"
@@ -306,8 +288,8 @@ msgstr "Sonntag"
 msgid "What is served?"
 msgstr "Küchenrichtung?"
 
-msgid "Kind of location"
-msgstr "Art des Lokals"
+msgid "What kind of cuisine / Kind of location"
+msgstr "Küchenrichtung / Art der Location"
 
 msgid "What kind of cuisine? Name 2-3 examples (optional)"
 msgstr "Küchenrichtung? Bitte nenne 2-3 Beispiele (optional)"
@@ -327,11 +309,15 @@ msgstr "abschicken"
 msgid "Gastro Submits"
 msgstr "Gastro einreichen"
 
+#, python-format
 msgid "At the moment there are %(gastros_count)s submissions."
 msgstr "Momentan gibt es  %(gastros_count)s Einreichungen."
 
 msgid "status"
 msgstr "Status"
+
+msgid "Update"
+msgstr "Aktualisieren"
 
 msgid "New"
 msgstr "Neu"
@@ -345,6 +331,9 @@ msgstr "speichern"
 msgid "Dashboard"
 msgstr "Dashboard"
 
+msgid "Closed"
+msgstr "geschlossen"
+
 msgid "Submissions"
 msgstr "Einreichungen"
 
@@ -356,6 +345,12 @@ msgstr "ausloggen"
 
 msgid "login"
 msgstr "einloggen"
+
+msgid "dashboard"
+msgstr "Dashboard"
+
+msgid "Gastro Closed"
+msgstr "Gastro bearbeiten"
 
 msgid "gastro edit"
 msgstr "Gastro bearbeiten"

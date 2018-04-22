@@ -19,20 +19,6 @@ input.next {
     border-color: #8BC34A;
 }
 
-input.getgeo {
-    float: right;
-    background:  #8BC34A;
-    border-color: #8BC34A;
-
-}
-
-input.map {
-    float: right;
-    background:  #8BC34A;
-    border-color: #8BC34A;
-
-}
-
 button.save {
     float: right;
 }

@@ -3,6 +3,7 @@ from django.db import models, transaction, IntegrityError
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
+from bvdata.data.managers import GastroQuerySet
 from bvdata.data.utils import get_random_string_32
 
 
@@ -105,59 +106,61 @@ class BaseLocation(models.Model):
         abstract = True
 
 
+# districts
+# we are using the old berlin districts: https://de.wikipedia.org/wiki/Berliner_Bezirke#Zeit_der_Teilung_Berlins
+
+CHOICE_CHA = 'CHARLOTTENBURG'
+CHOICE_FRI = 'FRIEDRICHSHAIN'
+CHOICE_HEL = 'HELLERSDORF'
+CHOICE_HOH = 'HOHENSCHÖNHAUSEN'
+CHOICE_KRE = 'KREUZBERG'
+CHOICE_KOP = 'KÖPENICK'
+CHOICE_LIC = 'LICHTENBERG'
+CHOICE_MAR = 'MARZAHN'
+CHOICE_MIT = 'MITTE'
+CHOICE_NEU = 'NEUKÖLLN'
+CHOICE_PAN = 'PANKOW'
+CHOICE_PRE = 'PRENZLAUER BERG'
+CHOICE_REI = 'REINICKENDORF'
+CHOICE_SCH = 'SCHÖNEBERG'
+CHOICE_SPA = 'SPANDAU'
+CHOICE_STE = 'STEGLITZ'
+CHOICE_TEM = 'TEMPELHOF'
+CHOICE_TIE = 'TIERGARTEN'
+CHOICE_TRE = 'TREPTOW'
+CHOICE_WED = 'WEDDING'
+CHOICE_WEI = 'WEISSENSEE'
+CHOICE_WIL = 'WILMERSDORF'
+CHOICE_ZEH = 'ZEHLENDORF'
+
+DISTRICT_CHOICES = [
+    (CHOICE_CHA, 'Charlottenburg'),
+    (CHOICE_FRI, 'Friedrichshain'),
+    (CHOICE_HEL, 'Hellersdorf'),
+    (CHOICE_HOH, 'Hohenschönhausen'),
+    (CHOICE_KRE, 'Kreuzberg'),
+    (CHOICE_KOP, 'Köpenick'),
+    (CHOICE_LIC, 'Lichtenberg'),
+    (CHOICE_MAR, 'Marzahn'),
+    (CHOICE_MIT, 'Mitte'),
+    (CHOICE_NEU, 'Neukölln'),
+    (CHOICE_PAN, 'Pankow'),
+    (CHOICE_PRE, 'Prenzlauer Berg'),
+    (CHOICE_REI, 'Reinickendorf'),
+    (CHOICE_SCH, 'Schöneberg'),
+    (CHOICE_SPA, 'Spandau'),
+    (CHOICE_STE, 'Steglitz'),
+    (CHOICE_TEM, 'Tempelhof'),
+    (CHOICE_TIE, 'Tiergarten'),
+    (CHOICE_TRE, 'Treptow'),
+    (CHOICE_WED, 'Wedding'),
+    (CHOICE_WEI, 'Weißensee'),
+    (CHOICE_WIL, 'Wilmersdorf'),
+    (CHOICE_ZEH, 'Zehlendorf')
+]
+
+
 class BaseGastro(BaseLocation):
-    # districts
-    # we are using the old berlin districts: https://de.wikipedia.org/wiki/Berliner_Bezirke#Zeit_der_Teilung_Berlins
-    CHOICE_CHA = 'CHARLOTTENBURG'
-    CHOICE_FRI = 'FRIEDRICHSHAIN'
-    CHOICE_HEL = 'HELLERSDORF'
-    CHOICE_HOH = 'HOHENSCHÖNHAUSEN'
-    CHOICE_KRE = 'KREUZBERG'
-    CHOICE_KOP = 'KÖPENICK'
-    CHOICE_LIC = 'LICHTENBERG'
-    CHOICE_MAR = 'MARZAHN'
-    CHOICE_MIT = 'MITTE'
-    CHOICE_NEU = 'NEUKÖLLN'
-    CHOICE_PAN = 'PANKOW'
-    CHOICE_PRE = 'PRENZLAUER BERG'
-    CHOICE_REI = 'REINICKENDORF'
-    CHOICE_SCH = 'SCHÖNEBERG'
-    CHOICE_SPA = 'SPANDAU'
-    CHOICE_STE = 'STEGLITZ'
-    CHOICE_TEM = 'TEMPELHOF'
-    CHOICE_TIE = 'TIERGARTEN'
-    CHOICE_TRE = 'TREPTOW'
-    CHOICE_WED = 'WEDDING'
-    CHOICE_WEI = 'WEISSENSEE'
-    CHOICE_WIL = 'WILMERSDORF'
-    CHOICE_ZEH = 'ZEHLENDORF'
-
-    DISTRICT_CHOICES = [
-        (CHOICE_CHA, 'Charlottenburg'),
-        (CHOICE_FRI, 'Friedrichshain'),
-        (CHOICE_HEL, 'Hellersdorf'),
-        (CHOICE_HOH, 'Hohenschönhausen'),
-        (CHOICE_KRE, 'Kreuzberg'),
-        (CHOICE_KOP, 'Köpenick'),
-        (CHOICE_LIC, 'Lichtenberg'),
-        (CHOICE_MAR, 'Marzahn'),
-        (CHOICE_MIT, 'Mitte'),
-        (CHOICE_NEU, 'Neukölln'),
-        (CHOICE_PAN, 'Pankow'),
-        (CHOICE_PRE, 'Prenzlauer Berg'),
-        (CHOICE_REI, 'Reinickendorf'),
-        (CHOICE_SCH, 'Schöneberg'),
-        (CHOICE_SPA, 'Spandau'),
-        (CHOICE_STE, 'Steglitz'),
-        (CHOICE_TEM, 'Tempelhof'),
-        (CHOICE_TIE, 'Tiergarten'),
-        (CHOICE_TRE, 'Treptow'),
-        (CHOICE_WED, 'Wedding'),
-        (CHOICE_WEI, 'Weißensee'),
-        (CHOICE_WIL, 'Wilmersdorf'),
-        (CHOICE_ZEH, 'Zehlendorf')
-    ]
-
     district = models.CharField(_('District'), max_length=30, null=True, choices=DISTRICT_CHOICES)
 
     # publicTransport
@@ -193,7 +196,7 @@ class BaseGastro(BaseLocation):
     # glutenFree
     glutenFree = models.NullBooleanField(_('Gluten-free options'), choices=NULLBOOLEAN_CHOICE)
     # breakfast
-    breakfast = models.NullBooleanField(_('Breakfast'), choices=NULLBOOLEAN_CHOICE)
+    breakfast = models.NullBooleanField(_('Vegan Breakfast'), choices=NULLBOOLEAN_CHOICE)
     # brunch
     brunch = models.NullBooleanField(_('Brunch'), choices=NULLBOOLEAN_CHOICE)
     # seatsOutdoor
@@ -239,6 +242,8 @@ class Gastro(BaseLocationID, BaseGastro):
     class Meta:
         ordering = ['name']
 
+    objects = GastroQuerySet.as_manager()
+
     # creates a dict of the model object
     def as_dict(self):
         gastro_dict = {}
@@ -254,6 +259,7 @@ class Gastro(BaseLocationID, BaseGastro):
             vegan=self.vegan,
             district=self.get_district_display(),
         )
+
         # opening hours
         if self.telephone is not None:
             gastro_dict.update(telephone=self.telephone)
@@ -388,6 +394,18 @@ class Gastro(BaseLocationID, BaseGastro):
         if self.review_link is not None:
             gastro_dict.update(reviewURL=self.review_link.split('/')[-2])
 
+        # name
+        if self.closed:
+            gastro_dict.update(name=f'{self.name} - GESCHLOSSEN / CLOSED')
+            gastro_dict.update(otMon="")
+            gastro_dict.update(otTue="")
+            gastro_dict.update(otWed="")
+            gastro_dict.update(otThu="")
+            gastro_dict.update(otFri="")
+            gastro_dict.update(otSat="")
+            gastro_dict.update(otSun="")
+            gastro_dict.pop('telephone', None)
+
         return gastro_dict
 
 
@@ -399,6 +417,8 @@ class GastroSubmit(BaseGastro):
         null=True,
         blank=True,
     )
+
+    district = models.CharField(_('District'), max_length=30, null=True, blank=True, choices=DISTRICT_CHOICES)
 
     submit_email = models.EmailField(_('Submitter e-mail'), null=True, blank=True)
 

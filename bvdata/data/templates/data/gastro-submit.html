@@ -64,7 +64,7 @@
                         {{ form.website|as_crispy_field }}
                     </div>
                 </div>
-                <input type="button" name="next" class="getgeo btn btn-success" value="{% trans 'next' %}"/>
+                <input id="step1" type="button" name="next" class="next btn btn-success" value="{% trans 'next' %}"/>
             </fieldset>
             <fieldset>
                 <h3> Step 2: {% trans 'Location' %}</h3>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <input type="button" name="previous" class="previous btn btn-secondary" value="{% trans 'previous' %}"/>
-                <input type="button" name="next" class="map btn btn-success" value="{% trans 'next' %}"/>
+                <input id="step2" type="button" name="next" class="next btn btn-success" value="{% trans 'next' %}"/>
             </fieldset>
             <fieldset>
                 <h3>Step 3: {% trans 'Opening hours' %}</h3>
@@ -145,13 +145,13 @@
                     </div>
                 </div>
                 <input type="button" name="previous" class="previous btn btn-secondary" value="{% trans 'previous' %}"/>
-                <input type="button" name="next" class="next btn btn-success" value="{% trans 'next' %}"/>
+                <input id="step3" type="button" name="next" class="next btn btn-success" value="{% trans 'next' %}"/>
             </fieldset>
             <fieldset>
                 <h3> Step 4: {% trans 'What is served?' %}</h3>
                 <div class="row">
                     <div class="col">
-                        <h6 class="text-center">{% trans 'Kind of location' %}</h6>
+                        <h6 class="text-center">{% trans 'What kind of cuisine / Kind of location' %}</h6>
                     </div>
                 </div>
                 <div class="row">
@@ -185,7 +185,7 @@
                     </div>
                 </div>
                 <input type="button" name="previous" class="previous btn btn-secondary" value="{% trans 'previous' %}"/>
-                <input type="button" name="next" class="next btn btn-success" value="{% trans 'next' %}"/>
+                <input id="step4" type="button" name="next" class="next btn btn-success" value="{% trans 'next' %}"/>
 
             </fieldset>
             <fieldset>
@@ -219,7 +219,7 @@
                     </div>
                 </div>
                 <input type="button" name="previous" class="previous btn btn-secondary" value="{% trans 'previous' %}"/>
-                <input type="button" name="next" class="next btn btn-success" value="{% trans 'next' %}"/>
+                <input id="step5" type="button" name="next" class="next btn btn-success" value="{% trans 'next' %}"/>
             </fieldset>
             <fieldset>
                 <div class="row">

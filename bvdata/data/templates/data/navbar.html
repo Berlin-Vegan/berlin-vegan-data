@@ -12,6 +12,9 @@
             <li class="nav-item {% if page_name == 'dashboard' %}active{% endif %}">
                 <a class="nav-link" href="{% url 'data:dashboard' %}">{% trans 'Dashboard' %}</a>
             </li>
+            <li class="nav-item {% if page_name == 'gastros-closed' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'data:gastros-closed' %}">{% trans 'Closed' %}</a>
+            </li>
             <li class="nav-item {% if page_name == 'gastro-new' %}active{% endif %}">
                 <a class="nav-link" href="{% url 'data:gastro-new' %}">{% trans 'New' %}</a>
             </li>

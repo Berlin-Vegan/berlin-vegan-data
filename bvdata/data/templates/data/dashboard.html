@@ -3,7 +3,7 @@
 {% block content %}
 <div class="jumbotron">
   <div class="container">
-    <h1>{% trans 'dashboard' %}</h1>
+    <h1> {{ page_title }}</h1>
     <p>{% blocktrans with gastros_count=gastros|length %}At the moment there are {{ gastros_count }} entries.{% endblocktrans %}</p>
   </div>
 </div>
@@ -28,7 +28,7 @@
     </thead>
     <tbody class="searchable">
     {% for gastro in gastros %}
-          <tr class="clickable-row {% if gastro.closed %}table-danger{% endif %}" data-href="{% url 'data:gastro-update' gastro.id_string %}">
+          <tr class="clickable-row" data-href="{% url 'data:gastro-update' gastro.id_string %}">
             <td>{{ gastro.name }}</td>
             <td>{{ gastro.street }}</td>
             <td>{{ gastro.cityCode }}</td>

@@ -5,50 +5,29 @@ $(document).ready(function(){
     var lat = null;
     var lon = null;
 
-    $(".next").click(function(){
+    /*$(".next").click(function(){
         current_step = $(this).parent();
         next_step = $(this).parent().next();
         next_step.show();
         current_step.hide();
         setProgressBar(++current);
 
-    });
+    });*/
 
-    $(".map").click(function(){
-        var vegan = [document.getElementById("id_district")];
-        var lat = document.getElementById("id_latCoord");
-        var long = document.getElementById("id_longCoord");
-
-        if($('#id_latCoord').val() && $('#id_longCoord').val())
-        {
-            $("#map").removeClass("border border-danger");
-            if(valid(vegan))
-            {
-                current_step = $(this).parent();
-                next_step = $(this).parent().next();
-                next_step.show();
-                current_step.hide();
-                setProgressBar(++current);
-            }
-        }
-        else
-        {
-            $("#map").addClass("border border-danger");
-        }
-
-    });
-
-    $(".getgeo").click(function(){
+    $("#step1").click(function(){
         var name = document.getElementById("id_name");
         var street = document.getElementById("id_street");
-        var city = document.getElementById("id_city");
         var citycode = document.getElementById("id_cityCode");
         var vegan = document.getElementById("id_vegan");
+        var telephone = document.getElementById("id_telephone");
+        var email = document.getElementById("id_email");
+        var website = document.getElementById("id_website");
 
-        var list = [name, street, city, citycode, vegan];
+        var list = [name, street, citycode, vegan, telephone, email, website];
 
 
-        if(valid(list)){
+        if(valid(list))
+        {
             current_step = $(this).parent();
             next_step = $(this).parent().next();
             next_step.show();
@@ -85,6 +64,103 @@ $(document).ready(function(){
 
     });
 
+    $("#step2").click(function(){
+        var district = document.getElementById("id_district");
+        var lat = document.getElementById("id_latCoord");
+        var long = document.getElementById("id_longCoord");
+        var publictransport = document.getElementById("id_publicTransport");
+
+        var list = [district, publictransport];
+
+        if($('#id_latCoord').val() && $('#id_longCoord').val())
+        {
+            $("#map").removeClass("border border-danger");
+            if(valid(list))
+            {
+                current_step = $(this).parent();
+                next_step = $(this).parent().next();
+                next_step.show();
+                current_step.hide();
+                setProgressBar(++current);
+            }
+        }
+        else
+        {
+            $("#map").addClass("border border-danger");
+        }
+
+    });
+
+    $("#step3").click(function(){
+        var openingMon = document.getElementById("id_openingMon");
+        var openingTue = document.getElementById("id_openingTue");
+        var openingWed = document.getElementById("id_openingWed");
+        var openingThu = document.getElementById("id_openingThu");
+        var openingFri = document.getElementById("id_openingFri");
+        var openingSat = document.getElementById("id_openingSat");
+        var openingSun = document.getElementById("id_openingSun");
+
+        var closingMon = document.getElementById("id_closingMon");
+        var closingTue = document.getElementById("id_closingTue");
+        var closingWed = document.getElementById("id_closingWed");
+        var closingThu = document.getElementById("id_closingThu");
+        var closingFri = document.getElementById("id_closingFri");
+        var closingSat = document.getElementById("id_closingSat");
+        var closingSun = document.getElementById("id_closingSun");
+
+        var commentOpen = document.getElementById("id_commentOpen");
+
+        var list = [
+            openingMon, openingTue, openingWed, openingThu, openingFri, openingSat, openingSun,
+            closingMon, closingTue, closingWed, closingThu, closingFri, closingSat, closingSun,
+            commentOpen
+        ];
+
+        if(valid(list))
+        {
+            current_step = $(this).parent();
+            next_step = $(this).parent().next();
+            next_step.show();
+            current_step.hide();
+            setProgressBar(++current);
+        }
+    });
+
+    $("#step4").click(function(){
+        var comment = document.getElementById("id_comment");
+        var commentEnglish = document.getElementById("id_commentEnglish");
+
+        var list = [comment, commentEnglish];
+
+        if(valid(list))
+        {
+            current_step = $(this).parent();
+            next_step = $(this).parent().next();
+            next_step.show();
+            current_step.hide();
+            setProgressBar(++current);
+        }
+    });
+
+    $("#step5").click(function(){
+
+        var seatsOutdoor = document.getElementById("id_seatsOutdoor");
+        var seatsIndoor = document.getElementById("id_seatsIndoor");
+
+        var list = [seatsOutdoor, seatsIndoor];
+
+        if(valid(list))
+        {
+            current_step = $(this).parent();
+            next_step = $(this).parent().next();
+            next_step.show();
+            current_step.hide();
+            setProgressBar(++current);
+        }
+    });
+
+
+
     $(".previous").click(function(){
         current_step = $(this).parent();
         next_step = $(this).parent().prev();
@@ -107,14 +183,14 @@ function valid(list) {
     var is_valid = true;
     for(var i = 0; i<list.length; i++)
     {
-       if (list[i].validity.valid)
-       {
-          list[i].classList.remove('is-invalid');
-       }
-      else
+        if (list[i].validity.valid)
         {
-          is_valid = false;
-          list[i].classList.add('is-invalid');
+            list[i].classList.remove('is-invalid');
+        }
+        else
+        {
+            is_valid = false;
+            list[i].classList.add('is-invalid');
         }
     }
     return is_valid;
@@ -129,7 +205,7 @@ var options = {
 
 var map = L.map('map', options);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org.org/{z}/{x}/{y}.png', {attribution: 'OSM'}).addTo(map);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: 'OSM'}).addTo(map);
 
 var myMarker = L.marker([52.52194895, 13.4134887482193], {draggable: true})
         .addTo(map)

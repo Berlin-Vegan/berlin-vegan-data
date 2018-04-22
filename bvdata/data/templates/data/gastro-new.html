@@ -19,12 +19,12 @@
     <hr>
     <form action="{% url 'data:gastro-new' %}" method="POST" class="post-form">
         {% csrf_token %}
-        {% include 'data/includes/gastro-form-new.html' %}
+        {% include 'data/includes/gastro-form.html' %}
     </form>
 </div>
 {% endblock %}
 
 {% block script %}
    {{ block.super }}
-<script src="{% static 'js/map-new.js' %}"></script>
+<script src="{% static 'js/map.js' %}"></script>
 {% endblock %}
