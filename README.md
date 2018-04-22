@@ -6,7 +6,7 @@ This software is made for [https://www.berlin-vegan.de/](https://www.berlin-vega
 * packages ``` gettext git libffi-dev libpq libjpeg-turbo-dev libxslt-dev gcc libc-dev linux-headers musl-dev postgresql-dev python3-dev```
 ## start developing
 ```
-git clone git@github.com:Berlin-Vegan/berlin-vegan-data.git
+git clone https://github.com/Berlin-Vegan/berlin-vegan-data.git
 ```
 ```
 cd berlin-vegan-data
