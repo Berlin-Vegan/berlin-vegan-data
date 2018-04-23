@@ -5,15 +5,6 @@ $(document).ready(function(){
     var lat = null;
     var lon = null;
 
-    /*$(".next").click(function(){
-        current_step = $(this).parent();
-        next_step = $(this).parent().next();
-        next_step.show();
-        current_step.hide();
-        setProgressBar(++current);
-
-    });*/
-
     $("#step1").click(function(){
         var name = document.getElementById("id_name");
         var street = document.getElementById("id_street");

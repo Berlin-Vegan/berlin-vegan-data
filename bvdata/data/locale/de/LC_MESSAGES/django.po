@@ -332,7 +332,7 @@ msgid "Dashboard"
 msgstr "Dashboard"
 
 msgid "Closed"
-msgstr "geschlossen"
+msgstr "Geschlossen"
 
 msgid "Submissions"
 msgstr "Einreichungen"

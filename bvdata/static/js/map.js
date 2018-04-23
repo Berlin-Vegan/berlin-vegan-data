@@ -1,5 +1,5 @@
-var lat = null;
-var lon = null;
+var lat = document.getElementById('id_latCoord').getAttribute('value') || 52.52194895;
+var lon = document.getElementById('id_longCoord').getAttribute('value') || 13.4134887482193;
 var district = null;
 
 $(document).ready(function() {
@@ -37,9 +37,10 @@ var map = L.map('map', options);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: 'OSM'}).addTo(map);
 
-var myMarker = L.marker([52.52194895, 13.4134887482193], {draggable: true})
+var myMarker = L.marker([lat, lon], {draggable: true})
         .addTo(map)
         .on('dragend', function(e) {
             document.getElementById('id_latCoord').value=e.target._latlng['lat'];
             document.getElementById('id_longCoord').value=e.target._latlng['lng'];
         });
+map.panTo(new L.LatLng(lat, lon));
