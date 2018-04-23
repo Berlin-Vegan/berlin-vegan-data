@@ -186,7 +186,7 @@ msgid "gastro foreignkey"
 msgstr ""
 
 msgid "Submitter e-mail"
-msgstr "E-Mail Einreichender"
+msgstr "E-Mail Einreichende*r"
 
 #, python-format
 msgid "At the moment there are %(gastros_count)s entries."
