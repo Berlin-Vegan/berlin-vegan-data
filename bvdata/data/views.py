@@ -1,15 +1,15 @@
 import json
-from datetime import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import ListView, UpdateView, RedirectView, CreateView, DeleteView, DetailView
+from django.views.generic import ListView, UpdateView, RedirectView, CreateView, DeleteView
 from rest_framework import viewsets
 
-from bvdata.data.forms import GastroForm, GastroSubmitForm
+from bvdata.data.forms import GastroForm, GastroSubmitForm, UserProfileChangeEmailForm
 from bvdata.data.serializer import GastroSerializer
 from .models import Gastro, GastroSubmit
 
@@ -215,3 +215,30 @@ class ApiGastroLocationsJson(ListView):
 class GastroViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Gastro.objects.all()
     serializer_class = GastroSerializer
+
+
+# user profile
+
+class UserProfileView(UpdateView):
+    model = User
+    template_name = 'registration/user-profile.html'
+    context_object_name = 'user'
+    form_class = UserProfileChangeEmailForm
+
+
+    extra_context_data = {
+        'page_name': 'user-profile',
+        'page_title': _('user profile'),
+    }
+
+    def get_context_data(self, **kwargs):
+        return super(UserProfileView, self).get_context_data(
+            **self.extra_context_data,
+            **kwargs,
+        )
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(User, id=self.request.user.id)
+
+    def get_success_url(self):
+        return reverse('data:user-profile')

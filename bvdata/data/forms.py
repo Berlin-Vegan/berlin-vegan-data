@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import UserChangeForm
 from django.forms import ModelForm, BooleanField, HiddenInput, Form, ModelChoiceField, NumberInput
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -211,3 +212,9 @@ class GastroModelChoiceForm(Form):
 
 class GastroModelChoiceRequiredForm(Form):
     gastros = ModelChoiceField(queryset=Gastro.objects.all(), label='')
+
+
+class UserProfileChangeEmailForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['email']

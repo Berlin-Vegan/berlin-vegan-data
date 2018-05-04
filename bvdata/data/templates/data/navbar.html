@@ -31,9 +31,12 @@
                     <a class="nav-link" href="{% url 'admin:index' %}">{% trans 'admin' %}</a>
                 </li>
             {% endif %}
+             <li class="nav-item align-left {% if page_name == 'user-profile' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'data:user-profile' %}">{% trans 'Profile' %}</a>
+             </li>
         </ul>
 
-            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'data:logout' %}?next=/accounts/login/">{% trans 'logout' %}</a>
+        <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'data:logout' %}?next=/accounts/login/">{% trans 'logout' %}</a>
     {% endif %}
     </div>
 </nav>
