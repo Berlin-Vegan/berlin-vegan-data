@@ -9,8 +9,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView, UpdateView, RedirectView, CreateView, DeleteView, DetailView
 from rest_framework import viewsets
 
-from bvdata.data.forms import GastroForm, GastroSubmitForm, GastroSubmitEditForm, GastroSubmitCheckForm, \
-    GastroModelChoiceForm, GastroModelChoiceRequiredForm, GastroSubmitBaseForm
+from bvdata.data.forms import GastroForm, GastroSubmitForm
 from bvdata.data.serializer import GastroSerializer
 from .models import Gastro, GastroSubmit
 
@@ -136,7 +135,7 @@ class GastroSubmitView(AuthMixin, CreateView):
 
     def form_valid(self, form):
         form.save()
-        return HttpResponseRedirect(reverse('data:dashboard'))
+        return HttpResponseRedirect('https://www.berlin-vegan.de/submit-danke-thank-you/')
 
 
 class GastroSubmitListView(AuthMixin, ListView):
@@ -189,8 +188,18 @@ class GastroSubmitEditView(AuthMixin, CreateView):
         self.get_gastrosubmit().delete()
         return super(GastroSubmitEditView, self).form_valid(form)
 
-# api
 
+class GastroSubmitDeleteView(AuthMixin, DeleteView):
+    model = GastroSubmit
+
+    def get_success_url(self):
+        return reverse('data:gastro-submit-list')
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(GastroSubmit, id=self.kwargs['id'])
+
+
+# api
 class ApiGastroLocationsJson(ListView):
     model = Gastro
 

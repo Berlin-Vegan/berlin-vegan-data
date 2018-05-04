@@ -14,7 +14,9 @@ from .views import (
     GastroSubmitListView,
     GastroSubmitEditView,
     GastroViewSet,
-    GastrosClosedView)
+    GastrosClosedView,
+    GastroSubmitDeleteView,
+)
 
 app_name = 'data'
 
@@ -37,6 +39,7 @@ urlpatterns = [
 
     path('gastro-submit-list/', GastroSubmitListView.as_view(), name='gastro-submit-list'),
     path('gastro-submit/<int:id>/edit/', GastroSubmitEditView.as_view(), name='gastro-submit-edit'),
+    path('gastro-submit/<int:id>/delete/', GastroSubmitDeleteView.as_view(), name='gastro-submit-delete'),
 
     # public
     path('gastro-submit/', GastroSubmitView.as_view(), name='gastro-submit'),

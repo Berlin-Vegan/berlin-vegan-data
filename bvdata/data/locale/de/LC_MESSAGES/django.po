@@ -326,7 +326,7 @@ msgid "get geodata"
 msgstr "Geodaten holen"
 
 msgid "Save"
-msgstr "speichern"
+msgstr "Speichern"
 
 msgid "Dashboard"
 msgstr "Dashboard"

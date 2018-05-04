@@ -26,6 +26,14 @@
         {% csrf_token %}
         {% include 'data/includes/gastro-form.html' %}
     </form>
+    <div class="row">
+        <div class="col offset-md-11">
+            <form action="{% url 'data:gastro-submit-delete' gastro_submit.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">{% trans 'Delete' %}</button>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
