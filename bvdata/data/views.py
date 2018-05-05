@@ -117,7 +117,7 @@ class GastroDeleteView(AuthMixin, DeleteView):
         return get_object_or_404(Gastro, id_string=self.kwargs['id_string'])
 
 
-class GastroSubmitView(AuthMixin, CreateView):
+class GastroSubmitView(CreateView):
     model = GastroSubmit
     template_name = 'data/gastro-submit.html'
     form_class = GastroSubmitForm
