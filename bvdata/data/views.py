@@ -173,7 +173,6 @@ class GastroSubmitEditView(AuthMixin, CreateView):
         return get_object_or_404(GastroSubmit, id=self.kwargs['id'])
 
     def get_context_data(self, **kwargs):
-        print(self.object)
         return super(GastroSubmitEditView, self).get_context_data(
             gastro_submit=self.get_gastrosubmit(),
             form=GastroForm(instance=self.get_gastrosubmit()),
@@ -224,7 +223,6 @@ class UserProfileView(UpdateView):
     template_name = 'registration/user-profile.html'
     context_object_name = 'user'
     form_class = UserProfileChangeEmailForm
-
 
     extra_context_data = {
         'page_name': 'user-profile',

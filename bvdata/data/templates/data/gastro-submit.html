@@ -25,7 +25,7 @@
         <div class="progress">
             <div class="progress-bar active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-        <form action="{% url 'data:gastro-submit' %}" method="POST" id="gastro-submit">
+        <form action="{% url 'data:gastro-submit' %}" onsubmit="return submitemail()" method="POST" id="gastro-submit">
             {% csrf_token %}
             <fieldset>
                 <h3>Step 1: {% trans 'General' %}</h3>

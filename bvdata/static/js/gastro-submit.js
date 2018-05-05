@@ -170,6 +170,12 @@ $(document).ready(function(){
 
 });
 
+function submitemail() {
+    var submit_email = document.getElementById("id_submit_email");
+    return valid([submit_email]);
+
+}
+
 function valid(list) {
     var is_valid = true;
     for(var i = 0; i<list.length; i++)
