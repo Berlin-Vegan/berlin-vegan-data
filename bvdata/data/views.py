@@ -6,7 +6,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import ListView, UpdateView, RedirectView, CreateView, DeleteView
+from django.views.generic import ListView, UpdateView, RedirectView, CreateView, DeleteView, DetailView
+from django.views.generic.edit import ModelFormMixin
 from rest_framework import viewsets
 
 from bvdata.data.forms import GastroForm, GastroSubmitForm, UserProfileChangeEmailForm
@@ -158,8 +159,8 @@ class GastroSubmitListView(AuthMixin, ListView):
         return get_object_or_404(Gastro, id_string=self.kwargs['id_string'])
 
 
-class GastroSubmitEditView(AuthMixin, CreateView):
-    model = Gastro
+class GastroSubmitEditView(AuthMixin, ModelFormMixin, DetailView):
+    model = GastroSubmit
     template_name = 'data/gastro-submit-edit.html'
     context_object_name = 'gastro_submit'
     form_class = GastroForm
@@ -169,23 +170,36 @@ class GastroSubmitEditView(AuthMixin, CreateView):
         'page_title': _('gastros-submit'),
     }
 
-    def get_gastrosubmit(self):
-        return get_object_or_404(GastroSubmit, id=self.kwargs['id'])
-
     def get_context_data(self, **kwargs):
         return super(GastroSubmitEditView, self).get_context_data(
-            gastro_submit=self.get_gastrosubmit(),
-            form=GastroForm(instance=self.get_gastrosubmit()),
             **self.extra_context_data,
             **kwargs,
         )
 
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
     def form_valid(self, form):
-        instance = form.save(commit=False)
-        instance.last_editor = self.request.user
-        instance.save()
-        self.get_gastrosubmit().delete()
-        return super(GastroSubmitEditView, self).form_valid(form)
+        if 'save' in self.request.POST:
+            self.object = form.save()
+            return super(GastroSubmitEditView, self).form_valid(form)
+        if 'publish' in self.request.POST:
+            self.gastro = Gastro(**form.cleaned_data, last_editor=self.request.user)
+            self.gastro.save()
+            self.object.delete()
+            return HttpResponseRedirect(reverse('data:gastro-update', args=[self.gastro.id_string]))
+
+    def get_success_url(self):
+        if 'save' in self.request.POST:
+            return reverse('data:gastro-submit-edit', args=[self.object.id])
+
 
 
 class GastroSubmitDeleteView(AuthMixin, DeleteView):
@@ -193,9 +207,6 @@ class GastroSubmitDeleteView(AuthMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('data:gastro-submit-list')
-
-    def get_object(self, queryset=None):
-        return get_object_or_404(GastroSubmit, id=self.kwargs['id'])
 
 
 # api

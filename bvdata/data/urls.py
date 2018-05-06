@@ -39,8 +39,8 @@ urlpatterns = [
     path('location/gastro/<str:id_string>/delete/', GastroDeleteView.as_view(), name='gastro-delete'),
 
     path('gastro-submit-list/', GastroSubmitListView.as_view(), name='gastro-submit-list'),
-    path('gastro-submit/<int:id>/edit/', GastroSubmitEditView.as_view(), name='gastro-submit-edit'),
-    path('gastro-submit/<int:id>/delete/', GastroSubmitDeleteView.as_view(), name='gastro-submit-delete'),
+    path('gastro-submit/<int:pk>/edit/', GastroSubmitEditView.as_view(), name='gastro-submit-edit'),
+    path('gastro-submit/<int:pk>/delete/', GastroSubmitDeleteView.as_view(), name='gastro-submit-delete'),
 
     # public
     path('gastro-submit/', GastroSubmitView.as_view(), name='gastro-submit'),
