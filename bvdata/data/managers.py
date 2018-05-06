@@ -1,6 +1,7 @@
 from datetime import timedelta
 
 from django.db.models import Q
+from django.db.models.functions import Lower
 from django.utils import timezone
 from django.db import models
 
@@ -15,3 +16,5 @@ class GastroQuerySet(models.QuerySet):
     def closed(self):
         return self.filter(closed__isnull=False)
 
+    def alphabetical(self):
+        return self.order_by(Lower('name'))

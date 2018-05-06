@@ -33,7 +33,7 @@ class DashboardView(AuthMixin, ListView):
     context_object_name = 'gastros'
 
     def get_queryset(self):
-        return super(DashboardView, self).get_queryset().open()
+        return super(DashboardView, self).get_queryset().open().alphabetical()
 
     extra_context_data = {
         'page_name': 'dashboard',
