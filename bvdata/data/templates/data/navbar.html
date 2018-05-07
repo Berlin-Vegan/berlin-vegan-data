@@ -18,7 +18,7 @@
             <li class="nav-item {% if page_name == 'gastro-new' %}active{% endif %}">
                 <a class="nav-link" href="{% url 'data:gastro-new' %}">{% trans 'New' %}</a>
             </li>
-            <li class="nav-item {% if page_name == 'gastros-submit' %}active{% endif %}">
+            <li class="nav-item {% if page_name == 'gastros-submit-list' %}active{% endif %}">
                 <a class="nav-link" href="{% url 'data:gastro-submit-list' %}">
                     {% trans 'Submissions' %}
                     <span class="badge badge-light">{{ submit_count }}</span>

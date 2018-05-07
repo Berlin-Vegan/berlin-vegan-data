@@ -237,6 +237,12 @@ msgstr "neu"
 msgid "Gastro Submit Edit"
 msgstr "Gastro-Einreichung bearbeiten"
 
+msgid "Publish"
+msgstr "Veröffentlichen"
+
+msgid "Save"
+msgstr "Speichern"
+
 msgid "Submit an entry for the Berlin-Vegan map"
 msgstr "Vorschlag für die Berlin-Vegan-Karte"
 
@@ -325,9 +331,6 @@ msgstr "Neu"
 msgid "get geodata"
 msgstr "Geodaten holen"
 
-msgid "Save"
-msgstr "Speichern"
-
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -340,11 +343,20 @@ msgstr "Einreichungen"
 msgid "admin"
 msgstr "Admin"
 
+msgid "Profile"
+msgstr "Profil"
+
 msgid "logout"
 msgstr "ausloggen"
 
 msgid "login"
 msgstr "einloggen"
+
+msgid "Change Password"
+msgstr "Passwort ändern"
+
+msgid "Change E-Mail"
+msgstr "E-Mail ändern"
 
 msgid "dashboard"
 msgstr "Dashboard"
@@ -360,3 +372,12 @@ msgstr "Gastro neu"
 
 msgid "gastro submit"
 msgstr "Gastro einreichen"
+
+msgid "gastros submit list"
+msgstr ""
+
+msgid "gastros submit edit"
+msgstr ""
+
+msgid "user profile"
+msgstr ""

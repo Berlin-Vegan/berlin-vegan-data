@@ -1,11 +1,14 @@
 import json
 
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.views import password_change, PasswordChangeView
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.http import require_http_methods
 from django.views.generic import ListView, UpdateView, RedirectView, CreateView, DeleteView, DetailView
 from django.views.generic.edit import ModelFormMixin
 from rest_framework import viewsets
@@ -145,8 +148,8 @@ class GastroSubmitListView(AuthMixin, ListView):
     context_object_name = 'gastros_submit'
 
     extra_context_data = {
-        'page_name': 'gastros-submit',
-        'page_title': _('gastros-submit'),
+        'page_name': 'gastros-submit-list',
+        'page_title': _('gastros submit list'),
     }
 
     def get_context_data(self, **kwargs):
@@ -155,7 +158,7 @@ class GastroSubmitListView(AuthMixin, ListView):
             **kwargs,
         )
 
-    def get_object(self, queryset=None):
+    def get_object(self):
         return get_object_or_404(Gastro, id_string=self.kwargs['id_string'])
 
 
@@ -166,8 +169,8 @@ class GastroSubmitEditView(AuthMixin, ModelFormMixin, DetailView):
     form_class = GastroForm
 
     extra_context_data = {
-        'page_name': 'gastros-submit',
-        'page_title': _('gastros-submit'),
+        'page_name': 'gastros-submit-edit',
+        'page_title': _('gastros submit edit'),
     }
 
     def get_context_data(self, **kwargs):
@@ -199,7 +202,6 @@ class GastroSubmitEditView(AuthMixin, ModelFormMixin, DetailView):
     def get_success_url(self):
         if 'save' in self.request.POST:
             return reverse('data:gastro-submit-edit', args=[self.object.id])
-
 
 
 class GastroSubmitDeleteView(AuthMixin, DeleteView):
@@ -242,6 +244,7 @@ class UserProfileView(UpdateView):
 
     def get_context_data(self, **kwargs):
         return super(UserProfileView, self).get_context_data(
+            password_change_form=PasswordChangeForm(user=self.request.user),
             **self.extra_context_data,
             **kwargs,
         )
@@ -251,3 +254,7 @@ class UserProfileView(UpdateView):
 
     def get_success_url(self):
         return reverse('data:user-profile')
+
+
+class UserPasswordChangeView(PasswordChangeView):
+    success_url = reverse_lazy('data:user-profile')

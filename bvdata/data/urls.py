@@ -17,7 +17,7 @@ from .views import (
     GastrosClosedView,
     GastroSubmitDeleteView,
     UserProfileView,
-)
+    UserPasswordChangeView)
 
 app_name = 'data'
 
@@ -50,6 +50,7 @@ urlpatterns = [
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
 
     path('accounts/user/profile/', UserProfileView.as_view(), name='user-profile'),
+    path('accounts/user/profile/change-password/', UserPasswordChangeView.as_view(), name='user-profile-change-password'),
 
 
     # django rest framework
