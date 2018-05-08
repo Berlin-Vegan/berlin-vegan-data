@@ -3,17 +3,17 @@ import json
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.contrib.auth.views import password_change, PasswordChangeView
+from django.contrib.auth.views import PasswordChangeView
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.decorators.http import require_http_methods
 from django.views.generic import ListView, UpdateView, RedirectView, CreateView, DeleteView, DetailView
 from django.views.generic.edit import ModelFormMixin
 from rest_framework import viewsets
 
 from bvdata.data.forms import GastroForm, GastroSubmitForm, UserProfileChangeEmailForm
+from bvdata.data.mail import mail_new_submit
 from bvdata.data.serializer import GastroSerializer
 from .models import Gastro, GastroSubmit
 
@@ -139,6 +139,8 @@ class GastroSubmitView(CreateView):
 
     def form_valid(self, form):
         form.save()
+        submits = GastroSubmit.objects.all().count()
+        mail_new_submit(submits)
         return HttpResponseRedirect('https://www.berlin-vegan.de/submit-danke-thank-you/')
 
 

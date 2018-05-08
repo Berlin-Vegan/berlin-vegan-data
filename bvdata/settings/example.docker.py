@@ -20,3 +20,14 @@ DATABASES = {
         'PORT': 5432,
     }
 }
+
+ADMINS = os.environ.get('ADMINS', [])
+
+SERVER_EMAIL = os.environ.get('SERVER_EMAIL', '')
+
+EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', '')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_FROM = os.environ.get('EMAIL_FROM', '')
+EMAIL_GASTROS = os.environ.get('EMAIL_GASTROS', '')
