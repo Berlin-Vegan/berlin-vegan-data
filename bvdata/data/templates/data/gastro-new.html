@@ -20,6 +20,7 @@
     <form action="{% url 'data:gastro-new' %}" method="POST" class="post-form">
         {% csrf_token %}
         {% include 'data/includes/gastro-form.html' %}
+        <button type="submit" name="save" class="save btn btn-primary">{% trans 'Save' %}</button>
     </form>
 </div>
 {% endblock %}
