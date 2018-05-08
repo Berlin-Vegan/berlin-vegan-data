@@ -8,9 +8,10 @@ def mail_new_submit(open_submits:  int) -> None:
     from_email = settings.EMAIL_FROM
     recipient_list = [settings.EMAIL_GASTROS]
 
-    try:
-        send_mail(subject=subject, message=message, from_email=from_email, recipient_list=recipient_list)
-    except:
-        pass
-
-
+    send_mail(
+        subject=subject,
+        message=message,
+        from_email=from_email,
+        recipient_list=recipient_list,
+        fail_silently=True
+    )
