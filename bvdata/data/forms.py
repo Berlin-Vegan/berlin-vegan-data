@@ -181,7 +181,7 @@ class GastroSubmitForm(GastroSubmitBaseForm):
         self.fields['latCoord'].widget = HiddenInput()
         self.fields['longCoord'].widget = HiddenInput()
         self.fields['city'].widget.attrs['readonly'] = True
-        self.fields['cityCode'].widget = NumberInput()
+        self.fields['cityCode'].widget = NumberInput(attrs={'maxlength': 5})
 
 
 class GastroSubmitEditForm(GastroSubmitBaseForm):
