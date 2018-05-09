@@ -17,3 +17,10 @@ DATABASES = {
         'PASSWORD': 'bvdata',
     }
 }
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_FROM = 'test@test.de'
+EMAIL_GASTROS = 'test@test.de'
