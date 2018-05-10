@@ -30,13 +30,13 @@
                 </a>
             </li>
         </ul>
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav ml-auto">
             {% if user.is_superuser %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'admin:index' %}">{% trans 'admin' %}</a>
                 </li>
             {% endif %}
-             <li class="nav-item {% if page_name == 'user-profile' %}active{% endif %}">
+             <li class="nav-itemt {% if page_name == 'user-profile' %}active{% endif %}">
                     <a class="nav-link" href="{% url 'data:user-profile' %}">{% trans 'Profile' %}</a>
              </li>
         </ul>
