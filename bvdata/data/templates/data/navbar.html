@@ -4,9 +4,14 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="/">
       <img src="{% static 'images/berlin-vegan-logo.png' %}" width="30" height="30" alt="">
-      Berlin-Vegan Data</a>
+      Berlin-Vegan Data
+    </a>
 
-    <div class="collapse navbar-collapse">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar" aria-controls="collapsingNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="collapsingNavbar">
     {% if user.is_authenticated %}
         <ul class="navbar-nav mr-auto">
             <li class="nav-item {% if page_name == 'dashboard' %}active{% endif %}">
@@ -25,13 +30,13 @@
                 </a>
             </li>
         </ul>
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav mr-auto">
             {% if user.is_superuser %}
-                <li class="nav-item align-left">
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'admin:index' %}">{% trans 'admin' %}</a>
                 </li>
             {% endif %}
-             <li class="nav-item align-left {% if page_name == 'user-profile' %}active{% endif %}">
+             <li class="nav-item {% if page_name == 'user-profile' %}active{% endif %}">
                     <a class="nav-link" href="{% url 'data:user-profile' %}">{% trans 'Profile' %}</a>
              </li>
         </ul>

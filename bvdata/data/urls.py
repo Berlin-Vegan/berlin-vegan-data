@@ -17,7 +17,7 @@ from .views import (
     GastrosClosedView,
     GastroSubmitDeleteView,
     UserProfileView,
-    UserPasswordChangeView)
+    UserPasswordChangeView, DataAuthView)
 
 app_name = 'data'
 
@@ -46,7 +46,7 @@ urlpatterns = [
     path('gastro-submit/', GastroSubmitView.as_view(), name='gastro-submit'),
 
     # auth urls
-    path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
+    path('accounts/login/', DataAuthView.as_view(), name='login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
 
     path('accounts/user/profile/', UserProfileView.as_view(), name='user-profile'),

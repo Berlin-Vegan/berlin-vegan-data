@@ -1,9 +1,23 @@
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.forms import ModelForm, BooleanField, HiddenInput, Form, ModelChoiceField, NumberInput
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from .models import *
+
+
+class DataAuthForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(DataAuthForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs = {
+            'class': 'form-control',
+            'placeholder': _('username'),
+            'autofocus': ''
+        }
+        self.fields['password'].widget.attrs = {
+            'class': 'form-control',
+            'placeholder': _('password')
+        }
 
 
 class TimeDateAsBooleanField(BooleanField):

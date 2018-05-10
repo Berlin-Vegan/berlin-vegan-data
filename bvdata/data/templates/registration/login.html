@@ -7,14 +7,17 @@
 
 {% block content %}
     <div class="container">
-
-      <form class="form-signin" method="post" action="{% url 'data:login' %}">{% csrf_token %}
-        <h2 class="form-signin-heading">Please sign in</h2>
-            {{ form.username|as_crispy_field }}
-            {{ form.password|as_crispy_field }}
-        <button class="btn btn-lg btn-primary btn-block" type="submit">{% trans 'login' %}</button>
-      </form>
-
+        <form class="form-signin" method="post" action="{% url 'data:login' %}">
+            {% csrf_token %}
+            <img class="mb-4" src="{% static 'images/berlin-vegan-logo.png' %}" alt="" width="72" height="72">
+            <h2 class="h3 mb-3 font-weight-normal">{% trans 'Please sign in' %}</h2>
+            {{ form.non_field_errors }}
+            {{ form.username.errors }}
+            {{ form.username }}
+            {{ form.password.errors }}
+            {{ form.password }}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">{% trans 'login' %}</button>
+        </form>
     </div> <!-- /container -->
   </body>
 {% endblock %}

@@ -3,7 +3,7 @@ import json
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.views import PasswordChangeView, LoginView
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
@@ -12,7 +12,7 @@ from django.views.generic import ListView, UpdateView, RedirectView, CreateView,
 from django.views.generic.edit import ModelFormMixin
 from rest_framework import viewsets
 
-from bvdata.data.forms import GastroForm, GastroSubmitForm, UserProfileChangeEmailForm
+from bvdata.data.forms import GastroForm, GastroSubmitForm, UserProfileChangeEmailForm, DataAuthForm
 from bvdata.data.mail import mail_new_submit
 from bvdata.data.serializer import GastroSerializer
 from .models import Gastro, GastroSubmit
@@ -28,6 +28,10 @@ class HomeView(RedirectView):
 class AuthMixin(LoginRequiredMixin):
     login_url = '/accounts/login/'
     redirect_field_name = 'next'
+
+
+class DataAuthView(LoginView):
+    form_class = DataAuthForm
 
 
 # AuthViews

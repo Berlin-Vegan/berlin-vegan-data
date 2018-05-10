@@ -26,7 +26,7 @@
         {% csrf_token %}
         {% include 'data/includes/gastro-form.html' %}
         <button type="submit" name="publish" class="save btn btn-success">{% trans 'Publish' %}</button>
-        <button type="submit" name="save" class="save btn btn-primary">{% trans 'Save' %}</button>
+        <button type="submit" name="save" class="save btn btn-primary">{% trans 'Save' context 'data' %}</button>
     </form>
     <div class="row">
         <div class="col offset-md-11">
@@ -41,5 +41,5 @@
 
 {% block script %}
    {{ block.super }}
-<script src="{% static 'js/map.js' %}"></script>
+    <script src="{% static 'js/map.js' %}"></script>
 {% endblock %}
