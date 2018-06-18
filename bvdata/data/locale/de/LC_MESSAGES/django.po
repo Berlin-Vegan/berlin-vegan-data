@@ -1,11 +1,16 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-09 11:38+0200\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 
 msgid "Data"
 msgstr ""
+
+msgid "username"
+msgstr "Username"
+
+msgid "password"
+msgstr "Passwort"
 
 msgid "Opens at"
 msgstr "öffnet um"
@@ -252,8 +257,8 @@ msgstr "Vorschlag für die Berlin-Vegan-Karte"
 msgid "General"
 msgstr "Allgemeines"
 
-msgid "Please note that we only include places in the gastro map of our website and in the Berlin-Vegan app if they have at least three clearly declared vegan dishes on offer."
-msgstr "Bitte beachte, dass wir nur Lokale in die Gastrokarte unserer Webseite und in die Berlin-Vegan-App aufnehmen, wenn es mindestens drei klar als vegan deklarierte Speisen im Angebot gibt."
+msgid "Please note that we only include places in the Berlin-Vegan map of our website and in the Berlin-Vegan app if there are at least three clearly as vegan declared dishes on offer. If you have a suggestion for the shopping card or an update of an existing place please contact: gastro {at} berlin-vegan(dot)de"
+msgstr "Bitte beachte, dass wir nur Lokale in die Gastrokarte unserer Webseite und in die Berlin-Vegan-App aufnehmen, wenn es mindestens drei klar als vegan deklarierte Speisen im Angebot gibt. Wenn du einen Vorschlag für die Einkaufenkarte hast oder eine Korrektur für die Gastrokarte, schreib uns bitte an: gastro {at} berlin-vegan(dot)de"
 
 msgid "next"
 msgstr "weiter"
@@ -352,11 +357,17 @@ msgstr "Profil"
 msgid "logout"
 msgstr "ausloggen"
 
+msgid "Please sign in"
+msgstr "Bitte einloggen"
+
 msgid "login"
 msgstr "einloggen"
 
 msgid "Change Password"
 msgstr "Passwort ändern"
+
+msgid "Save"
+msgstr "Speichern"
 
 msgid "Change E-Mail"
 msgstr "E-Mail ändern"
