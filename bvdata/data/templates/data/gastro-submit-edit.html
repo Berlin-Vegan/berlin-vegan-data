@@ -2,44 +2,51 @@
 {% load i18n static crispy_forms_tags %}
 
 {% block content %}
-<nav class="nav flex-column sticky-top" id="sidebar">
-  <a class="nav-link" href="#general">{% trans 'general' %}</a>
-  <a class="nav-link" href="#opening-hours">{% trans 'opening hours' %}</a>
-  <a class="nav-link" href="#details">{% trans 'details' %}</a>
-  <a class="nav-link" href="#tags">{% trans 'tags' %}</a>
-</nav>
-<div class="container" id="container-edit">
-    <div class="page-header">
+    <nav class="nav flex-column sticky-top" id="sidebar">
+        <a class="nav-link" href="#general">{% trans 'general' %}</a>
+        <a class="nav-link" href="#opening-hours">{% trans 'opening hours' %}</a>
+        <a class="nav-link" href="#details">{% trans 'details' %}</a>
+        <a class="nav-link" href="#tags">{% trans 'tags' %}</a>
+    </nav>
+    <div class="container" id="container-edit">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md">
+                    <h1>{% trans 'Gastro Submit Edit' %}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6 class="float-left">{% trans 'Submitter e-mail' %}: {{ gastro_submit.submit_email }}</h6>
+                </div>
+                <div class="col d-flex align-items-end justify-content-end">
+                    <div class="float-right">
+                        <p class="small margin-bottom-0-5 text-size-0-7">
+                            {% trans 'submitted:' %} {{ gastro_submit.created|date:'SHORT_DATETIME_FORMAT' }},
+                            {% trans 'updated:' %} {{ gastro_submit.updated|date:'SHORT_DATETIME_FORMAT' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <form action="{% url 'data:gastro-submit-edit' gastro_submit.id %}" method="POST" class="post-form">
+            {% csrf_token %}
+            {% include 'data/includes/gastro-form.html' %}
+            <button type="submit" name="publish" class="save btn btn-success">{% trans 'Publish' %}</button>
+            <button type="submit" name="save" class="save btn btn-primary">{% trans 'Save' context 'data' %}</button>
+        </form>
         <div class="row">
-            <div class="col-md">
-                <h1>{% trans 'Gastro Submit Edit' %}</h1>
+            <div class="col offset-md-11">
+                <form action="{% url 'data:gastro-submit-delete' gastro_submit.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">{% trans 'Delete' %}</button>
+                </form>
             </div>
         </div>
-         <div class="row">
-            <div class="col">
-                <h6 class="float-left">{% trans 'Submitter e-mail' %}: {{ gastro_submit.submit_email }}</h6>
-            </div>
-         </div>
     </div>
-    <hr>
-    <form action="{% url 'data:gastro-submit-edit' gastro_submit.id %}" method="POST" class="post-form">
-        {% csrf_token %}
-        {% include 'data/includes/gastro-form.html' %}
-        <button type="submit" name="publish" class="save btn btn-success">{% trans 'Publish' %}</button>
-        <button type="submit" name="save" class="save btn btn-primary">{% trans 'Save' context 'data' %}</button>
-    </form>
-    <div class="row">
-        <div class="col offset-md-11">
-            <form action="{% url 'data:gastro-submit-delete' gastro_submit.id %}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger">{% trans 'Delete' %}</button>
-            </form>
-        </div>
-    </div>
-</div>
 {% endblock %}
 
 {% block script %}
-   {{ block.super }}
+    {{ block.super }}
     <script src="{% static 'js/map.js' %}"></script>
 {% endblock %}

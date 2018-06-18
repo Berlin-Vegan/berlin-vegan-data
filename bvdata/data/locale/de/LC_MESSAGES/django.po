@@ -1,6 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-18 11:56+0200\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 
 msgid "Data"
@@ -248,6 +249,9 @@ msgstr "neu"
 msgid "Gastro Submit Edit"
 msgstr "Gastro-Einreichung bearbeiten"
 
+msgid "submitted:"
+msgstr "eingereicht:"
+
 msgid "Publish"
 msgstr "Veröffentlichen"
 
@@ -257,6 +261,7 @@ msgstr "Vorschlag für die Berlin-Vegan-Karte"
 msgid "General"
 msgstr "Allgemeines"
 
+#, python-brace-format
 msgid "Please note that we only include places in the Berlin-Vegan map of our website and in the Berlin-Vegan app if there are at least three clearly as vegan declared dishes on offer. If you have a suggestion for the shopping card or an update of an existing place please contact: gastro {at} berlin-vegan(dot)de"
 msgstr "Bitte beachte, dass wir nur Lokale in die Gastrokarte unserer Webseite und in die Berlin-Vegan-App aufnehmen, wenn es mindestens drei klar als vegan deklarierte Speisen im Angebot gibt. Wenn du einen Vorschlag für die Einkaufenkarte hast oder eine Korrektur für die Gastrokarte, schreib uns bitte an: gastro {at} berlin-vegan(dot)de"
 
@@ -326,6 +331,9 @@ msgstr "Gastro einreichen"
 #, python-format
 msgid "At the moment there are %(gastros_count)s submissions."
 msgstr "Momentan gibt es  %(gastros_count)s Einreichungen."
+
+msgid "submitted"
+msgstr "eingereicht"
 
 msgid "status"
 msgstr "Status"
