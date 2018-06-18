@@ -27,6 +27,7 @@
         <th>{% trans 'street' %}</th>
         <th>{% trans 'city code' %}</th>
         <th>{% trans 'vegan' %}</th>
+        <th>{% trans 'submitted' %}</th>
         <th>{% trans 'status' %}</th>
       </tr>
     </thead>
@@ -37,6 +38,7 @@
             <td>{{ gastro.street }}</td>
             <td>{{ gastro.cityCode }}</td>
             <td>{{ gastro.get_vegan_display }}</td>
+            <td>{{ gastro.created }}</td>
             <td>
                 {% if gastro.gastro %}
                     <span class="badge badge-primary">{% trans 'Update' %}</span>
