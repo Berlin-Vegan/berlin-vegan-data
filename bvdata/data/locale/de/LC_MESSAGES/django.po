@@ -146,7 +146,7 @@ msgid "Catering"
 msgstr "Catering"
 
 msgid "Delivery service"
-msgstr "Leiferservice"
+msgstr "Lieferservice"
 
 msgid "Organic"
 msgstr "Bio"
