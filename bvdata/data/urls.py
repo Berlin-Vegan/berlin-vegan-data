@@ -1,8 +1,6 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path, re_path, include
 
-from rest_framework.routers import DefaultRouter
-
 from .views import (
     DashboardView,
     GastroUpdateView,
@@ -13,16 +11,12 @@ from .views import (
     GastroSubmitView,
     GastroSubmitListView,
     GastroSubmitEditView,
-    GastroViewSet,
     GastrosClosedView,
     GastroSubmitDeleteView,
     UserProfileView,
     UserPasswordChangeView, DataAuthView)
 
 app_name = 'data'
-
-router = DefaultRouter()
-router.register(r'gastro', GastroViewSet)
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
@@ -51,10 +45,4 @@ urlpatterns = [
 
     path('accounts/user/profile/', UserProfileView.as_view(), name='user-profile'),
     path('accounts/user/profile/change-password/', UserPasswordChangeView.as_view(), name='user-profile-change-password'),
-
-
-    # django rest framework
-    re_path(r'^rest-api/', include(router.urls)),
-
-
 ]

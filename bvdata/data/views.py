@@ -10,11 +10,9 @@ from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView, UpdateView, RedirectView, CreateView, DeleteView, DetailView
 from django.views.generic.edit import ModelFormMixin
-from rest_framework import viewsets
 
 from bvdata.data.forms import GastroForm, GastroSubmitForm, UserProfileChangeEmailForm, DataAuthForm
 from bvdata.data.mail import mail_new_submit
-from bvdata.data.serializer import GastroSerializer
 from .models import Gastro, GastroSubmit
 
 
@@ -227,12 +225,6 @@ class ApiGastroLocationsJson(ListView):
     def get(self, request, *args, **kwargs):
         results = [gastro.as_dict() for gastro in self.get_queryset()]
         return HttpResponse(json.dumps(results), content_type="application/json")
-
-
-# restframework
-class GastroViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Gastro.objects.all()
-    serializer_class = GastroSerializer
 
 
 # user profile
