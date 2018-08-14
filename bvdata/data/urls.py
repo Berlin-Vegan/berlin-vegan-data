@@ -22,10 +22,10 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('api/GastroLocations.json', ApiGastroLocationsJson.as_view(), name='api'),
 
-    # listviews
     # open
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
-    #closed
+
+    # closed
     path('gastros-closed/', GastrosClosedView.as_view(), name='gastros-closed'),
 
     path('gastro-new/', GastroNewView.as_view(), name='gastro-new'),
