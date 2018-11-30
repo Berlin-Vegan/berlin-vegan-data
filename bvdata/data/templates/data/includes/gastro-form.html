@@ -31,6 +31,7 @@
         {{ form.email|as_crispy_field }}
         {{ form.telephone|as_crispy_field }}
         {{ form.vegan|as_crispy_field }}
+        {{ form.website|as_crispy_field }}
         <div class="row">
             <div class="col">
                 <button type="button" id="getadress" class="btn btn-success">{% trans 'get geodata' %}</button>
@@ -103,15 +104,9 @@
 <div class="row">
     <div class="col">
         {{ form.publicTransport|as_crispy_field }}
-        <div class="row">
-            <div class="col">
-                {{ form.review_link|as_crispy_field }}
-            </div>
-            <div class="col">
-                {{ form.website|as_crispy_field }}
-            </div>
-        </div>
-
+    </div>
+    <div class="col">
+        {{ form.review_link|as_crispy_field }}
     </div>
 </div>
 <div class="row">
