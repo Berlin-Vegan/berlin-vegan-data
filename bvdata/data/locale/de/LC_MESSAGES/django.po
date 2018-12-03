@@ -1,7 +1,6 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-18 11:56+0200\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 
 msgid "Data"
@@ -196,8 +195,11 @@ msgstr ""
 msgid "Submitter e-mail"
 msgstr "E-Mail Einreichende*r"
 
-#, python-format
-msgid "At the moment there are %(gastros_count)s entries."
+#, fuzzy, python-format
+#| msgid "At the moment there are %(gastros_count)s entries."
+msgid ""
+"At the moment there are %(gastros_count)s\n"
+"                entries."
 msgstr "Momentan gibt es  %(gastros_count)s Einträge."
 
 msgid "name"
@@ -211,6 +213,9 @@ msgstr "PLZ"
 
 msgid "vegan"
 msgstr "Vegan"
+
+msgid "review"
+msgstr "Rezension"
 
 msgid "general"
 msgstr "Allgemein"
