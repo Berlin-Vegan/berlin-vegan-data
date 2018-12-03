@@ -189,6 +189,9 @@ msgstr "Kommentar Öffnungszeiten"
 msgid "last editor"
 msgstr "letzte*r Bearbeiter*in:"
 
+msgid "Sticker"
+msgstr "Aufkleber"
+
 msgid "gastro foreignkey"
 msgstr ""
 
@@ -351,6 +354,9 @@ msgstr "Neu"
 
 msgid "get geodata"
 msgstr "Geodaten holen"
+
+msgid "Meta"
+msgstr "Meta"
 
 msgid "Dashboard"
 msgstr "Dashboard"

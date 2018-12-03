@@ -84,7 +84,8 @@ class GastroForm(ModelForm):
             'imbiss',
             'eiscafe',
             'cafe',
-            'bar'
+            'bar',
+            'has_sticker',
         ]
     
     def __init__(self, *args, **kwargs):

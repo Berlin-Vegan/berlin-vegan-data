@@ -233,6 +233,8 @@ class Gastro(BaseLocationID, BaseGastro):
         verbose_name=_('last editor')
     )
 
+    has_sticker = models.BooleanField(_('Sticker'), default=False)
+
     def __str__(self):
         return self.name
 
