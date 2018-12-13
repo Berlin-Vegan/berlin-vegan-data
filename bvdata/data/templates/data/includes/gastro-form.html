@@ -1,5 +1,11 @@
 {% load i18n crispy_forms_tags %}
-
+<div class="row">
+    {% if form.submit_email.value %}
+    <div class="col-4">
+        {{ form.submit_email|as_crispy_field }}
+    </div>
+    {% endif %}
+</div>
 <h4 id="general">{% trans 'general' %}</h4>
 <div class="row">
     <div class="col">

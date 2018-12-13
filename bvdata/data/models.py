@@ -220,6 +220,8 @@ class BaseGastro(BaseLocation):
     # comment open
     commentOpen = models.TextField(_('Comment opening hours'), null=True, blank=True)
 
+    submit_email = models.EmailField(_('Submitter e-mail'), null=True, blank=True)
+
     class Meta:
         abstract = True
 
@@ -422,7 +424,6 @@ class GastroSubmit(BaseGastro):
 
     district = models.CharField(_('District'), max_length=30, null=True, blank=True, choices=DISTRICT_CHOICES)
 
-    submit_email = models.EmailField(_('Submitter e-mail'), null=True, blank=True)
 
     def __str__(self):
         return self.name
