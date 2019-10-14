@@ -9,7 +9,7 @@ services:
         ports:
             - 8000:8000
         volumes:
-            - ./static:/code/static
+            - ./static:/app/static
         environment:
             - PORT=8000
 
