@@ -1,4 +1,0 @@
-Django==2.1.*
-uWSGI==2.0.*
-django-crispy-forms==1.7.*
-psycopg2-binary
