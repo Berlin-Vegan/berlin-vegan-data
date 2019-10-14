@@ -4,6 +4,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+flake8 = "*"
+isort = "*"
+seed-isort-config = "*"
+black = "==19.3b0"
 
 [packages]
 django-crispy-forms = "==1.7.*"
