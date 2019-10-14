@@ -1,22 +1,15 @@
 #!/bin/bash
 
-git checkout master
-git pull
+#git checkout master
+#git pull
 
-#docker build
-docker-compose build
-
-#docker up
-docker-compose up -d
+docker-compose up -d --build
 
 #migration
-docker exec -ti berlinvegandata_django_1 sh -c "python manage.py migrate"
+docker-compose exec django sh -c "pipenv run python manage.py migrate"
 
 #compilemessages
-docker exec -ti berlinvegandata_django_1 sh -c "python manage.py compilemessages -l de"
+docker-compose  exec django sh -c "pipenv run python manage.py compilemessages -l de"
 
 #collect static
-docker exec -ti berlinvegandata_django_1 sh -c "python manage.py collectstatic --noinput"
-
-#docker restart django
-docker restart berlinvegandata_django_1
+docker-compose  exec django sh -c "pipenv run python manage.py collectstatic --noinput"
