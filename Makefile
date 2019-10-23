@@ -1,5 +1,7 @@
-test-lint:
-	pipenv run seed-isort-config
+dev:
+	pipenv sync --dev
+
+test-lint: dev
 	pipenv run isort -c
 	pipenv run flake8 .
 	pipenv run black --check .
