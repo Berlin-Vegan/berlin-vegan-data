@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.db import models, transaction, IntegrityError
+from django.db import IntegrityError, models, transaction
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
@@ -9,7 +9,7 @@ from bvdata.data.utils import get_random_string_32
 
 class BaseLocationID(models.Model):
     # id string
-    id_string = models.CharField(_('unique id'), max_length=32, unique=True, blank=True)
+    id_string = models.CharField(_("unique id"), max_length=32, unique=True, blank=True)
 
     class Meta:
         abstract = True
@@ -31,50 +31,50 @@ class BaseLocationID(models.Model):
 
 
 class BaseLocation(models.Model):
-    #create date
-    created = models.DateTimeField(_('created'), auto_now_add=True)
+    # create date
+    created = models.DateTimeField(_("created"), auto_now_add=True)
     # update date
-    updated = models.DateTimeField(_('updated'), auto_now=True)
+    updated = models.DateTimeField(_("updated"), auto_now=True)
     # name
-    name = models.CharField(_('Name of location'), max_length=100)
+    name = models.CharField(_("Name of location"), max_length=100)
     # street
-    street = models.CharField(_('Street / No'), max_length=100)
+    street = models.CharField(_("Street / No"), max_length=100)
     # cityCode
-    cityCode = models.CharField(_('Postal code'), max_length=5)
+    cityCode = models.CharField(_("Postal code"), max_length=5)
     # city
-    city = models.CharField(_('City'), max_length=20, default='Berlin')
+    city = models.CharField(_("City"), max_length=20, default="Berlin")
     # latCoord
-    latCoord = models.FloatField(_('latitude'))
+    latCoord = models.FloatField(_("latitude"))
     # longCoord
-    longCoord = models.FloatField(_('longitude'))
+    longCoord = models.FloatField(_("longitude"))
     # telephone
-    telephone = models.CharField(_('Telephone'), max_length=25, null=True, blank=True)
+    telephone = models.CharField(_("Telephone"), max_length=25, null=True, blank=True)
     # website
-    website = models.URLField(_('Website'), null=True, blank=True)
+    website = models.URLField(_("Website"), null=True, blank=True)
     # email
-    email = models.EmailField(_('E-mail'), null=True, blank=True)
+    email = models.EmailField(_("E-mail"), null=True, blank=True)
 
     # otMon
-    openingMon = models.TimeField(_('opening monday'), null=True, blank=True)
-    closingMon = models.TimeField(_('closing monday'), null=True, blank=True)
+    openingMon = models.TimeField(_("opening monday"), null=True, blank=True)
+    closingMon = models.TimeField(_("closing monday"), null=True, blank=True)
     # otTue
-    openingTue = models.TimeField(_('opening tuesday'), null=True, blank=True)
-    closingTue = models.TimeField(_('closing tuesday'), null=True, blank=True)
+    openingTue = models.TimeField(_("opening tuesday"), null=True, blank=True)
+    closingTue = models.TimeField(_("closing tuesday"), null=True, blank=True)
     # otWen
-    openingWed = models.TimeField(_('opening wednesday'), null=True, blank=True)
-    closingWed = models.TimeField(_('closing wednesday'), null=True, blank=True)
+    openingWed = models.TimeField(_("opening wednesday"), null=True, blank=True)
+    closingWed = models.TimeField(_("closing wednesday"), null=True, blank=True)
     # otThu
-    openingThu = models.TimeField(_('opening thursday'), null=True, blank=True)
-    closingThu = models.TimeField(_('closing thursday'), null=True, blank=True)
+    openingThu = models.TimeField(_("opening thursday"), null=True, blank=True)
+    closingThu = models.TimeField(_("closing thursday"), null=True, blank=True)
     # otFri
-    openingFri = models.TimeField(_('opening friday'), null=True, blank=True)
-    closingFri = models.TimeField(_('closing friday'), null=True, blank=True)
+    openingFri = models.TimeField(_("opening friday"), null=True, blank=True)
+    closingFri = models.TimeField(_("closing friday"), null=True, blank=True)
     # otSat
-    openingSat = models.TimeField(_('opening saturday'), null=True, blank=True)
-    closingSat = models.TimeField(_('closing saturday'), null=True, blank=True)
+    openingSat = models.TimeField(_("opening saturday"), null=True, blank=True)
+    closingSat = models.TimeField(_("closing saturday"), null=True, blank=True)
     # otSun
-    openingSun = models.TimeField(_('opening sunday'), null=True, blank=True)
-    closingSun = models.TimeField(_('closing sunday'), null=True, blank=True)
+    openingSun = models.TimeField(_("opening sunday"), null=True, blank=True)
+    closingSun = models.TimeField(_("closing sunday"), null=True, blank=True)
 
     # vegan
     OMNIVORE_VEGAN = 2
@@ -82,25 +82,27 @@ class BaseLocation(models.Model):
     VEGAN_VEGAN = 5
 
     VEGAN_CHOICE = (
-        (OMNIVORE_VEGAN, 'Ominvore (vegan labeled)'),
-        (VEGETARIAN_VEGAN, 'Vegetarian (vegan labeled)'),
-        (VEGAN_VEGAN, 'Vegan'),
+        (OMNIVORE_VEGAN, "Ominvore (vegan labeled)"),
+        (VEGETARIAN_VEGAN, "Vegetarian (vegan labeled)"),
+        (VEGAN_VEGAN, "Vegan"),
     )
 
-    vegan = models.IntegerField(_('Vegan friendly'), choices=VEGAN_CHOICE)
+    vegan = models.IntegerField(_("Vegan friendly"), choices=VEGAN_CHOICE)
     # comment
-    comment = models.TextField(_('Comment in German'), null=True, blank=True)
+    comment = models.TextField(_("Comment in German"), null=True, blank=True)
     # commentEnglish
-    commentEnglish = models.TextField(_('Comment in English'), null=True, blank=True)
+    commentEnglish = models.TextField(_("Comment in English"), null=True, blank=True)
 
     # not public
 
     # review link
-    review_link = models.URLField(_('review link'), max_length=255, null=True, blank=True)
+    review_link = models.URLField(
+        _("review link"), max_length=255, null=True, blank=True
+    )
     # if gastro is closed
-    closed = models.DateField(_('closed'), null=True, default=None)
+    closed = models.DateField(_("closed"), null=True, default=None)
     # textfield for internal comments
-    text_intern = models.TextField(_('text intern'), null=True, blank=True)
+    text_intern = models.TextField(_("text intern"), null=True, blank=True)
 
     class Meta:
         abstract = True
@@ -109,62 +111,66 @@ class BaseLocation(models.Model):
 # districts
 # we are using the old berlin districts: https://de.wikipedia.org/wiki/Berliner_Bezirke#Zeit_der_Teilung_Berlins
 
-CHOICE_CHA = 'CHARLOTTENBURG'
-CHOICE_FRI = 'FRIEDRICHSHAIN'
-CHOICE_HEL = 'HELLERSDORF'
-CHOICE_HOH = 'HOHENSCHÖNHAUSEN'
-CHOICE_KRE = 'KREUZBERG'
-CHOICE_KOP = 'KÖPENICK'
-CHOICE_LIC = 'LICHTENBERG'
-CHOICE_MAR = 'MARZAHN'
-CHOICE_MIT = 'MITTE'
-CHOICE_NEU = 'NEUKÖLLN'
-CHOICE_PAN = 'PANKOW'
-CHOICE_PRE = 'PRENZLAUER BERG'
-CHOICE_REI = 'REINICKENDORF'
-CHOICE_SCH = 'SCHÖNEBERG'
-CHOICE_SPA = 'SPANDAU'
-CHOICE_STE = 'STEGLITZ'
-CHOICE_TEM = 'TEMPELHOF'
-CHOICE_TIE = 'TIERGARTEN'
-CHOICE_TRE = 'TREPTOW'
-CHOICE_WED = 'WEDDING'
-CHOICE_WEI = 'WEISSENSEE'
-CHOICE_WIL = 'WILMERSDORF'
-CHOICE_ZEH = 'ZEHLENDORF'
+CHOICE_CHA = "CHARLOTTENBURG"
+CHOICE_FRI = "FRIEDRICHSHAIN"
+CHOICE_HEL = "HELLERSDORF"
+CHOICE_HOH = "HOHENSCHÖNHAUSEN"
+CHOICE_KRE = "KREUZBERG"
+CHOICE_KOP = "KÖPENICK"
+CHOICE_LIC = "LICHTENBERG"
+CHOICE_MAR = "MARZAHN"
+CHOICE_MIT = "MITTE"
+CHOICE_NEU = "NEUKÖLLN"
+CHOICE_PAN = "PANKOW"
+CHOICE_PRE = "PRENZLAUER BERG"
+CHOICE_REI = "REINICKENDORF"
+CHOICE_SCH = "SCHÖNEBERG"
+CHOICE_SPA = "SPANDAU"
+CHOICE_STE = "STEGLITZ"
+CHOICE_TEM = "TEMPELHOF"
+CHOICE_TIE = "TIERGARTEN"
+CHOICE_TRE = "TREPTOW"
+CHOICE_WED = "WEDDING"
+CHOICE_WEI = "WEISSENSEE"
+CHOICE_WIL = "WILMERSDORF"
+CHOICE_ZEH = "ZEHLENDORF"
 
 DISTRICT_CHOICES = [
-    (CHOICE_CHA, 'Charlottenburg'),
-    (CHOICE_FRI, 'Friedrichshain'),
-    (CHOICE_HEL, 'Hellersdorf'),
-    (CHOICE_HOH, 'Hohenschönhausen'),
-    (CHOICE_KRE, 'Kreuzberg'),
-    (CHOICE_KOP, 'Köpenick'),
-    (CHOICE_LIC, 'Lichtenberg'),
-    (CHOICE_MAR, 'Marzahn'),
-    (CHOICE_MIT, 'Mitte'),
-    (CHOICE_NEU, 'Neukölln'),
-    (CHOICE_PAN, 'Pankow'),
-    (CHOICE_PRE, 'Prenzlauer Berg'),
-    (CHOICE_REI, 'Reinickendorf'),
-    (CHOICE_SCH, 'Schöneberg'),
-    (CHOICE_SPA, 'Spandau'),
-    (CHOICE_STE, 'Steglitz'),
-    (CHOICE_TEM, 'Tempelhof'),
-    (CHOICE_TIE, 'Tiergarten'),
-    (CHOICE_TRE, 'Treptow'),
-    (CHOICE_WED, 'Wedding'),
-    (CHOICE_WEI, 'Weißensee'),
-    (CHOICE_WIL, 'Wilmersdorf'),
-    (CHOICE_ZEH, 'Zehlendorf')
+    (CHOICE_CHA, "Charlottenburg"),
+    (CHOICE_FRI, "Friedrichshain"),
+    (CHOICE_HEL, "Hellersdorf"),
+    (CHOICE_HOH, "Hohenschönhausen"),
+    (CHOICE_KRE, "Kreuzberg"),
+    (CHOICE_KOP, "Köpenick"),
+    (CHOICE_LIC, "Lichtenberg"),
+    (CHOICE_MAR, "Marzahn"),
+    (CHOICE_MIT, "Mitte"),
+    (CHOICE_NEU, "Neukölln"),
+    (CHOICE_PAN, "Pankow"),
+    (CHOICE_PRE, "Prenzlauer Berg"),
+    (CHOICE_REI, "Reinickendorf"),
+    (CHOICE_SCH, "Schöneberg"),
+    (CHOICE_SPA, "Spandau"),
+    (CHOICE_STE, "Steglitz"),
+    (CHOICE_TEM, "Tempelhof"),
+    (CHOICE_TIE, "Tiergarten"),
+    (CHOICE_TRE, "Treptow"),
+    (CHOICE_WED, "Wedding"),
+    (CHOICE_WEI, "Weißensee"),
+    (CHOICE_WIL, "Wilmersdorf"),
+    (CHOICE_ZEH, "Zehlendorf"),
 ]
 
 
 class BaseGastro(BaseLocation):
-    district = models.CharField(_('District'), max_length=30, null=True, choices=DISTRICT_CHOICES)
+    district = models.CharField(
+        _("District"), max_length=30, null=True, choices=DISTRICT_CHOICES
+    )
 
     # publicTransport
-    publicTransport = models.CharField(_('Public transport'), max_length=255, null=True, blank=True)
+    publicTransport = models.CharField(
+        _("Public transport"), max_length=255, null=True, blank=True
+    )
 
     # NullBoolean Choices
     NULLBOOLEAN_NULL = None
@@ -172,55 +178,65 @@ class BaseGastro(BaseLocation):
     NULLBOOLEAN_FALSE = False
 
     NULLBOOLEAN_CHOICE = (
-        (NULLBOOLEAN_NULL, _('unknown')),
-        (NULLBOOLEAN_TRUE, _('yes')),
-        (NULLBOOLEAN_FALSE, _('no')),
+        (NULLBOOLEAN_NULL, _("unknown")),
+        (NULLBOOLEAN_TRUE, _("yes")),
+        (NULLBOOLEAN_FALSE, _("no")),
     )
 
     # handicappedAccessible
-    handicappedAccessible = models.NullBooleanField(_('Wheelchair accessible'), choices=NULLBOOLEAN_CHOICE)
+    handicappedAccessible = models.NullBooleanField(
+        _("Wheelchair accessible"), choices=NULLBOOLEAN_CHOICE
+    )
     # handicappedAccessibleWc
-    handicappedAccessibleWc = models.NullBooleanField(_('Wheelchair accessible toilet'), choices=NULLBOOLEAN_CHOICE)
+    handicappedAccessibleWc = models.NullBooleanField(
+        _("Wheelchair accessible toilet"), choices=NULLBOOLEAN_CHOICE
+    )
     # dog
-    dog = models.NullBooleanField(_('Dogs allowed'), choices=NULLBOOLEAN_CHOICE)
+    dog = models.NullBooleanField(_("Dogs allowed"), choices=NULLBOOLEAN_CHOICE)
     # childChair
-    childChair = models.NullBooleanField(_('High chair'), choices=NULLBOOLEAN_CHOICE)
+    childChair = models.NullBooleanField(_("High chair"), choices=NULLBOOLEAN_CHOICE)
     # catering
-    catering = models.NullBooleanField(_('Catering'), choices=NULLBOOLEAN_CHOICE)
+    catering = models.NullBooleanField(_("Catering"), choices=NULLBOOLEAN_CHOICE)
     # delivery
-    delivery = models.NullBooleanField(_('Delivery service'), choices=NULLBOOLEAN_CHOICE)
+    delivery = models.NullBooleanField(
+        _("Delivery service"), choices=NULLBOOLEAN_CHOICE
+    )
     # organic
-    organic = models.NullBooleanField(_('Organic'), choices=NULLBOOLEAN_CHOICE)
+    organic = models.NullBooleanField(_("Organic"), choices=NULLBOOLEAN_CHOICE)
     # wlan
-    wlan = models.NullBooleanField(_('Wi-Fi'), choices=NULLBOOLEAN_CHOICE)
+    wlan = models.NullBooleanField(_("Wi-Fi"), choices=NULLBOOLEAN_CHOICE)
     # glutenFree
-    glutenFree = models.NullBooleanField(_('Gluten-free options'), choices=NULLBOOLEAN_CHOICE)
+    glutenFree = models.NullBooleanField(
+        _("Gluten-free options"), choices=NULLBOOLEAN_CHOICE
+    )
     # breakfast
-    breakfast = models.NullBooleanField(_('Vegan Breakfast'), choices=NULLBOOLEAN_CHOICE)
+    breakfast = models.NullBooleanField(
+        _("Vegan Breakfast"), choices=NULLBOOLEAN_CHOICE
+    )
     # brunch
-    brunch = models.NullBooleanField(_('Brunch'), choices=NULLBOOLEAN_CHOICE)
+    brunch = models.NullBooleanField(_("Brunch"), choices=NULLBOOLEAN_CHOICE)
     # seatsOutdoor
-    seatsOutdoor = models.IntegerField(_('Seats outdoor'), null=True, blank=True)
+    seatsOutdoor = models.IntegerField(_("Seats outdoor"), null=True, blank=True)
     # seatsIndoor
-    seatsIndoor = models.IntegerField(_('Seats indoor'), null=True, blank=True)
+    seatsIndoor = models.IntegerField(_("Seats indoor"), null=True, blank=True)
 
     # Tags
 
     # Restaurant
-    restaurant = models.BooleanField(_('Restaurant'), default=False)
+    restaurant = models.BooleanField(_("Restaurant"), default=False)
     # Imbiss
-    imbiss = models.BooleanField(_('Snack bar'), default=False)
+    imbiss = models.BooleanField(_("Snack bar"), default=False)
     # Eiscafe
-    eiscafe = models.BooleanField(_('Ice cream parlor'), default=False)
+    eiscafe = models.BooleanField(_("Ice cream parlor"), default=False)
     # Cafe
-    cafe = models.BooleanField(_('Café'), default=False)
+    cafe = models.BooleanField(_("Café"), default=False)
     # Bar
-    bar = models.BooleanField(_('Bar'), default=False)
+    bar = models.BooleanField(_("Bar"), default=False)
 
     # comment open
-    commentOpen = models.TextField(_('Comment opening hours'), null=True, blank=True)
+    commentOpen = models.TextField(_("Comment opening hours"), null=True, blank=True)
 
-    submit_email = models.EmailField(_('Submitter e-mail'), null=True, blank=True)
+    submit_email = models.EmailField(_("Submitter e-mail"), null=True, blank=True)
 
     class Meta:
         abstract = True
@@ -232,19 +248,19 @@ class Gastro(BaseLocationID, BaseGastro):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name=_('last editor')
+        verbose_name=_("last editor"),
     )
 
-    has_sticker = models.BooleanField(_('Sticker'), default=False)
+    has_sticker = models.BooleanField(_("Sticker"), default=False)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('data:gastro-update', args=[self.id_string])
+        return reverse("data:gastro-update", args=[self.id_string])
 
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
 
     objects = GastroQuerySet.as_manager()
 
@@ -272,19 +288,47 @@ class Gastro(BaseLocationID, BaseGastro):
         if self.email is not None:
             gastro_dict.update(email=self.email)
         if self.openingMon is not None:
-            gastro_dict.update(otMon=str(self.openingMon.strftime('%H:%M')) + " - " + str(self.closingMon.strftime('%H:%M')))
+            gastro_dict.update(
+                otMon=str(self.openingMon.strftime("%H:%M"))
+                + " - "
+                + str(self.closingMon.strftime("%H:%M"))
+            )
         if self.openingTue is not None:
-            gastro_dict.update(otTue=str(self.openingTue.strftime('%H:%M')) + " - " + str(self.closingTue.strftime('%H:%M')))
+            gastro_dict.update(
+                otTue=str(self.openingTue.strftime("%H:%M"))
+                + " - "
+                + str(self.closingTue.strftime("%H:%M"))
+            )
         if self.openingWed is not None:
-            gastro_dict.update(otWed=str(self.openingWed.strftime('%H:%M')) + " - " + str(self.closingWed.strftime('%H:%M')))
+            gastro_dict.update(
+                otWed=str(self.openingWed.strftime("%H:%M"))
+                + " - "
+                + str(self.closingWed.strftime("%H:%M"))
+            )
         if self.openingThu is not None:
-            gastro_dict.update(otThu=str(self.openingThu.strftime('%H:%M')) + " - " + str(self.closingThu.strftime('%H:%M')))
+            gastro_dict.update(
+                otThu=str(self.openingThu.strftime("%H:%M"))
+                + " - "
+                + str(self.closingThu.strftime("%H:%M"))
+            )
         if self.openingFri is not None:
-            gastro_dict.update(otFri=str(self.openingFri.strftime('%H:%M')) + " - " + str(self.closingFri.strftime('%H:%M')))
+            gastro_dict.update(
+                otFri=str(self.openingFri.strftime("%H:%M"))
+                + " - "
+                + str(self.closingFri.strftime("%H:%M"))
+            )
         if self.openingSat is not None:
-            gastro_dict.update(otSat=str(self.openingSat.strftime('%H:%M')) + " - " + str(self.closingSat.strftime('%H:%M')))
+            gastro_dict.update(
+                otSat=str(self.openingSat.strftime("%H:%M"))
+                + " - "
+                + str(self.closingSat.strftime("%H:%M"))
+            )
         if self.openingSun is not None:
-            gastro_dict.update(otSun=str(self.openingSun.strftime('%H:%M')) + " - " + str(self.closingSun.strftime('%H:%M')))
+            gastro_dict.update(
+                otSun=str(self.openingSun.strftime("%H:%M"))
+                + " - "
+                + str(self.closingSun.strftime("%H:%M"))
+            )
 
         # gastro comments
         if self.comment is not None:
@@ -384,23 +428,23 @@ class Gastro(BaseLocationID, BaseGastro):
         # tags fehlt in data import
         tags = []
         if self.restaurant is True:
-            tags.append('Restaurant')
+            tags.append("Restaurant")
         if self.imbiss is True:
-            tags.append('Imbiss')
+            tags.append("Imbiss")
         if self.eiscafe is True:
-            tags.append('Eiscafe')
+            tags.append("Eiscafe")
         if self.cafe is True:
-            tags.append('Cafe')
+            tags.append("Cafe")
         if self.bar is True:
-            tags.append('Bar')
+            tags.append("Bar")
         gastro_dict.update(tags=tags)
 
         if self.review_link is not None:
-            gastro_dict.update(reviewURL=self.review_link.split('/')[-2])
+            gastro_dict.update(reviewURL=self.review_link.split("/")[-2])
 
         # name
         if self.closed:
-            gastro_dict.update(name=f'{self.name} - GESCHLOSSEN / CLOSED')
+            gastro_dict.update(name=f"{self.name} - GESCHLOSSEN / CLOSED")
             gastro_dict.update(otMon="")
             gastro_dict.update(otTue="")
             gastro_dict.update(otWed="")
@@ -408,7 +452,7 @@ class Gastro(BaseLocationID, BaseGastro):
             gastro_dict.update(otFri="")
             gastro_dict.update(otSat="")
             gastro_dict.update(otSun="")
-            gastro_dict.pop('telephone', None)
+            gastro_dict.pop("telephone", None)
 
         return gastro_dict
 
@@ -417,13 +461,14 @@ class GastroSubmit(BaseGastro):
     gastro = models.ForeignKey(
         Gastro,
         on_delete=models.SET_NULL,
-        verbose_name=_('gastro foreignkey'),
+        verbose_name=_("gastro foreignkey"),
         null=True,
         blank=True,
     )
 
-    district = models.CharField(_('District'), max_length=30, null=True, blank=True, choices=DISTRICT_CHOICES)
-
+    district = models.CharField(
+        _("District"), max_length=30, null=True, blank=True, choices=DISTRICT_CHOICES
+    )
 
     def __str__(self):
         return self.name

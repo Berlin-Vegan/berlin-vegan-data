@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('data', '0002_add_ordering'),
-    ]
+    dependencies = [("data", "0002_add_ordering")]
 
     operations = [
         migrations.AddField(
-            model_name='gastro',
-            name='commentOpen',
-            field=models.TextField(blank=True, null=True, verbose_name='comment open'),
-        ),
+            model_name="gastro",
+            name="commentOpen",
+            field=models.TextField(blank=True, null=True, verbose_name="comment open"),
+        )
     ]

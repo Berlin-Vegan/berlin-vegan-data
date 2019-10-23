@@ -5,14 +5,14 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('data', '0007_add_has_sticker'),
-    ]
+    dependencies = [("data", "0007_add_has_sticker")]
 
     operations = [
         migrations.AddField(
-            model_name='gastro',
-            name='submit_email',
-            field=models.EmailField(blank=True, max_length=254, null=True, verbose_name='Submitter e-mail'),
-        ),
+            model_name="gastro",
+            name="submit_email",
+            field=models.EmailField(
+                blank=True, max_length=254, null=True, verbose_name="Submitter e-mail"
+            ),
+        )
     ]

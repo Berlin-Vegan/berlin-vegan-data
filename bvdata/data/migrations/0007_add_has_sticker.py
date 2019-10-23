@@ -5,29 +5,63 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('data', '0006_refactor_verbose_name'),
-    ]
+    dependencies = [("data", "0006_refactor_verbose_name")]
 
     operations = [
         migrations.AddField(
-            model_name='gastro',
-            name='has_sticker',
-            field=models.BooleanField(default=False, verbose_name='Sticker'),
+            model_name="gastro",
+            name="has_sticker",
+            field=models.BooleanField(default=False, verbose_name="Sticker"),
         ),
         migrations.AlterField(
-            model_name='gastro',
-            name='breakfast',
-            field=models.NullBooleanField(choices=[(None, 'unknown'), (True, 'yes'), (False, 'no')], verbose_name='Vegan Breakfast'),
+            model_name="gastro",
+            name="breakfast",
+            field=models.NullBooleanField(
+                choices=[(None, "unknown"), (True, "yes"), (False, "no")],
+                verbose_name="Vegan Breakfast",
+            ),
         ),
         migrations.AlterField(
-            model_name='gastrosubmit',
-            name='breakfast',
-            field=models.NullBooleanField(choices=[(None, 'unknown'), (True, 'yes'), (False, 'no')], verbose_name='Vegan Breakfast'),
+            model_name="gastrosubmit",
+            name="breakfast",
+            field=models.NullBooleanField(
+                choices=[(None, "unknown"), (True, "yes"), (False, "no")],
+                verbose_name="Vegan Breakfast",
+            ),
         ),
         migrations.AlterField(
-            model_name='gastrosubmit',
-            name='district',
-            field=models.CharField(blank=True, choices=[('CHARLOTTENBURG', 'Charlottenburg'), ('FRIEDRICHSHAIN', 'Friedrichshain'), ('HELLERSDORF', 'Hellersdorf'), ('HOHENSCHÖNHAUSEN', 'Hohenschönhausen'), ('KREUZBERG', 'Kreuzberg'), ('KÖPENICK', 'Köpenick'), ('LICHTENBERG', 'Lichtenberg'), ('MARZAHN', 'Marzahn'), ('MITTE', 'Mitte'), ('NEUKÖLLN', 'Neukölln'), ('PANKOW', 'Pankow'), ('PRENZLAUER BERG', 'Prenzlauer Berg'), ('REINICKENDORF', 'Reinickendorf'), ('SCHÖNEBERG', 'Schöneberg'), ('SPANDAU', 'Spandau'), ('STEGLITZ', 'Steglitz'), ('TEMPELHOF', 'Tempelhof'), ('TIERGARTEN', 'Tiergarten'), ('TREPTOW', 'Treptow'), ('WEDDING', 'Wedding'), ('WEISSENSEE', 'Weißensee'), ('WILMERSDORF', 'Wilmersdorf'), ('ZEHLENDORF', 'Zehlendorf')], max_length=30, null=True, verbose_name='District'),
+            model_name="gastrosubmit",
+            name="district",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("CHARLOTTENBURG", "Charlottenburg"),
+                    ("FRIEDRICHSHAIN", "Friedrichshain"),
+                    ("HELLERSDORF", "Hellersdorf"),
+                    ("HOHENSCHÖNHAUSEN", "Hohenschönhausen"),
+                    ("KREUZBERG", "Kreuzberg"),
+                    ("KÖPENICK", "Köpenick"),
+                    ("LICHTENBERG", "Lichtenberg"),
+                    ("MARZAHN", "Marzahn"),
+                    ("MITTE", "Mitte"),
+                    ("NEUKÖLLN", "Neukölln"),
+                    ("PANKOW", "Pankow"),
+                    ("PRENZLAUER BERG", "Prenzlauer Berg"),
+                    ("REINICKENDORF", "Reinickendorf"),
+                    ("SCHÖNEBERG", "Schöneberg"),
+                    ("SPANDAU", "Spandau"),
+                    ("STEGLITZ", "Steglitz"),
+                    ("TEMPELHOF", "Tempelhof"),
+                    ("TIERGARTEN", "Tiergarten"),
+                    ("TREPTOW", "Treptow"),
+                    ("WEDDING", "Wedding"),
+                    ("WEISSENSEE", "Weißensee"),
+                    ("WILMERSDORF", "Wilmersdorf"),
+                    ("ZEHLENDORF", "Zehlendorf"),
+                ],
+                max_length=30,
+                null=True,
+                verbose_name="District",
+            ),
         ),
     ]
