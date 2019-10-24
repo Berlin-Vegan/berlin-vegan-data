@@ -6,5 +6,4 @@ env/
 *.sqlite3
 /static/
 .env
-bvdata/settings/docker.py
 *.mo
