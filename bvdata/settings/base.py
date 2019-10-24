@@ -22,12 +22,16 @@ BASE_DIR = Path(__file__).parents[2]
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ""
+SECRET_KEY = os.environ.get("SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = bool(os.getenv("DEBUG", False))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    i for i in os.environ.get("ALLOWED_HOSTS", "data.berlin-vegan.de").split(",")
+]
+
+CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 
 # Application definition
 
@@ -69,6 +73,17 @@ TEMPLATES = [
         },
     }
 ]
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("DATABASE_NAME", "postgres"),
+        "USER": os.environ.get("DATABASE_USER", "postgres"),
+        "PASSWORD": os.environ.get("DATABASE_PASSWORD", "postgres"),
+        "HOST": os.environ.get("DATABSE_HOST", "postgres"),
+        "PORT": os.environ.get("DATABSE_PORT", 5432),
+    }
+}
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
@@ -125,3 +140,10 @@ LOGIN_REDIRECT_URL = "/dashboard/"
 
 # email
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+SERVER_EMAIL = os.environ.get("SERVER_EMAIL", "")
+EMAIL_HOST = os.environ.get("EMAIL_HOST", "")
+EMAIL_PORT = os.environ.get("EMAIL_PORT", "")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+EMAIL_FROM = os.environ.get("EMAIL_FROM", "")
+EMAIL_GASTROS = os.environ.get("EMAIL_GASTROS", "")
