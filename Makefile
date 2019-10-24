@@ -1,10 +1,19 @@
 dev:
 	pipenv sync --dev
 
-test-lint: dev
+lint:
+	pipenv run isort
+	pipenv run flake8 .
+	pipenv run black .
+
+
+test-lint:
 	pipenv run isort -c
 	pipenv run flake8 .
 	pipenv run black --check .
+
+test: dev test-lint
+	pipenv run ./manage.py makemigrations --check
 
 prod:
 	pipenv run python manage.py migrate && \
