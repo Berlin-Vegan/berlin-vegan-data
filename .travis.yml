@@ -1,8 +1,13 @@
+language: generic
+
 services:
   - docker
+  - postgresql
 
 before_install:
   - docker build -t bvdata .
 
 script:
-  - docker run bvdata make test-lint
+  - docker run --network="host" --env DATABASE_HOST=localhost --env SECRET_KEY=nosecret bvdata make test
+
+
