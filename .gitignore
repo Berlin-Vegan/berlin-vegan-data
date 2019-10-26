@@ -7,3 +7,4 @@ env/
 /static/
 .env
 *.mo
+.coverage

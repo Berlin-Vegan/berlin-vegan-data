@@ -14,6 +14,7 @@ test-lint:
 
 test: dev test-lint
 	pipenv run ./manage.py makemigrations --check
+	pipenv run pytest
 
 prod:
 	pipenv run python manage.py migrate && \
