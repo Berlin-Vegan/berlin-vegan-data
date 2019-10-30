@@ -8,6 +8,6 @@ before_install:
   - docker build -t bvdata .
 
 script:
-  - docker run --network="host" --env DATABASE_HOST=localhost --env SECRET_KEY=nosecret bvdata make test
+  - docker run --network="host" --env DATABASE_HOST=localhost --env SECRET_KEY=nosecret --env EMAIL_GASTROS=test@test.de bvdata make test
 
 
