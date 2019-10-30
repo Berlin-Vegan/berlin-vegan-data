@@ -11,6 +11,7 @@ pytest = "*"
 pytest-cov = "*"
 pytest-django = "*"
 pytest-sugar = "*"
+factory-boy = "*"
 
 [packages]
 django-crispy-forms = "==1.7.*"

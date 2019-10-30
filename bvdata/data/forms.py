@@ -127,7 +127,8 @@ class BaseGastroForm(ModelForm):
         for t in timepicker:
             self.fields[t].widget.attrs.update({"placeholder": "HH:MM"})
             self.fields[t].widget.format = "%H:%M"
-            self.fields["cityCode"].widget = NumberInput(attrs={"maxlength": 5})
+
+        self.fields["cityCode"].widget = NumberInput(attrs={"maxlength": 5})
 
 
 class GastroForm(BaseGastroForm):

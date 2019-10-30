@@ -204,6 +204,7 @@ class GastroSubmitEditView(AuthMixin, ModelFormMixin, DetailView):
             return HttpResponseRedirect(
                 reverse("data:gastro-update", args=[self.gastro.id_string])
             )
+        return super(GastroSubmitEditView, self).form_valid(form)
 
     def get_success_url(self):
         if "save" in self.request.POST:
@@ -230,8 +231,6 @@ class ApiGastroLocationsJson(ListView):
 
 
 # user profile
-
-
 class UserProfileView(UpdateView):
     model = User
     template_name = "registration/user-profile.html"
