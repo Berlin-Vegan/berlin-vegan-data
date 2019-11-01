@@ -10,32 +10,16 @@ services:
             - 8000:8000
         volumes:
             - ./static:/app/static
-        environment:
-            - PORT=8000
-
-            - DATABASE_NAME=${DBNAME}
-            - DATABASE_USER=${DBUSER}
-            - DATABASE_PASSWORD=${DBPASSWORD}
-
-            - SECRET_KEY=${SECRET_KEY}
-
-            - ADMINS=${ADMINS}
-
-            - SERVER_EMAIL=${SERVER_EMAIL}
-            - EMAIL_HOST=${EMAIL_HOST}
-            - EMAIL_PORT=${EMAIL_PORT}
-            - EMAIL_HOST_USER=${EMAIL_HOST_USER}
-            - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
-            - EMAIL_FROM=${EMAIL_FROM}
-            - EMAIL_GASTROS=${EMAIL_GASTROS}
+        env_file:
+            - .env
     postgres:
         image: postgres:10.1-alpine
         restart: always
         volumes:
             - pgdata:/var/lib/postgresql/data/
         environment:
-            - POSTGRES_DB=${DBNAME}
-            - POSTGRES_USER=${DBUSER}
-            - POSTGRES_PASSWORD=${DBPASSWORD}
+            - POSTGRES_DB=${DATABASE_NAME}
+            - POSTGRES_USER=${DATABASE_USER}
+            - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
 volumes:
   pgdata:
