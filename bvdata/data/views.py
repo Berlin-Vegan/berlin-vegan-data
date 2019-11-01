@@ -17,7 +17,9 @@ from django.views.generic import (
     UpdateView,
 )
 from django.views.generic.edit import ModelFormMixin
+from django_filters.views import FilterView
 
+from bvdata.data.filters import GastroFilter
 from bvdata.data.forms import (
     DataAuthForm,
     GastroForm,
@@ -46,10 +48,11 @@ class DataAuthView(LoginView):
 
 
 # AuthViews
-class DashboardView(AuthMixin, ListView):
+class DashboardView(AuthMixin, FilterView):
     model = Gastro
     template_name = "data/dashboard.html"
     context_object_name = "gastros"
+    filterset_class = GastroFilter
 
     def get_queryset(self):
         return super(DashboardView, self).get_queryset().open().alphabetical()
@@ -69,7 +72,7 @@ class GastrosClosedView(DashboardView):
     }
 
     def get_queryset(self):
-        return super(ListView, self).get_queryset().closed()
+        return super(FilterView, self).get_queryset().closed()
 
 
 class GastroUpdateView(AuthMixin, UpdateView):
