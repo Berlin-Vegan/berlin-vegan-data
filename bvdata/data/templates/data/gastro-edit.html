@@ -39,11 +39,12 @@
     <div class="row">
         <div class="col">
              <form action="{% url 'data:gastro-update' gastro.id_string %}" method="POST" class="post-form" style="display: inline-block;">
-            {% csrf_token %}
-            {% include 'data/includes/gastro-form.html' %}
-            <button type="submit" name="save" class="save btn btn-primary">{% trans 'Save' context 'data' %}</button>
+                {% csrf_token %}
+                {% include 'data/includes/gastro-form.html' %}
+                <button type="submit" name="save" class="save btn btn-primary">{% trans 'Save' context 'data' %}</button>
+             </form>
         </div>
-    </form>
+
     </div>
     <div class="row">
         <div class="col offset-md-11">
