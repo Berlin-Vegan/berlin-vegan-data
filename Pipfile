@@ -18,6 +18,7 @@ django-crispy-forms = "==1.7.*"
 "psycopg2-binary" = "*"
 Django = "==2.1.*"
 gunicorn = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.7"
