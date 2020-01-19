@@ -454,6 +454,8 @@ class Gastro(BaseLocationID, BaseGastro):
             gastro_dict.update(otSun="")
             gastro_dict.pop("telephone", None)
 
+        gastro_dict.update(created=self.created.strftime("%Y-%m-%d"))
+
         return gastro_dict
 
 
