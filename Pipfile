@@ -16,7 +16,7 @@ factory-boy = "*"
 [packages]
 django-crispy-forms = "==1.8.*"
 "psycopg2-binary" = "*"
-Django = "==2.1.*"
+Django = "*"
 gunicorn = "*"
 django-filter = "*"
 

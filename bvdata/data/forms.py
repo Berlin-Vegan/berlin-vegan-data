@@ -2,7 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms import BooleanField, HiddenInput, ModelForm, NumberInput
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from bvdata.data.models import Gastro, GastroSubmit
 
