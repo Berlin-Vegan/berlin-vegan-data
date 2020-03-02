@@ -14,7 +14,7 @@ pytest-sugar = "*"
 factory-boy = "*"
 
 [packages]
-django-crispy-forms = "==1.8.*"
+django-crispy-forms = "==1.9.*"
 "psycopg2-binary" = "*"
 Django = "*"
 gunicorn = "*"
