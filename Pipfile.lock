@@ -215,11 +215,11 @@
         },
         "isort": {
             "hashes": [
-                "sha256:145072eedc4927cc9c1f9478f2d83b2fc1e6469df4129c02ef4e8c742207a46c",
-                "sha256:ae3007f72a2e9da36febd3454d8be4b175d6ca17eb765841d5fe3d038aede79d"
+                "sha256:2426f423a77bfb639ec67cf13ef7cb96f3521772b8831f099a777aae0c9ba571",
+                "sha256:32bd1190ae0a5cc45f10fbe3fb85918b17441f8e51db51e67453972e9acb6c96"
             ],
             "index": "pypi",
-            "version": "==5.1.4"
+            "version": "==5.4.0"
         },
         "mccabe": {
             "hashes": [
