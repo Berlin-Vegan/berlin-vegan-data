@@ -2,13 +2,13 @@ dev:
 	pipenv sync --dev
 
 lint:
-	pipenv run isort
+	pipenv run isort .
 	pipenv run flake8 .
 	pipenv run black .
 
 
 test-lint:
-	pipenv run isort -c
+	pipenv run isort . -c
 	pipenv run flake8 .
 	pipenv run black --check .
 
