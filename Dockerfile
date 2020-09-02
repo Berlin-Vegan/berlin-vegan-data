@@ -5,5 +5,5 @@ RUN apk add --no-cache --virtual .build-deps build-base gcc libc-dev fortify-hea
     && apk add postgresql-dev gettext make && pip install pipenv==2018.11.26 && pipenv sync && apk del .build-deps
 
 ENV DJANGO_SETTINGS_MODULE=bvdata.settings.base
-
+EXPOSE 8000
 CMD ["make", "prod"]
