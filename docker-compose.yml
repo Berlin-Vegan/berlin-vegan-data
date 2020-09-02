@@ -6,10 +6,8 @@ services:
         restart: always
         depends_on:
             - postgres
-        ports:
-            - 8000:8000
         volumes:
-            - ./static:/app/static
+            - dstatic:/app/static
         env_file:
             - .env
     postgres:
@@ -21,5 +19,17 @@ services:
             - POSTGRES_DB=${DATABASE_NAME}
             - POSTGRES_USER=${DATABASE_USER}
             - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    entrypoint:
+        image: nginx:stable-alpine
+        restart: always
+        ports:
+            - 8000:8080
+        volumes:
+            - ./nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+            - dstatic:/var/www/dstatic
+        depends_on:
+            - django
+
 volumes:
   pgdata:
+  dstatic:
