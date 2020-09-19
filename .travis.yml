@@ -1,13 +1,10 @@
-language: generic
-
-services:
-  - docker
-  - postgresql
-
-before_install:
-  - docker build -t bvdata .
-
-script:
-  - docker run --network="host" --env DATABASE_HOST=localhost --env SECRET_KEY=nosecret --env EMAIL_GASTROS=test@test.de bvdata make test
-
-
+jobs:
+  include:
+    - stage: test backend
+      language: generic
+      services:
+        - docker
+        - postgresql
+      script:
+        - docker build -f backend/Dockerfile -t bvdata backend/
+        - docker run --network="host" --env DATABASE_HOST=localhost --env SECRET_KEY=nosecret --env EMAIL_GASTROS=test@test.de bvdata make test
