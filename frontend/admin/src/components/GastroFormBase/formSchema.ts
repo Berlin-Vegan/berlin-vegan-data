@@ -1,0 +1,63 @@
+import * as Yup from 'yup';
+import { map } from 'ramda';
+import { nthOr } from '../../utils/fp';
+import { veganFieldOptions } from './fields/constants';
+
+const veganValues = map((item) => nthOr(0, 0)(item))(veganFieldOptions);
+
+const gastroFormSchema = Yup.object().shape({
+  name: Yup.string().max(100).required(),
+  street: Yup.string().max(100).required(),
+  postalCode: Yup.string().min(5).max(5).required(),
+  city: Yup.string().max(20).required(),
+  latitude: Yup.number().required(),
+  longitude: Yup.number().required(),
+  telephone: Yup.string().max(25).nullable(),
+  website: Yup.string().url().nullable(),
+  email: Yup.string().email().nullable(),
+  openingMon: Yup.string().nullable(),
+  closingMon: Yup.string().nullable(),
+  openingTue: Yup.string().nullable(),
+  closingTue: Yup.string().nullable(),
+  openingWed: Yup.string().nullable(),
+  closingWed: Yup.string().nullable(),
+  openingThu: Yup.string().nullable(),
+  closingThu: Yup.string().nullable(),
+  openingFri: Yup.string().nullable(),
+  closingFri: Yup.string().nullable(),
+  openingSat: Yup.string().nullable(),
+  closingSat: Yup.string().nullable(),
+  openingSun: Yup.string().nullable(),
+  closingSun: Yup.string().nullable(),
+  vegan: Yup.number().oneOf(veganValues).required(),
+  comment: Yup.string(),
+  commentEnglish: Yup.string(),
+  commentOpen: Yup.string(),
+  reviewLink: Yup.string().url().nullable(),
+  closed: Yup.string().nullable(),
+  textIntern: Yup.string().nullable(),
+  district: Yup.string().required(),
+  publicTransport: Yup.string().nullable(),
+  handicappedAccessible: Yup.boolean().nullable(),
+  handicappedAccessibleWc: Yup.boolean().nullable(),
+  dog: Yup.boolean().nullable(),
+  childChair: Yup.boolean().nullable(),
+  catering: Yup.boolean().nullable(),
+  delivery: Yup.boolean().nullable(),
+  organic: Yup.boolean().nullable(),
+  wlan: Yup.boolean().nullable(),
+  glutenFree: Yup.boolean().nullable(),
+  brunch: Yup.boolean().nullable(),
+  seatsOutdoor: Yup.number().integer().nullable(),
+  seatsIndoor: Yup.number().integer().nullable(),
+  restaurant: Yup.boolean().required(),
+  imbiss: Yup.boolean().required(),
+  eiscafe: Yup.boolean().required(),
+  cafe: Yup.boolean().required(),
+  bar: Yup.boolean().required(),
+  submitEmail: Yup.string().email().nullable(),
+  hasSticker: Yup.boolean(),
+  isSubmission: Yup.boolean(),
+});
+
+export default gastroFormSchema;
