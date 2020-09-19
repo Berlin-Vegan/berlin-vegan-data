@@ -1,0 +1,28 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+flake8 = "*"
+isort = "*"
+black = "==19.3b0"
+pytest = "*"
+pytest-cov = "*"
+pytest-django = "*"
+pytest-sugar = "*"
+factory-boy = "==2.12.0"
+ipython = "*"
+
+[packages]
+django-crispy-forms = "*"
+"psycopg2-binary" = "*"
+Django = "*"
+gunicorn = "*"
+django-filter = "*"
+django-rest-registration = "*"
+djangorestframework = "*"
+djangorestframework-camel-case = "*"
+
+[requires]
+python_version = "3.7"
