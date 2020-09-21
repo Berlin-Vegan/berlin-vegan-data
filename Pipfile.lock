@@ -187,10 +187,10 @@
         },
         "faker": {
             "hashes": [
-                "sha256:bc4b8c908dfcd84e4fe5d9fa2e52fbe17546515fb8f126909b98c47badf05658",
-                "sha256:ff188c416864e3f7d8becd8f9ee683a4b4101a2a2d2bcdcb3e84bb1bdd06eaae"
+                "sha256:075a95ac4c95765370919d787dcd958acfaea635005ad5af4d926cb0973800db",
+                "sha256:80bab8d46035a7393de827210c5d39c17109d3346d131946bde622137120c496"
             ],
-            "version": "==4.1.2"
+            "version": "==4.1.3"
         },
         "flake8": {
             "hashes": [
@@ -217,11 +217,11 @@
         },
         "isort": {
             "hashes": [
-                "sha256:171c5f365791073426b5ed3a156c2081a47f88c329161fd28228ff2da4c97ddb",
-                "sha256:ba91218eee31f1e300ecc079ef0c524cea3fc41bfbb979cbdf5fd3a889e3cfed"
+                "sha256:6187a9f1ce8784cbc6d1b88790a43e6083a6302f03e9ae482acc0f232a98c843",
+                "sha256:c16eaa7432a1c004c585d79b12ad080c6c421dd18fe27982ca11f95e6898e432"
             ],
             "index": "pypi",
-            "version": "==5.5.2"
+            "version": "==5.5.3"
         },
         "mccabe": {
             "hashes": [
