@@ -1,34 +1,42 @@
 version: '3.4'
 
 services:
-    django:
-        build: .
+    backend:
+        build:
+            context: ./backend/
         restart: always
         depends_on:
             - postgres
         volumes:
             - dstatic:/app/static
         env_file:
-            - .env
+            - ./backend/.env
+    frontend:
+        build:
+            context: ./frontend/admin/
+        restart: always
+        depends_on:
+            - backend
     postgres:
         image: postgres:10.1-alpine
         restart: always
         volumes:
             - pgdata:/var/lib/postgresql/data/
         environment:
-            - POSTGRES_DB=${DATABASE_NAME}
-            - POSTGRES_USER=${DATABASE_USER}
-            - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+            - POSTGRES_DB=${POSTGRES_DB}
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     entrypoint:
         image: nginx:stable-alpine
         restart: always
         ports:
             - 8000:8080
         volumes:
-            - ./nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+            - ./entrypoint/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
             - dstatic:/var/www/dstatic
         depends_on:
-            - django
+            - backend
+            - frontend
 
 volumes:
   pgdata:
