@@ -248,33 +248,33 @@ class Gastro(BaseLocationID, BaseGastro):
             gastro_dict.update(website=self.website)
         if self.email is not None:
             gastro_dict.update(email=self.email)
-        if self.closing_mon is not None:
+        if self.opening_mon is not None:
             gastro_dict.update(
-                otMon=str(self.closing_mon.strftime("%H:%M"))
+                otMon=str(self.opening_mon.strftime("%H:%M"))
                 + " - "
                 + str(self.closing_mon.strftime("%H:%M"))
             )
-        if self.closing_tue is not None:
+        if self.opening_tue is not None:
             gastro_dict.update(
-                otTue=str(self.closing_tue.strftime("%H:%M"))
+                otTue=str(self.opening_tue.strftime("%H:%M"))
                 + " - "
                 + str(self.closing_tue.strftime("%H:%M"))
             )
-        if self.closing_wed is not None:
+        if self.opening_wed is not None:
             gastro_dict.update(
-                otWed=str(self.closing_wed.strftime("%H:%M"))
+                otWed=str(self.opening_wed.strftime("%H:%M"))
                 + " - "
                 + str(self.closing_wed.strftime("%H:%M"))
             )
-        if self.closing_thu is not None:
+        if self.opening_thu is not None:
             gastro_dict.update(
-                otThu=str(self.closing_thu.strftime("%H:%M"))
+                otThu=str(self.opening_thu.strftime("%H:%M"))
                 + " - "
                 + str(self.closing_thu.strftime("%H:%M"))
             )
-        if self.closing_fri is not None:
+        if self.opening_fri is not None:
             gastro_dict.update(
-                otFri=str(self.closing_fri.strftime("%H:%M"))
+                otFri=str(self.opening_fri.strftime("%H:%M"))
                 + " - "
                 + str(self.closing_fri.strftime("%H:%M"))
             )
@@ -284,9 +284,9 @@ class Gastro(BaseLocationID, BaseGastro):
                 + " - "
                 + str(self.closing_sat.strftime("%H:%M"))
             )
-        if self.closing_sun is not None:
+        if self.opening_sun is not None:
             gastro_dict.update(
-                otSun=str(self.closing_sun.strftime("%H:%M"))
+                otSun=str(self.opening_sun.strftime("%H:%M"))
                 + " - "
                 + str(self.closing_sun.strftime("%H:%M"))
             )
