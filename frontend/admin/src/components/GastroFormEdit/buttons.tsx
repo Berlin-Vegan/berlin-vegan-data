@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { useField } from 'formik';
 import { useSnackbar } from 'notistack';
 import Grid from '@material-ui/core/Grid';
@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import SaveIcon from '@material-ui/icons/Save';
 import { authorizedFetch } from '../../utils/fetch';
 import { PagePaths } from '../../pages/constants';
+import { AuthContext } from '../../providers/UserProvider';
 
 interface IPublishButton {
   isSubmitting: boolean;
@@ -15,6 +16,7 @@ interface IPublishButton {
 }
 
 const PublishButton: FC<IPublishButton> = ({ isSubmitting, idString }) => {
+  const { dispatch: userDispatch } = useContext(AuthContext);
   const [, isSubmissionMeta, { setValue: setIsSubmission }] = useField(
     'isSubmission'
   );
@@ -22,9 +24,14 @@ const PublishButton: FC<IPublishButton> = ({ isSubmitting, idString }) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const publishGastro = async () => {
-    const res = await authorizedFetch(`/api/v1/gastros/${idString}/`, 'PATCH', {
-      isSubmission: false,
-    });
+    const res = await authorizedFetch(
+      userDispatch,
+      `/api/v1/gastros/${idString}/`,
+      'PATCH',
+      {
+        isSubmission: false,
+      }
+    );
     if (res.status === 200) {
       enqueueSnackbar(`Gastro ${nameMeta.value} published`, {
         variant: 'success',
@@ -58,12 +65,17 @@ interface IButtons {
 }
 
 const Buttons: FC<IButtons> = ({ submitForm, isSubmitting, idString }) => {
+  const { dispatch } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
   const [, nameMeta] = useField('name');
 
   const gastroDelete = async () => {
-    const res = await authorizedFetch(`/api/v1/gastros/${idString}/`, 'DELETE');
+    const res = await authorizedFetch(
+      dispatch,
+      `/api/v1/gastros/${idString}/`,
+      'DELETE'
+    );
     if (res.status === 204) {
       enqueueSnackbar(`Gastro ${nameMeta.value} deleted`, {
         variant: 'success',

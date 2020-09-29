@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Field, Form, Formik } from 'formik';
 import { useSnackbar } from 'notistack';
 import { TextField } from 'formik-material-ui';
@@ -8,6 +8,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { authorizedFetch } from '../../utils/fetch';
+import { AuthContext } from '../../providers/UserProvider';
 
 const useStyles = makeStyles(() => ({
   saveButton: {
@@ -23,6 +24,8 @@ const initial = {
 
 const PasswordChangeForm = () => {
   const classes = useStyles();
+  const { dispatch } = useContext(AuthContext);
+
   const { enqueueSnackbar } = useSnackbar();
 
   return (
@@ -30,6 +33,7 @@ const PasswordChangeForm = () => {
       initialValues={initial}
       onSubmit={async (values, { setSubmitting, setErrors, setValues }) => {
         const res = await authorizedFetch(
+          dispatch,
           '/api/v1/accounts/change-password/',
           'POST',
           values

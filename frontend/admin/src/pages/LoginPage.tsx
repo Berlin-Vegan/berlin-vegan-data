@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Container from '@material-ui/core/Container';
-import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
-import { IAppState } from '../store/store';
+import { AuthContext } from '../providers/UserProvider';
 
 const LoginPageComponent = () => (
   <Container component="main" maxWidth="xs">
@@ -12,10 +11,13 @@ const LoginPageComponent = () => (
 );
 
 const LoginPage = () => {
-  const authenticated = useSelector(
-    (state: IAppState) => state.userState.authenticated
+  const { state } = useContext(AuthContext);
+
+  return state.authenticated ? (
+    <Redirect push to="/" />
+  ) : (
+    <LoginPageComponent />
   );
-  return authenticated ? <Redirect push to="/" /> : <LoginPageComponent />;
 };
 
 export default LoginPage;

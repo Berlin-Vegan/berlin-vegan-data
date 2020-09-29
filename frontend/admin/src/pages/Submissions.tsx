@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import Grid from '@material-ui/core/Grid';
 
 import GastroTable from '../components/GastroTable';
 import { fetchGastroList } from '../utils/fetch';
+import { AuthContext } from '../providers/UserProvider';
 
 const Submissions = () => {
+  const { dispatch } = useContext(AuthContext);
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetchGastroList('is_submission=true').then((res) =>
-        res.json()
-      );
+      const result = await fetchGastroList(
+        dispatch,
+        'is_submission=true'
+      ).then((res) => res.json());
       setData(result);
     };
 

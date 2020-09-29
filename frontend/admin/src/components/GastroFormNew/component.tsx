@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useContext } from 'react';
 import { Form, Formik } from 'formik';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -9,8 +9,11 @@ import { authorizedFetch } from '../../utils/fetch';
 import buttons from './buttons';
 import initial from './initialData';
 import GastroBaseForm from '../GastroFormBase';
+import { AuthContext } from '../../providers/UserProvider';
 
 const GastroFormNew: FunctionComponent = () => {
+  const { dispatch } = useContext(AuthContext);
+
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
 
@@ -20,7 +23,12 @@ const GastroFormNew: FunctionComponent = () => {
         initialValues={initial}
         validationSchema={gastroFormSchema}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
-          const res = await authorizedFetch('/api/v1/gastros/', 'POST', values);
+          const res = await authorizedFetch(
+            dispatch,
+            '/api/v1/gastros/',
+            'POST',
+            values
+          );
           const data = await res.json();
           if (res.status === 201) {
             enqueueSnackbar(`Gastro ${data.name} created`, {

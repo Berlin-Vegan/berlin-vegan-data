@@ -1,7 +1,8 @@
 import { getCSRFToken } from './cookie';
-import { store } from '../store/store';
+import { UserDispatch, TYPE_USER_LOGOUT } from '../providers/UserProvider';
 
 export const authorizedFetch = async (
+  userDispatch: UserDispatch,
   url: string,
   method: string = 'GET',
   body: object | Array<unknown> | null = null
@@ -16,11 +17,14 @@ export const authorizedFetch = async (
   });
 
   if (response.status === 403) {
-    store.dispatch({ type: 'LOGOUT_USER' });
+    userDispatch({ type: TYPE_USER_LOGOUT });
   }
 
   return response;
 };
 
-export const fetchGastroList = async (filter: string): Promise<Response> =>
-  authorizedFetch(`/api/v1/gastros/?${filter}`);
+export const fetchGastroList = async (
+  userDispatch: UserDispatch,
+  filter: string
+): Promise<Response> =>
+  authorizedFetch(userDispatch, `/api/v1/gastros/?${filter}`);
