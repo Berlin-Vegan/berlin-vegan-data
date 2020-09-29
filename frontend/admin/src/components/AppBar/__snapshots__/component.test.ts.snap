@@ -50,6 +50,11 @@ exports[`render <AppBarComponent /> 1`] = `
     >
       Berlin-Vegan Data
     </h1>
+    <p
+      className="MuiTypography-root MuiTypography-body1"
+    >
+      –
+    </p>
     <button
       className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-logout-8 MuiButton-containedSecondary"
       disabled={false}

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useContext } from 'react';
 import clsx from 'clsx';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,20 +8,29 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Button } from '@material-ui/core';
 
+import { pathOr } from 'ramda';
 import { useStyles } from './styles';
 import Logo from '../../berlin-vegan-logo.png';
 import { authorizedFetch } from '../../utils/fetch';
-import { store } from '../../store/store';
+import {
+  AuthContext,
+  UserDispatch,
+  TYPE_USER_LOGOUT,
+} from '../../providers/UserProvider';
 
 type AppBarComponentProps = {
   open: boolean;
   handleDrawerOpen: () => void;
 };
 
-const logoutUser = async (): Promise<void> => {
-  const response = await authorizedFetch('/api/v1/accounts/logout/', 'POST');
+const logoutUser = async (userDispatch: UserDispatch): Promise<void> => {
+  const response = await authorizedFetch(
+    userDispatch,
+    '/api/v1/accounts/logout/',
+    'POST'
+  );
   if (response.ok) {
-    store.dispatch({ type: 'LOGOUT_USER' });
+    userDispatch({ type: TYPE_USER_LOGOUT });
   }
 };
 
@@ -30,6 +39,8 @@ const AppBarComponent: FunctionComponent<AppBarComponentProps> = ({
   handleDrawerOpen,
 }) => {
   const classes = useStyles();
+  const { state, dispatch: userDispatch } = useContext(AuthContext);
+  const username = pathOr('–', ['userData', 'username'], state);
 
   return (
     <AppBar
@@ -56,12 +67,13 @@ const AppBarComponent: FunctionComponent<AppBarComponentProps> = ({
         >
           Berlin-Vegan Data
         </Typography>
+        <Typography>{username}</Typography>
         <Button
           variant="contained"
           color="secondary"
           className={classes.logout}
           startIcon={<ExitToAppIcon />}
-          onClick={logoutUser}
+          onClick={() => logoutUser(userDispatch)}
         >
           Logout
         </Button>

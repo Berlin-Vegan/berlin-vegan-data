@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useContext } from 'react';
 import { useSnackbar } from 'notistack';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
@@ -12,6 +12,7 @@ import { GastroDataType } from './types';
 import useStyles from './styles';
 import Buttons from './buttons';
 import GastroBaseForm from '../GastroFormBase';
+import { AuthContext } from '../../providers/UserProvider';
 
 interface IGastroFormEdit {
   gastroData: GastroDataType;
@@ -19,6 +20,8 @@ interface IGastroFormEdit {
 
 const GastroFormEdit: FunctionComponent<IGastroFormEdit> = ({ gastroData }) => {
   const classes = useStyles();
+  const { dispatch } = useContext(AuthContext);
+
   const { enqueueSnackbar } = useSnackbar();
   const { created, updated, idString, lastEditor, ...formData } = gastroData;
   return (
@@ -28,6 +31,7 @@ const GastroFormEdit: FunctionComponent<IGastroFormEdit> = ({ gastroData }) => {
         validationSchema={gastroFormSchema}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
           const res = await authorizedFetch(
+            dispatch,
             `/api/v1/gastros/${idString}/`,
             'PUT',
             values

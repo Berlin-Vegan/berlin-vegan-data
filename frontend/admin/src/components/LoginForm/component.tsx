@@ -1,18 +1,30 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
-import { propOr, __ } from 'ramda';
+import { __, propOr } from 'ramda';
 import useStyles from './styles';
-import { store } from '../../store/store';
+import {
+  AuthContext,
+  TYPE_SET_USER_DATA,
+  TYPE_USER_LOGIN,
+  UserDispatch,
+} from '../../providers/UserProvider';
+import { authorizedFetch } from '../../utils/fetch';
+
+const getUserData = (userDispatch: UserDispatch) =>
+  authorizedFetch(userDispatch, '/api/v1/accounts/profile/').then((res) =>
+    res.json()
+  );
 
 const login = async (
   username: string,
   password: string,
-  setErrors: Dispatch<SetStateAction<IErrorsState>>
+  setErrors: Dispatch<SetStateAction<IErrorsState>>,
+  userDispatch: UserDispatch
 ): Promise<void> => {
   const response = await fetch('/api/v1/accounts/login/', {
     method: 'POST',
@@ -21,7 +33,9 @@ const login = async (
   });
 
   if (response.status === 200) {
-    store.dispatch({ type: 'LOGIN_USER' });
+    userDispatch({ type: TYPE_USER_LOGIN });
+    const userData = await getUserData(userDispatch);
+    userDispatch({ type: TYPE_SET_USER_DATA, payload: userData });
   } else {
     const errors = await response.json();
     const propEmpty = propOr('', __, errors);
@@ -42,6 +56,7 @@ interface IErrorsState {
 
 const LoginForm = () => {
   const classes = useStyles();
+  const { dispatch: userDispatch } = useContext(AuthContext);
   const [formState, setFormState] = useState({ username: '', password: '' });
   const [errorsState, setErrors] = useState<IErrorsState>({
     detail: '',
@@ -53,7 +68,7 @@ const LoginForm = () => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   const handleButtonClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    login(formState.username, formState.password, setErrors);
+    login(formState.username, formState.password, setErrors, userDispatch);
   };
 
   return (

@@ -1,15 +1,13 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useContext } from 'react';
 
-import { useSelector } from 'react-redux';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
-import { IAppState } from '../../store/store';
+
 import { PagePaths } from '../../pages/constants';
+import { AuthContext } from '../../providers/UserProvider';
 
 const PrivateRoute: FunctionComponent<RouteProps> = ({ children, ...rest }) => {
-  const authenticated = useSelector(
-    (state: IAppState) => state.userState.authenticated
-  );
-  return authenticated ? (
+  const { state: authState } = useContext(AuthContext);
+  return authState.authenticated ? (
     <Route {...rest} render={() => children} />
   ) : (
     <Redirect to={PagePaths.LOGIN_PAGE} />

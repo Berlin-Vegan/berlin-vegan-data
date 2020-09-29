@@ -4,16 +4,14 @@ import * as Sentry from '@sentry/react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import 'fontsource-roboto';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { PersistGate } from 'redux-persist/integration/react';
 import { SnackbarProvider } from 'notistack';
-import { persistor, store } from './store/store';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { UserProvider } from './providers/UserProvider';
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -21,18 +19,16 @@ Sentry.init({
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Router>
-            <SnackbarProvider maxSnack={3}>
-              <App />
-            </SnackbarProvider>
-          </Router>
-        </ThemeProvider>
-      </PersistGate>
-    </Provider>
+    <UserProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          <SnackbarProvider maxSnack={3}>
+            <App />
+          </SnackbarProvider>
+        </Router>
+      </ThemeProvider>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
