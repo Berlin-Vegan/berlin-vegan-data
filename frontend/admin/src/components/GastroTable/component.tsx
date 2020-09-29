@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import MUIDataTable, { MUIDataTableOptions } from 'mui-datatables';
+import MUIDataTable, {
+  MUIDataTableColumnDef,
+  MUIDataTableOptions,
+} from 'mui-datatables';
 import { useHistory } from 'react-router-dom';
+import { assocPath } from 'ramda';
+import { FilterContext } from '../../providers/FilterProvider';
+import { mapIndexed, nthOr } from '../../utils/fp';
 
-const veganColumnBody: any = {
+type VeganColumnBody = {
+  [index: number]: string;
+};
+
+const veganColumnBody: VeganColumnBody = {
   2: 'Ominvore (vegan labeled)',
   4: 'Vegetarian (vegan labeled)',
   5: 'Vegan',
@@ -45,7 +55,11 @@ const columns = [
       filter: true,
       sort: true,
       searchable: false,
-      customBodyRender: (value: number, tableMeta: any, updateValue: any) => {
+      customBodyRender: (
+        value: number,
+        tableMeta: never,
+        updateValue: never
+      ) => {
         return veganColumnBody[value];
       },
     },
@@ -57,7 +71,11 @@ const columns = [
       filter: true,
       sort: true,
       searchable: false,
-      customBodyRender: (value: number, tableMeta: any, updateValue: any) => {
+      customBodyRender: (
+        value: number,
+        tableMeta: never,
+        updateValue: never
+      ) => {
         return value ? <CheckIcon /> : <ClearIcon />;
       },
     },
@@ -88,19 +106,26 @@ interface IGastroTableProps {
 
 const GastroTable = ({ data }: IGastroTableProps) => {
   const history = useHistory();
+  const { filterState, setFilterState } = useContext(FilterContext);
 
   const options: MUIDataTableOptions = {
     selectableRows: 'none',
     pagination: false,
     onRowClick: (_rowData, rowMeta) =>
       history.push(`/gastro/${data[rowMeta.dataIndex].idString}/edit`),
+    onFilterChange: (_changedColumn, filterList: any[], _type) =>
+      setFilterState(filterList),
   };
+
+  const columnsWithFilter: MUIDataTableColumnDef[] = mapIndexed((column, idx) =>
+    assocPath(['options', 'filterList'], nthOr([], idx)(filterState), column)
+  )(columns);
 
   return (
     <MUIDataTable
       title={`Gastros (${data.length})`}
       data={data}
-      columns={columns}
+      columns={columnsWithFilter}
       options={options}
     />
   );
