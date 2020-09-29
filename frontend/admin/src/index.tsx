@@ -11,7 +11,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { UserProvider } from './providers/UserProvider';
+import Providers from './providers';
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -19,7 +19,7 @@ Sentry.init({
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserProvider>
+    <Providers>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Router>
@@ -28,7 +28,7 @@ ReactDOM.render(
           </SnackbarProvider>
         </Router>
       </ThemeProvider>
-    </UserProvider>
+    </Providers>
   </React.StrictMode>,
   document.getElementById('root')
 );
