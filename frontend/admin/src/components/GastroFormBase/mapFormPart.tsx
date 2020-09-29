@@ -3,7 +3,21 @@ import { useField } from 'formik';
 import ReactMapGL, { Marker, NavigationControl } from 'react-map-gl';
 import RoomIcon from '@material-ui/icons/Room';
 
-const marker = (lat: number, long: number, setLatLong: any) => (
+type MapProps = {
+  lat: number;
+  long: number;
+  setLongLatFields: (long: number, lat: number) => void;
+};
+
+type ViewportState = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+};
+
+type SetLatLong = (lngLat: [number, number]) => void;
+
+const marker = (lat: number, long: number, setLatLong: SetLatLong) => (
   <Marker
     latitude={lat}
     longitude={long}
@@ -13,18 +27,6 @@ const marker = (lat: number, long: number, setLatLong: any) => (
     <RoomIcon fontSize="large" />
   </Marker>
 );
-
-type MapProps = {
-  lat: number;
-  long: number;
-  setLongLatFields: (long: number, lat: number) => any;
-};
-
-type ViewportState = {
-  latitude: number;
-  longitude: number;
-  zoom: number;
-};
 
 const Map: FC<MapProps> = ({ lat, long, setLongLatFields }) => {
   const [viewportState, setViewportState] = useState<ViewportState>({
@@ -47,7 +49,7 @@ const Map: FC<MapProps> = ({ lat, long, setLongLatFields }) => {
   const setLongLatViewportFields = ([longMarker, latMarker]: [
     number,
     number
-  ]) => {
+  ]): void => {
     setLongLatFields(longMarker, latMarker);
     setViewportState({
       ...viewportState,
@@ -89,7 +91,7 @@ const MapFormPart = () => {
     { setValue: setValueLongitude },
   ] = useField('longitude');
 
-  const setNewLongLat = (long: number, lat: number) => {
+  const setNewLongLat = (long: number, lat: number): void => {
     setValueLatitude(lat);
     setValueLongitude(long);
   };
