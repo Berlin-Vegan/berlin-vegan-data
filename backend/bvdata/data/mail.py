@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 
 def mail_new_submit(open_submits: int) -> None:
     subject = "Es gibt eine neue Einreichung"
-    message = f"Momentan gib es {open_submits} offene Einreichungen. https://data.berlin-vegan.de/gastro-submit-list/"
+    message = f"There are currently {open_submits} open submissions. https://data.berlin-vegan.de/gastros/submissions/"
     from_email = settings.EMAIL_FROM
     recipient_list = [settings.EMAIL_GASTROS]
 
