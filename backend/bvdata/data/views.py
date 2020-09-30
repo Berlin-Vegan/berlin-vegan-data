@@ -26,7 +26,7 @@ class GastroSubmitView(CreateView):
 
     def form_valid(self, form):
         form.save()
-        submits = Gastro.objects.all().count()
+        submits = Gastro.objects.filter(is_submission=True).count()
         mail_new_submit(submits)
         return HttpResponseRedirect(
             "https://www.berlin-vegan.de/submit-danke-thank-you/"
