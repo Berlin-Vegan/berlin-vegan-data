@@ -6,5 +6,5 @@ export enum PagePaths {
   GASTRO_PAGE_EDIT = '/gastro/:id([0-9a-z]{32})/edit',
   GASTRO_PAGE_NEW = '/gastro/new',
   PAGE_NOT_FOUND = '*',
-  PROFILE_PAGE = '/profile',
+  PROFILE_PAGE = '/profile'
 }

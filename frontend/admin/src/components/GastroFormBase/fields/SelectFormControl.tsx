@@ -53,7 +53,7 @@ const SelectYesNoUnknown = ({ children, ...props }: SelectProps) => {
       const { value } = event.target;
       setFieldValue(name, stringToBoolean(value));
     },
-    [setFieldValue, name]
+    [setFieldValue, name],
   );
   return (
     <MuiSelect {...fieldValueToString(props)} onChange={onChange}>

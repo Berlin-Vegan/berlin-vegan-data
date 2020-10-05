@@ -27,7 +27,7 @@ const GastroFormNew: FunctionComponent = () => {
             dispatch,
             '/api/v1/gastros/',
             'POST',
-            values
+            values,
           );
           const data = await res.json();
           if (res.status === 201) {

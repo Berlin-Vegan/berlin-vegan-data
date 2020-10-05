@@ -27,7 +27,7 @@ const logoutUser = async (userDispatch: UserDispatch): Promise<void> => {
   const response = await authorizedFetch(
     userDispatch,
     '/api/v1/accounts/logout/',
-    'POST'
+    'POST',
   );
   if (response.ok) {
     userDispatch({ type: TYPE_USER_LOGOUT });

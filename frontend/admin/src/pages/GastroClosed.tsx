@@ -15,7 +15,7 @@ const GastroClosed = () => {
     const fetchData = async () => {
       const result = await fetchGastroList(
         dispatch,
-        'closed=true&is_submission=false'
+        'closed=true&is_submission=false',
       ).then((res) => res.json());
       setData(result);
     };

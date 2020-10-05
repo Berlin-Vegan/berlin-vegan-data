@@ -58,7 +58,7 @@ const columns = [
       customBodyRender: (
         value: number,
         tableMeta: never,
-        updateValue: never
+        updateValue: never,
       ) => {
         return veganColumnBody[value];
       },
@@ -74,7 +74,7 @@ const columns = [
       customBodyRender: (
         value: number,
         tableMeta: never,
-        updateValue: never
+        updateValue: never,
       ) => {
         return value ? <CheckIcon /> : <ClearIcon />;
       },
@@ -127,7 +127,7 @@ const GastroTable = ({ data }: IGastroTableProps) => {
   };
 
   const columnsWithFilter: MUIDataTableColumnDef[] = mapIndexed((column, idx) =>
-    assocPath(['options', 'filterList'], nthOr([], idx)(filterState), column)
+    assocPath(['options', 'filterList'], nthOr([], idx)(filterState), column),
   )(columns);
 
   return (

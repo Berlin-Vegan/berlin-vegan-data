@@ -28,7 +28,7 @@ const NullTextField = ({ children, ...props }: TextFieldProps) => {
       const { value } = event.target;
       setFieldValue(name, emptyStringToNull(value));
     },
-    [setFieldValue, name]
+    [setFieldValue, name],
   );
 
   return (

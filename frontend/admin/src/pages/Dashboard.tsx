@@ -14,7 +14,7 @@ const Dashboard = () => {
     const fetchData = async () => {
       const result = await fetchGastroList(
         dispatch,
-        'closed=false&is_submission=false'
+        'closed=false&is_submission=false',
       ).then((res) => res.json());
       setData(result);
     };

@@ -15,7 +15,7 @@ const GetGeoButton = () => {
 
   const fetchGeoLocation = async () => {
     const res = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${streetMeta.value},${postalCodeMeta.value},${cityMeta.value}`
+      `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${streetMeta.value},${postalCodeMeta.value},${cityMeta.value}`,
     );
     if (res.status === 200) {
       const data = await res.json();

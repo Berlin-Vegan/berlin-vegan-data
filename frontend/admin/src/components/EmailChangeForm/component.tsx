@@ -42,7 +42,7 @@ const EmailChangeForm = () => {
           dispatch,
           profileURL,
           'PATCH',
-          values
+          values,
         );
         const data = await res.json();
         if (res.status === 200) {

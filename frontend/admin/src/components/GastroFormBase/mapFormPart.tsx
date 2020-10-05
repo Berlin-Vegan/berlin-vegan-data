@@ -78,7 +78,7 @@ const latlongEmpty = <div>Latitude & Longitude are empty.</div>;
 
 const MapFormPart = () => {
   const [, { value: latitudeValue }, { setValue: setValueLatitude }] = useField(
-    'latitude'
+    'latitude',
   );
   const [
     ,
