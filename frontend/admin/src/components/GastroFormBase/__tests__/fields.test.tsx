@@ -128,8 +128,9 @@ standardComponentTest(BVKeyboardTimePickerWrapper, { test: null });
 standardComponentTest(BVKeyboardTimePickerWrapper, { test: '12:00:00' });
 
 test('string to date|null|undefined dateStringToDate', () => {
-  const resultEmptyString = dateStringToDate('');
-  expect(resultEmptyString).toStrictEqual(new Date('2000-11-22T00:00:00.000Z'));
+  const resultNaNDate = dateStringToDate('');
+  expect(resultNaNDate).not.toBeNull();
+  expect(resultNaNDate).not.toBeUndefined();
 
   const resultString = dateStringToDate('2019-11-01');
   expect(resultString).toStrictEqual(new Date('2019-11-01T00:00:00.000'));

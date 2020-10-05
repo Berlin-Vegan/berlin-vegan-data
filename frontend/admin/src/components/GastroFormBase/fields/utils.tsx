@@ -11,3 +11,6 @@ const menuItem = (value: number | string, label: string) => (
 
 export const menuItems = (fieldOptions: Array<[number | string, string]>) =>
   map((item) => menuItem(nthOr('', 0)(item), nthOr('', 1)(item)))(fieldOptions);
+
+export const withLeadingZero = (value: number): string =>
+  value < 10 ? `0${value}` : `${value}`;

@@ -8,6 +8,7 @@ import {
   KeyboardTimePickerProps,
 } from 'formik-material-ui-pickers';
 import { getHours, getMinutes, parse } from 'date-fns';
+import { withLeadingZero } from './utils';
 
 export const timeStringToDate = (value: string | null | undefined) => {
   if (typeof value === 'string') {
@@ -15,9 +16,6 @@ export const timeStringToDate = (value: string | null | undefined) => {
   }
   return value;
 };
-
-const withLeadingZero = (value: number): string =>
-  value < 10 ? `0${value}` : `${value}`;
 
 const getHoursWithZero = (date: Date) => withLeadingZero(getHours(date));
 const getMinutesWithZero = (date: Date) => withLeadingZero(getMinutes(date));
