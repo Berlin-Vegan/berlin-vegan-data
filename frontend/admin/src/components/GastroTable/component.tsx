@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -78,6 +78,12 @@ const columns = [
       ) => {
         return value ? <CheckIcon /> : <ClearIcon />;
       },
+      filterOptions: {
+        renderValue: (v: boolean) => (v ? 'Review' : 'No Review'),
+      },
+      customFilterListOptions: {
+        render: (v: boolean) => (v ? 'Review' : 'No Review'),
+      },
     },
   },
 ];
@@ -107,6 +113,7 @@ interface IGastroTableProps {
 const GastroTable = ({ data }: IGastroTableProps) => {
   const history = useHistory();
   const { filterState, setFilterState } = useContext(FilterContext);
+  const [countState, setCountState] = useState(0);
 
   const options: MUIDataTableOptions = {
     selectableRows: 'none',
@@ -115,6 +122,8 @@ const GastroTable = ({ data }: IGastroTableProps) => {
       history.push(`/gastro/${data[rowMeta.dataIndex].idString}/edit`),
     onFilterChange: (_changedColumn, filterList: any[], _type) =>
       setFilterState(filterList),
+    onTableChange: (action, { displayData }) =>
+      setCountState(displayData.length),
   };
 
   const columnsWithFilter: MUIDataTableColumnDef[] = mapIndexed((column, idx) =>
@@ -123,7 +132,7 @@ const GastroTable = ({ data }: IGastroTableProps) => {
 
   return (
     <MUIDataTable
-      title={`Gastros (${data.length})`}
+      title={`Gastros (${countState})`}
       data={data}
       columns={columnsWithFilter}
       options={options}
