@@ -95,8 +95,9 @@ standardComponentTest(FormControlNoYesUnknownWrapper, { test: true });
 standardComponentTest(FormControlNoYesUnknownWrapper, { test: false });
 
 test('string to date|null|undefined timeStringToDate', () => {
-  const resultNewDate = timeStringToDate('');
-  expect(resultNewDate).toStrictEqual(new Date('2000-11-22T00:00:00.000Z'));
+  const resultNaNDate = timeStringToDate('');
+  expect(resultNaNDate).not.toBeNull();
+  expect(resultNaNDate).not.toBeUndefined();
 
   const resultDate = timeStringToDate('11:00:00');
   expect(resultDate).toStrictEqual(new Date('2000-11-22T11:00:00.000'));
@@ -107,9 +108,9 @@ test('string to date|null|undefined timeStringToDate', () => {
 
 test('date to string dateToTimeString', () => {
   const resultTimeString = dateToTimeString(
-    new Date('2000-11-22T12:00:00.000')
+    new Date('2000-11-22T04:01:00.000')
   );
-  expect(resultTimeString).toStrictEqual('12:00:00');
+  expect(resultTimeString).toStrictEqual('04:01:00');
 
   const resultNull = dateToTimeString(null);
   expect(resultNull).toBeNull();
