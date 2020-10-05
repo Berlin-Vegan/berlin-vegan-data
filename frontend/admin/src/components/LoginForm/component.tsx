@@ -5,7 +5,7 @@ import { Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
-import { __, propOr } from 'ramda';
+import { __, propOr, isEmpty, assoc, ifElse } from 'ramda';
 import useStyles from './styles';
 import {
   AuthContext,
@@ -14,11 +14,20 @@ import {
   UserDispatch,
 } from '../../providers/UserProvider';
 import { authorizedFetch } from '../../utils/fetch';
+import { getCSRFToken } from '../../utils/cookie';
 
 const getUserData = (userDispatch: UserDispatch) =>
   authorizedFetch(userDispatch, '/api/v1/accounts/profile/').then((res) =>
     res.json()
   );
+
+const initialHeader = { 'Content-Type': 'application/json' };
+const setCSRFToken = assoc('X-CSRFToken', __, initialHeader);
+const getHeader = ifElse(
+  (x) => !isEmpty(x),
+  (x) => setCSRFToken(x),
+  () => initialHeader
+);
 
 const login = async (
   username: string,
@@ -28,7 +37,7 @@ const login = async (
 ): Promise<void> => {
   const response = await fetch('/api/v1/accounts/login/', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: getHeader(getCSRFToken()),
     body: JSON.stringify({ login: username, password }),
   });
 
