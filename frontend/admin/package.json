@@ -23,7 +23,7 @@
     "date-fns": "^2.14.0",
     "eslint": "^6",
     "fontsource-roboto": "^3.0.3",
-    "formik": "^2.1.4",
+    "formik": "^2.1.7",
     "formik-material-ui": "^3.0.0",
     "formik-material-ui-pickers": "^0.0.8",
     "mui-datatables": "^3",
