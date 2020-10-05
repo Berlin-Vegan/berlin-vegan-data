@@ -5,6 +5,10 @@ import { veganFieldOptions } from './fields/constants';
 
 const veganValues = map((item) => nthOr(0, 0)(item))(veganFieldOptions);
 
+export const testTimeString = (value: string | null | undefined): boolean =>
+  value === null ||
+  (value !== undefined && /([01]\d|2[0-3]):([0-5]\d):([0-5]\d)/.test(value));
+
 const gastroFormSchema = Yup.object().shape({
   name: Yup.string().max(100).required(),
   street: Yup.string().max(100).required(),
@@ -15,20 +19,48 @@ const gastroFormSchema = Yup.object().shape({
   telephone: Yup.string().max(25).nullable(),
   website: Yup.string().url().nullable(),
   email: Yup.string().email().nullable(),
-  openingMon: Yup.string().nullable(),
-  closingMon: Yup.string().nullable(),
-  openingTue: Yup.string().nullable(),
-  closingTue: Yup.string().nullable(),
-  openingWed: Yup.string().nullable(),
-  closingWed: Yup.string().nullable(),
-  openingThu: Yup.string().nullable(),
-  closingThu: Yup.string().nullable(),
-  openingFri: Yup.string().nullable(),
-  closingFri: Yup.string().nullable(),
-  openingSat: Yup.string().nullable(),
-  closingSat: Yup.string().nullable(),
-  openingSun: Yup.string().nullable(),
-  closingSun: Yup.string().nullable(),
+  openingMon: Yup.string()
+    .test('testTimeString', 'Time invalid', testTimeString)
+    .nullable(),
+  closingMon: Yup.string()
+    .test('testTimeString', 'Time invalid', testTimeString)
+    .nullable(),
+  openingTue: Yup.string()
+    .test('testTimeString', 'Time invalid', testTimeString)
+    .nullable(),
+  closingTue: Yup.string()
+    .test('testTimeString', 'Time invalid', testTimeString)
+    .nullable(),
+  openingWed: Yup.string()
+    .test('testTimeString', 'Time invalid', testTimeString)
+    .nullable(),
+  closingWed: Yup.string()
+    .test('testTimeString', 'Time invalid', testTimeString)
+    .nullable(),
+  openingThu: Yup.string()
+    .test('testTimeString', 'Time invalid', testTimeString)
+    .nullable(),
+  closingThu: Yup.string()
+    .test('testTimeString', 'Time invalid', testTimeString)
+    .nullable(),
+  openingFri: Yup.string()
+    .test('testTimeString', 'Time invalid', testTimeString)
+    .nullable(),
+  closingFri: Yup.string()
+    .test('testTimeString', 'Time invalid', testTimeString)
+    .nullable(),
+  openingSat: Yup.string()
+    .test('testTimeString', 'Time invalid', testTimeString)
+    .nullable(),
+  closingSat: Yup.string()
+    .test('testTimeString', 'Time invalid', testTimeString)
+    .nullable(),
+  openingSun: Yup.string()
+    .test('testTimeString', 'Time invalid', testTimeString)
+    .nullable(),
+  closingSun: Yup.string()
+    .test('testTimeString', 'Time invalid', testTimeString)
+    .nullable(),
   vegan: Yup.number().oneOf(veganValues).required(),
   comment: Yup.string(),
   commentEnglish: Yup.string(),
