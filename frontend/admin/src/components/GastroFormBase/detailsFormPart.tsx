@@ -31,7 +31,7 @@ const yesNoUnknownInputs = (label: string, name: string) => (
 
 const nthOrEmpty = nthOr('');
 const createYesNoUnknownInputs = map((entry) =>
-  yesNoUnknownInputs(nthOrEmpty(0)(entry), nthOrEmpty(1)(entry))
+  yesNoUnknownInputs(nthOrEmpty(0)(entry), nthOrEmpty(1)(entry)),
 )(yesNoUnkownList);
 
 const useStyles = makeStyles(() => ({

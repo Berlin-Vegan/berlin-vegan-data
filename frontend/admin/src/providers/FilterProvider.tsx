@@ -15,7 +15,7 @@ interface IFilterContext {
 }
 
 const FilterContext: Context<IFilterContext> = createContext(
-  {} as IFilterContext
+  {} as IFilterContext,
 );
 
 const FilterProvider: React.FC = ({ children }) => {

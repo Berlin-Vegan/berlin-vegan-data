@@ -108,7 +108,7 @@ test('string to date|null|undefined timeStringToDate', () => {
 
 test('date to string dateToTimeString', () => {
   const resultTimeString = dateToTimeString(
-    new Date('2000-11-22T04:01:00.000')
+    new Date('2000-11-22T04:01:00.000'),
   );
   expect(resultTimeString).toStrictEqual('04:01:00');
 
@@ -141,7 +141,7 @@ test('string to date|null|undefined dateStringToDate', () => {
 
 test('date to string dateToDateString', () => {
   const resultEmptyString = dateToDateString(
-    new Date('2019-11-01T23:00:00.000')
+    new Date('2019-11-01T23:00:00.000'),
   );
   expect(resultEmptyString).toStrictEqual('2019-11-01');
 

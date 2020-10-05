@@ -36,7 +36,7 @@ const PasswordChangeForm = () => {
           dispatch,
           '/api/v1/accounts/change-password/',
           'POST',
-          values
+          values,
         );
         const data = await res.json();
         if (res.status === 200) {

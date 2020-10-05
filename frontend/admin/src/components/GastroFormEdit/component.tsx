@@ -34,7 +34,7 @@ const GastroFormEdit: FunctionComponent<IGastroFormEdit> = ({ gastroData }) => {
             dispatch,
             `/api/v1/gastros/${idString}/`,
             'PUT',
-            values
+            values,
           );
           const data = await res.json();
           if (res.status === 200) {

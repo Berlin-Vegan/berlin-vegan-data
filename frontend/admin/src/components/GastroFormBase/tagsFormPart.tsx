@@ -28,7 +28,7 @@ const checkBox = (label: string, name: string) => (
 const nthOrEmpty = nthOr('');
 
 const buildTagList = map((tag) =>
-  checkBox(nthOrEmpty(0)(tag), nthOrEmpty(1)(tag))
+  checkBox(nthOrEmpty(0)(tag), nthOrEmpty(1)(tag)),
 )(tagList);
 
 const tagsFormPart = (

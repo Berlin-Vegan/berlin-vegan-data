@@ -15,7 +15,7 @@ const Submissions = () => {
     const fetchData = async () => {
       const result = await fetchGastroList(
         dispatch,
-        'is_submission=true'
+        'is_submission=true',
       ).then((res) => res.json());
       setData(result);
     };

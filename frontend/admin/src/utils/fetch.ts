@@ -5,7 +5,7 @@ export const authorizedFetch = async (
   userDispatch: UserDispatch,
   url: string,
   method: string = 'GET',
-  body: object | Array<unknown> | null = null
+  body: object | Array<unknown> | null = null,
 ): Promise<Response> => {
   const response = await fetch(url, {
     method,
@@ -25,6 +25,6 @@ export const authorizedFetch = async (
 
 export const fetchGastroList = async (
   userDispatch: UserDispatch,
-  filter: string
+  filter: string,
 ): Promise<Response> =>
   authorizedFetch(userDispatch, `/api/v1/gastros/?${filter}`);

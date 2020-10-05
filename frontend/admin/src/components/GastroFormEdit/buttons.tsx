@@ -18,7 +18,7 @@ interface IPublishButton {
 const PublishButton: FC<IPublishButton> = ({ isSubmitting, idString }) => {
   const { dispatch: userDispatch } = useContext(AuthContext);
   const [, isSubmissionMeta, { setValue: setIsSubmission }] = useField(
-    'isSubmission'
+    'isSubmission',
   );
   const [, nameMeta] = useField('name');
   const { enqueueSnackbar } = useSnackbar();
@@ -30,7 +30,7 @@ const PublishButton: FC<IPublishButton> = ({ isSubmitting, idString }) => {
       'PATCH',
       {
         isSubmission: false,
-      }
+      },
     );
     if (res.status === 200) {
       enqueueSnackbar(`Gastro ${nameMeta.value} published`, {
@@ -74,7 +74,7 @@ const Buttons: FC<IButtons> = ({ submitForm, isSubmitting, idString }) => {
     const res = await authorizedFetch(
       dispatch,
       `/api/v1/gastros/${idString}/`,
-      'DELETE'
+      'DELETE',
     );
     if (res.status === 204) {
       enqueueSnackbar(`Gastro ${nameMeta.value} deleted`, {

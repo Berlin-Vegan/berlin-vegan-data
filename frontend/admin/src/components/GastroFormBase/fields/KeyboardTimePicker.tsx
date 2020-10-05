@@ -27,7 +27,7 @@ export const dateToTimeString = (date: Date | null): string | null =>
   date !== null ? getTimeString(date) : date;
 
 const fieldToBVKeyboardTimePicker = (
-  props: KeyboardTimePickerProps
+  props: KeyboardTimePickerProps,
 ): MuiKeyboardTimePickerProps =>
   fieldToKeyboardTimePicker({
     ...props,
@@ -46,7 +46,7 @@ const BVKeyboardTimePicker = ({
     (date) => {
       setFieldValue(name, dateToTimeString(date));
     },
-    [setFieldValue, name]
+    [setFieldValue, name],
   );
 
   return (

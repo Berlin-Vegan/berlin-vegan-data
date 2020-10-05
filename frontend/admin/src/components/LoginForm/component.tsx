@@ -18,7 +18,7 @@ import { getCSRFToken } from '../../utils/cookie';
 
 const getUserData = (userDispatch: UserDispatch) =>
   authorizedFetch(userDispatch, '/api/v1/accounts/profile/').then((res) =>
-    res.json()
+    res.json(),
   );
 
 const initialHeader = { 'Content-Type': 'application/json' };
@@ -26,14 +26,14 @@ const setCSRFToken = assoc('X-CSRFToken', __, initialHeader);
 const getHeader = ifElse(
   (x) => !isEmpty(x),
   (x) => setCSRFToken(x),
-  () => initialHeader
+  () => initialHeader,
 );
 
 const login = async (
   username: string,
   password: string,
   setErrors: Dispatch<SetStateAction<IErrorsState>>,
-  userDispatch: UserDispatch
+  userDispatch: UserDispatch,
 ): Promise<void> => {
   const response = await fetch('/api/v1/accounts/login/', {
     method: 'POST',
@@ -93,7 +93,7 @@ const LoginForm = () => {
           variant="subtitle1"
           className={clsx(
             !errorsState.detail && classes.noError,
-            errorsState.detail && classes.error
+            errorsState.detail && classes.error,
           )}
         >
           {errorsState.detail}
