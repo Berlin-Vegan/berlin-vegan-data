@@ -9,6 +9,11 @@ export const testTimeString = (value: string | null | undefined): boolean =>
   value === null ||
   (value !== undefined && /([01]\d|2[0-3]):([0-5]\d):([0-5]\d)/.test(value));
 
+export const testDateString = (value: string | null | undefined): boolean =>
+  value === null ||
+  (value !== undefined &&
+    /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/.test(value));
+
 const gastroFormSchema = Yup.object().shape({
   name: Yup.string().max(100).required(),
   street: Yup.string().max(100).required(),
@@ -66,7 +71,9 @@ const gastroFormSchema = Yup.object().shape({
   commentEnglish: Yup.string(),
   commentOpen: Yup.string(),
   reviewLink: Yup.string().url().nullable(),
-  closed: Yup.string().nullable(),
+  closed: Yup.string()
+    .test('testDateString', 'Date invalid', testDateString)
+    .nullable(),
   textIntern: Yup.string().nullable(),
   district: Yup.string().required(),
   publicTransport: Yup.string().nullable(),
