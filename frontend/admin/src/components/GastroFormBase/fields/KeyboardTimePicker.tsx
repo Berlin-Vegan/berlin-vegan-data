@@ -7,18 +7,26 @@ import {
   fieldToKeyboardTimePicker,
   KeyboardTimePickerProps,
 } from 'formik-material-ui-pickers';
-import { format, parse } from 'date-fns';
+import { getHours, getMinutes, parse } from 'date-fns';
 
 export const timeStringToDate = (value: string | null | undefined) => {
   if (typeof value === 'string') {
-    const date = parse(value, 'HH:mm:ss', new Date());
-    return isNaN(date.getTime()) ? new Date() : date;
+    return parse(value, 'HH:mm:ss', new Date());
   }
   return value;
 };
 
-export const dateToTimeString = (value: Date | null): string | null =>
-  value !== null ? `${format(value, 'HH:mm')}:00` : value;
+const withLeadingZero = (value: number): string =>
+  value < 10 ? `0${value}` : `${value}`;
+
+const getHoursWithZero = (date: Date) => withLeadingZero(getHours(date));
+const getMinutesWithZero = (date: Date) => withLeadingZero(getMinutes(date));
+
+const getTimeString = (date: Date) =>
+  `${getHoursWithZero(date)}:${getMinutesWithZero(date)}:00`;
+
+export const dateToTimeString = (date: Date | null): string | null =>
+  date !== null ? getTimeString(date) : date;
 
 const fieldToBVKeyboardTimePicker = (
   props: KeyboardTimePickerProps
