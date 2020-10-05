@@ -7,20 +7,23 @@ import {
   fieldToKeyboardDatePicker,
   KeyboardDatePickerProps,
 } from 'formik-material-ui-pickers';
-import { format, parse } from 'date-fns';
-
-const dateFormat = 'yyyy-MM-dd';
+import { getDate, getMonth, getYear, parseISO } from 'date-fns';
+import { withLeadingZero } from './utils';
 
 export const dateStringToDate = (value: string | null | undefined) => {
   if (typeof value === 'string') {
-    const date = parse(value, dateFormat, new Date());
-    return isNaN(date.getTime()) ? new Date() : date;
+    return parseISO(value);
   }
   return value;
 };
 
-export const dateToDateString = (value: Date | null): string | null =>
-  value !== null ? format(value, dateFormat) : value;
+const getMonthWithZero = (date: Date) => withLeadingZero(getMonth(date) + 1);
+const getDayWithZero = (date: Date) => withLeadingZero(getDate(date));
+const getDateString = (date: Date) =>
+  `${getYear(date)}-${getMonthWithZero(date)}-${getDayWithZero(date)}`;
+
+export const dateToDateString = (date: Date | null): string | null =>
+  date !== null ? getDateString(date) : date;
 
 const fieldToBVKeyboardDatePicker = (
   props: KeyboardDatePickerProps

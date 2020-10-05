@@ -64,12 +64,7 @@ const Map: FC<MapProps> = ({ lat, long, setLongLatFields }) => {
       width="100vw"
       height="25vh"
       mapStyle={process.env.REACT_APP_MAP_API_URL}
-      onViewportChange={(nextViewport) =>
-        setViewportState({
-          latitude: nextViewport.latitude,
-          longitude: nextViewport.longitude,
-          zoom: nextViewport.zoom,
-        })}
+      onViewportChange={(nextViewport) => setViewportState(nextViewport)}
     >
       <div style={{ position: 'absolute', right: 0 }}>
         <NavigationControl />
