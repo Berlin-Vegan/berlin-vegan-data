@@ -1,5 +1,5 @@
 # build environment
-FROM node:14.12.0-alpine as prepare
+FROM node:15.0.1-alpine as prepare
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn --production
