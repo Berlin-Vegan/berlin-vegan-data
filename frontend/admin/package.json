@@ -18,7 +18,7 @@
     "@types/react-map-gl": "^5.2.7",
     "@types/react-router-dom": "^5.1.5",
     "@types/react-test-renderer": "^16.9.2",
-    "@types/yup": "^0.29.2",
+    "@types/yup": "^0.29.9",
     "clsx": "^1.1.0",
     "date-fns": "^2.14.0",
     "eslint": "^6",
