@@ -71,7 +71,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.0.4",
     "@testing-library/user-event": "^12.1.6",
-    "@typescript-eslint/eslint-plugin": "4.3.0",
+    "@typescript-eslint/eslint-plugin": "4.8.1",
     "@typescript-eslint/parser": "^4.3.0",
     "babel-eslint": "^10.1.0",
     "eslint-config-airbnb": "^18.1.0",
