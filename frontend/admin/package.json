@@ -27,7 +27,7 @@
     "formik-material-ui": "^3.0.0",
     "formik-material-ui-pickers": "0.0.11",
     "mui-datatables": "^3",
-    "notistack": "^1.0.0",
+    "notistack": "^1.0.9",
     "prop-types": "^15.6.0",
     "ramda": "^0.27.1",
     "react": "^16.13.1",
