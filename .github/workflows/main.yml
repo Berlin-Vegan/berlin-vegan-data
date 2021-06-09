@@ -1,0 +1,28 @@
+name: Testing
+
+on: [pull_request]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Build BE Docker image
+        run: docker build -f backend/Dockerfile -t be-bvdata backend/
+      - name: Run BE Tests
+        run: docker run --network="host" --env DATABASE_HOST=localhost --env SECRET_KEY=nosecret --env EMAIL_GASTROS=test@test.de be-bvdata make test
