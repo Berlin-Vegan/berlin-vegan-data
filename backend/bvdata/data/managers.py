@@ -7,7 +7,7 @@ from django.utils import timezone
 
 
 class GastroQuerySet(models.QuerySet):
-    def api(self):
+    def api_public(self):
         return self.filter(
             (
                 Q(closed__isnull=True)
