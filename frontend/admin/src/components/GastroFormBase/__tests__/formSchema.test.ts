@@ -1,11 +1,9 @@
 import GastroDetailValid from './fixtures/GastroDetailVaild.json';
 import gastroFormSchema, { testTimeString } from '../formSchema';
 
-test('valid gastro object', () => {
-  return gastroFormSchema
+test('valid gastro object', () => gastroFormSchema
     .validate(GastroDetailValid)
-    .then((result) => expect(result).toBeTruthy());
-});
+    .then((result) => expect(result).toBeTruthy()));
 
 test('testTimeString true', () => {
   expect(testTimeString('00:00:00')).toBeTruthy();

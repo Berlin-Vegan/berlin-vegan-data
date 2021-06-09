@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import Grid from '@material-ui/core/Grid';
+import { AuthContext } from '../../providers/UserProvider';
+import { fetchGastroList } from '../../utils/fetch';
+import LocationTable from '../../components/LocationTable';
 
-import GastroTable from '../components/GastroTable';
-import { fetchGastroList } from '../utils/fetch';
-import { AuthContext } from '../providers/UserProvider';
-
-const Submissions = () => {
+const GastroSubmissions = () => {
   const { dispatch } = useContext(AuthContext);
 
   const [data, setData] = useState([]);
@@ -21,15 +20,15 @@ const Submissions = () => {
     };
 
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
-        <GastroTable data={data} />
+        <LocationTable title="Gastro" data={data} />
       </Grid>
     </Grid>
   );
 };
 
-export default Submissions;
+export default GastroSubmissions;

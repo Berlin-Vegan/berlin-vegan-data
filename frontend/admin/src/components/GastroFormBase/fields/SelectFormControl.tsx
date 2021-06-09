@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import InputLabel from '@material-ui/core/InputLabel';
 import MuiSelect, {
   SelectProps as MuiSelectProps,
@@ -7,6 +7,13 @@ import { Field } from 'formik';
 import { SelectProps, fieldToSelect } from 'formik-material-ui';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+  capitalizeTitle: {
+    textTransform: 'capitalize',
+  },
+}));
 
 interface IMappingDict {
   [id: string]: boolean | null;
@@ -67,21 +74,26 @@ interface IFormControlProps {
   name: string;
 }
 
-const FormControlNoYesUnknown = ({ label, name }: IFormControlProps) => (
-  <FormControl required>
-    <InputLabel htmlFor={name}>{label}</InputLabel>
-    <Field
-      component={SelectYesNoUnknown}
-      name={name}
-      inputProps={{
-        id: name,
-      }}
-    >
-      <MenuItem value="yes">Yes</MenuItem>
-      <MenuItem value="no">No</MenuItem>
-      <MenuItem value="unknown">Unknown</MenuItem>
-    </Field>
-  </FormControl>
-);
+const FormControlNoYesUnknown: FC<IFormControlProps> = ({ label, name }) => {
+  const classes = useStyles();
+  return (
+    <FormControl required>
+      <InputLabel htmlFor={name} className={classes.capitalizeTitle}>
+        {label}
+      </InputLabel>
+      <Field
+        component={SelectYesNoUnknown}
+        name={name}
+        inputProps={{
+          id: name,
+        }}
+      >
+        <MenuItem value="yes">Yes</MenuItem>
+        <MenuItem value="no">No</MenuItem>
+        <MenuItem value="unknown">Unknown</MenuItem>
+      </Field>
+    </FormControl>
+  );
+};
 
 export default FormControlNoYesUnknown;

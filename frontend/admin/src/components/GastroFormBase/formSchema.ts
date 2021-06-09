@@ -3,7 +3,7 @@ import { map } from 'ramda';
 import { nthOr } from '../../utils/fp';
 import { veganFieldOptions } from './fields/constants';
 
-const veganValues = map((item) => nthOr(0, 0)(item))(veganFieldOptions);
+export const veganValues = map((item) => nthOr(0, 0)(item))(veganFieldOptions);
 
 export const testTimeString = (value: string | null | undefined): boolean =>
   value === null ||

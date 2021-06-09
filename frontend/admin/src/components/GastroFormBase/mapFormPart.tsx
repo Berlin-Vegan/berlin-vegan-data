@@ -48,7 +48,7 @@ const Map: FC<MapProps> = ({ lat, long, setLongLatFields }) => {
 
   const setLongLatViewportFields = ([longMarker, latMarker]: [
     number,
-    number
+    number,
   ]): void => {
     setLongLatFields(longMarker, latMarker);
     setViewportState({
@@ -64,7 +64,9 @@ const Map: FC<MapProps> = ({ lat, long, setLongLatFields }) => {
       width="100vw"
       height="25vh"
       mapStyle={process.env.REACT_APP_MAP_API_URL}
-      onViewportChange={(nextViewport) => setViewportState(nextViewport)}
+      onViewportChange={(nextViewport: ViewportState) =>
+        setViewportState(nextViewport)
+      }
     >
       <div style={{ position: 'absolute', right: 0 }}>
         <NavigationControl />

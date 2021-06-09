@@ -5,9 +5,8 @@ import React, {
   SetStateAction,
   useState,
 } from 'react';
-import { MUIDataTableColumnDef } from 'mui-datatables';
 
-type FilterState = MUIDataTableColumnDef[];
+export type FilterState = string[][];
 
 interface IFilterContext {
   filterState: FilterState;

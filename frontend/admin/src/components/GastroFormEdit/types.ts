@@ -2,8 +2,8 @@ export type GastroDataType = {
   latitude: number;
   longitude: number;
   telephone: string;
-  website: string;
-  email: string;
+  website: null | string;
+  email: null | string;
   openingMon: null | string;
   closingMon: null | string;
   openingTue: null | string;
@@ -21,7 +21,7 @@ export type GastroDataType = {
   comment: string;
   commentEnglish: string;
   reviewLink: null | string;
-  closed: boolean;
+  closed: null | string;
   textIntern: string;
   district: string;
   publicTransport: string;
@@ -47,7 +47,7 @@ export type GastroDataType = {
   hasSticker: boolean;
   name: string;
   street: string;
-  cityCode: string;
+  postalCode: string;
   city: string;
   vegan: number;
   isSubmission: boolean;
