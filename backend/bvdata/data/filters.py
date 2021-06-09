@@ -1,6 +1,6 @@
 from django_filters import rest_framework as filters
 
-from bvdata.data.models import Gastro
+from bvdata.data.models import BaseLocation, Gastro
 
 
 class GastroFilter(filters.FilterSet):
@@ -15,3 +15,8 @@ class GastroFilter(filters.FilterSet):
     class Meta:
         model = Gastro
         fields = ["closed", "is_submission"]
+
+
+class BaseLocationFilter(GastroFilter):
+    class Meta(GastroFilter.Meta):
+        model = BaseLocation
