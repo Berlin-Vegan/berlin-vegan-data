@@ -62,26 +62,28 @@ const EmailChangeForm = () => {
     >
       {({ submitForm, isSubmitting }) => (
         <Form>
-          <Grid container spacing={1} direction="column" md={4}>
-            <Typography variant="h5">Change Email</Typography>
-            <Field
-              component={TextField}
-              name="email"
-              type="email"
-              label="E-Mail"
-              required
-            />
-            <Grid container justify="flex-end" className={classes.saveButton}>
-              <Button
-                variant="contained"
-                color="primary"
-                disabled={isSubmitting}
-                onClick={submitForm}
-                name="save"
-                startIcon={<SaveIcon />}
-              >
-                Save
-              </Button>
+          <Grid container spacing={1} direction="column">
+            <Grid container item direction="column" md={4}>
+              <Typography variant="h5">Change Email</Typography>
+              <Field
+                component={TextField}
+                name="email"
+                type="email"
+                label="E-Mail"
+                required
+              />
+              <Grid container justify="flex-end" className={classes.saveButton}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disabled={isSubmitting}
+                  onClick={submitForm}
+                  name="save"
+                  startIcon={<SaveIcon />}
+                >
+                  Save
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
         </Form>
