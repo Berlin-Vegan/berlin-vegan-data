@@ -37,7 +37,7 @@ class ApiGastroLocationsJson(ListView):
     model = Gastro
 
     def get_queryset(self):
-        return Gastro.objects.api().alphabetical()
+        return Gastro.objects.api_public().alphabetical()
 
     def get(self, request, *args, **kwargs):
         results = [gastro.as_dict() for gastro in self.get_queryset()]
