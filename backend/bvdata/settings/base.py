@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
 
 CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 # Application definition
 
 INSTALLED_APPS = [
@@ -58,6 +59,22 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+if DEBUG:
+    try:
+        import debug_toolbar  # noqa F401
+
+        MIDDLEWARE += [
+            "debug_toolbar.middleware.DebugToolbarMiddleware",
+        ]
+        INSTALLED_APPS += [
+            "debug_toolbar",
+        ]
+        INTERNAL_IPS = [
+            "127.0.0.1",
+        ]
+    except ImportError:
+        pass
 
 ROOT_URLCONF = "bvdata.urls"
 
@@ -114,7 +131,6 @@ REST_REGISTRATION = {
 
 WSGI_APPLICATION = "bvdata.wsgi.application"
 
-
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -127,14 +143,12 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
 LANGUAGE_CODE = "en"
 
 LANGUAGES = [("de", _("German")), ("en", _("English"))]
-
 
 TIME_ZONE = "Europe/Berlin"
 
@@ -144,7 +158,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
@@ -152,7 +165,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "bvdata/static")]
 
 STATIC_URL = "/dstatic/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
 
 LOGIN_REDIRECT_URL = "/dashboard/"
 

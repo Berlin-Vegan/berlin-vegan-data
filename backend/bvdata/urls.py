@@ -24,3 +24,11 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# add debug toolbar in urlpatterns
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += [
+        path("__debug__/", include(debug_toolbar.urls)),
+    ]
