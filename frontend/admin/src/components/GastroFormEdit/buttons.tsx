@@ -80,7 +80,7 @@ const Buttons: FC<IButtons> = ({ submitForm, isSubmitting, idString }) => {
       enqueueSnackbar(`Gastro ${nameMeta.value} deleted`, {
         variant: 'success',
       });
-      history.push(PagePaths.DASHBOARD_PAGE);
+      history.push(PagePaths.GASTRO_DASHBOARD);
     }
   };
 

@@ -3,11 +3,11 @@ import { Paper } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { isEmpty } from 'ramda';
-import GastroFormEdit from '../components/GastroFormEdit';
-import { authorizedFetch } from '../utils/fetch';
-import NotFoundPage from './NotFoundPage';
-import { GastroDataType } from '../components/GastroFormEdit/types';
-import { AuthContext } from '../providers/UserProvider';
+import { AuthContext } from '../../providers/UserProvider';
+import { authorizedFetch } from '../../utils/fetch';
+import { GastroDataType } from '../../components/GastroFormEdit/types';
+import NotFoundPage from '../NotFoundPage';
+import GastroFormEdit from '../../components/GastroFormEdit';
 
 const useStyles = makeStyles(() => ({
   paper: {
@@ -38,7 +38,7 @@ const GastroEditPage = () => {
       }
     };
     fetchData();
-  }, [id]);
+  }, [dispatch, id]);
 
   return notFound ? (
     <NotFoundPage />

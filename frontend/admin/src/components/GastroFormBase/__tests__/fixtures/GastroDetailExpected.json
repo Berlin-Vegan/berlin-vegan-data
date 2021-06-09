@@ -26,7 +26,7 @@
   "seatsIndoor": 40,
   "name": "Lorem Ipsum",
   "street": "Lorem Ipsum Straße 77",
-  "cityCode": "11111",
+  "postalCode": "11111",
   "city": "Berlin",
   "comment": "ctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing e",
   "commentEnglish": "labore et dolore magna aliquyam erat, sed diam voluptua. \n At",

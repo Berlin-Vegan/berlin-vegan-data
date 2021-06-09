@@ -1,10 +1,30 @@
 import renderer from 'react-test-renderer';
 import React, { ComponentType } from 'react';
 import ReactDOM from 'react-dom';
+import { act } from 'react-dom/test-utils';
 
 export const standardComponentTest = (C: ComponentType<any>, props = {}) => {
   renderWithTestRenderer(C, props);
   it('renders without crashing', () => renders(C, props));
+};
+
+export const standardComponentTestMockFetch = (
+  C: ComponentType<any>,
+  props = {},
+  fakeResponse: any,
+) => {
+  renderWithTestRenderer(C, props);
+  it('renders without crashing and mock fetch', async () => {
+    jest.spyOn(window, 'fetch').mockImplementation(
+      (): Promise<any> => {
+        const fetchResponse = {
+          json: () => Promise.resolve(fakeResponse),
+        };
+        return Promise.resolve(fetchResponse);
+      },
+    );
+    await act(async () => renders(C, props));
+  });
 };
 
 export const renders = (C: ComponentType, props: object) => {

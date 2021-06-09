@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -7,7 +7,7 @@ import MUIDataTable, {
   MUIDataTableOptions,
 } from 'mui-datatables';
 import { useHistory } from 'react-router-dom';
-import { assocPath } from 'ramda';
+import { assocPath, hasPath, ifElse, path } from 'ramda';
 import { FilterContext } from '../../providers/FilterProvider';
 import { mapIndexed, nthOr } from '../../utils/fp';
 
@@ -55,13 +55,8 @@ const columns = [
       filter: true,
       sort: true,
       searchable: false,
-      customBodyRender: (
-        value: number,
-        tableMeta: never,
-        updateValue: never,
-      ) => {
-        return veganColumnBody[value];
-      },
+      customBodyRender: (value: number, tableMeta: never, updateValue: never) =>
+        veganColumnBody[value],
     },
   },
   {
@@ -71,13 +66,8 @@ const columns = [
       filter: true,
       sort: true,
       searchable: false,
-      customBodyRender: (
-        value: number,
-        tableMeta: never,
-        updateValue: never,
-      ) => {
-        return value ? <CheckIcon /> : <ClearIcon />;
-      },
+      customBodyRender: (value: number, tableMeta: never, updateValue: never) =>
+        value ? <CheckIcon /> : <ClearIcon />,
       filterOptions: {
         renderValue: (v: boolean) => (v ? 'Review' : 'No Review'),
       },
@@ -88,29 +78,24 @@ const columns = [
   },
 ];
 
-type GastroData = {
-  idString: string;
-  lastEdit: number;
-  created: string;
-  updated: string;
+type LocationListData = {
+  id?: string;
+  idString?: string;
   name: string;
-  cityCode: string;
+  postalCode: string;
   city: string;
-  latCoord: number;
-  longCoord: number;
-  telephone: string;
-  website: string;
-  email: string | null;
-  hasSticker: boolean;
   vegan: number;
   hasReviewLink: boolean;
 };
 
-interface IGastroTableProps {
-  data: Array<GastroData>;
+export interface ILocationTableProps {
+  title: string;
+  data: LocationListData[];
 }
 
-const GastroTable = ({ data }: IGastroTableProps) => {
+const getID = ifElse(hasPath(['id']), path(['id']), path(['idString']));
+
+const LocationTable: FC<ILocationTableProps> = ({ title, data }) => {
   const history = useHistory();
   const { filterState, setFilterState } = useContext(FilterContext);
   const [countState, setCountState] = useState(0);
@@ -119,8 +104,10 @@ const GastroTable = ({ data }: IGastroTableProps) => {
     selectableRows: 'none',
     pagination: false,
     onRowClick: (_rowData, rowMeta) =>
-      history.push(`/gastro/${data[rowMeta.dataIndex].idString}/edit`),
-    onFilterChange: (_changedColumn, filterList: any[], _type) =>
+      history.push(
+        `/${title.toLowerCase()}/${getID(data[rowMeta.dataIndex])}/edit`,
+      ),
+    onFilterChange: (_changedColumn, filterList, _type) =>
       setFilterState(filterList),
     onTableChange: (action, { displayData }) =>
       setCountState(displayData.length),
@@ -132,7 +119,7 @@ const GastroTable = ({ data }: IGastroTableProps) => {
 
   return (
     <MUIDataTable
-      title={`Gastros (${countState})`}
+      title={`${title} (${countState})`}
       data={data}
       columns={columnsWithFilter}
       options={options}
@@ -140,4 +127,4 @@ const GastroTable = ({ data }: IGastroTableProps) => {
   );
 };
 
-export default GastroTable;
+export default LocationTable;

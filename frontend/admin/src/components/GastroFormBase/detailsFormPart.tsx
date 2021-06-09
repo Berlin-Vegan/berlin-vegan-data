@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { map } from 'ramda';
 import FormControlNoYesUnknown from './fields/SelectFormControl';
 import NullTextField from './fields/NullTextField';
-import { nthOr } from '../../utils/fp';
+import { nthOrEmpty } from '../../utils/fp';
 
 const yesNoUnkownList = [
   ['Wheelchair Accessible', 'handicappedAccessible'],
@@ -29,7 +29,6 @@ const yesNoUnknownInputs = (label: string, name: string) => (
   </Grid>
 );
 
-const nthOrEmpty = nthOr('');
 const createYesNoUnknownInputs = map((entry) =>
   yesNoUnknownInputs(nthOrEmpty(0)(entry), nthOrEmpty(1)(entry)),
 )(yesNoUnkownList);

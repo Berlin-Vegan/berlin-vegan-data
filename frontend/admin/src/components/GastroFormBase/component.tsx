@@ -7,8 +7,7 @@ import tagsFormPart from './tagsFormPart';
 import metaFormPart from './metaFormPart';
 import SubmitEmailField from './fields/SubmitEmailField';
 
-const GastroBaseForm: FC = ({ children }) => {
-  return (
+const GastroBaseForm: FC = ({ children }) => (
     <Grid container direction="column" spacing={1}>
       <SubmitEmailField />
       <GeneralFormPart />
@@ -19,6 +18,5 @@ const GastroBaseForm: FC = ({ children }) => {
       {children}
     </Grid>
   );
-};
 
 export default GastroBaseForm;

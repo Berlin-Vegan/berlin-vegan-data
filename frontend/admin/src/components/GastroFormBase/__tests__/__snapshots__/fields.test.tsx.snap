@@ -499,7 +499,7 @@ exports[`render <FormControlNoYesUnknownWrapper /> 1`] = `
     className="MuiFormControl-root"
   >
     <label
-      className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled Mui-required Mui-required"
+      className="MuiFormLabel-root MuiInputLabel-root makeStyles-capitalizeTitle-1 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled Mui-required Mui-required"
       data-shrink={true}
       htmlFor="test"
     >
@@ -566,7 +566,7 @@ exports[`render <FormControlNoYesUnknownWrapper /> 2`] = `
     className="MuiFormControl-root"
   >
     <label
-      className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled Mui-required Mui-required"
+      className="MuiFormLabel-root MuiInputLabel-root makeStyles-capitalizeTitle-1 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled Mui-required Mui-required"
       data-shrink={true}
       htmlFor="test"
     >
@@ -633,7 +633,7 @@ exports[`render <FormControlNoYesUnknownWrapper /> 3`] = `
     className="MuiFormControl-root"
   >
     <label
-      className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled Mui-required Mui-required"
+      className="MuiFormLabel-root MuiInputLabel-root makeStyles-capitalizeTitle-1 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled Mui-required Mui-required"
       data-shrink={true}
       htmlFor="test"
     >
@@ -700,7 +700,7 @@ exports[`render <FormControlNoYesUnknownWrapper /> 4`] = `
     className="MuiFormControl-root"
   >
     <label
-      className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled Mui-required Mui-required"
+      className="MuiFormLabel-root MuiInputLabel-root makeStyles-capitalizeTitle-1 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled Mui-required Mui-required"
       data-shrink={true}
       htmlFor="test"
     >
