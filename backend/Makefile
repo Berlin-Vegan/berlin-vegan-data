@@ -3,8 +3,8 @@ dev:
 
 lint:
 	pipenv run isort .
-	pipenv run flake8 .
 	pipenv run black .
+	pipenv run flake8 .
 
 test-lint:
 	pipenv run isort . -c
