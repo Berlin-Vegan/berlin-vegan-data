@@ -21,7 +21,7 @@
     "@types/react-test-renderer": "^17.0.1",
     "@types/yup": "^0.29.2",
     "clsx": "^1.1.0",
-    "date-fns": "^2.14.0",
+    "date-fns": "^2.22.1",
     "eslint": "^7.30.0",
     "formik": "^2.1.7",
     "formik-material-ui": "^3.0.0",
