@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { Field } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { makeStyles } from '@material-ui/core/styles';
-import NullTextField from '../GastroFormBase/fields/NullTextField';
+import NullTextField from './fields/NullTextField';
 
 const useStyles = makeStyles(() => ({
   textAreaMulti: {

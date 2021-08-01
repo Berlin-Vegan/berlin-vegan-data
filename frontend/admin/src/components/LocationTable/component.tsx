@@ -7,7 +7,7 @@ import MUIDataTable, {
   MUIDataTableOptions,
 } from 'mui-datatables';
 import { useHistory } from 'react-router-dom';
-import { assocPath, hasPath, ifElse, path } from 'ramda';
+import { assocPath } from 'ramda';
 import { FilterContext } from '../../providers/FilterProvider';
 import { mapIndexed, nthOr } from '../../utils/fp';
 
@@ -79,8 +79,7 @@ const columns = [
 ];
 
 type LocationListData = {
-  id?: string;
-  idString?: string;
+  id: string;
   name: string;
   postalCode: string;
   city: string;
@@ -93,8 +92,6 @@ export interface ILocationTableProps {
   data: LocationListData[];
 }
 
-const getID = ifElse(hasPath(['id']), path(['id']), path(['idString']));
-
 const LocationTable: FC<ILocationTableProps> = ({ title, data }) => {
   const history = useHistory();
   const { filterState, setFilterState } = useContext(FilterContext);
@@ -105,7 +102,7 @@ const LocationTable: FC<ILocationTableProps> = ({ title, data }) => {
     pagination: false,
     onRowClick: (_rowData, rowMeta) =>
       history.push(
-        `/${title.toLowerCase()}/${getID(data[rowMeta.dataIndex])}/edit`,
+        `/${title.toLowerCase()}/${data[rowMeta.dataIndex].id}/edit`,
       ),
     onFilterChange: (_changedColumn, filterList, _type) =>
       setFilterState(filterList),

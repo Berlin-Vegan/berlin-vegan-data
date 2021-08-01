@@ -10,6 +10,7 @@ const ShoppingFormBase: FC = ({ children }) => (
   <LocationFormBase
     booleanAttrList={SHOPPING_BOOLEAN_ATTRIBUTES}
     tagList={SHOPPING_TAGS}
+    positiveIntegerAttrList={[]}
   >
     {children}
   </LocationFormBase>

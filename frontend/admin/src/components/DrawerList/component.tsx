@@ -44,7 +44,7 @@ const gastroListItems = (
 
 const shoppingListItems = (
   <>
-    <ListSubheader>Shopping (Test/Not Live)</ListSubheader>
+    <ListSubheader>Shopping</ListSubheader>
     <NavListItem pathname={PagePaths.SHOPPING_PAGE}>
       <ListItemIcon>
         <DashboardIcon />

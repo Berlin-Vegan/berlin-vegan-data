@@ -241,7 +241,7 @@ exports[`render <BaseFormWrapper /> 1`] = `
       <li
         className="MuiListSubheader-root MuiListSubheader-sticky MuiListSubheader-gutters"
       >
-        Shopping (Test/Not Live)
+        Shopping
       </li>
       <a
         aria-current={null}

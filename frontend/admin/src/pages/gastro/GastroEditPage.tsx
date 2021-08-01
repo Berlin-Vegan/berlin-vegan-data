@@ -1,56 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Paper } from '@material-ui/core';
-import { useParams } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import { isEmpty } from 'ramda';
-import { AuthContext } from '../../providers/UserProvider';
-import { authorizedFetch } from '../../utils/fetch';
-import { GastroDataType } from '../../components/GastroFormEdit/types';
-import NotFoundPage from '../NotFoundPage';
-import GastroFormEdit from '../../components/GastroFormEdit';
+import React from 'react';
 
-const useStyles = makeStyles(() => ({
-  paper: {
-    padding: '16px',
-  },
-}));
+import LocationEdit from '../../components/LocationEdit';
+import { GASTRO } from '../../utils/constants';
+import { gastroSchema } from '../../components/GastroFormBase/gastroFormSchema';
+import GastroFormBase from '../../components/GastroFormBase';
 
-interface IParams {
-  id: string;
-}
-
-const GastroEditPage = () => {
-  const classes = useStyles();
-  const { dispatch } = useContext(AuthContext);
-  const { id } = useParams<IParams>();
-  const [gastroData, setGastroState] = useState<object | GastroDataType>({});
-  const [notFound, setNotFound] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await authorizedFetch(dispatch, `/api/v1/gastros/${id}`);
-      const data = await res.json();
-      if (res.status === 200) {
-        setGastroState(data);
-      }
-      if (res.status === 404) {
-        setNotFound(true);
-      }
-    };
-    fetchData();
-  }, [dispatch, id]);
-
-  return notFound ? (
-    <NotFoundPage />
-  ) : (
-    <Paper className={classes.paper}>
-      {isEmpty(gastroData) ? (
-        <div>Loading</div>
-      ) : (
-        <GastroFormEdit gastroData={gastroData as GastroDataType} />
-      )}
-    </Paper>
-  );
-};
+const GastroEditPage = () => (
+  <LocationEdit
+    type={GASTRO}
+    label="Shopping"
+    locationForm={GastroFormBase}
+    locationFormSchema={gastroSchema}
+  />
+);
 
 export default GastroEditPage;

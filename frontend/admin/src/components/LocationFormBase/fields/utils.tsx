@@ -1,4 +1,5 @@
 import React from 'react';
+
 import MenuItem from '@material-ui/core/MenuItem';
 import { map } from 'ramda';
 import { nthOr } from '../../../utils/fp';

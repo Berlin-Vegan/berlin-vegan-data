@@ -1,10 +1,8 @@
 import React from 'react';
-import { join, map, pipe, split } from 'ramda';
+import { map } from 'ramda';
 import { Grid } from '@material-ui/core';
-import FormControlNoYesUnknown from '../GastroFormBase/fields/SelectFormControl';
-
-const buildLabel = (key: string): string =>
-  pipe(split(/(?=[A-Z])/), join(' '))(key);
+import FormControlNoYesUnknown from './fields/SelectFormControl';
+import { buildLabel } from './utils';
 
 const yesNoUnknownInputs = (attr: string) => (
   <Grid container item direction="column" md={3} key={attr}>

@@ -9,9 +9,9 @@ import PageContainer from './components/PageContainer';
 import NotFoundPage from './pages/NotFoundPage';
 import ProfilePage from './pages/ProfilePage';
 import ShoppingPage from './pages/shopping/ShoppingPage';
-import GastroDashboard from './pages/gastro/GastroDashboard';
+import GastroPage from './pages/gastro/GastroPage';
 import GastroClosed from './pages/gastro/GastroClosed';
-import GastroSubmissions from './pages/gastro/GastroSubmissions';
+import GastroSubmissionsPage from './pages/gastro/GastroSubmissionPage';
 import GastroNewPage from './pages/gastro/GastroNewPage';
 import GastroEditPage from './pages/gastro/GastroEditPage';
 import ShoppingEditPage from './pages/shopping/ShoppingEditPage';
@@ -33,7 +33,7 @@ const App = () => (
           <Route
             path={PagePaths.GASTRO_DASHBOARD}
             exact
-            component={GastroDashboard}
+            component={GastroPage}
           />
           <Route
             path={PagePaths.GASTROS_PAGE_CLOSED}
@@ -43,7 +43,7 @@ const App = () => (
           <Route
             path={PagePaths.GASTROS_PAGE_SUBMISSIONS}
             exact
-            component={GastroSubmissions}
+            component={GastroSubmissionsPage}
           />
           <Route
             path={PagePaths.GASTRO_PAGE_NEW}

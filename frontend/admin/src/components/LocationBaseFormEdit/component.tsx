@@ -10,7 +10,7 @@ import { defaultTo } from 'ramda';
 import { authorizedFetch } from '../../utils/fetch';
 import { AuthContext } from '../../providers/UserProvider';
 import Buttons from './buttons';
-import useStyles from '../GastroFormEdit/styles';
+import useStyles from './styles';
 import LocationBaseType from '../LocationFormBase/locationBaseType';
 
 type LocationBaseFormEditType = {

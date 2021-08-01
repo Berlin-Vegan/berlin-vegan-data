@@ -1,22 +1,20 @@
 import React, { FC } from 'react';
-import Grid from '@material-ui/core/Grid';
-import GeneralFormPart from './generalFormPart';
-import openingHoursFormPart from './openingHoursFormPart';
-import DetailsFormPart from './detailsFormPart';
-import tagsFormPart from './tagsFormPart';
-import metaFormPart from './metaFormPart';
-import SubmitEmailField from './fields/SubmitEmailField';
 
-const GastroBaseForm: FC = ({ children }) => (
-    <Grid container direction="column" spacing={1}>
-      <SubmitEmailField />
-      <GeneralFormPart />
-      {openingHoursFormPart}
-      <DetailsFormPart />
-      {tagsFormPart}
-      {metaFormPart}
-      {children}
-    </Grid>
-  );
+import LocationFormBase from '../LocationFormBase';
+import {
+  GASTRO_BOOLEAN_ATTRIBUTES,
+  GASTRO_POSITIVE_INTEGER_ATTRIBUTES,
+  GASTRO_TAGS,
+} from './gastroFormSchema';
 
-export default GastroBaseForm;
+const GastroFormBase: FC = ({ children }) => (
+  <LocationFormBase
+    booleanAttrList={GASTRO_BOOLEAN_ATTRIBUTES}
+    tagList={GASTRO_TAGS}
+    positiveIntegerAttrList={GASTRO_POSITIVE_INTEGER_ATTRIBUTES}
+  >
+    {children}
+  </LocationFormBase>
+);
+
+export default GastroFormBase;

@@ -4,11 +4,11 @@ import Typography from '@material-ui/core/Typography';
 import { Field } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { makeStyles } from '@material-ui/core/styles';
-import MapFormPart from '../GastroFormBase/mapFormPart';
-import NullTextField from '../GastroFormBase/fields/NullTextField';
-import veganFormControl from '../GastroFormBase/fields/VeganFormControl';
-import GetGeoButton from '../GastroFormBase/getGeoButton';
-import BVKeyboardDatePicker from '../GastroFormBase/fields/KeyboardDatePicker';
+import MapFormPart from './mapFormPart';
+import NullTextField from './fields/NullTextField';
+import veganFormControl from './fields/VeganFormControl';
+import GetGeoButton from './getGeoButton';
+import BVKeyboardDatePicker from './fields/KeyboardDatePicker';
 
 const useStyles = makeStyles((theme) => ({
   gridGeoClosed: {
