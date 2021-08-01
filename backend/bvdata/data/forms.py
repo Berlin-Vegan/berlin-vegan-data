@@ -1,12 +1,116 @@
-from django.forms import HiddenInput, ModelForm, NumberInput
+from typing import Dict, List, Type, Union
+
+from django.db import transaction
+from django.forms import (
+    BooleanField,
+    HiddenInput,
+    IntegerField,
+    ModelForm,
+    NullBooleanField,
+    NumberInput,
+    Select,
+    TimeField,
+)
 from django.utils.translation import gettext_lazy as _
 
-from bvdata.data.models import Gastro
+from bvdata.data.models import (
+    GASTRO_BOOLEAN_ATTRIBUTE_CHOICES,
+    GASTRO_POSITIVE_INTEGER_ATTRIBUTE_CHOICES,
+    NULLBOOLEAN_CHOICE,
+    NULLBOOLEAN_NULL,
+    BaseLocation,
+    BooleanAttribute,
+    LocationTypeChoices,
+    OpeningHours,
+    PositiveIntegerAttribute,
+    Tag,
+    WeekdayChoices,
+)
 
 
 class GastroSubmitForm(ModelForm):
+    opening_mon = TimeField(required=False)
+    opening_tue = TimeField(required=False)
+    opening_wed = TimeField(required=False)
+    opening_thu = TimeField(required=False)
+    opening_fri = TimeField(required=False)
+    opening_sat = TimeField(required=False)
+    opening_sun = TimeField(required=False)
+    closing_mon = TimeField(required=False)
+    closing_tue = TimeField(required=False)
+    closing_wed = TimeField(required=False)
+    closing_thu = TimeField(required=False)
+    closing_fri = TimeField(required=False)
+    closing_sat = TimeField(required=False)
+    closing_sun = TimeField(required=False)
+
+    delivery = NullBooleanField(
+        widget=Select(choices=NULLBOOLEAN_CHOICE),
+        initial=NULLBOOLEAN_NULL,
+        required=False,
+    )
+    organic = NullBooleanField(
+        widget=Select(choices=NULLBOOLEAN_CHOICE),
+        initial=NULLBOOLEAN_NULL,
+        required=False,
+    )
+    handicapped_accessible = NullBooleanField(
+        widget=Select(choices=NULLBOOLEAN_CHOICE),
+        initial=NULLBOOLEAN_NULL,
+        required=False,
+    )
+    handicapped_accessible_wc = NullBooleanField(
+        widget=Select(choices=NULLBOOLEAN_CHOICE),
+        initial=NULLBOOLEAN_NULL,
+        required=False,
+    )
+    dog = NullBooleanField(
+        widget=Select(choices=NULLBOOLEAN_CHOICE),
+        initial=NULLBOOLEAN_NULL,
+        required=False,
+    )
+    child_chair = NullBooleanField(
+        widget=Select(choices=NULLBOOLEAN_CHOICE),
+        initial=NULLBOOLEAN_NULL,
+        required=False,
+    )
+    catering = NullBooleanField(
+        widget=Select(choices=NULLBOOLEAN_CHOICE),
+        initial=NULLBOOLEAN_NULL,
+        required=False,
+    )
+    wlan = NullBooleanField(
+        widget=Select(choices=NULLBOOLEAN_CHOICE),
+        initial=NULLBOOLEAN_NULL,
+        required=False,
+    )
+    gluten_free = NullBooleanField(
+        widget=Select(choices=NULLBOOLEAN_CHOICE),
+        initial=NULLBOOLEAN_NULL,
+        required=False,
+    )
+    breakfast = NullBooleanField(
+        widget=Select(choices=NULLBOOLEAN_CHOICE),
+        initial=NULLBOOLEAN_NULL,
+        required=False,
+    )
+    brunch = NullBooleanField(
+        widget=Select(choices=NULLBOOLEAN_CHOICE),
+        initial=NULLBOOLEAN_NULL,
+        required=False,
+    )
+
+    restaurant = BooleanField(initial=False, required=False)
+    imbiss = BooleanField(initial=False, required=False)
+    eiscafe = BooleanField(initial=False, required=False)
+    cafe = BooleanField(initial=False, required=False)
+    bar = BooleanField(initial=False, required=False)
+
+    seats_indoor = IntegerField(min_value=0, initial=0)
+    seats_outdoor = IntegerField(min_value=0, initial=0)
+
     class Meta:
-        model = Gastro
+        model = BaseLocation
         fields = [
             "name",
             "street",
@@ -34,11 +138,8 @@ class GastroSubmitForm(ModelForm):
             "vegan",
             "comment",
             "comment_english",
-            "comment_open",
-            "review_link",
-            "text_intern",
-            "district",
-            "public_transport",
+            "comment_opening_hours",
+            "comment_public_transport",
             "handicapped_accessible",
             "handicapped_accessible_wc",
             "dog",
@@ -102,3 +203,76 @@ class GastroSubmitForm(ModelForm):
         for t in timepicker:
             self.fields[t].widget.attrs.update({"placeholder": "HH:MM"})
             self.fields[t].widget.format = "%H:%M"
+
+    def save(self, commit=True):
+        self.instance.type = LocationTypeChoices.GASTRO
+        with transaction.atomic():
+            instance = super(GastroSubmitForm, self).save(commit=True)
+            self._save_opening_hours(instance=instance)
+            self._save_tags(instance=instance)
+            self._save_attrs(
+                instance=instance,
+                attr_keys=dict(GASTRO_POSITIVE_INTEGER_ATTRIBUTE_CHOICES),
+                attr_model=PositiveIntegerAttribute,
+                attr_manager="positive_integer_attributes",
+            )
+            self._save_attrs(
+                instance=instance,
+                attr_keys=dict(GASTRO_BOOLEAN_ATTRIBUTE_CHOICES),
+                attr_model=BooleanAttribute,
+                attr_manager="boolean_attributes",
+            )
+        return instance
+
+    def _save_opening_hours(self, instance: BaseLocation):
+        OPENING_HOURS_PAIRS = {
+            WeekdayChoices.MONDAY: ("opening_mon", "closing_mon"),
+            WeekdayChoices.TUESDAY: ("opening_tue", "closing_tue"),
+            WeekdayChoices.WEDNESDAY: ("opening_wed", "closing_wed"),
+            WeekdayChoices.THURSDAY: ("opening_thu", "closing_thu"),
+            WeekdayChoices.FRIDAY: ("opening_fri", "closing_fri"),
+            WeekdayChoices.SATURDAY: ("opening_sat", "closing_sat"),
+            WeekdayChoices.SUNDAY: ("opening_sun", "closing_sun"),
+        }
+
+        opening_hours = []
+        for day, day_keys in OPENING_HOURS_PAIRS.items():
+            opening_hours.append(
+                OpeningHours(
+                    location=instance,
+                    weekday=day,
+                    opening=self.cleaned_data[day_keys[0]],
+                    closing=self.cleaned_data[day_keys[1]],
+                )
+            )
+        OpeningHours.objects.bulk_create(opening_hours)
+
+    def _save_tags(self, instance: BaseLocation):
+        TAGS_SET = {
+            "restaurant": "restaurant",
+            "imbiss": "snack bar",
+            "eiscafe": "ice cream parlor",
+            "cafe": "cafe",
+            "bar": "bar",
+        }
+        tags: List[Tag] = []
+        for form_field, tag_name in TAGS_SET.items():
+            tag = self.cleaned_data[form_field]
+            if tag:
+                tags.append(Tag.objects.get_or_create(tag=tag_name)[0])
+        instance.tags.set(tags)
+
+    def _save_attrs(
+        self,
+        instance: BaseLocation,
+        attr_keys: Dict[str, str],
+        attr_model: Type[Union[PositiveIntegerAttribute, BooleanAttribute]],
+        attr_manager: str,
+    ):
+        attrs: List[attr_model] = []
+        for attr_key in attr_keys:
+            attr_value = self.cleaned_data[attr_key]
+            attrs.append(
+                attr_model.objects.get_or_create(name=attr_key, state=attr_value)[0]
+            )
+        getattr(instance, attr_manager).set(attrs)

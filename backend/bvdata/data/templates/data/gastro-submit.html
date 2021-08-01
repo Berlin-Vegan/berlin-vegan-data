@@ -94,10 +94,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        {{ form.public_transport|as_crispy_field }}
-                    </div>
-                    <div class="col">
-                        {{ form.district|as_crispy_field }}
+                        {{ form.comment_public_transport|as_crispy_field }}
                     </div>
                 </div>
                 <input type="button" name="previous" class="previous btn btn-secondary" value="{% trans 'previous' %}"/>
@@ -144,7 +141,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        {{ form.comment_open|as_crispy_field }}
+                        {{ form.comment_opening_hours|as_crispy_field }}
                     </div>
                 </div>
                 <input type="button" name="previous" class="previous btn btn-secondary" value="{% trans 'previous' %}"/>

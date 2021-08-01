@@ -58,14 +58,13 @@ $(document).ready(function () {
   });
 
   $("#step2").click(function () {
-    var district = document.getElementById("id_district");
-    var publictransport = document.getElementById("id_public_transport");
-
-    var list = [district, publictransport];
+    var publictransport = document.getElementById(
+      "id_comment_public_transport"
+    );
 
     if ($("#id_latitude").val() && $("#id_longitude").val()) {
       $("#map").removeClass("border border-danger");
-      if (valid(list)) {
+      if (valid([publictransport])) {
         current_step = $(this).parent();
         next_step = $(this).parent().next();
         next_step.show();
@@ -94,7 +93,7 @@ $(document).ready(function () {
     var closingSat = document.getElementById("id_closing_sat");
     var closingSun = document.getElementById("id_closing_sun");
 
-    var commentOpen = document.getElementById("id_comment_open");
+    var commentOpen = document.getElementById("id_comment_opening_hours");
 
     var list = [
       openingMon,
@@ -139,7 +138,7 @@ $(document).ready(function () {
   });
 
   $("#step5").click(function () {
-    var seatsOutdoor = document.getElementById("id_seats_outdoor");
+    var seatsOutdoor = document.getElementById("id_handicapped_accessible_wc");
     var seatsIndoor = document.getElementById("id_seats_indoor");
 
     var list = [seatsOutdoor, seatsIndoor];
