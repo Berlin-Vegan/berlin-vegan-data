@@ -16,12 +16,15 @@ __all__ = (
     "TAG_CHOICES",
     "Tag",
     "SHOPPING_BOOELAN_ATTRIBUTE_CHOICES",
+    "GASTRO_BOOELAN_ATTRIBUTE_CHOICES",
     "BooleanAttribute",
     "LocationTypeChoices",
     "BaseLocation",
     "Gastro",
     "DISTRICT_CHOICES",
     "NULLBOOLEAN_CHOICE",
+    "PositiveIntegerAttribute",
+    "GASTRO_POSITIVE_INTEGER_ATTRIBUTE_CHOICES",
 )
 
 
@@ -143,6 +146,17 @@ SHOPPING_BOOELAN_ATTRIBUTE_CHOICES = BASE_BOOLEAN_ATTRIBUTE_CHOICES + (
     ("webshop", "Webshop"),
 )
 
+GASTRO_BOOELAN_ATTRIBUTE_CHOICES = BASE_BOOLEAN_ATTRIBUTE_CHOICES + (
+    ("handicapped_accessible_wc", "Handicapped Accessible WC"),
+    ("dog", "Dog"),
+    ("child_chair", "Child Chair"),
+    ("catering", "Catering"),
+    ("wlan", "Wlan"),
+    ("gluten_free", "Gluten Free"),
+    ("breakfast", "Breakfast"),
+    ("brunch", "Brunch"),
+)
+
 NULLBOOLEAN_NULL = None
 NULLBOOLEAN_TRUE = True
 NULLBOOLEAN_FALSE = False
@@ -169,6 +183,33 @@ class BooleanAttribute(models.Model):
                 check=models.Q(
                     name__in=list(
                         map(lambda x: x[0], SHOPPING_BOOELAN_ATTRIBUTE_CHOICES)
+                    )
+                ),
+            )
+        ]
+
+
+GASTRO_POSITIVE_INTEGER_ATTRIBUTE_CHOICES = (
+    ("seats_outdoor", "Seats Outdoor"),
+    ("seats_indoor", "Seats Indoor"),
+)
+
+
+class PositiveIntegerAttribute(models.Model):
+    name = models.CharField(
+        max_length=max(map(len, dict(GASTRO_POSITIVE_INTEGER_ATTRIBUTE_CHOICES))),
+        choices=GASTRO_POSITIVE_INTEGER_ATTRIBUTE_CHOICES,
+    )
+    state = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        unique_together = ["name", "state"]
+        constraints = [
+            models.CheckConstraint(
+                name="%(app_label)s_%(class)s_name_valid",
+                check=models.Q(
+                    name__in=list(
+                        map(lambda x: x[0], GASTRO_POSITIVE_INTEGER_ATTRIBUTE_CHOICES)
                     )
                 ),
             )
@@ -211,6 +252,9 @@ class BaseLocation(BaseLocationID):
     comment_opening_hours = models.TextField(
         _("Comment opening hours"), default="", blank=True
     )
+    comment_public_transport = models.TextField(
+        _("Comment Public transport"), default="", blank=True
+    )
     review_link = models.URLField(
         _("review link"), max_length=255, default="", blank=True
     )
@@ -222,6 +266,7 @@ class BaseLocation(BaseLocationID):
 
     tags = models.ManyToManyField(Tag)
     boolean_attributes = models.ManyToManyField(BooleanAttribute)
+    positive_integer_attributes = models.ManyToManyField(PositiveIntegerAttribute)
 
     objects = GastroQuerySet.as_manager()
 
