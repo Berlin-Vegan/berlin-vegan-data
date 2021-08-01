@@ -5,13 +5,15 @@ from rest_framework.viewsets import ModelViewSet
 from bvdata.data.api_v2.FilterBackend import AuthorizedFilterBackend
 from bvdata.data.api_v2.serializers import (
     PrivateBaseLocationListSerializer,
+    PrivateGastroDetailSerializer,
     PrivateShoppingDetailSerializer,
+    PublicGastroDetailSerializer,
     PublicShoppingDetailSerializer,
 )
 from bvdata.data.filters import BaseLocationFilter
 from bvdata.data.models import BaseLocation, LocationTypeChoices
 
-__all__ = ("ShoppingViewSet",)
+__all__ = ("ShoppingViewSet", "GastroViewSet")
 
 
 class BaseLocationModelViewSetMixin:
@@ -59,6 +61,7 @@ class BaseLocationModelViewSetMixin:
 
     def perform_create(self, serializer):
         serializer.validated_data["last_editor"] = self.request.user
+        serializer.validated_data["type"] = self.location_type
         super(BaseLocationModelViewSetMixin, self).perform_create(serializer)
 
     def perform_update(self, serializer):
@@ -77,6 +80,17 @@ class ShoppingViewSet(BaseLocationModelViewSetMixin, ModelViewSet):
         "public": PublicShoppingDetailSerializer,
         "private": {
             "default": PrivateShoppingDetailSerializer,
+            "list": PrivateBaseLocationListSerializer,
+        },
+    }
+
+
+class GastroViewSet(BaseLocationModelViewSetMixin, ModelViewSet):
+    location_type = LocationTypeChoices.GASTRO
+    serializer_class = {
+        "public": PublicGastroDetailSerializer,
+        "private": {
+            "default": PrivateGastroDetailSerializer,
             "list": PrivateBaseLocationListSerializer,
         },
     }

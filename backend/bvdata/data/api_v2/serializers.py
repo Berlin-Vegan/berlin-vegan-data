@@ -3,6 +3,7 @@ from rest_framework.fields import (
     BooleanField,
     ChoiceField,
     DictField,
+    IntegerField,
     ReadOnlyField,
     SerializerMethodField,
     TimeField,
@@ -10,22 +11,28 @@ from rest_framework.fields import (
 from rest_framework.serializers import ListSerializer, ModelSerializer, Serializer
 
 from bvdata.data.models import (
-    SHOPPING_BOOELAN_ATTRIBUTE_CHOICES,
+    GASTRO_BOOLEAN_ATTRIBUTE_CHOICES,
+    GASTRO_POSITIVE_INTEGER_ATTRIBUTE_CHOICES,
+    GASTRO_TAG_CHOICES,
+    SHOPPING_BOOLEAN_ATTRIBUTE_CHOICES,
     SHOPPING_TAG_CHOICES,
     BaseLocation,
     BooleanAttribute,
-    LocationTypeChoices,
     OpeningHours,
+    PositiveIntegerAttribute,
     Tag,
 )
 
 __all__ = (
-    "TagShoppingListSerializer",
+    "TagListSerializer",
     "OpeningHoursSerializer",
     "ShoppingAttributeSerializer",
     "PrivateBaseLocationListSerializer",
     "PrivateShoppingDetailSerializer",
     "PublicShoppingDetailSerializer",
+    "PublicGastroDetailSerializer",
+    "PrivateGastroDetailSerializer",
+    "GastroAttributeSerializer",
 )
 
 WEEKDAY_SERIALIZER_DEFAULT = {"opening": None, "closing": None}
@@ -72,8 +79,12 @@ class OpeningHoursSerializer(Serializer):
         return ret
 
 
-class TagShoppingListSerializer(ListSerializer):
-    child = ChoiceField(choices=SHOPPING_TAG_CHOICES)
+class TagListSerializer(ListSerializer):
+    def __init__(self, tags, *args, **kwargs):
+        child = ChoiceField(choices=tags)
+        super(TagListSerializer, self).__init__(
+            required=False, child=child, *args, **kwargs
+        )
 
     def to_representation(self, data):
         iterable = data.all() if isinstance(data, models.Manager) else data
@@ -83,7 +94,7 @@ class TagShoppingListSerializer(ListSerializer):
         ]
 
     def to_internal_value(self, data):
-        ret = super(TagShoppingListSerializer, self).to_internal_value(data=data)
+        ret = super(TagListSerializer, self).to_internal_value(data=data)
         return set(ret)
 
 
@@ -91,7 +102,7 @@ class ShoppingAttributeSerializer(Serializer):
     def get_fields(self):
         return {
             field[0]: BooleanField(allow_null=True)
-            for field in SHOPPING_BOOELAN_ATTRIBUTE_CHOICES
+            for field in SHOPPING_BOOLEAN_ATTRIBUTE_CHOICES
         }
 
     def to_representation(self, data):
@@ -102,6 +113,58 @@ class ShoppingAttributeSerializer(Serializer):
     def to_internal_value(self, data):
         data = super(ShoppingAttributeSerializer, self).to_internal_value(data=data)
         return [{"name": name, "state": state} for name, state in data.items()]
+
+
+class GastroAttributeSerializer(Serializer):
+    def get_fields(self):
+        return {
+            **{
+                field[0]: BooleanField(allow_null=True)
+                for field in GASTRO_BOOLEAN_ATTRIBUTE_CHOICES
+            },
+            **{
+                field[0]: IntegerField(min_value=0, default=0)
+                for field in GASTRO_POSITIVE_INTEGER_ATTRIBUTE_CHOICES
+            },
+        }
+
+    def to_representation(self, data: BaseLocation):
+        boolean_attributes = (
+            data.boolean_attributes.all()
+            if isinstance(data.boolean_attributes, models.Manager)
+            else data.boolean_attributes
+        )
+        positive_integer_attributes = (
+            data.positive_integer_attributes.all()
+            if isinstance(data.positive_integer_attributes, models.Manager)
+            else data.positive_integer_attributes
+        )
+        ret = {
+            field.name: field.state
+            for field in [*boolean_attributes, *positive_integer_attributes]
+        }
+        return super(GastroAttributeSerializer, self).to_representation(ret)
+
+    @staticmethod
+    def _get_attrs(attrs):
+        return [{"name": name, "state": state} for name, state in attrs.items()]
+
+    def to_internal_value(self, data):
+        data = super(GastroAttributeSerializer, self).to_internal_value(data=data)
+        return {
+            "boolean_attributes": self._get_attrs(
+                {
+                    boolean_key: data[boolean_key]
+                    for boolean_key in dict(GASTRO_BOOLEAN_ATTRIBUTE_CHOICES)
+                }
+            ),
+            "positive_integer_attributes": self._get_attrs(
+                {
+                    p_integer_key: data[p_integer_key]
+                    for p_integer_key in dict(GASTRO_POSITIVE_INTEGER_ATTRIBUTE_CHOICES)
+                }
+            ),
+        }
 
 
 class BaseLocationSerializer(ModelSerializer):
@@ -152,20 +215,28 @@ class PublicBaseDetailSerializer(BaseLocationSerializer):
         ]
 
 
-class PublicNameMixin(Serializer):
-    name = SerializerMethodField()
-
-    @staticmethod
-    def get_name(obj):
-        return f"{obj.name} - GESCHLOSSEN / CLOSED" if obj.closed else obj.name
-
-
-class PublicShoppingDetailSerializer(PublicNameMixin, PublicBaseDetailSerializer):
-    tags = TagShoppingListSerializer(required=False)
+class ShoppingTagsAttributesSerializerMixin(Serializer):
+    tags = TagListSerializer(tags=SHOPPING_TAG_CHOICES)
     attributes = ShoppingAttributeSerializer(
         source="boolean_attributes", required=False
     )
 
+
+class GastroTagsAttributesSerializerMixin(Serializer):
+    tags = TagListSerializer(tags=GASTRO_TAG_CHOICES)
+    attributes = GastroAttributeSerializer(source="*", required=False)
+
+
+class PublicShoppingDetailSerializer(
+    ShoppingTagsAttributesSerializerMixin, PublicBaseDetailSerializer
+):
+    class Meta(PublicBaseDetailSerializer.Meta):
+        pass
+
+
+class PublicGastroDetailSerializer(
+    GastroTagsAttributesSerializerMixin, PublicBaseDetailSerializer
+):
     class Meta(PublicBaseDetailSerializer.Meta):
         pass
 
@@ -180,12 +251,7 @@ class LastEditorMixin(Serializer):
         )
 
 
-class PrivateShoppingDetailSerializer(LastEditorMixin, PublicBaseDetailSerializer):
-    tags = TagShoppingListSerializer(required=False)
-    attributes = ShoppingAttributeSerializer(
-        source="boolean_attributes", required=False
-    )
-
+class PrivateBaseDetailSerializer(LastEditorMixin, PublicBaseDetailSerializer):
     class Meta(PublicBaseDetailSerializer.Meta):
         fields = PublicBaseDetailSerializer.Meta.fields + [
             "text_intern",
@@ -199,65 +265,141 @@ class PrivateShoppingDetailSerializer(LastEditorMixin, PublicBaseDetailSerialize
             "last_editor",
         ]
 
+    @transaction.atomic
     def create(self, validated_data):
-        boolean_attributes = validated_data.pop("boolean_attributes", [])
         tags = validated_data.pop("tags", [])
         opening_hours = validated_data.pop("openinghours_set", {})
-        with transaction.atomic():
-            base_location = BaseLocation.objects.create(
-                type=LocationTypeChoices.SHOPPING, **validated_data
-            )
-            opening_hours = [
-                OpeningHours(location=base_location, **opening_hour)
-                for opening_hour in opening_hours
-            ]
-            OpeningHours.objects.bulk_create(opening_hours)
+        instance = BaseLocation.objects.create(**validated_data)
+        opening_hours = [
+            OpeningHours(location=instance, **opening_hour)
+            for opening_hour in opening_hours
+        ]
+        OpeningHours.objects.bulk_create(opening_hours)
+        tags = [Tag.objects.get_or_create(tag=tag)[0] for tag in tags]
+        instance.tags.set(tags)
+
+        return instance
+
+    @transaction.atomic
+    def update(self, instance, validated_data):
+        tags = validated_data.pop("tags", None)
+        opening_hours = validated_data.pop("openinghours_set", None)
+        for (key, value) in validated_data.items():
+            setattr(instance, key, value)
+        instance.save()
+
+        if opening_hours is not None:
+            weekday_list = [opening_hour["weekday"] for opening_hour in opening_hours]
+            # delete opening hours
+            OpeningHours.objects.filter(location=instance).exclude(
+                weekday__in=weekday_list
+            ).delete()
+            # update or create opening hours
+            for opening_hour in opening_hours:
+                defaults = dict(
+                    opening=opening_hour["opening"], closing=opening_hour["closing"]
+                )
+                OpeningHours.objects.update_or_create(
+                    defaults=defaults,
+                    location=instance,
+                    weekday=opening_hour["weekday"],
+                )
+
+        if tags is not None:
+            tags_new = [Tag.objects.get_or_create(tag=tag)[0] for tag in tags]
+            instance.tags.set(tags_new)
+
+        return instance
+
+
+class PrivateShoppingDetailSerializer(
+    ShoppingTagsAttributesSerializerMixin, PrivateBaseDetailSerializer
+):
+    class Meta(PrivateBaseDetailSerializer.Meta):
+        pass
+
+    @transaction.atomic
+    def create(self, validated_data):
+        boolean_attributes = validated_data.pop("boolean_attributes", None)
+        instance = super(PrivateShoppingDetailSerializer, self).create(
+            validated_data=validated_data
+        )
+        if boolean_attributes:
             boolean_attributes = [
                 BooleanAttribute.objects.get_or_create(**boolean_attribute)[0]
                 for boolean_attribute in boolean_attributes
             ]
-            base_location.boolean_attributes.set(boolean_attributes)
-            tags = [Tag.objects.get_or_create(tag=tag)[0] for tag in tags]
-            base_location.tags.set(tags)
-        return base_location
+            instance.boolean_attributes.set(boolean_attributes)
+        return instance
 
+    @transaction.atomic
     def update(self, instance, validated_data):
         boolean_attributes = validated_data.pop("boolean_attributes", None)
-        tags = validated_data.pop("tags", None)
-        opening_hours = validated_data.pop("openinghours_set", None)
-        with transaction.atomic():
-            for (key, value) in validated_data.items():
-                setattr(instance, key, value)
-            instance.save()
+        instance = super(PrivateShoppingDetailSerializer, self).update(
+            instance=instance, validated_data=validated_data
+        )
+        if boolean_attributes is not None:
+            boolean_attributes_new = [
+                BooleanAttribute.objects.get_or_create(**boolean_attribute)[0]
+                for boolean_attribute in boolean_attributes
+            ]
+            instance.boolean_attributes.set(boolean_attributes_new)
 
-            if opening_hours is not None:
-                weekday_list = [
-                    opening_hour["weekday"] for opening_hour in opening_hours
-                ]
-                # delete opening hours
-                OpeningHours.objects.filter(location=instance).exclude(
-                    weekday__in=weekday_list
-                ).delete()
-                # update or create opening hours
-                for opening_hour in opening_hours:
-                    defaults = dict(
-                        opening=opening_hour["opening"], closing=opening_hour["closing"]
-                    )
-                    OpeningHours.objects.update_or_create(
-                        defaults=defaults,
-                        location=instance,
-                        weekday=opening_hour["weekday"],
-                    )
+        return instance
 
-            if boolean_attributes is not None:
-                boolean_attributes_new = [
-                    BooleanAttribute.objects.get_or_create(**boolean_attribute)[0]
-                    for boolean_attribute in boolean_attributes
-                ]
-                instance.boolean_attributes.set(boolean_attributes_new)
 
-            if tags is not None:
-                tags_new = [Tag.objects.get_or_create(tag=tag)[0] for tag in tags]
-                instance.tags.set(tags_new)
+class PrivateGastroDetailSerializer(
+    GastroTagsAttributesSerializerMixin, PrivateBaseDetailSerializer
+):
+    class Meta(PrivateBaseDetailSerializer.Meta):
+        pass
 
+    @transaction.atomic
+    def create(self, validated_data):
+        boolean_attributes = validated_data.pop("boolean_attributes", None)
+        positive_integer_attributes = validated_data.pop(
+            "positive_integer_attributes", None
+        )
+        instance = super(PrivateGastroDetailSerializer, self).create(
+            validated_data=validated_data
+        )
+        if boolean_attributes:
+            boolean_attributes = [
+                BooleanAttribute.objects.get_or_create(**boolean_attribute)[0]
+                for boolean_attribute in boolean_attributes
+            ]
+            instance.boolean_attributes.set(boolean_attributes)
+        if positive_integer_attributes:
+            positive_integer_attributes = [
+                PositiveIntegerAttribute.objects.get_or_create(
+                    **positive_integer_attribute
+                )[0]
+                for positive_integer_attribute in positive_integer_attributes
+            ]
+            instance.positive_integer_attributes.set(positive_integer_attributes)
+        return instance
+
+    @transaction.atomic
+    def update(self, instance, validated_data):
+        boolean_attributes = validated_data.pop("boolean_attributes", None)
+        positive_integer_attributes = validated_data.pop(
+            "positive_integer_attributes", None
+        )
+        instance = super(PrivateGastroDetailSerializer, self).update(
+            instance=instance, validated_data=validated_data
+        )
+        if boolean_attributes is not None:
+            boolean_attributes_new = [
+                BooleanAttribute.objects.get_or_create(**boolean_attribute)[0]
+                for boolean_attribute in boolean_attributes
+            ]
+            instance.boolean_attributes.set(boolean_attributes_new)
+        if positive_integer_attributes:
+            positive_integer_attributes = [
+                PositiveIntegerAttribute.objects.get_or_create(
+                    **positive_integer_attribute
+                )[0]
+                for positive_integer_attribute in positive_integer_attributes
+            ]
+            instance.positive_integer_attributes.set(positive_integer_attributes)
         return instance
