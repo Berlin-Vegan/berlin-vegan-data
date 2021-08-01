@@ -1,3 +1,3 @@
-import GastroBaseForm from './component';
+import component from './component';
 
-export default GastroBaseForm;
+export default component;

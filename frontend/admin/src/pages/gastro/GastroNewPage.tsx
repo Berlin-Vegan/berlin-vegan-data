@@ -1,22 +1,19 @@
 import React from 'react';
-import { Paper } from '@material-ui/core';
 
-import { makeStyles } from '@material-ui/core/styles';
-import GastroFormNew from '../../components/GastroFormNew';
+import LocationBaseFormNew from '../../components/LocationBaseFormNew';
+import { GASTRO } from '../../utils/constants';
+import GastroFormBase from '../../components/GastroFormBase';
+import { gastroSchema } from '../../components/GastroFormBase/gastroFormSchema';
+import initialGastroData from '../../components/GastroFormBase/initialData';
 
-const useStyles = makeStyles(() => ({
-  paper: {
-    padding: '16px',
-  },
-}));
-
-const GastroNewPage = () => {
-  const classes = useStyles();
-  return (
-    <Paper className={classes.paper}>
-      <GastroFormNew />
-    </Paper>
-  );
-};
+const GastroNewPage = () => (
+  <LocationBaseFormNew
+    type={GASTRO}
+    label="Gastro"
+    locationForm={GastroFormBase}
+    locationFormSchema={gastroSchema}
+    initialData={initialGastroData}
+  />
+);
 
 export default GastroNewPage;

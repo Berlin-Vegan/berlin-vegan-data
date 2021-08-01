@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { authorizedFetch } from '../../utils/fetch';
 import { AuthContext } from '../../providers/UserProvider';
-import buttons from '../GastroFormNew/buttons';
+import buttons from './buttons';
 import { LocationType } from '../../utils/constants';
 import { buildFEDetailUrl, buildListUrl } from '../../utils/utils';
 import LocationBaseType from '../LocationFormBase/locationBaseType';

@@ -1,5 +1,26 @@
-type LocationBaseAttributesType = {
-  [index: string]: null | boolean;
+type NullBoolean = null | boolean;
+
+type LocationBaseBooleanAttributesType = {
+  organic: NullBoolean;
+  delivery: NullBoolean;
+  handicappedAccessible: NullBoolean;
+};
+
+type GastroBooleanAttributesType = LocationBaseBooleanAttributesType & {
+  handicappedAccessibleWc: NullBoolean;
+  dog: NullBoolean;
+  childChair: NullBoolean;
+  catering: NullBoolean;
+  wlan: NullBoolean;
+  glutenFree: NullBoolean;
+  breakfast: NullBoolean;
+  brunch: NullBoolean;
+  seatsOutdoor: number;
+  seatsIndoor: number;
+};
+
+type ShoppingBooleanAttributesType = LocationBaseBooleanAttributesType & {
+  webshop: NullBoolean;
 };
 
 type OpeningHoursDayType = {
@@ -42,7 +63,7 @@ type LocationBaseType = {
   hasSticker: boolean;
   isSubmission: boolean;
   tags: string[];
-  attributes: LocationBaseAttributesType;
+  attributes: GastroBooleanAttributesType | ShoppingBooleanAttributesType;
   openingHours: OpeningHoursType;
 };
 

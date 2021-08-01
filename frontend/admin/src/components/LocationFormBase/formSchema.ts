@@ -1,9 +1,7 @@
 import * as Yup from 'yup';
-import {
-  testDateString,
-  testTimeString,
-  veganValues,
-} from '../GastroFormBase/formSchema';
+import { map } from 'ramda';
+import { veganFieldOptions } from './fields/constants';
+import { nthOr } from '../../utils/fp';
 
 export const OPENING_HOURS_DAYS = [
   'monday',
@@ -14,6 +12,17 @@ export const OPENING_HOURS_DAYS = [
   'saturday',
   'sunday',
 ];
+
+const veganValues = map((item) => nthOr(0, 0)(item))(veganFieldOptions);
+
+export const testTimeString = (value: string | null | undefined): boolean =>
+  value === null ||
+  (value !== undefined && /([01]\d|2[0-3]):([0-5]\d):([0-5]\d)/.test(value));
+
+const testDateString = (value: string | null | undefined): boolean =>
+  value === null ||
+  (value !== undefined &&
+    /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/.test(value));
 
 const openingHoursDaySchema = Yup.object().shape({
   opening: Yup.string()
@@ -33,11 +42,13 @@ export const BASE_BOOLEAN_ATTRIBUTES = [
   'handicappedAccessible',
 ];
 
+export const buildAttributeSchema = (
+  attrList: Array<string>,
+  attrType: Yup.AnySchema,
+) => attrList.reduce((obj, key) => ({ ...obj, [key]: attrType }), {});
+
 export const booleanAttributeSchema = (attrList: Array<string>) =>
-  attrList.reduce(
-    (obj, key) => ({ ...obj, [key]: Yup.boolean().nullable() }),
-    {},
-  );
+  buildAttributeSchema(attrList, Yup.boolean().nullable());
 
 const locationBaseSchema = Yup.object().shape({
   name: Yup.string().max(100).required(),
