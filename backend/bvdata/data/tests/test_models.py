@@ -4,7 +4,7 @@ import pytest
 from django.db import IntegrityError
 from django.test import TestCase
 
-from bvdata.data.models import SHOPPING_BOOELAN_ATTRIBUTE_CHOICES, WeekdayChoices
+from bvdata.data.models import SHOPPING_BOOLEAN_ATTRIBUTE_CHOICES, WeekdayChoices
 from bvdata.data.tests.factories import (
     BaseLocationFactory,
     BooleanAttributesFactory,
@@ -39,7 +39,7 @@ class TestBooleanAttributeModel(TestCase):
             BooleanAttributesFactory(name="abc")
 
     def test_boolean_attribute_choices(self) -> None:
-        for attribute in SHOPPING_BOOELAN_ATTRIBUTE_CHOICES:
+        for attribute in SHOPPING_BOOLEAN_ATTRIBUTE_CHOICES:
             self.assertFalse(" " in attribute[0])
             self.assertTrue(attribute[0].islower())
 
