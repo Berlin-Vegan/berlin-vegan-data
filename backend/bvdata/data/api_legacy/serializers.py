@@ -149,6 +149,7 @@ def _build_boolean_attributes(boolean_attrs: List[BooleanAttribute]) -> dict:
             attr.state
         )
         for attr in boolean_attrs
+        if attr.name in BOOLEAN_ATTRIBUTES_TO_FIELD_NAME
     }
 
 
