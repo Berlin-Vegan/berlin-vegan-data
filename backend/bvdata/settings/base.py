@@ -13,7 +13,9 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 from pathlib import PurePath as Path
 
+import sentry_sdk
 from django.utils.translation import gettext_lazy as _
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).parents[2]
@@ -177,3 +179,9 @@ EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
 EMAIL_FROM = os.environ.get("EMAIL_FROM", "")
 EMAIL_GASTROS = os.environ.get("EMAIL_GASTROS", "")
+
+sentry_sdk.init(
+    dsn=os.environ.get("SENTRY_DSN", None),
+    integrations=[DjangoIntegration()],
+    traces_sample_rate=0.2,
+)

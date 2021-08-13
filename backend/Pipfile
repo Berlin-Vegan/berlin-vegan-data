@@ -25,6 +25,7 @@ django-rest-registration = "*"
 djangorestframework = "*"
 djangorestframework-camel-case = "*"
 regex = "*"
+sentry-sdk = "*"
 
 [requires]
 python_version = "3.8"
