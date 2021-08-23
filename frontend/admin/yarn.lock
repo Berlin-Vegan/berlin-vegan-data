@@ -2078,10 +2078,10 @@
   resolved "https://registry.npmjs.org/@types/minimatch/-/minimatch-3.0.4.tgz"
   integrity sha512-1z8k4wzFnNjVK/tlxvrWuK5WMt6mydWWP7+zvH5eFep4oj+UkrfiJTRtjCeBXNpwaA/FYqqtb4/QS4ianFpIRA==
 
-"@types/mui-datatables@^3.7.3":
-  version "3.7.3"
-  resolved "https://registry.npmjs.org/@types/mui-datatables/-/mui-datatables-3.7.3.tgz"
-  integrity sha512-4l41Fb9j5pbX7Ye/7n6/gJ2mZPLY8GLzRzjAnAiXCztY+Ghz+6v8wL+9cQzZuZSePbnsJZI+cwIy7dFXbAI7QQ==
+"@types/mui-datatables@^3.7.6":
+  version "3.7.6"
+  resolved "https://registry.yarnpkg.com/@types/mui-datatables/-/mui-datatables-3.7.6.tgz#fe334525eb2b3f742fb53599e961e1ebc0dc65e5"
+  integrity sha512-HaTdcbCnXLNKEpT0aK/1Rp/UdNuDCIrMefYxdlC64eKgLr85Jet0owvHTvIbRL23WZdImVu9cwpME5crtftvfQ==
   dependencies:
     "@material-ui/core" "^4.11.3"
     "@material-ui/types" "5.1.0"
