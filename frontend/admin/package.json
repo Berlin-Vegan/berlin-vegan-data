@@ -15,7 +15,7 @@
     "@types/mui-datatables": "^3.7.3",
     "@types/node": "^15.12.5",
     "@types/ramda": "^0.27.20",
-    "@types/react": "^17.0.11",
+    "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.3",
     "@types/react-map-gl": "^5.2.7",
     "@types/react-router-dom": "^5.1.5",
