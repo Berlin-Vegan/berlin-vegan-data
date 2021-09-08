@@ -26,6 +26,7 @@ export const initialLocationData = {
   comment: '',
   commentEnglish: '',
   commentOpeningHours: '',
+  commentPublicTransport: '',
   reviewLink: '',
   closed: null,
   textIntern: '',

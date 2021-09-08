@@ -64,6 +64,7 @@ const locationBaseSchema = Yup.object().shape({
   comment: Yup.string(),
   commentEnglish: Yup.string(),
   commentOpeningHours: Yup.string(),
+  commentPublicTransport: Yup.string(),
   reviewLink: Yup.string().url().nullable(),
   closed: Yup.string()
     .test('testDateString', 'Date invalid', testDateString)
