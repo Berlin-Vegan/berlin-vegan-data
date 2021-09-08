@@ -72,7 +72,7 @@ const DetailsFormPart = () => {
             component={TextField}
             type="text"
             label="Public Transport"
-            name="publicTransport"
+            name="commentPublicTransport"
           />
         </Grid>
         <Grid container item direction="column" md={6}>
