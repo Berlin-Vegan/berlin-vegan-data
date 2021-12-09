@@ -1,3 +1,4 @@
+from datetime import time
 from typing import Dict, List, Optional
 
 from bvdata.data.models import (
@@ -80,8 +81,17 @@ def _build_boolean_attribute(value: Optional[bool]) -> int:
         return 0
 
 
+def time_to_str(time_obj: time) -> str:
+    if time_obj:
+        return time_obj.strftime("%H:%M")
+    else:
+        return ""
+
+
 def _build_opening_hour_str(opening_hour: OpeningHours) -> str:
-    return f"""{opening_hour.opening.strftime("%H:%M")} - {opening_hour.closing.strftime("%H:%M")}"""
+    opening_str = time_to_str(opening_hour.opening)
+    closing_str = time_to_str(opening_hour.closing)
+    return f"""{opening_str} - {closing_str}"""
 
 
 def _add_not_none_empty(location_dict, data, json_field_name) -> None:
