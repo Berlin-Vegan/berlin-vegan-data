@@ -65,6 +65,7 @@ type LocationBaseType = {
   tags: string[];
   attributes: GastroBooleanAttributesType | ShoppingBooleanAttributesType;
   openingHours: OpeningHoursType;
+  review: null | number;
 };
 
 export default LocationBaseType;

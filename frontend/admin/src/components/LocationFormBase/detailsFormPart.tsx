@@ -1,10 +1,11 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { Field } from 'formik';
+import { Field, useField } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { makeStyles } from '@material-ui/core/styles';
-import NullTextField from './fields/NullTextField';
+import MuiAlert from '@material-ui/lab/Alert';
+import ReviewFormControl from './fields/ReviewFormControl';
 
 const useStyles = makeStyles(() => ({
   textAreaMulti: {
@@ -16,12 +17,19 @@ const useStyles = makeStyles(() => ({
 
 const DetailsFormPart = () => {
   const classes = useStyles();
+  const [, reviewMeta] = useField('review');
+  const reviewEmpty = reviewMeta.value === '' || reviewMeta.value == null;
 
   return (
     <>
       <Grid item>
         <Typography variant="h5">Details</Typography>
       </Grid>
+      {reviewEmpty ? null : (
+        <MuiAlert elevation={6} variant="filled" severity="info">
+          The text of the review will be used.
+        </MuiAlert>
+      )}
       <Grid container item spacing={1} className={classes.textAreaMulti}>
         <Grid container item direction="column" md={6}>
           <Field
@@ -76,13 +84,7 @@ const DetailsFormPart = () => {
           />
         </Grid>
         <Grid container item direction="column" md={6}>
-          <Field
-            component={NullTextField}
-            type="text"
-            label="Review Link"
-            name="reviewLink"
-            placeholder="https://www.berlin-vegan.de/..."
-          />
+          <ReviewFormControl />
         </Grid>
       </Grid>
     </>

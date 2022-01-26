@@ -36,6 +36,7 @@ export const initialLocationData = {
   isSubmission: false,
   tags: [],
   openingHours,
+  review: null,
 };
 
 export const initialLocationBooleanAttributeData = {

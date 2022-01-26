@@ -1,6 +1,6 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { isEmpty } from 'ramda';
+import { isEmpty, pathOr } from 'ramda';
 import * as Yup from 'yup';
 import { AuthContext } from '../../providers/UserProvider';
 import { authorizedFetch } from '../../utils/fetch';
@@ -10,6 +10,7 @@ import PaperDefault from '../PaperDefault';
 import LocationBaseType from '../LocationFormBase/locationBaseType';
 import { buildDetailUrl } from '../../utils/utils';
 import { LocationType } from '../../utils/constants';
+import getReview from '../Review';
 
 interface IParams {
   id: string;
@@ -22,6 +23,8 @@ type LocationEditType = {
   locationFormSchema: Yup.AnySchema;
 };
 
+type LocationDataStateType = object | LocationBaseType;
+
 const LocationEdit: FC<LocationEditType> = ({
   type,
   label,
@@ -30,9 +33,9 @@ const LocationEdit: FC<LocationEditType> = ({
 }) => {
   const { dispatch } = useContext(AuthContext);
   const { id } = useParams<IParams>();
-  const [locationData, setLocationDataState] = useState<
-    object | LocationBaseType
-  >({});
+  const [locationData, setLocationDataState] = useState<LocationDataStateType>(
+    {},
+  );
   const [notFound, setNotFound] = useState(false);
 
   const locationUrl = buildDetailUrl(type.toLowerCase(), id);
@@ -54,19 +57,25 @@ const LocationEdit: FC<LocationEditType> = ({
   return notFound ? (
     <NotFoundPage />
   ) : (
-    <PaperDefault>
+    <>
       {isEmpty(locationData) ? (
-        <div>Loading</div>
+        <PaperDefault>
+          <div>Loading</div>
+        </PaperDefault>
       ) : (
-        <LocationBaseFormEdit
-          label={label}
-          locationUrl={locationUrl}
-          locationForm={locationForm}
-          locationData={locationData as LocationBaseType}
-          locationFormSchema={locationFormSchema}
-        />
+        <>
+          <LocationBaseFormEdit
+            label={label}
+            locationUrl={locationUrl}
+            locationForm={locationForm}
+            locationData={locationData as LocationBaseType}
+            locationFormSchema={locationFormSchema}
+            setLocationDataState={setLocationDataState}
+          />
+          {getReview(pathOr(null, ['review'], locationData))}
+        </>
       )}
-    </PaperDefault>
+    </>
   );
 };
 

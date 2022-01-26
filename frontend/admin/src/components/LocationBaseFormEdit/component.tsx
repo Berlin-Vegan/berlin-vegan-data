@@ -12,6 +12,7 @@ import { AuthContext } from '../../providers/UserProvider';
 import Buttons from './buttons';
 import useStyles from './styles';
 import LocationBaseType from '../LocationFormBase/locationBaseType';
+import PaperDefault from '../PaperDefault';
 
 type LocationBaseFormEditType = {
   label: string;
@@ -19,6 +20,7 @@ type LocationBaseFormEditType = {
   locationForm: FC;
   locationData: LocationBaseType;
   locationFormSchema: Yup.AnySchema;
+  setLocationDataState: React.Dispatch<React.SetStateAction<LocationBaseType>>;
 };
 
 const LocationBaseFormEdit: FunctionComponent<LocationBaseFormEditType> = ({
@@ -27,6 +29,7 @@ const LocationBaseFormEdit: FunctionComponent<LocationBaseFormEditType> = ({
   locationForm,
   locationData,
   locationFormSchema,
+  setLocationDataState,
 }) => {
   const classes = useStyles();
   const { dispatch } = useContext(AuthContext);
@@ -36,64 +39,69 @@ const LocationBaseFormEdit: FunctionComponent<LocationBaseFormEditType> = ({
   const { created, updated, lastEditor, ...formData } = locationData;
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Formik
-        initialValues={formData}
-        validationSchema={locationFormSchema}
-        onSubmit={async (values, { setSubmitting, setErrors }) => {
-          const res = await authorizedFetch(
-            dispatch,
-            locationUrl,
-            'PUT',
-            values,
-          );
-          const data = await res.json();
-          if (res.status === 200) {
-            enqueueSnackbar(`${label} ${data.name} updated`, {
-              variant: 'success',
-            });
-          }
-          if (res.status === 400) {
-            enqueueSnackbar('Form invalid', {
-              variant: 'error',
-            });
-            setErrors(data);
-          }
-          setSubmitting(false);
-        }}
-      >
-        {({ submitForm, isSubmitting }) => (
-          <Form>
-            <Grid container className={classes.metaInfo}>
-              <Grid container item spacing={1} md={6}>
-                <Grid item>
-                  <div>
-                    Created: {created ? parseISO(created).toDateString() : '–'}
-                  </div>
+    <PaperDefault>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <Formik
+          initialValues={formData}
+          validationSchema={locationFormSchema}
+          onSubmit={async (values, { setSubmitting, setErrors }) => {
+            const res = await authorizedFetch(
+              dispatch,
+              locationUrl,
+              'PUT',
+              values,
+            );
+            const data = await res.json();
+            if (res.status === 200) {
+              setLocationDataState(data);
+              enqueueSnackbar(`${label} ${data.name} updated`, {
+                variant: 'success',
+              });
+            }
+            if (res.status === 400) {
+              enqueueSnackbar('Form invalid', {
+                variant: 'error',
+              });
+              setErrors(data);
+            }
+            setSubmitting(false);
+          }}
+        >
+          {({ submitForm, isSubmitting }) => (
+            <Form>
+              <Grid container className={classes.metaInfo}>
+                <Grid container item spacing={1} md={6}>
+                  <Grid item>
+                    <div>
+                      Created:{' '}
+                      {created ? parseISO(created).toDateString() : '–'}
+                    </div>
+                  </Grid>
+                  <Grid item>
+                    <div>
+                      Updated:{' '}
+                      {updated ? parseISO(updated).toDateString() : '–'}
+                    </div>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <div>
-                    Updated: {updated ? parseISO(updated).toDateString() : '–'}
-                  </div>
+                <Grid container item md={6} justify="flex-end">
+                  <Grid item>
+                    <div>Last Editor: {defaultTo('–', lastEditor)}</div>
+                  </Grid>
                 </Grid>
               </Grid>
-              <Grid container item md={6} justify="flex-end">
-                <Grid item>
-                  <div>Last Editor: {defaultTo('–', lastEditor)}</div>
-                </Grid>
-              </Grid>
-            </Grid>
-            <LocationForm>
-              <Buttons
-                submitForm={submitForm}
-                isSubmitting={isSubmitting}
-                locationUrl={locationUrl}
-              />
-            </LocationForm>
-          </Form>
-        )}
-      </Formik>
-    </MuiPickersUtilsProvider>
+              <LocationForm>
+                <Buttons
+                  submitForm={submitForm}
+                  isSubmitting={isSubmitting}
+                  locationUrl={locationUrl}
+                />
+              </LocationForm>
+            </Form>
+          )}
+        </Formik>
+      </MuiPickersUtilsProvider>
+    </PaperDefault>
   );
 };
 

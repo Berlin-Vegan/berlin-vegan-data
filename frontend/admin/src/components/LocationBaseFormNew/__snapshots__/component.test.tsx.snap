@@ -97,7 +97,7 @@ exports[`render <LocationBaseFormNewWrapper /> 1`] = `
           </div>
         </div>
         <div
-          className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item MuiGrid-justify-xs-space-between"
+          className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item MuiGrid-justify-content-xs-space-between"
         >
           <div
             className="MuiGrid-root MuiGrid-item"
@@ -185,7 +185,7 @@ exports[`render <LocationBaseFormNewWrapper /> 1`] = `
         className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-direction-xs-column MuiGrid-grid-md-4"
       >
         <div
-          className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-justify-xs-space-between"
+          className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-justify-content-xs-space-between"
         >
           <div
             className="MuiFormControl-root MuiTextField-root"
@@ -418,7 +418,7 @@ exports[`render <LocationBaseFormNewWrapper /> 1`] = `
           </div>
         </div>
         <div
-          className="MuiGrid-root makeStyles-gridGeoClosed-1 MuiGrid-container MuiGrid-item MuiGrid-justify-xs-space-around"
+          className="MuiGrid-root makeStyles-gridGeoClosed-1 MuiGrid-container MuiGrid-item MuiGrid-justify-content-xs-space-around"
         >
           <button
             className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSizeSmall MuiButton-sizeSmall"
@@ -535,7 +535,7 @@ exports[`render <LocationBaseFormNewWrapper /> 1`] = `
       </h5>
     </div>
     <div
-      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item MuiGrid-justify-xs-space-between"
+      className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item MuiGrid-justify-content-xs-space-between"
     >
       <div
         className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-direction-xs-column MuiGrid-grid-md-2"
@@ -1854,34 +1854,47 @@ exports[`render <LocationBaseFormNewWrapper /> 1`] = `
         className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-direction-xs-column MuiGrid-grid-md-6"
       >
         <div
-          className="MuiFormControl-root MuiTextField-root"
+          className="makeStyles-flexContainerSpinner-6"
         >
-          <label
-            className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated"
-            data-shrink={false}
-          >
-            Review Link
-          </label>
           <div
-            className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
-            onClick={[Function]}
+            className="makeStyles-reviewLabelSpinner-7"
           >
-            <input
-              aria-invalid={false}
-              autoFocus={false}
-              className="MuiInputBase-input MuiInput-input"
-              disabled={false}
-              name="reviewLink"
-              onAnimationStart={[Function]}
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              placeholder="https://www.berlin-vegan.de/..."
-              required={false}
-              type="text"
-              value=""
-            />
+            <label
+              className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-animated"
+            >
+              Review
+            </label>
           </div>
+          <div>
+            <div
+              className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+              role="progressbar"
+              style={
+                Object {
+                  "height": 40,
+                  "width": 40,
+                }
+              }
+            >
+              <svg
+                className="MuiCircularProgress-svg"
+                viewBox="22 22 44 44"
+              >
+                <circle
+                  className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                  cx={44}
+                  cy={44}
+                  fill="none"
+                  r={20.2}
+                  strokeWidth={3.6}
+                  style={Object {}}
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            className="makeStyles-reviewRightSpinner-8"
+          />
         </div>
       </div>
     </div>
@@ -1900,7 +1913,7 @@ exports[`render <LocationBaseFormNewWrapper /> 1`] = `
           className="MuiFormControl-root"
         >
           <label
-            className="MuiFormLabel-root MuiInputLabel-root makeStyles-capitalizeTitle-6 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled Mui-required Mui-required"
+            className="MuiFormLabel-root MuiInputLabel-root makeStyles-capitalizeTitle-9 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled Mui-required Mui-required"
             data-shrink={true}
             htmlFor="attributes.organic"
           >
@@ -1962,7 +1975,7 @@ exports[`render <LocationBaseFormNewWrapper /> 1`] = `
           className="MuiFormControl-root"
         >
           <label
-            className="MuiFormLabel-root MuiInputLabel-root makeStyles-capitalizeTitle-6 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled Mui-required Mui-required"
+            className="MuiFormLabel-root MuiInputLabel-root makeStyles-capitalizeTitle-9 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled Mui-required Mui-required"
             data-shrink={true}
             htmlFor="attributes.delivery"
           >
@@ -2024,7 +2037,7 @@ exports[`render <LocationBaseFormNewWrapper /> 1`] = `
           className="MuiFormControl-root"
         >
           <label
-            className="MuiFormLabel-root MuiInputLabel-root makeStyles-capitalizeTitle-6 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled Mui-required Mui-required"
+            className="MuiFormLabel-root MuiInputLabel-root makeStyles-capitalizeTitle-9 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled Mui-required Mui-required"
             data-shrink={true}
             htmlFor="attributes.handicappedAccessible"
           >
@@ -2232,7 +2245,7 @@ exports[`render <LocationBaseFormNewWrapper /> 1`] = `
         >
           <span
             aria-disabled={false}
-            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-7 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
+            className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-10 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
             onBlur={[Function]}
             onDragLeave={[Function]}
             onFocus={[Function]}
@@ -2251,7 +2264,7 @@ exports[`render <LocationBaseFormNewWrapper /> 1`] = `
             >
               <input
                 checked={false}
-                className="PrivateSwitchBase-input-10"
+                className="PrivateSwitchBase-input-13"
                 data-indeterminate={false}
                 disabled={false}
                 name="hasSticker"
