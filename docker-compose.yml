@@ -2,6 +2,7 @@ version: '3.4'
 
 services:
     backend:
+        image: bvdata
         build:
             context: ./backend/
         restart: always
@@ -11,6 +12,25 @@ services:
             - dstatic:/app/static
         env_file:
             - ./backend/.env
+    celery-worker:
+        image: bvdata
+        restart: always
+        depends_on:
+            - postgres
+            - redis
+        env_file:
+            - ./backend/.env
+        command: make worker
+    celery-beat:
+        image: bvdata
+        restart: always
+        depends_on:
+            - postgres
+            - redis
+            - celery-worker
+        env_file:
+            - ./backend/.env
+        command: make beat
     frontend:
         build:
             context: ./frontend/admin/
@@ -26,6 +46,8 @@ services:
             - POSTGRES_DB=${POSTGRES_DB}
             - POSTGRES_USER=${POSTGRES_USER}
             - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    redis:
+        image: "redis:alpine"
     entrypoint:
         image: nginx:stable-alpine
         restart: always

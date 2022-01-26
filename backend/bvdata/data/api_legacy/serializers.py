@@ -141,8 +141,8 @@ def _build_base(location: BaseLocation, data_to_field_name: dict) -> dict:
     if location.closed:
         base_dict.pop("telephone", None)
 
-    if location.review_link:
-        base_dict.update(reviewURL=location.review_link.split("/")[-2])
+    if location.review:
+        base_dict.update(reviewURL=location.review.url.split("/")[-2])
 
     base_dict.update(
         _build_opening_hours(

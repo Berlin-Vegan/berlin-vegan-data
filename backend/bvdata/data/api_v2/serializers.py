@@ -201,7 +201,6 @@ class PublicBaseDetailSerializer(BaseLocationSerializer):
             "comment_english",
             "comment_opening_hours",
             "comment_public_transport",
-            "review_link",
             "closed",
             "opening_hours",
             "tags",
@@ -260,6 +259,7 @@ class PrivateBaseDetailSerializer(LastEditorMixin, PublicBaseDetailSerializer):
             "is_submission",
             "submit_email",
             "last_editor",
+            "review",
         ]
 
         read_only_fields = PublicBaseDetailSerializer.Meta.read_only_fields + [
