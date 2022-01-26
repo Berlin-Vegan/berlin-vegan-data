@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
+
 import CssBaseline from '@material-ui/core/CssBaseline';
 import '@fontsource/roboto';
 import { ThemeProvider } from '@material-ui/core/styles';

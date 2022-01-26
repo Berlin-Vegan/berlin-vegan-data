@@ -81,6 +81,7 @@ const locationBaseSchema = Yup.object().shape({
     booleanAttributeSchema(BASE_BOOLEAN_ATTRIBUTES),
   ),
   tags: Yup.array().of(Yup.string()),
+  review: Yup.number().nullable(),
 });
 
 export default locationBaseSchema;

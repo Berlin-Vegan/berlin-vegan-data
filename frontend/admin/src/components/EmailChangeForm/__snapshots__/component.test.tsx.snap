@@ -54,7 +54,7 @@ exports[`render <EmailChangeFormWrapper /> 1`] = `
         </div>
       </div>
       <div
-        className="MuiGrid-root makeStyles-saveButton-1 MuiGrid-container MuiGrid-justify-xs-flex-end"
+        className="MuiGrid-root makeStyles-saveButton-1 MuiGrid-container MuiGrid-justify-content-xs-flex-end"
       >
         <button
           className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"

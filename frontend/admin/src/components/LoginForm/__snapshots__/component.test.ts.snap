@@ -5,7 +5,7 @@ exports[`render <LoginForm /> 1`] = `
   className="makeStyles-paper-1"
 >
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-avatar-2 MuiAvatar-colorDefault"
+    className="MuiAvatar-root MuiAvatar-circular makeStyles-avatar-2 MuiAvatar-colorDefault"
   >
     <svg
       aria-hidden={true}

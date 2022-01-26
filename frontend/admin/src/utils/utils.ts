@@ -1,9 +1,14 @@
 import { pipe, toLower } from 'ramda';
-import { LocationType } from './constants';
+import { LocationType, V1, V2 } from './constants';
 
-// API urls
+//
+export const buildReviewListUrl: string = `${V1}review/`;
+export const buildReviewDetailUrl = (id: number): string =>
+  `${buildReviewListUrl}${id}/`;
+
+// API V2 urls
 export const buildListUrl = (type: LocationType): string =>
-  pipe(toLower, (lowerType: string) => `/api/v2/${lowerType}/`)(type);
+  pipe(toLower, (lowerType: string) => `${V2}${lowerType}/`)(type);
 export const buildDetailUrl = (type: LocationType, id: string): string =>
   pipe(toLower, buildListUrl, (baseUrl: string) => `${baseUrl}${id}/`)(type);
 // FE urls
