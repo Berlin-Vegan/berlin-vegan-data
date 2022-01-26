@@ -18,6 +18,7 @@ services:
         depends_on:
             - postgres
             - redis
+            - backend
         env_file:
             - ./backend/.env
         command: make worker
@@ -28,6 +29,7 @@ services:
             - postgres
             - redis
             - celery-worker
+            - backend
         env_file:
             - ./backend/.env
         command: make beat
