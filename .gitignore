@@ -8,3 +8,5 @@ env/
 .env
 *.mo
 .coverage
+
+celerybeat-schedule

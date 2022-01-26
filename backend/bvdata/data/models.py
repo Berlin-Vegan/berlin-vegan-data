@@ -8,24 +8,26 @@ from bvdata.data.managers import GastroQuerySet
 from bvdata.data.utils import get_random_string_32
 
 __all__ = (
-    "WeekdayChoices",
-    "OpeningHours",
-    "VEGAN_CHOICE",
-    "SHOPPING_TAG_CHOICES",
+    "BaseLocation",
+    "BooleanAttribute",
+    "GASTRO_BOOLEAN_ATTRIBUTE_CHOICES",
+    "GASTRO_POSITIVE_INTEGER_ATTRIBUTE_CHOICES",
     "GASTRO_TAG_CHOICES",
+    "LocationTypeChoices",
+    "NULLBOOLEAN_CHOICE",
+    "NULLBOOLEAN_NULL",
+    "OMNIVORE_VEGAN",
+    "OpeningHours",
+    "PositiveIntegerAttribute",
+    "Review",
+    "ReviewImage",
+    "SHOPPING_BOOLEAN_ATTRIBUTE_CHOICES",
+    "SHOPPING_TAG_CHOICES",
     "TAG_CHOICES",
     "Tag",
-    "SHOPPING_BOOLEAN_ATTRIBUTE_CHOICES",
-    "GASTRO_BOOLEAN_ATTRIBUTE_CHOICES",
-    "BooleanAttribute",
-    "LocationTypeChoices",
-    "BaseLocation",
-    "NULLBOOLEAN_CHOICE",
-    "PositiveIntegerAttribute",
-    "GASTRO_POSITIVE_INTEGER_ATTRIBUTE_CHOICES",
-    "OMNIVORE_VEGAN",
+    "VEGAN_CHOICE",
     "VEGAN_VEGAN",
-    "NULLBOOLEAN_NULL",
+    "WeekdayChoices",
 )
 
 
@@ -232,9 +234,6 @@ class BaseLocation(models.Model):
     comment_public_transport = models.TextField(
         _("Comment Public transport"), default="", blank=True
     )
-    review_link = models.URLField(
-        _("review link"), max_length=255, default="", blank=True
-    )
     closed = models.DateField(_("closed"), null=True, default=None)
     text_intern = models.TextField(_("text intern"), default="", blank=True)
     has_sticker = models.BooleanField(_("Sticker"), default=False)
@@ -244,6 +243,9 @@ class BaseLocation(models.Model):
     tags = models.ManyToManyField(Tag)
     boolean_attributes = models.ManyToManyField(BooleanAttribute)
     positive_integer_attributes = models.ManyToManyField(PositiveIntegerAttribute)
+    review = models.ForeignKey(
+        to="data.Review", on_delete=models.SET_NULL, blank=True, null=True
+    )
 
     objects = GastroQuerySet.as_manager()
 
@@ -274,3 +276,16 @@ class BaseLocation(models.Model):
             if id_string_error_patter.search(str(e)) is None:
                 raise e
             return self.set_string(**kwargs)
+
+
+class Review(models.Model):
+    text = models.TextField()
+    url = models.URLField(unique=True)
+    updated = models.DateTimeField()
+
+
+class ReviewImage(models.Model):
+    review = models.ForeignKey(to=Review, on_delete=models.CASCADE)
+    height = models.PositiveIntegerField()
+    width = models.PositiveIntegerField()
+    url = models.URLField(unique=True)

@@ -31,7 +31,7 @@ class BaseLocationModelViewSetMixin:
         self.queryset_public = self.queryset.api_public()
         self.queryset_list_private = self.queryset.annotate(
             has_review_link=Case(
-                When(review_link__exact="", then=Value(False)),
+                When(review__isnull=True, then=Value(False)),
                 default=Value(True),
                 output_field=BooleanField(),
             )
@@ -40,7 +40,7 @@ class BaseLocationModelViewSetMixin:
 
     def get_location_type(self):
         if self.location_type is None:
-            raise Exception("Location Type must be set.")
+            raise Exception("Location type must be set.")
         return self.location_type
 
     def get_queryset(self):

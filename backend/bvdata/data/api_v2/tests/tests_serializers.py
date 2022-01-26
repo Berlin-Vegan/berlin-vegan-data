@@ -94,9 +94,9 @@ def baselocation_input_fixture(
         comment=location_factory.comment,
         comment_english=location_factory.comment_english,
         comment_opening_hours=location_factory.comment_opening_hours,
-        review_link=location_factory.review_link,
         closed=location_factory.closed,
         text_intern=location_factory.text_intern,
+        review=None,
     )
     if attribute_input is not None:
         location_input["attributes"] = attribute_input

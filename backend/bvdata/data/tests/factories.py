@@ -11,15 +11,19 @@ from bvdata.data.models import (
     LocationTypeChoices,
     OpeningHours,
     PositiveIntegerAttribute,
+    Review,
+    ReviewImage,
     Tag,
     WeekdayChoices,
 )
 
 __all__ = (
-    "TagFactory",
-    "BooleanAttributesFactory",
     "BaseLocationFactory",
+    "BooleanAttributesFactory",
     "OpeningHoursFactory",
+    "ReviewFactory",
+    "ReviewImageFactory",
+    "TagFactory",
 )
 
 
@@ -58,6 +62,15 @@ class PositiveIntegerAttributesFactory(DjangoModelFactory):
         model = PositiveIntegerAttribute
 
 
+class ReviewFactory(DjangoModelFactory):
+    url = Faker("url")
+    text = Faker("text", max_nb_chars=400)
+    updated = Faker("date_time")
+
+    class Meta:
+        model = Review
+
+
 class BaseLocationFactory(DjangoModelFactory):
     type = Faker(
         "random_element", elements=[type[0] for type in LocationTypeChoices.choices]
@@ -78,10 +91,12 @@ class BaseLocationFactory(DjangoModelFactory):
     comment = Faker("text", max_nb_chars=400)
     comment_english = Faker("text", max_nb_chars=400)
     comment_opening_hours = Faker("text", max_nb_chars=400)
-    review_link = Faker("url")
     closed = Faker("date_object")
     text_intern = Faker("text", max_nb_chars=400, ext_word_list=None)
     is_submission = Faker("boolean")
+    submit_email = Faker("email")
+
+    review = SubFactory(ReviewFactory)
 
     @post_generation
     def tags(self, create, extracted, **kwargs):
@@ -121,3 +136,13 @@ class OpeningHoursFactory(DjangoModelFactory):
 
     class Meta:
         model = OpeningHours
+
+
+class ReviewImageFactory(DjangoModelFactory):
+    review = SubFactory(ReviewFactory)
+    height = Faker("pyint")
+    width = Faker("pyint")
+    url = Faker("url")
+
+    class Meta:
+        model = ReviewImage

@@ -15,7 +15,7 @@ from bvdata.data.models import (
     Tag,
     WeekdayChoices,
 )
-from bvdata.data.tests.factories import BaseLocationFactory
+from bvdata.data.tests.factories import BaseLocationFactory, ReviewFactory
 
 
 class TestApiGastroLocationsJson(TestCase):
@@ -25,7 +25,10 @@ class TestApiGastroLocationsJson(TestCase):
         self.client = Client()
 
     def test_gastro_to_dict(self):
-        location = BaseLocation.objects.create(
+        review = ReviewFactory(
+            url="https://www.berlin-vegan.de/essen-und-trinken/rezensionen/test-restaurant/"
+        )
+        location = BaseLocationFactory(
             id_string="6zd67nov4gjk8wv24trgxd9sr1r5f413",
             type=LocationTypeChoices.GASTRO,
             name="Test Restaurant",
@@ -40,7 +43,6 @@ class TestApiGastroLocationsJson(TestCase):
             vegan=5,
             comment="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed ",
             comment_english="English, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed ",
-            review_link="https://www.berlin-vegan.de/essen-und-trinken/rezensionen/test-restaurant/",
             closed=None,
             text_intern="Intern, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed ",
             comment_public_transport="Public Transport, Lorem ipsum dolor sit amet, consetetur ",
@@ -48,6 +50,7 @@ class TestApiGastroLocationsJson(TestCase):
             submit_email="submit@test.de",
             has_sticker=True,
             is_submission=False,
+            review=review,
         )
 
         OpeningHours.objects.create(
@@ -221,6 +224,9 @@ class TestApiShoppingLocationsJson(TestCase):
         self.client = Client()
 
     def test_shopping_to_dict(self):
+        review = ReviewFactory(
+            url="https://www.berlin-vegan.de/essen-und-trinken/rezensionen/test-shop/"
+        )
         location = BaseLocation.objects.create(
             id_string="6zd67nov4gjk8wv24trgxd9sr1r5f413",
             type=LocationTypeChoices.SHOPPING,
@@ -236,7 +242,6 @@ class TestApiShoppingLocationsJson(TestCase):
             vegan=5,
             comment="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed ",
             comment_english="English, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed ",
-            review_link="https://www.berlin-vegan.de/essen-und-trinken/rezensionen/test-shop/",
             closed=None,
             text_intern="Intern, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed ",
             comment_public_transport="Public Transport, Lorem ipsum dolor sit amet, consetetur ",
@@ -244,6 +249,7 @@ class TestApiShoppingLocationsJson(TestCase):
             submit_email="submit@test.de",
             has_sticker=True,
             is_submission=False,
+            review=review,
         )
 
         OpeningHours.objects.create(
