@@ -200,6 +200,6 @@ CELERY_TIMEZONE = TIME_ZONE
 CELERYBEAT_SCHEDULE = {
     "import_wordpress_reviews": {
         "task": "import_wordpress_reviews",
-        "schedule": crontab(minute="1"),
+        "schedule": crontab(minute="0", hour="*/4"),
     },
 }
