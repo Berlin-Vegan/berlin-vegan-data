@@ -6,7 +6,7 @@ verify_ssl = true
 [dev-packages]
 flake8 = "*"
 isort = "*"
-black = "==21.5b1"
+black = "==21.12b0"
 pytest = "*"
 pytest-cov = "*"
 pytest-django = "*"
