@@ -8497,9 +8497,9 @@ ms@^2.1.1:
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
 mui-datatables@^3:
-  version "3.7.7"
-  resolved "https://registry.npmjs.org/mui-datatables/-/mui-datatables-3.7.7.tgz"
-  integrity sha512-IHK6snQybKdyZET2G1ODN3cCrFE6u2TUk/wIGUMq7+vANXAALYjh7EXeJtesYmzR/7R7ctv4/V8uARraSQMKPg==
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/mui-datatables/-/mui-datatables-3.8.2.tgz#92e0b0d0b5e6f34df1bd647b54c410f8a6acd81d"
+  integrity sha512-OjjwlmjZDpQvYhdelll8B+xNsr/uCS2x+quR72oISi0IrKIeioKgXn4YJrux54QkJn11f5FEFv8V1PGnjulktQ==
   dependencies:
     "@babel/runtime-corejs3" "^7.12.1"
     clsx "^1.1.1"
