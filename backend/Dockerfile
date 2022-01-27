@@ -1,4 +1,4 @@
-FROM python:3.8-alpine
+FROM python:3.10.2-alpine
 COPY . /app
 WORKDIR /app
 RUN apk add --no-cache --virtual .build-deps build-base gcc libc-dev fortify-headers linux-headers python3-dev musl-dev \
