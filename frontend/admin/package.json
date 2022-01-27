@@ -13,7 +13,7 @@
     "@sentry/react": "^6.11.0",
     "@sentry/tracing": "^6.11.0",
     "@types/jest": "^26.0.23",
-    "@types/mui-datatables": "^3.7.3",
+    "@types/mui-datatables": "^3.7.7",
     "@types/node": "^15.12.5",
     "@types/ramda": "^0.27.20",
     "@types/react": "^17.0.11",
