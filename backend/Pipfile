@@ -18,7 +18,7 @@ django-debug-toolbar = "*"
 [packages]
 django-crispy-forms = "*"
 "psycopg2-binary" = "*"
-Django = "<4"
+Django = "<5"
 gunicorn = "*"
 django-filter = "*"
 django-rest-registration = "*"
