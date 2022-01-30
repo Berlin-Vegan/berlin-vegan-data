@@ -54,6 +54,7 @@ const LocationBaseFormNewWrapper = () => (
       locationForm={testBaseForm}
       locationData={locationData}
       locationFormSchema={testFormSchema}
+      setLocationDataState={() => {}}
     />
   </SnackbarProvider>
 );
