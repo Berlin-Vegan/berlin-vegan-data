@@ -11,7 +11,6 @@
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@material-ui/pickers": "^3.2.10",
     "@sentry/react": "^6.11.0",
-    "@sentry/tracing": "^6.17.3",
     "@types/jest": "^26.0.23",
     "@types/mui-datatables": "^3.7.7",
     "@types/node": "^15.12.5",
