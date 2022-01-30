@@ -24,7 +24,7 @@ const getUserData = (userDispatch: UserDispatch) =>
 const initialHeader = { 'Content-Type': 'application/json' };
 const setCSRFToken = assoc('X-CSRFToken', __, initialHeader);
 const getHeader = ifElse(
-  (x) => !isEmpty(x),
+  (x: string) => !isEmpty(x),
   (x) => setCSRFToken(x),
   () => initialHeader,
 );
