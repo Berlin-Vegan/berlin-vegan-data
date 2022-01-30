@@ -9,7 +9,12 @@ const LocationTableWrapper = (props: ILocationTableProps) => (
   </FilterProvider>
 );
 
-standardComponentTest(LocationTableWrapper, { title: '', data: [] });
+standardComponentTest(LocationTableWrapper, {
+  title: '',
+  data: [],
+  overwriteOptions: { tableId: 'testID' },
+});
+
 const dataID = {
   id: 'fwfwgeg345egetg34',
   name: 'TestName',
@@ -21,17 +26,5 @@ const dataID = {
 standardComponentTest(LocationTableWrapper, {
   title: 'TestTable',
   data: [dataID],
-});
-
-const dataIDString = {
-  idString: 'fwfwgeg345egetg34',
-  name: 'TestName',
-  postalCode: '12345',
-  city: 'Berlin',
-  vegan: 5,
-  hasReviewLink: false,
-};
-standardComponentTest(LocationTableWrapper, {
-  title: 'TestTable',
-  data: [dataIDString],
+  overwriteOptions: { tableId: 'testID' },
 });

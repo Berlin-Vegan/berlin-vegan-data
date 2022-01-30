@@ -5,7 +5,11 @@ import { FilterProvider } from '../../providers/FilterProvider';
 
 const LocationListWrapper = () => (
   <FilterProvider>
-    <LocationList label="TestList" url="/api/vX/list" />
+    <LocationList
+      label="TestList"
+      url="/api/vX/list"
+      overwriteTableOptions={{ tableId: 'testID' }}
+    />
   </FilterProvider>
 );
 
