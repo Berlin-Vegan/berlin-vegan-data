@@ -88,10 +88,6 @@ def create_or_update_locations_with_review(review_tuple: ReviewTuple) -> Review:
     return review
 
 
-def delete_unused_reviews(reviews: List[Review]) -> None:
-    Review.objects.exclude(id__in=[review.id for review in reviews]).delete()
-
-
 def parse_datetime_berlin(datetime_str: str) -> Optional[datetime]:
     updated_naive = parse_datetime(datetime_str)
     if updated_naive is None:
@@ -151,5 +147,3 @@ def import_reviews_from_wordpress():
             )
             review = create_or_update_locations_with_review(review_tuple=review_tuple)
             new_review_list.append(review)
-
-    delete_unused_reviews(reviews=new_review_list)

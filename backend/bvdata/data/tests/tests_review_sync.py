@@ -9,7 +9,6 @@ from django.test import TestCase
 from bvdata.data.models import Review, ReviewImage
 from bvdata.data.review_sync import (
     ReviewDict,
-    delete_unused_reviews,
     get_review_images,
     get_review_text,
     import_reviews_from_wordpress,
@@ -195,17 +194,3 @@ class TestReviewSync(TestCase):
 
         with pytest.raises(Review.DoesNotExist):
             Review.objects.get(id=review_image_to_be_removed.id)
-
-    def test_delete_unused_reviews(self) -> None:
-        review_used = ReviewFactory()
-        review_unused = ReviewFactory()
-        delete_unused_reviews(reviews=[review_used])
-
-        self.assertEqual(Review.objects.all().count(), 1)
-        try:
-            Review.objects.get(id=review_used.id)
-        except Review.DoesNotExist:
-            self.fail("Wrong review removed")
-
-        with pytest.raises(Review.DoesNotExist):
-            Review.objects.get(id=review_unused.id)
