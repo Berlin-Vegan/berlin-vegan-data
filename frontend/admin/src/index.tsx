@@ -18,6 +18,7 @@ import Providers from './providers';
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
+  // @ts-ignore
   integrations: [new Integrations.BrowserTracing()],
 });
 
