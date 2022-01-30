@@ -2,6 +2,7 @@ import React, { FC, useContext, useEffect, useState } from 'react';
 
 import Grid from '@material-ui/core/Grid';
 
+import { MUIDataTableOptions } from 'mui-datatables';
 import { authorizedFetch } from '../../utils/fetch';
 import { AuthContext } from '../../providers/UserProvider';
 import LocationTable from '../LocationTable';
@@ -9,9 +10,14 @@ import LocationTable from '../LocationTable';
 type LocationListType = {
   label: string;
   url: string;
+  overwriteTableOptions?: MUIDataTableOptions;
 };
 
-const LocationList: FC<LocationListType> = ({ label, url }) => {
+const LocationList: FC<LocationListType> = ({
+  label,
+  url,
+  overwriteTableOptions = {},
+}) => {
   const { dispatch } = useContext(AuthContext);
   const [data, setData] = useState([]);
 
@@ -28,7 +34,11 @@ const LocationList: FC<LocationListType> = ({ label, url }) => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
-        <LocationTable title={label} data={data} />
+        <LocationTable
+          title={label}
+          data={data}
+          overwriteOptions={overwriteTableOptions}
+        />
       </Grid>
     </Grid>
   );

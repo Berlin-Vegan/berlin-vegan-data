@@ -15,14 +15,12 @@ export const standardComponentTestMockFetch = (
 ) => {
   renderWithTestRenderer(C, props);
   it('renders without crashing and mock fetch', async () => {
-    jest.spyOn(window, 'fetch').mockImplementation(
-      (): Promise<any> => {
-        const fetchResponse = {
-          json: () => Promise.resolve(fakeResponse),
-        };
-        return Promise.resolve(fetchResponse);
-      },
-    );
+    jest.spyOn(window, 'fetch').mockImplementation((): Promise<any> => {
+      const fetchResponse = {
+        json: () => Promise.resolve(fakeResponse),
+      };
+      return Promise.resolve(fetchResponse);
+    });
     await act(async () => renders(C, props));
   });
 };

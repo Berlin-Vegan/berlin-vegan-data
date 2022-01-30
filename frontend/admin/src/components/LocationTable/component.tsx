@@ -90,9 +90,14 @@ type LocationListData = {
 export interface ILocationTableProps {
   title: string;
   data: LocationListData[];
+  overwriteOptions?: MUIDataTableOptions;
 }
 
-const LocationTable: FC<ILocationTableProps> = ({ title, data }) => {
+const LocationTable: FC<ILocationTableProps> = ({
+  title,
+  data,
+  overwriteOptions = {},
+}) => {
   const history = useHistory();
   const { filterState, setFilterState } = useContext(FilterContext);
   const [countState, setCountState] = useState(0);
@@ -119,7 +124,7 @@ const LocationTable: FC<ILocationTableProps> = ({ title, data }) => {
       title={`${title} (${countState})`}
       data={data}
       columns={columnsWithFilter}
-      options={options}
+      options={{ ...options, ...overwriteOptions }}
     />
   );
 };
