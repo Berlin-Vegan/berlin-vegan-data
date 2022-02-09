@@ -27,10 +27,10 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Build BE Docker image
-        run: docker build -f backend/Dockerfile -t be-bvdata backend/
+        run: docker build --target builder-base -f backend/Dockerfile -t bvdata-be backend/
       - name: Run BE Tests
-        run: docker run --network="host" --env DATABASE_HOST=localhost --env SECRET_KEY=nosecret --env EMAIL_GASTROS=test@test.de be-bvdata make test
-  frontend:
+        run: docker run --network="host" --env DATABASE_HOST=localhost --env SECRET_KEY=nosecret --env EMAIL_GASTROS=test@test.de bvdata-be make test
+  frontend-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code

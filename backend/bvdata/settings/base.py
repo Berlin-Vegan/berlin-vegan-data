@@ -34,7 +34,12 @@ ALLOWED_HOSTS = [
     i for i in os.environ.get("ALLOWED_HOSTS", "data.berlin-vegan.de").split(",")
 ]
 
-CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
+CSRF_TRUSTED_ORIGINS = [
+    i
+    for i in os.environ.get(
+        "CSRF_TRUSTED_ORIGINS", "https://data.berlin-vegan.de"
+    ).split(",")
+]
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 # Application definition
