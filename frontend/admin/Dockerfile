@@ -1,12 +1,19 @@
 # build environment
-FROM node:17.4.0-alpine as prepare
+FROM node:16.13.0-alpine as prepare
+
+ARG ENVIRONMENT=production
+
+ENV ENVIRONMENT=${ENVIRONMENT}
+
 WORKDIR /app
 COPY package.json yarn.lock ./
-RUN yarn --production
+RUN yarn install $(test "$ENVIRONMENT" = production && echo "--production")
 COPY . ./
 
 # build
 FROM prepare as builder
+ENV SKIP_PREFLIGHT_CHECK=true
+ENV DISABLE_ESLINT_PLUGIN=true
 RUN yarn run build
 
 # production environment
