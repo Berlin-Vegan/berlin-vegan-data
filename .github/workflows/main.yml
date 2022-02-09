@@ -36,6 +36,13 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Build FE Docker image
-        run: docker build --target prepare -f frontend/admin/Dockerfile -t fe-bvdata frontend/admin/
+        run: docker build --target prepare -f frontend/admin/Dockerfile -t bvdata-fe frontend/admin/ --build-arg ENVIRONMENT=dev
       - name: Run FE Tests
-        run: docker run fe-bvdata /bin/ash -c "yarn install && yarn run test-all"
+        run: docker run bvdata-fe /bin/ash -c "yarn install && yarn run test-all"
+  frontend-test-prod-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Build prod files
+        run: docker build --target builder -f frontend/admin/Dockerfile -t bvdata-fe frontend/admin/
