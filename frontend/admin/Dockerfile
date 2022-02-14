@@ -1,5 +1,5 @@
 # build environment
-FROM node:16.13.0-alpine as prepare
+FROM node:17.5.0-alpine as prepare
 
 ARG ENVIRONMENT=production
 
