@@ -8,6 +8,9 @@ inputs:
   image-context:
     description: "Context of the image"
     required: true
+  repo-token:
+    description: "Github Token"
+    required: true
 
 runs:
   using: "composite"
@@ -17,7 +20,7 @@ runs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ github.event.inputs.repo-token }}
 
     - name: Extract metadata (tags, labels) for Image
       id: meta

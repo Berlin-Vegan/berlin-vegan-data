@@ -31,3 +31,4 @@ jobs:
         with:
           image-type: fe
           image-context: frontend/admin/
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
