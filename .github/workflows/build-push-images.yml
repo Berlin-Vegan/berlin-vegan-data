@@ -1,0 +1,29 @@
+name: Create and publish Docker image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  backend-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Build and Push BE image
+        uses: ./.github/actions/build-push-image
+        with:
+          image-type: be
+          image-context: backend/
+
+  frontend-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Build and Push BE image
+        uses: ./.github/actions/build-push-image
+        with:
+          image-type: fe
+          image-context: frontend/admin/
