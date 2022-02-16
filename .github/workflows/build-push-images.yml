@@ -3,6 +3,10 @@ name: Create and publish Docker image
 on:
   workflow_dispatch:
 
+env:
+  REGISTRY: ghcr.io
+  REPO: ${{ github.repository }}
+
 jobs:
   backend-image:
     runs-on: ubuntu-latest
@@ -15,8 +19,9 @@ jobs:
       - name: Build and Push BE image
         uses: ./.github/actions/build-push-image
         with:
-          image-type: be
-          image-context: backend/
+          imageType: be
+          imageContext: backend/
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
 
   frontend-image:
     runs-on: ubuntu-latest
@@ -26,9 +31,9 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: Build and Push BE image
+      - name: Build and Push FE image
         uses: ./.github/actions/build-push-image
         with:
-          image-type: fe
-          image-context: frontend/admin/
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          imageType: fe
+          imageContext: frontend/admin/
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
