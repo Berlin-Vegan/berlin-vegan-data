@@ -2,13 +2,13 @@ name: Build image
 description: Build image with given context and naming
 
 inputs:
-  image-type:
+  imageType:
     description: "Type of image (be/fe)"
     required: true
-  image-context:
+  imageContext:
     description: "Context of the image"
     required: true
-  repo-token:
+  repoToken:
     description: "Github Token"
     required: true
 
@@ -18,15 +18,15 @@ runs:
     - name: Log in to the Container registry
       uses: docker/login-action@v1
       with:
-        registry: ghcr.io
+        registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
-        password: ${{ github.event.inputs.repo-token }}
+        password: ${{ env.INPUT_REPOTOKEN }}
 
     - name: Extract metadata (tags, labels) for Image
       id: meta
       uses: docker/metadata-action@v3
       with:
-        images: ghcr.io/bvdata-${{ github.event.inputs.image-type }}
+        images:  ${{ env.REGISTRY }}/${{ env.REPO }}/${{ env.INPUT_IMAGETYPE }}
         tags: |
           type=sha
           type=raw,value=latest
@@ -34,7 +34,7 @@ runs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
-        context: ${{ github.event.inputs.image-context }}
+        context: ${{ env.INPUT_IMAGECONTEXT }}
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
