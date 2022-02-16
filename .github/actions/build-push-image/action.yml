@@ -20,13 +20,13 @@ runs:
       with:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
-        password: ${{ env.INPUT_REPOTOKEN }}
+        password: ${{ inputs.repoToken }}
 
     - name: Extract metadata (tags, labels) for Image
       id: meta
       uses: docker/metadata-action@v3
       with:
-        images:  ${{ env.REGISTRY }}/${{ env.REPO }}/${{ env.INPUT_IMAGETYPE }}
+        images:  ${{ env.REGISTRY }}/${{ env.REPO }}/${{ inputs.imageType }}
         tags: |
           type=sha
           type=raw,value=latest
@@ -34,7 +34,7 @@ runs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
-        context: ${{ env.INPUT_IMAGECONTEXT }}
+        context: ${{ inputs.imageContext }}
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
