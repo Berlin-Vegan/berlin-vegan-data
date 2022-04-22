@@ -46,3 +46,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Build prod files
         run: docker build --target builder -f frontend/admin/Dockerfile -t bvdata-fe frontend/admin/
+
+  build-push-images:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: [backend, frontend-tests, frontend-test-prod-build]
+    steps:
+      - uses: ./.github/workflows/build-push-images
