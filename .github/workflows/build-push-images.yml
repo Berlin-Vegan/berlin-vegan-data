@@ -3,6 +3,11 @@ name: Create and publish Docker image
 on:
   workflow_dispatch:
   workflow_call:
+    secrets:
+      REACT_APP_MAP_API_URL:
+        required: true
+      REACT_APP_SENTRY_DSN:
+        required: true
 
 env:
   REGISTRY: ghcr.io
