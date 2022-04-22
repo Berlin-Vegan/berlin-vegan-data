@@ -11,6 +11,10 @@ inputs:
   repoToken:
     description: "Github Token"
     required: true
+  buildArgs:
+    description: Build args
+    required: false
+    default: ""
 
 runs:
   using: "composite"
@@ -30,8 +34,8 @@ runs:
         tags: |
           type=sha
           type=raw,value=latest
-
-    - name: Build and push Docker image
+    if: "${{ inputs.buildArgs == '' }}"
+    - name: Build and push Docker image without buildArgs
       uses: docker/build-push-action@v2
       with:
         context: ${{ inputs.imageContext }}
@@ -39,3 +43,13 @@ runs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         no-cache: true
+    if: "${{ inputs.buildArgs != '' }}"
+      - name: Build and push Docker image with buildArgs
+        uses: docker/build-push-action@v2
+        with:
+          context: ${{ inputs.imageContext }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          no-cache: true
+          build-args: ${{ inputs.buildArgs }}
