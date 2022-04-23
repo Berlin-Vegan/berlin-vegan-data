@@ -11,7 +11,7 @@ services:
         depends_on:
             - postgres
         env_file:
-            - ./backend/.env
+            - .env
         volumes:
             - ./backend/:/app
         command: python /app/manage.py runserver 0.0.0.0:8000
@@ -28,6 +28,9 @@ services:
                 ENVIRONMENT: dev
         depends_on:
             - backend
+        environment:
+            - REACT_APP_MAP_API_URL=${REACT_APP_MAP_API_URL}
+            - REACT_APP_SENTRY_DSN=${REACT_APP_SENTRY_DSN}
         volumes:
             - ./frontend/admin:/app
             - /app/node_modules
@@ -37,12 +40,12 @@ services:
         ports:
             - "3000:3000"
     postgres:
-        image: postgres:10.1-alpine
+        image: postgres:14.2-alpine
         volumes:
             - pgdata:/var/lib/postgresql/data/
         environment:
-            - POSTGRES_DB=${POSTGRES_DB}
-            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_DB=${DATABASE_NAME}
+            - POSTGRES_USER=${DATABASE_PASSWORD}
             - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     mailhog:
         image: mailhog/mailhog
