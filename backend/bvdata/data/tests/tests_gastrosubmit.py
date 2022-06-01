@@ -3,7 +3,12 @@ from django.test import Client, TestCase
 from django.urls import reverse
 
 from bvdata.data.forms import GastroSubmitForm
-from bvdata.data.models import BaseLocation, BooleanAttribute, PositiveIntegerAttribute
+from bvdata.data.models import (
+    VEGAN_VEGAN,
+    BaseLocation,
+    BooleanAttribute,
+    PositiveIntegerAttribute,
+)
 
 
 class TestGastroSubmit(TestCase):
@@ -24,7 +29,6 @@ class TestGastroSubmit(TestCase):
             telephone="012345678",
             website="https://test.de",
             email="test@test.de",
-            vegan=5,
             comment="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed ",
             comment_english="English, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed ",
             comment_public_transport="Public Transport, Lorem ipsum dolor sit amet, consetetur ",
@@ -64,7 +68,6 @@ class TestGastroSubmit(TestCase):
             telephone="012345678",
             website="https://test.de",
             email="test@test.de",
-            vegan=5,
             comment="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed ",
             comment_english="English, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed ",
             comment_public_transport="Public Transport, Lorem ipsum dolor sit amet, consetetur ",
@@ -95,6 +98,7 @@ class TestGastroSubmit(TestCase):
         )
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(len(BaseLocation.objects.all()), 1)
+        self.assertEqual(len(BaseLocation.objects.filter(vegan=VEGAN_VEGAN)), 1)
         self.assertEqual(len(PositiveIntegerAttribute.objects.all()), 2)
         self.assertEqual(len(PositiveIntegerAttribute.objects.filter(state=10)), 1)
         self.assertEqual(len(PositiveIntegerAttribute.objects.filter(state=20)), 1)

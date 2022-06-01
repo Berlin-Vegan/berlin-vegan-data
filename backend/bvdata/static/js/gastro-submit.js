@@ -12,12 +12,11 @@ $(document).ready(function () {
     var name = document.getElementById("id_name");
     var street = document.getElementById("id_street");
     var citycode = document.getElementById("id_postal_code");
-    var vegan = document.getElementById("id_vegan");
     var telephone = document.getElementById("id_telephone");
     var email = document.getElementById("id_email");
     var website = document.getElementById("id_website");
 
-    var list = [name, street, citycode, vegan, telephone, email, website];
+    var list = [name, street, citycode, telephone, email, website];
 
     if (valid(list)) {
       current_step = $(this).parent();
