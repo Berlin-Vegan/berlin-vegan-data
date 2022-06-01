@@ -32,12 +32,11 @@
                 <div class="row">
                     <div class="col">
                         <div class="alert alert-info text-center" role="alert" id="alert-top">
-                            {% blocktrans trimmed %}
-                                Do you know of any restaurants, snack bars, ice cream shops, cafés or bars which are fully vegan or offer at least three clearly labeled vegan dishes, but are not listed on the Berlin-Vegan map yet? If so, please fill in the form below. Thank you! <br><br>
-
+                            {% blocktranslate trimmed %}
+                                Do you know of any restaurants, snack bars, ice cream shops, cafés or bars which are fully vegan, but are not listed on the Berlin-Vegan map yet? If so, please fill in the form below. Thank you!
+                                <br><br>
                                 To suggest a shop or to inform us about news concerning a listed shop please contact: gastro@berlin-vegan.de. Please note that we do not list bigger chains since we unfortunately lack the capacity to keep this data updated.
-
-                            {% endblocktrans %}
+                            {% endblocktranslate %}
                         </div>
                     </div>
                 </div>
@@ -56,9 +55,6 @@
                     </div>
                     <div class="col">
                         <div class="row">
-                            <div class="col">
-                                {{ form.vegan|as_crispy_field }}
-                            </div>
                             <div class="col">
                                 {{ form.telephone|as_crispy_field }}
                             </div>

@@ -85,7 +85,7 @@ SHOPPING_TAG_CHOICES = (
 
 GASTRO_TAG_CHOICES = (
     ("bar", "Bar"),
-    ("cafe", "Cafe"),
+    ("cafe", "Coffee Shop"),
     ("ice cream parlor", "Ice Cream Parlor"),
     ("snack bar", "Snack Bar"),
     ("restaurant", "Restaurant"),
@@ -215,9 +215,9 @@ class BaseLocation(models.Model):
         blank=True,
         verbose_name=_("last editor"),
     )
-    name = models.CharField(_("Name of location"), max_length=100)
+    name = models.CharField(_("Name"), max_length=100)
     street = models.CharField(_("Street / No"), max_length=100)
-    postal_code = models.CharField(_("Postal code"), max_length=5)
+    postal_code = models.CharField(_("Postal Code"), max_length=5)
     city = models.CharField(_("City"), max_length=20, default="Berlin")
     latitude = models.FloatField(_("latitude"))
     longitude = models.FloatField(_("longitude"))
@@ -225,20 +225,20 @@ class BaseLocation(models.Model):
     website = models.URLField(_("Website"), null=True, blank=True)
     email = models.EmailField(_("E-mail"), null=True, blank=True)
 
-    vegan = models.IntegerField(_("Vegan friendly"), choices=VEGAN_CHOICE)
+    vegan = models.IntegerField(_("Vegan Friendly"), choices=VEGAN_CHOICE)
     comment = models.TextField(_("Comment in German"), default="", blank=True)
     comment_english = models.TextField(_("Comment in English"), default="", blank=True)
     comment_opening_hours = models.TextField(
-        _("Comment opening hours"), default="", blank=True
+        _("Comment Opening Hours"), default="", blank=True
     )
     comment_public_transport = models.TextField(
-        _("Comment Public transport"), default="", blank=True
+        _("Comment Public Transport"), default="", blank=True
     )
     closed = models.DateField(_("closed"), null=True, default=None)
     text_intern = models.TextField(_("text intern"), default="", blank=True)
     has_sticker = models.BooleanField(_("Sticker"), default=False)
     is_submission = models.BooleanField(_("Submission"), default=True)
-    submit_email = models.EmailField(_("Submitter e-mail"), null=True, blank=True)
+    submit_email = models.EmailField(_("Submitter E-mail"), null=True, blank=True)
 
     tags = models.ManyToManyField(Tag)
     boolean_attributes = models.ManyToManyField(BooleanAttribute)

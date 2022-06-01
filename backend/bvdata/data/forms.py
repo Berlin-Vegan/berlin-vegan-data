@@ -18,6 +18,7 @@ from bvdata.data.models import (
     GASTRO_POSITIVE_INTEGER_ATTRIBUTE_CHOICES,
     NULLBOOLEAN_CHOICE,
     NULLBOOLEAN_NULL,
+    VEGAN_VEGAN,
     BaseLocation,
     BooleanAttribute,
     LocationTypeChoices,
@@ -45,69 +46,80 @@ class GastroSubmitForm(ModelForm):
     closing_sun = TimeField(required=False)
 
     delivery = NullBooleanField(
+        label=_("Delivery"),
         widget=Select(choices=NULLBOOLEAN_CHOICE),
         initial=NULLBOOLEAN_NULL,
         required=False,
     )
     organic = NullBooleanField(
+        label=_("Organic"),
         widget=Select(choices=NULLBOOLEAN_CHOICE),
         initial=NULLBOOLEAN_NULL,
         required=False,
     )
     handicapped_accessible = NullBooleanField(
+        label=_("Handicapped Accessible"),
         widget=Select(choices=NULLBOOLEAN_CHOICE),
         initial=NULLBOOLEAN_NULL,
         required=False,
     )
     handicapped_accessible_wc = NullBooleanField(
+        label=_("Handicapped Accessible WC"),
         widget=Select(choices=NULLBOOLEAN_CHOICE),
         initial=NULLBOOLEAN_NULL,
         required=False,
     )
     dog = NullBooleanField(
+        label=_("Dogs"),
         widget=Select(choices=NULLBOOLEAN_CHOICE),
         initial=NULLBOOLEAN_NULL,
         required=False,
     )
     child_chair = NullBooleanField(
+        label=_("Child Chair"),
         widget=Select(choices=NULLBOOLEAN_CHOICE),
         initial=NULLBOOLEAN_NULL,
         required=False,
     )
     catering = NullBooleanField(
+        label=_("Catering"),
         widget=Select(choices=NULLBOOLEAN_CHOICE),
         initial=NULLBOOLEAN_NULL,
         required=False,
     )
     wlan = NullBooleanField(
+        label=_("Wifi"),
         widget=Select(choices=NULLBOOLEAN_CHOICE),
         initial=NULLBOOLEAN_NULL,
         required=False,
     )
     gluten_free = NullBooleanField(
+        label=_("Gluten Free"),
         widget=Select(choices=NULLBOOLEAN_CHOICE),
         initial=NULLBOOLEAN_NULL,
         required=False,
     )
     breakfast = NullBooleanField(
+        label=_("Vegan Breakfast"),
         widget=Select(choices=NULLBOOLEAN_CHOICE),
         initial=NULLBOOLEAN_NULL,
         required=False,
     )
     brunch = NullBooleanField(
+        label=_("Brunch"),
         widget=Select(choices=NULLBOOLEAN_CHOICE),
         initial=NULLBOOLEAN_NULL,
         required=False,
     )
 
-    restaurant = BooleanField(initial=False, required=False)
-    imbiss = BooleanField(initial=False, required=False)
-    eiscafe = BooleanField(initial=False, required=False)
-    cafe = BooleanField(initial=False, required=False)
-    bar = BooleanField(initial=False, required=False)
+    restaurant = BooleanField(label=_("Restaurant"), initial=False, required=False)
+    imbiss = BooleanField(label=_("Snack Bar"), initial=False, required=False)
+    eiscafe = BooleanField(label=_("Ice Cream Parlor"), initial=False, required=False)
+    cafe = BooleanField(label=_("Coffee Shop"), initial=False, required=False)
+    bar = BooleanField(label=_("Bar"), initial=False, required=False)
 
-    seats_indoor = IntegerField(min_value=0, initial=0)
-    seats_outdoor = IntegerField(min_value=0, initial=0)
+    seats_indoor = IntegerField(label=_("Seats Indoor"), min_value=0, initial=0)
+    seats_outdoor = IntegerField(label=_("Seats Outdoor"), min_value=0, initial=0)
 
     class Meta:
         model = BaseLocation
@@ -135,7 +147,6 @@ class GastroSubmitForm(ModelForm):
             "closing_sat",
             "opening_sun",
             "closing_sun",
-            "vegan",
             "comment",
             "comment_english",
             "comment_opening_hours",
@@ -206,6 +217,7 @@ class GastroSubmitForm(ModelForm):
 
     def save(self, commit=True):
         self.instance.type = LocationTypeChoices.GASTRO
+        self.instance.vegan = VEGAN_VEGAN
         with transaction.atomic():
             instance = super(GastroSubmitForm, self).save(commit=True)
             self._save_opening_hours(instance=instance)
