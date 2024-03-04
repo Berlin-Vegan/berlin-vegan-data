@@ -41,7 +41,7 @@ jobs:
         uses: ./.github/actions/build-push-image
         with:
           imageType: fe
-          imageContext: frontend/admin/
+          imageContext: frontend/
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           buildArgs: |
             REACT_APP_MAP_API_URL=${{ secrets.REACT_APP_MAP_API_URL }}
