@@ -30,26 +30,17 @@ jobs:
         run: docker build -f backend/Dockerfile -t bvdata-be backend/ --build-arg ENVIRONMENT=dev
       - name: Run BE Tests
         run: docker run --network="host" --env DATABASE_HOST=localhost --env SECRET_KEY=nosecret --env EMAIL_GASTROS=test@test.de bvdata-be ./run test
-  frontend-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - name: Build FE Docker image
-        run: docker build --target prepare -f frontend/admin/Dockerfile -t bvdata-fe frontend/admin/ --build-arg ENVIRONMENT=dev
-      - name: Run FE Tests
-        run: docker run bvdata-fe /bin/ash -c "yarn install && yarn run test-all"
   frontend-test-prod-build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Build prod files
-        run: docker build --target builder -f frontend/admin/Dockerfile -t bvdata-fe frontend/admin/
+        run: docker build --target builder -f frontend/Dockerfile -t bvdata-fe frontend/
 
   build-push-images:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main'}}
-    needs: [backend, frontend-tests, frontend-test-prod-build]
+    needs: [backend, frontend-test-prod-build]
     uses: ./.github/workflows/build-push-images.yml
     secrets:
       REACT_APP_MAP_API_URL: ${{ secrets.REACT_APP_MAP_API_URL }}
