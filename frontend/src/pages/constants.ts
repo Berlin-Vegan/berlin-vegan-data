@@ -1,0 +1,16 @@
+export enum PagePaths {
+  LOGIN_PAGE = '/login',
+  HOME = '/',
+  GASTRO_DASHBOARD = '/gastro',
+  GASTROS_CLOSED_PAGE = '/gastros/closed',
+  GASTROS_SUBMISSIONS_PAGE = '/gastros/submissions',
+  GASTRO_EDIT_PAGE = '/gastro/:id/edit',
+  GASTRO_NEW_PAGE = '/gastro/new',
+  NOT_FOUND_PAGE = '*',
+  PROFILE_PAGE = '/profile',
+  SHOPPING_PAGE = '/shopping',
+  SHOPPING_CLOSED_PAGE = '/shopping/closed',
+  SHOPPING_SUBMISSION_PAGE = '/shopping/submissions',
+  SHOPPING_PAGE_EDIT = '/shopping/:id/edit',
+  SHOPPING_NEW_PAGE = '/shopping/new',
+}
