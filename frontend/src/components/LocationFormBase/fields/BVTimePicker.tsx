@@ -7,7 +7,7 @@ import { TimePickerProps, fieldToTimePicker } from 'formik-mui-x-date-pickers';
 dayjs.extend(customParseFormat);
 
 const timeToStringOrNull = (date: Date | null): string | null =>
-  date === null ? '' : dayjs(date).format('HH:mm:ss');
+  date === null ? null : dayjs(date).format('HH:mm:ss');
 
 const stringToDate = (stringTime: string | null): Date | string =>
   stringTime === null ? '' : dayjs(stringTime, 'HH:mm:ss').toDate();
