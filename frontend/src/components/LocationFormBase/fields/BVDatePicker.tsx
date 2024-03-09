@@ -31,6 +31,7 @@ const BVDatePicker = ({ children, ...props }: DatePickerProps) => {
       })}
       onChange={handleChange}
       textField={{ variant: 'standard' }}
+      inputFormat="DD.MM.YYYY"
     >
       {children}
     </MuiDatePicker>
