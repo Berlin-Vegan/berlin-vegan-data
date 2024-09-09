@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { DataGrid, GridColDef, GridEventListener, GridToolbar } from '@mui/x-data-grid';
 
 import { FilterContext } from '@/providers/FilterProvider';
-import { LocationType } from '@/utils/constants';
+import { LocationType, SHOPPING } from '@/utils/constants';
 import { buildFEDetailUrl } from '@/utils/utils';
+import { VEGAN_OPTIONS_FIELD } from '@components/LocationFormBase/fields/constants';
 
 type LocationListData = {
   id: string;
@@ -25,11 +26,23 @@ export interface ILocationTableProps {
 const LocationTable = ({ data, type }: ILocationTableProps) => {
   const navigate = useNavigate();
   const { filterState, setFilterState } = useContext(FilterContext);
+  const showVeganOption = type == SHOPPING;
+  const handleRowClick: GridEventListener<'rowClick'> = (params) => {
+    navigate(buildFEDetailUrl(type, params.id as string));
+  };
 
   const columns: GridColDef[] = [
     { field: 'name', headerName: 'Name', flex: 1, type: 'string' },
     { field: 'street', headerName: 'Street', flex: 1, type: 'string' },
     { field: 'postalCode', headerName: 'Postal Code', flex: 0.3, type: 'string' },
+    {
+      field: 'vegan',
+      headerName: 'Vegan',
+      flex: 1,
+      type: 'number',
+      hideable: true,
+      renderCell: (params) => <>{VEGAN_OPTIONS_FIELD.get(params.value)}</>,
+    },
     {
       field: 'hasReviewLink',
       headerName: 'Review',
@@ -37,10 +50,6 @@ const LocationTable = ({ data, type }: ILocationTableProps) => {
       type: 'boolean',
     },
   ];
-
-  const handleRowClick: GridEventListener<'rowClick'> = (params) => {
-    navigate(buildFEDetailUrl(type, params.id as string));
-  };
 
   return (
     <DataGrid
@@ -61,6 +70,7 @@ const LocationTable = ({ data, type }: ILocationTableProps) => {
       onRowClick={handleRowClick}
       sortModel={filterState}
       onSortModelChange={(newSortModel) => setFilterState(newSortModel)}
+      columnVisibilityModel={{ vegan: showVeganOption }}
     />
   );
 };

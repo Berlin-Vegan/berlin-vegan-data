@@ -8,8 +8,9 @@ import { TextField } from 'formik-mui';
 import NullTextField from './fields/NullTextField';
 import GetGeoButton from './getGeoButton';
 import MapFormPart from './mapFormPart';
+import veganFormControl from '@components/LocationFormBase/fields/VeganFormControl';
 
-const GeneralFormPart = () => {
+const GeneralFormPart = ({ veganOption = false }: { veganOption: boolean }) => {
   return (
     <>
       <Grid item>
@@ -106,6 +107,11 @@ const GeneralFormPart = () => {
               variant="standard"
             />
           </Grid>
+          {veganOption ? (
+            <Grid container item direction="column">
+              {veganFormControl}
+            </Grid>
+          ) : null}
           <Grid container item direction="column">
             <Field
               component={NullTextField}

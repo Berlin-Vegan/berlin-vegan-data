@@ -2,7 +2,6 @@ import { __, concat, pipe, toLower } from 'ramda';
 
 import { LocationType, V1, V2 } from './constants';
 
-//
 export const buildReviewListUrl = `${V1}review/`;
 export const buildReviewDetailUrl = (id: number): string => `${buildReviewListUrl}${id}/`;
 
