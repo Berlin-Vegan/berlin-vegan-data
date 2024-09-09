@@ -43,7 +43,7 @@ const locationBaseSchema = Yup.object().shape({
   telephone: Yup.string().max(25).nullable(),
   website: Yup.string().url().nullable(),
   email: Yup.string().email().nullable(),
-  vegan: Yup.number().oneOf([5]).required(),
+  vegan: Yup.number().oneOf([5, 4, 2]).required(),
   comment: Yup.string(),
   commentEnglish: Yup.string(),
   commentOpeningHours: Yup.string(),

@@ -14,6 +14,7 @@ type LocationFormBaseProps = {
   booleanAttrList: string[];
   positiveIntegerAttrList: string[];
   tagList: string[];
+  veganOption?: boolean;
 };
 
 const LocationFormBase = ({
@@ -21,10 +22,11 @@ const LocationFormBase = ({
   booleanAttrList,
   positiveIntegerAttrList,
   tagList,
+  veganOption = false,
 }: PropsWithChildren<LocationFormBaseProps>) => (
   <Grid container direction="column" spacing={1}>
     <SubmitEmailField />
-    <GeneralFormPart />
+    <GeneralFormPart veganOption={veganOption} />
     {openingHoursFormPart}
     <DetailsFormPart />
     <AttributesFormPart
