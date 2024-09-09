@@ -1,9 +1,9 @@
 import html
 import re
+import zoneinfo
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple, TypedDict
 
-import pytz
 import requests
 from django.db import transaction
 from django.utils.dateparse import parse_datetime
@@ -92,7 +92,7 @@ def parse_datetime_berlin(datetime_str: str) -> Optional[datetime]:
     updated_naive = parse_datetime(datetime_str)
     if updated_naive is None:
         raise ValueError("Datetime string not well formatted")
-    return pytz.timezone("Europe/Berlin").localize(updated_naive, is_dst=None)
+    return updated_naive.replace(tzinfo=zoneinfo.ZoneInfo("Europe/Berlin"))
 
 
 def get_review(json_data: dict, existing_review_id: Optional[int]) -> ReviewTuple:

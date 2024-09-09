@@ -1,9 +1,9 @@
 import os
+import zoneinfo
 from datetime import datetime
 from unittest import mock
 
 import pytest
-import pytz
 from django.test import TestCase
 
 from bvdata.data.models import Review, ReviewImage
@@ -19,6 +19,7 @@ from bvdata.data.tests.factories import ReviewFactory, ReviewImageFactory
 
 class TestReviewSync(TestCase):
     url1 = "https://test.de/review1"
+    datezone = zoneinfo.ZoneInfo("Europe/Berlin")
 
     def setUp(self) -> None:
         self.path = os.path.dirname(os.path.realpath(__file__))
@@ -65,9 +66,7 @@ class TestReviewSync(TestCase):
 
     def test_review_was_modified_or_does_not_exist_modified(self) -> None:
         data = dict(link=self.url1, modified="2020-10-24T12:11:56")
-        updated = pytz.timezone("Europe/Berlin").localize(
-            datetime(year=2020, month=10, day=23), is_dst=None
-        )
+        updated = datetime(year=2020, month=10, day=23, tzinfo=self.datezone)
         review_dict: ReviewDict = {self.url1: {"id": 1, "updated": updated}}
 
         self.assertEqual(
@@ -79,9 +78,14 @@ class TestReviewSync(TestCase):
 
     def test_review_was_modified_or_does_not_exist_not_modified(self) -> None:
         data = dict(link=self.url1, modified="2020-10-24T12:11:56")
-        updated = pytz.timezone("Europe/Berlin").localize(
-            datetime(year=2020, month=10, day=24, hour=12, minute=11, second=56),
-            is_dst=None,
+        updated = datetime(
+            year=2020,
+            month=10,
+            day=24,
+            hour=12,
+            minute=11,
+            second=56,
+            tzinfo=self.datezone,
         )
         review_dict: ReviewDict = {self.url1: {"id": 1, "updated": updated}}
 
@@ -129,9 +133,14 @@ class TestReviewSync(TestCase):
     def test_import_reviews_from_wordpress_exist_no_update(
         self, mock_fetch_review_data, mock_create_or_update_review, mock_get_review
     ) -> None:
-        updated = pytz.timezone("Europe/Berlin").localize(
-            datetime(year=2020, month=10, day=24, hour=12, minute=11, second=56),
-            is_dst=None,
+        updated = datetime(
+            year=2020,
+            month=10,
+            day=24,
+            hour=12,
+            minute=11,
+            second=56,
+            tzinfo=self.datezone,
         )
         ReviewFactory(url=self.url1, updated=updated)
         mock_fetch_review_data.return_value = [
@@ -150,10 +159,16 @@ class TestReviewSync(TestCase):
     def test_import_reviews_from_wordpress_exist_update(
         self, mock_fetch_review_data
     ) -> None:
-        updated = pytz.timezone("Europe/Berlin").localize(
-            datetime(year=2019, month=10, day=24, hour=12, minute=11, second=56),
-            is_dst=None,
+        updated = datetime(
+            year=2019,
+            month=10,
+            day=24,
+            hour=12,
+            minute=11,
+            second=56,
+            tzinfo=self.datezone,
         )
+
         review = ReviewFactory(url=self.url1, updated=updated)
         old_review_image = ReviewImageFactory(review=review)
 
