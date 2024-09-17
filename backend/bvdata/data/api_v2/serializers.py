@@ -285,7 +285,7 @@ class PrivateBaseDetailSerializer(LastEditorMixin, PublicBaseDetailSerializer):
     def update(self, instance, validated_data):
         tags = validated_data.pop("tags", None)
         opening_hours = validated_data.pop("openinghours_set", None)
-        for (key, value) in validated_data.items():
+        for key, value in validated_data.items():
             setattr(instance, key, value)
         instance.save()
 
