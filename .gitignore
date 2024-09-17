@@ -11,3 +11,5 @@ backend/static/
 .coverage
 
 celerybeat-schedule
+
+.python-version

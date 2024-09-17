@@ -345,9 +345,9 @@ def build_new_gastro(legacy_gastro: LegacyGastro):
         legacy_gastro=legacy_gastro
     )
     new_gastro.boolean_attributes.set(new_boolean_attrs)
-    new_positive_integer_attrs: List[
-        PositiveIntegerAttribute
-    ] = get_positive_integer_attributes(legacy_gastro=legacy_gastro)
+    new_positive_integer_attrs: List[PositiveIntegerAttribute] = (
+        get_positive_integer_attributes(legacy_gastro=legacy_gastro)
+    )
     new_gastro.positive_integer_attributes.set(new_positive_integer_attrs)
     set_opening_hours(legacy_gastro=legacy_gastro, new_gastro=new_gastro)
 
