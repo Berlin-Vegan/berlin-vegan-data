@@ -19,7 +19,7 @@ sentry-sdk = "^2.14"
 celery = "^5.4"
 redis = "^5.0"
 requests = "^2.32"
-psycopg = {extras = ["binary"], version = "^3.2.1"}
+psycopg = {extras = ["binary"], version = "^3.2.2"}
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
