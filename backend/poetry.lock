@@ -458,14 +458,17 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-crispy-forms"
-version = "1.14.0"
+version = "2.3"
 description = "Best way to have Django DRY forms"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "django-crispy-forms-1.14.0.tar.gz", hash = "sha256:35887b8851a931374dd697207a8f56c57a9c5cb9dbf0b9fa54314da5666cea5b"},
-    {file = "django_crispy_forms-1.14.0-py3-none-any.whl", hash = "sha256:bc4d2037f6de602d39c0bc452ac3029d1f5d65e88458872cc4dbc01c3a400604"},
+    {file = "django_crispy_forms-2.3-py3-none-any.whl", hash = "sha256:efc4c31e5202bbec6af70d383a35e12fc80ea769d464fb0e7fe21768bb138a20"},
+    {file = "django_crispy_forms-2.3.tar.gz", hash = "sha256:2db17ae08527201be1273f0df789e5f92819e23dd28fec69cffba7f3762e1a38"},
 ]
+
+[package.dependencies]
+django = ">=4.2"
 
 [[package]]
 name = "django-debug-toolbar"
@@ -1440,4 +1443,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "997ddfd2636b2c52f3ba363ba4159ee1ea66b9b827b61e27495bfafa053f2a02"
+content-hash = "bb8d57946550a26f8245251b66784e8d83f688ff565dc34ec6d67dea2590d866"
