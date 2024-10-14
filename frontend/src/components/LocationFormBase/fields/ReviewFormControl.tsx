@@ -14,6 +14,7 @@ import { authorizedFetch } from '@/utils/fetch';
 import { buildReviewListUrl } from '@/utils/utils';
 
 import { styles } from './styles';
+import BVSelect from '@components/LocationFormBase/fields/BVSelect';
 
 const reviewItem = (reviewId: number, url: string) => (
   <MenuItem value={reviewId} key={reviewId}>
@@ -25,10 +26,26 @@ type ReviewFieldType = {
   reviews: Review[];
 };
 
+const stringToReviewValue = (value: string | unknown) => {
+  if (value === '') return null;
+
+  if (typeof value == 'string') {
+    return parseInt(value);
+  }
+  return null;
+};
+
+const reviewValueToString = (value: number | null | unknown) => {
+  if (typeof value !== 'number') {
+    return '';
+  }
+  return value.toString();
+};
+
 const ReviewField = ({ reviews }: ReviewFieldType) => (
   <FormControl fullWidth={true}>
     <Field
-      component={Select}
+      component={BVSelect}
       name="review"
       label="Review"
       variant="standard"
@@ -36,6 +53,8 @@ const ReviewField = ({ reviews }: ReviewFieldType) => (
         id: 'review-select',
         name: 'review',
       }}
+      readValue={reviewValueToString}
+      setValue={stringToReviewValue}
     >
       <MenuItem value="" key="">
         -------
