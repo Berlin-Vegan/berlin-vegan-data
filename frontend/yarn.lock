@@ -1049,10 +1049,15 @@
     "@sentry/utils" "8.30.0"
     hoist-non-react-statics "^3.3.2"
 
-"@sentry/types@8.30.0", "@sentry/types@^8.30.0":
+"@sentry/types@8.30.0":
   version "8.30.0"
   resolved "https://registry.yarnpkg.com/@sentry/types/-/types-8.30.0.tgz#5f5011f5b16bafd30a039ca5e8c337e948c703fb"
   integrity sha512-kgWW2BCjBmVlSQRG32GonHEVyeDbys74xf9mLPvynwHTgw3+NUlNAlEdu05xnb2ow4bCTHfbkS5G1zRgyv5k4Q==
+
+"@sentry/types@^8.34.0":
+  version "8.34.0"
+  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-8.34.0.tgz#b02da72d1be67df5246aa9a97ca661ee71569372"
+  integrity sha512-zLRc60CzohGCo6zNsNeQ9JF3SiEeRE4aDCP9fDDdIVCOKovS+mn1rtSip0qd0Vp2fidOu0+2yY0ALCz1A3PJSQ==
 
 "@sentry/utils@8.30.0":
   version "8.30.0"
