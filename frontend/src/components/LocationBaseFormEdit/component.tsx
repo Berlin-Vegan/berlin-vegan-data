@@ -17,8 +17,7 @@ import { authorizedFetch } from '@/utils/fetch';
 import LocationBaseType from '../LocationFormBase/locationBaseType';
 import PaperDefault from '../PaperDefault';
 import Buttons from './buttons';
-
-const DATE_FORMAT = 'ddd MMM D YYYY';
+import { DATE_FORMAT } from '@/utils/constants';
 
 type LocationBaseFormEditType = {
   label: string;

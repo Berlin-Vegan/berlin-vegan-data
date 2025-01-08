@@ -23,7 +23,22 @@ export const authorizedFetch = async (
   return response;
 };
 
-export const fetchGastroList = async (
+export const authorizedFetchPostFile = async (
   userDispatch: UserDispatch,
-  filter: string,
-): Promise<Response> => authorizedFetch(userDispatch, `/api/v1/gastros/?${filter}`);
+  url: string,
+  formData: FormData,
+): Promise<Response> => {
+  const response = await fetch(url, {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'X-CSRFToken': getCSRFToken(),
+    },
+  });
+
+  if (response.status === 403) {
+    userDispatch({ type: TYPE_USER_LOGOUT });
+  }
+
+  return response;
+};

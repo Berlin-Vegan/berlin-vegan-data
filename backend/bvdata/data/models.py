@@ -1,4 +1,5 @@
 import re
+import uuid
 
 from django.contrib.auth.models import User
 from django.db import IntegrityError, models, transaction
@@ -13,6 +14,7 @@ __all__ = (
     "GASTRO_BOOLEAN_ATTRIBUTE_CHOICES",
     "GASTRO_POSITIVE_INTEGER_ATTRIBUTE_CHOICES",
     "GASTRO_TAG_CHOICES",
+    "Image",
     "LocationTypeChoices",
     "NULLBOOLEAN_CHOICE",
     "NULLBOOLEAN_NULL",
@@ -289,3 +291,25 @@ class ReviewImage(models.Model):
     height = models.PositiveIntegerField()
     width = models.PositiveIntegerField()
     url = models.URLField(unique=True)
+
+
+def image_upload_to(instance, filename):
+    file_type = filename.split(".")[-1]
+    return f"images/{instance.location.id_string}/{uuid.uuid4()}.{file_type}"
+
+
+class Image(models.Model):
+    location = models.ForeignKey(to=BaseLocation, on_delete=models.CASCADE)
+    image = models.ImageField(
+        upload_to=image_upload_to, height_field="height", width_field="width"
+    )
+    height = models.PositiveIntegerField()
+    width = models.PositiveIntegerField()
+    upload_date = models.DateTimeField(auto_now_add=True)
+    uploader = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
+    description = models.CharField(max_length=256, blank=True, default="")

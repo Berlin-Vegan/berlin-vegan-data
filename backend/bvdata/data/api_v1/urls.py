@@ -2,7 +2,7 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from rest_registration.api.views import change_password, login, logout, profile
 
-from bvdata.data.api_v1.viewsets import ReviewViewSet
+from bvdata.data.api_v1.viewsets import ImageViewSet, ReviewViewSet
 
 account_urlpatterns = [
     path("login/", login, name="login"),
@@ -13,6 +13,7 @@ account_urlpatterns = [
 
 router_v1 = DefaultRouter()
 router_v1.register(r"review", ReviewViewSet, basename="api-v1-review")
+router_v1.register(r"image", ImageViewSet, basename="api-v1-image")
 
 urlpatterns = [
     path("accounts/", include(account_urlpatterns)),

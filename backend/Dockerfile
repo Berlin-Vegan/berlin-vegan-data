@@ -1,7 +1,7 @@
 ###############################################
 # Base Image
 ###############################################
-FROM python:3.12-slim as python-base
+FROM python:3.13-slim as python-base
 
 ARG ENVIRONMENT=production
 

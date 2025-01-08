@@ -8,7 +8,7 @@ import { styles } from '@components/Review/styles';
 import { isNil, pathOr } from 'ramda';
 
 import { AuthContext } from '@/providers/UserProvider';
-import { Image, Review } from '@/types';
+import { ReviewImage, Review } from '@/types';
 import { authorizedFetch } from '@/utils/fetch';
 import { buildReviewDetailUrl } from '@/utils/utils';
 
@@ -21,7 +21,7 @@ export const ReviewComponent = ({ reviewId }: ReviewComponentType) => {
   const [review, setReview] = useState<null | Review>(null);
 
   const reviewText: string = pathOr('', ['text'], review);
-  const images: Image[] = pathOr([], ['images'], review);
+  const images: ReviewImage[] = pathOr([], ['images'], review);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +41,7 @@ export const ReviewComponent = ({ reviewId }: ReviewComponentType) => {
         <p>{reviewText}</p>
         <div css={styles.reviewList}>
           <ImageList rowHeight={310} cols={3}>
-            {images.map((item: Image) => (
+            {images.map((item: ReviewImage) => (
               <ImageListItem key={item.url} cols={1}>
                 <img src={item.url} alt="" />
               </ImageListItem>
