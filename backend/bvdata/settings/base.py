@@ -41,6 +41,9 @@ CSRF_TRUSTED_ORIGINS = [
     ).split(",")
 ]
 
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 # Application definition
 
