@@ -2,7 +2,6 @@ from django.db.models import BooleanField, Case, Value, When
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 
-from bvdata.data.api_v2.FilterBackend import AuthorizedFilterBackend
 from bvdata.data.api_v2.serializers import (
     PrivateBaseLocationListSerializer,
     PrivateGastroDetailSerializer,
@@ -10,6 +9,7 @@ from bvdata.data.api_v2.serializers import (
     PublicGastroDetailSerializer,
     PublicShoppingDetailSerializer,
 )
+from bvdata.data.filter_backend import AuthorizedFilterBackend
 from bvdata.data.filters import BaseLocationFilter
 from bvdata.data.models import BaseLocation, LocationTypeChoices
 

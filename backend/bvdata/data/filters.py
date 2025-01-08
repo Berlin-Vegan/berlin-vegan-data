@@ -1,6 +1,6 @@
 from django_filters import rest_framework as filters
 
-from bvdata.data.models import BaseLocation
+from bvdata.data.models import BaseLocation, Image
 
 
 class BaseLocationFilter(filters.FilterSet):
@@ -15,3 +15,11 @@ class BaseLocationFilter(filters.FilterSet):
     class Meta:
         model = BaseLocation
         fields = ["closed", "is_submission"]
+
+
+class ImageFilter(filters.FilterSet):
+    location = filters.CharFilter(field_name="location__id_string")
+
+    class Meta:
+        model = Image
+        fields = ["location"]

@@ -12,14 +12,12 @@ import {
   TYPE_SET_USER_DATA,
   TYPE_USER_LOGIN,
   UserDispatch,
-} from '../../providers/UserProvider';
+} from '@/providers/UserProvider';
 import { authorizedFetch } from '@/utils/fetch';
 import { getCSRFToken } from '@/utils/cookie';
 
 const getUserData = (userDispatch: UserDispatch) =>
-  authorizedFetch(userDispatch, '/api/v1/accounts/profile/').then((res) =>
-    res.json(),
-  );
+  authorizedFetch(userDispatch, '/api/v1/accounts/profile/').then((res) => res.json());
 
 const initialHeader = { 'Content-Type': 'application/json' };
 const setCSRFToken = assoc('X-CSRFToken', __, initialHeader);

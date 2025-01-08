@@ -6,6 +6,7 @@ env/
 *.sqlite3
 /static/
 backend/static/
+backend/media/
 .env
 *.mo
 .coverage

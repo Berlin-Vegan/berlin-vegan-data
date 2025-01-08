@@ -13,6 +13,7 @@ import { AuthContext } from '@/providers/UserProvider';
 import { LocationType } from '@/utils/constants';
 import { authorizedFetch } from '@/utils/fetch';
 import { buildDetailUrl } from '@/utils/utils';
+import ImageList from '@components/ImageList';
 
 type LocationEditType = {
   type: LocationType;
@@ -64,6 +65,7 @@ const LocationEdit: FC<LocationEditType> = ({ type, label, locationForm, locatio
             setLocationDataState={setLocationDataState}
           />
           {getReview(pathOr(null, ['review'], locationData))}
+          <ImageList />
         </>
       )}
     </>

@@ -1,4 +1,4 @@
-export type Image = {
+export type ReviewImage = {
   url: string;
   height: number;
   width: number;
@@ -8,9 +8,16 @@ export type Review = {
   id: number;
   text: string;
   url: string;
-  images: Image[];
+  images: ReviewImage[];
 };
 
-// export const ShoppingType = 'shopping';
-// export const GastroType = 'gastro';
-// export type LocationType = typeof ShoppingType | typeof GastroType;
+export type Image = {
+  id: number;
+  location: string;
+  image: string;
+  height: number;
+  width: number;
+  uploadDate: Date;
+  uploader: string;
+  description: string;
+};
