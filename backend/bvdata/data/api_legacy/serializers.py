@@ -1,6 +1,8 @@
 from datetime import time
 from typing import Dict, List, Optional
 
+from django.http import HttpRequest
+
 from bvdata.data.models import (
     BaseLocation,
     BooleanAttribute,
@@ -143,6 +145,7 @@ def _build_base(location: BaseLocation, data_to_field_name: dict) -> dict:
 
     if location.review:
         base_dict.update(reviewURL=location.review.url.split("/")[-2])
+        base_dict.update(review=location.review.text)
 
     base_dict.update(
         _build_opening_hours(
@@ -172,7 +175,25 @@ def _build_positive_int_attributes(
     }
 
 
-def build_gastro(location: BaseLocation) -> dict:
+def _build_images(location: BaseLocation, request: HttpRequest) -> List[dict]:
+    images_list = []
+    if location.review:
+        images_list = [
+            dict(url=image.url, width=image.width, height=image.height)
+            for image in location.review.reviewimage_set.all()
+        ]
+    images_list = images_list + [
+        dict(
+            url=request.build_absolute_uri(image.image.url),
+            width=image.width,
+            height=image.height,
+        )
+        for image in location.image_set.all()
+    ]
+    return images_list
+
+
+def build_gastro(location: BaseLocation, request: HttpRequest) -> dict:
     gastro_dict = _build_base(
         location=location, data_to_field_name=GASTRO_DATA_FIELD_NAME_TO_FIELD_NAME
     )
@@ -181,12 +202,14 @@ def build_gastro(location: BaseLocation) -> dict:
     gastro_dict.update(
         _build_positive_int_attributes(location.positive_integer_attributes.all())
     )
+    gastro_dict.update(picture=_build_images(location, request))
     return gastro_dict
 
 
-def build_shopping(location: BaseLocation) -> dict:
+def build_shopping(location: BaseLocation, request: HttpRequest) -> dict:
     shopping_dict = _build_base(
         location=location, data_to_field_name=BASE_DATA_FIELD_NAME_TO_FIELD_NAME
     )
     shopping_dict.update(_build_boolean_attributes(location.boolean_attributes.all()))
+    shopping_dict.update(picture=_build_images(location, request))
     return shopping_dict

@@ -55,7 +55,9 @@ class ApiLocationsJsonMixin:
         return self.serializer
 
     def get(self, request, *args, **kwargs):
-        results = [self.serializer(location) for location in self.get_queryset()]
+        results = [
+            self.serializer(location, request) for location in self.get_queryset()
+        ]
         return HttpResponse(json.dumps(results), content_type="application/json")
 
 
