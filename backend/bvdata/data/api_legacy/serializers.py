@@ -202,7 +202,7 @@ def build_gastro(location: BaseLocation, request: HttpRequest) -> dict:
     gastro_dict.update(
         _build_positive_int_attributes(location.positive_integer_attributes.all())
     )
-    gastro_dict.update(picture=_build_images(location, request))
+    gastro_dict.update(pictures=_build_images(location, request))
     return gastro_dict
 
 
@@ -211,5 +211,5 @@ def build_shopping(location: BaseLocation, request: HttpRequest) -> dict:
         location=location, data_to_field_name=BASE_DATA_FIELD_NAME_TO_FIELD_NAME
     )
     shopping_dict.update(_build_boolean_attributes(location.boolean_attributes.all()))
-    shopping_dict.update(picture=_build_images(location, request))
+    shopping_dict.update(pictures=_build_images(location, request))
     return shopping_dict
