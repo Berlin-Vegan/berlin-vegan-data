@@ -143,6 +143,7 @@ class TestApiGastroLocationsJson(TestCase):
                 "comment": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed ",
                 "commentEnglish": "English, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed ",
                 "openComment": "Open Comment, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed",
+                "picture": [],
                 "publicTransport": "Public Transport, Lorem ipsum dolor sit amet, consetetur ",
                 "handicappedAccessible": 1,
                 "handicappedAccessibleWc": 0,
@@ -159,6 +160,7 @@ class TestApiGastroLocationsJson(TestCase):
                 "seatsIndoor": 50,
                 "tags": ["Cafe", "Restaurant"],
                 "reviewURL": "test-restaurant",
+                "review": review.text,
                 "created": timezone.now().strftime("%Y-%m-%d"),
             }
         ]
@@ -323,6 +325,8 @@ class TestApiShoppingLocationsJson(TestCase):
                 "otFri": "13:00 - 19:00",
                 "otSat": "14:00 - 20:00",
                 "otSun": "15:00 - 21:00",
+                "picture": [],
+                "review": review.text,
                 "comment": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed ",
                 "commentEnglish": "English, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed ",
                 "openComment": "Open Comment, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed",
