@@ -1,4 +1,5 @@
 from django.db.models import BooleanField, Case, Value, When
+from django.db.models.aggregates import Count
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 
@@ -35,7 +36,7 @@ class BaseLocationModelViewSetMixin:
                 default=Value(True),
                 output_field=BooleanField(),
             )
-        )
+        ).annotate(image_count=Count("image"))
         super(BaseLocationModelViewSetMixin, self).__init__(**kwargs)
 
     def get_location_type(self):
