@@ -178,9 +178,10 @@ class BaseLocationSerializer(ModelSerializer):
 
 class PrivateBaseLocationListSerializer(BaseLocationSerializer):
     has_review_link = BooleanField()
+    image_count = IntegerField()
 
     class Meta(BaseLocationSerializer.Meta):
-        fields = BaseLocationSerializer.Meta.fields + ["has_review_link"]
+        fields = BaseLocationSerializer.Meta.fields + ["has_review_link", "image_count"]
         read_only_fields = fields
 
 

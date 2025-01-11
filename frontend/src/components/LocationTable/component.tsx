@@ -16,6 +16,7 @@ type LocationListData = {
   city: string;
   vegan: number;
   hasReviewLink: boolean;
+  imageCount: number;
 };
 
 export interface ILocationTableProps {
@@ -48,6 +49,11 @@ const LocationTable = ({ data, type }: ILocationTableProps) => {
       headerName: 'Review',
       flex: 0.3,
       type: 'boolean',
+    },
+    {
+      field: 'imageCount',
+      headerName: 'Image Count',
+      type: 'number',
     },
   ];
 
