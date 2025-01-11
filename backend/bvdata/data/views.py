@@ -47,6 +47,9 @@ class ApiLocationsJsonMixin:
                 "boolean_attributes",
                 "positive_integer_attributes",
                 "openinghours_set",
+                "review",
+                "review__reviewimage_set",
+                "image_set",
             )
             .filter(type=self.location_type)
         )

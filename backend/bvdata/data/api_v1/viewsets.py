@@ -16,13 +16,13 @@ class ReviewViewSet(ReadOnlyModelViewSet):
 
 
 class ImageViewSet(ModelViewSet):
-    queryset = Image.objects.all()
+    queryset = Image.objects.all().prefetch_related("location", "uploader")
     serializer_class = ImageSerializerDefault
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class = ImageFilter
 
     def get_serializer_class(self):
-        if self.request.method in ["PUT", "PATCH"]:
+        if self.action == "update":
             return ImageSerializerUpdate
         else:
             return ImageSerializerDefault
