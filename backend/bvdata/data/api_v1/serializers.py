@@ -61,9 +61,9 @@ class ImageSerializerDefault(ImageSerializerBase):
         pass
 
     def create(self, validated_data):
-        location_id_string = validated_data.get("location")
-        location = BaseLocation.objects.get(id_string=location_id_string)
-        validated_data["location"] = location
+        validated_data["location"] = BaseLocation.objects.get(
+            id_string=validated_data.get("location")
+        )
         if (
             validated_data.get("description") == ""
             or validated_data.get("description") is None
@@ -78,3 +78,9 @@ class ImageSerializerUpdate(ImageSerializerBase):
             "location",
             "image",
         ]
+
+    def update(self, instance, validated_data):
+        validated_data["location"] = BaseLocation.objects.get(
+            id_string=validated_data.get("location")
+        )
+        return super(ImageSerializerUpdate, self).update(instance, validated_data)
