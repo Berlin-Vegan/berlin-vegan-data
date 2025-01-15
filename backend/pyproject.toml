@@ -21,6 +21,7 @@ redis = "^5.0"
 requests = "^2.32"
 psycopg = {extras = ["binary"], version = "^3.2.3"}
 pillow = "^11.0.0"
+beautifulsoup4 = "^4.12.3"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
