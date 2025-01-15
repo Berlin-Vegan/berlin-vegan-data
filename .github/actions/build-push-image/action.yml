@@ -35,7 +35,7 @@ runs:
           type=raw,value=latest
     - name: Build and push Docker image without buildArgs
       if: ${{ inputs.buildArgs == '' }}
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3
       with:
         context: ${{ inputs.imageContext }}
         push: true
@@ -44,7 +44,7 @@ runs:
         no-cache: true
     - name: Build and push Docker image with buildArgs
       if: ${{ inputs.buildArgs != '' }}
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3
       with:
         context: ${{ inputs.imageContext }}
         push: true
