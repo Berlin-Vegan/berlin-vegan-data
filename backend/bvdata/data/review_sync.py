@@ -1,10 +1,9 @@
-import html
-import re
 import zoneinfo
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple, TypedDict
 
 import requests
+from bs4 import BeautifulSoup
 from django.db import transaction
 from django.utils.dateparse import parse_datetime
 
@@ -25,30 +24,21 @@ ReviewDict = Dict[str, DetailReviewDict]
 
 
 def get_review_images(raw_content: str) -> List[ReviewImage]:
-    pattern = re.compile(
-        r'<img loading="lazy" width="(?P<width>\d+)" height="(?P<height>\d+)" src="(?P<url>.*?)" [^>]*/>'
-    )
-    images = re.finditer(pattern=pattern, string=raw_content)
+    soup = BeautifulSoup(raw_content, "html.parser")
+    images = soup.find_all("img")
     return [
         ReviewImage(
-            height=int(image["height"]), width=int(image["width"]), url=image["url"]
+            height=int(image.get("height")),
+            width=int(image.get("width")),
+            url=image.get("src"),
         )
         for image in images
     ]
 
 
 def get_review_text(raw_content: str) -> str:
-    pattern = re.compile(r"<p>([^>]+)</p>")
-    string_list = re.findall(pattern=pattern, string=raw_content)
-    text = ""
-    for string in string_list:
-        string = html.unescape(string)
-        string = string.replace("\xa0", "")
-        if string.endswith(" "):
-            text += string
-        else:
-            text += string + " "
-    text = text.strip()
+    soup = BeautifulSoup(raw_content, "html.parser")
+    text = soup.get_text()
     return text
 
 
