@@ -1,6 +1,7 @@
 from datetime import time
 from typing import Dict, List, Optional
 
+from django.db.models import QuerySet
 from django.http import HttpRequest
 
 from bvdata.data.models import (
@@ -156,7 +157,7 @@ def _build_base(location: BaseLocation, data_to_field_name: dict) -> dict:
     return base_dict
 
 
-def _build_boolean_attributes(boolean_attrs: List[BooleanAttribute]) -> dict:
+def _build_boolean_attributes(boolean_attrs: QuerySet[BooleanAttribute]) -> dict:
     return {
         BOOLEAN_ATTRIBUTES_TO_FIELD_NAME[attr.name]: _build_boolean_attribute(
             attr.state
@@ -176,13 +177,7 @@ def _build_positive_int_attributes(
 
 
 def _build_images(location: BaseLocation, request: HttpRequest) -> List[dict]:
-    images_list = []
-    if location.review:
-        images_list = [
-            dict(url=image.url, width=image.width, height=image.height)
-            for image in location.review.reviewimage_set.all()
-        ]
-    images_list = images_list + [
+    images_list = [
         dict(
             url=request.build_absolute_uri(image.image.url),
             width=image.width,
@@ -190,6 +185,11 @@ def _build_images(location: BaseLocation, request: HttpRequest) -> List[dict]:
         )
         for image in location.image_set.all()
     ]
+    if location.review:
+        images_list = images_list + [
+            dict(url=image.url, width=image.width, height=image.height)
+            for image in location.review.reviewimage_set.all()
+        ]
     return images_list
 
 
