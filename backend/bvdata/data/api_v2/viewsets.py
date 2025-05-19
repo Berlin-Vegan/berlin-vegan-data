@@ -1,16 +1,13 @@
 from django.db.models import BooleanField, Case, Value, When
 from django.db.models.aggregates import Count
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.viewsets import ModelViewSet
 
 from bvdata.data.api_v2.serializers import (
-    PrivateBaseLocationListSerializer,
-    PrivateGastroDetailSerializer,
-    PrivateShoppingDetailSerializer,
-    PublicGastroDetailSerializer,
-    PublicShoppingDetailSerializer,
+    GastroDetailSerializer,
+    LocationListSerializer,
+    ShoppingDetailSerializer,
 )
-from bvdata.data.filter_backend import AuthorizedFilterBackend
 from bvdata.data.filters import BaseLocationFilter
 from bvdata.data.models import BaseLocation, LocationTypeChoices
 
@@ -19,9 +16,8 @@ __all__ = ("ShoppingViewSet", "GastroViewSet")
 
 class BaseLocationModelViewSetMixin:
     location_type = None
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    filter_backends = [AuthorizedFilterBackend]
-    serializer_class = {"public": None, "private": {"default": None, "list": None}}
+    serializer_class = {"detail": None, "list": None}
+    filter_backends = [DjangoFilterBackend]
     filterset_class = BaseLocationFilter
     lookup_field = "id_string"
 
@@ -45,20 +41,12 @@ class BaseLocationModelViewSetMixin:
         return self.location_type
 
     def get_queryset(self):
-        if not self.request.user.is_authenticated:
-            return self.queryset_public
-        else:
-            if self.action == "list":
-                return self.queryset_list_private
-            return super(BaseLocationModelViewSetMixin, self).get_queryset()
+        if self.action == "list":
+            return self.queryset_list_private
+        return super(BaseLocationModelViewSetMixin, self).get_queryset()
 
     def get_serializer_class(self):
-        if not self.request.user.is_authenticated:
-            return self.serializer_class["public"]
-        else:
-            return self.serializer_class["private"].get(
-                self.action, self.serializer_class["private"]["default"]
-            )
+        return self.serializer_class.get(self.action, self.serializer_class["detail"])
 
     def perform_create(self, serializer):
         serializer.validated_data["last_editor"] = self.request.user
@@ -78,20 +66,14 @@ class BaseLocationModelViewSetMixin:
 class ShoppingViewSet(BaseLocationModelViewSetMixin, ModelViewSet):
     location_type = LocationTypeChoices.SHOPPING
     serializer_class = {
-        "public": PublicShoppingDetailSerializer,
-        "private": {
-            "default": PrivateShoppingDetailSerializer,
-            "list": PrivateBaseLocationListSerializer,
-        },
+        "detail": ShoppingDetailSerializer,
+        "list": LocationListSerializer,
     }
 
 
 class GastroViewSet(BaseLocationModelViewSetMixin, ModelViewSet):
     location_type = LocationTypeChoices.GASTRO
     serializer_class = {
-        "public": PublicGastroDetailSerializer,
-        "private": {
-            "default": PrivateGastroDetailSerializer,
-            "list": PrivateBaseLocationListSerializer,
-        },
+        "detail": GastroDetailSerializer,
+        "list": LocationListSerializer,
     }

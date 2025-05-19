@@ -27,11 +27,9 @@ __all__ = (
     "TagListSerializer",
     "OpeningHoursSerializer",
     "ShoppingAttributeSerializer",
-    "PrivateBaseLocationListSerializer",
-    "PrivateShoppingDetailSerializer",
-    "PublicShoppingDetailSerializer",
-    "PublicGastroDetailSerializer",
-    "PrivateGastroDetailSerializer",
+    "LocationListSerializer",
+    "ShoppingDetailSerializer",
+    "GastroDetailSerializer",
     "GastroAttributeSerializer",
 )
 
@@ -176,7 +174,7 @@ class BaseLocationSerializer(ModelSerializer):
         read_only_fields = ["id_string"]
 
 
-class PrivateBaseLocationListSerializer(BaseLocationSerializer):
+class LocationListSerializer(BaseLocationSerializer):
     has_review_link = BooleanField()
     image_count = IntegerField()
 
@@ -185,7 +183,29 @@ class PrivateBaseLocationListSerializer(BaseLocationSerializer):
         read_only_fields = fields
 
 
-class PublicBaseDetailSerializer(BaseLocationSerializer):
+class ShoppingTagsAttributesSerializerMixin(Serializer):
+    tags = TagListSerializer(tags=SHOPPING_TAG_CHOICES)
+    attributes = ShoppingAttributeSerializer(
+        source="boolean_attributes", required=False
+    )
+
+
+class GastroTagsAttributesSerializerMixin(Serializer):
+    tags = TagListSerializer(tags=GASTRO_TAG_CHOICES)
+    attributes = GastroAttributeSerializer(source="*", required=False)
+
+
+class LastEditorMixin(Serializer):
+    last_editor = SerializerMethodField()
+
+    @staticmethod
+    def get_last_editor(obj):
+        return (
+            obj.last_editor.username if hasattr(obj.last_editor, "username") else None
+        )
+
+
+class BaseDetailSerializer(LastEditorMixin, BaseLocationSerializer):
     opening_hours = OpeningHoursSerializer(source="openinghours_set", required=False)
     images = ReadOnlyField(default=[])
 
@@ -207,54 +227,6 @@ class PublicBaseDetailSerializer(BaseLocationSerializer):
             "tags",
             "attributes",
             "images",
-        ]
-
-        read_only_fields = BaseLocationSerializer.Meta.read_only_fields + [
-            "created",
-            "updated",
-            "images",
-        ]
-
-
-class ShoppingTagsAttributesSerializerMixin(Serializer):
-    tags = TagListSerializer(tags=SHOPPING_TAG_CHOICES)
-    attributes = ShoppingAttributeSerializer(
-        source="boolean_attributes", required=False
-    )
-
-
-class GastroTagsAttributesSerializerMixin(Serializer):
-    tags = TagListSerializer(tags=GASTRO_TAG_CHOICES)
-    attributes = GastroAttributeSerializer(source="*", required=False)
-
-
-class PublicShoppingDetailSerializer(
-    ShoppingTagsAttributesSerializerMixin, PublicBaseDetailSerializer
-):
-    class Meta(PublicBaseDetailSerializer.Meta):
-        pass
-
-
-class PublicGastroDetailSerializer(
-    GastroTagsAttributesSerializerMixin, PublicBaseDetailSerializer
-):
-    class Meta(PublicBaseDetailSerializer.Meta):
-        pass
-
-
-class LastEditorMixin(Serializer):
-    last_editor = SerializerMethodField()
-
-    @staticmethod
-    def get_last_editor(obj):
-        return (
-            obj.last_editor.username if hasattr(obj.last_editor, "username") else None
-        )
-
-
-class PrivateBaseDetailSerializer(LastEditorMixin, PublicBaseDetailSerializer):
-    class Meta(PublicBaseDetailSerializer.Meta):
-        fields = PublicBaseDetailSerializer.Meta.fields + [
             "text_intern",
             "has_sticker",
             "is_submission",
@@ -263,7 +235,10 @@ class PrivateBaseDetailSerializer(LastEditorMixin, PublicBaseDetailSerializer):
             "review",
         ]
 
-        read_only_fields = PublicBaseDetailSerializer.Meta.read_only_fields + [
+        read_only_fields = BaseLocationSerializer.Meta.read_only_fields + [
+            "created",
+            "updated",
+            "images",
             "last_editor",
         ]
 
@@ -314,16 +289,16 @@ class PrivateBaseDetailSerializer(LastEditorMixin, PublicBaseDetailSerializer):
         return instance
 
 
-class PrivateShoppingDetailSerializer(
-    ShoppingTagsAttributesSerializerMixin, PrivateBaseDetailSerializer
+class ShoppingDetailSerializer(
+    ShoppingTagsAttributesSerializerMixin, BaseDetailSerializer
 ):
-    class Meta(PrivateBaseDetailSerializer.Meta):
+    class Meta(BaseDetailSerializer.Meta):
         pass
 
     @transaction.atomic
     def create(self, validated_data):
         boolean_attributes = validated_data.pop("boolean_attributes", None)
-        instance = super(PrivateShoppingDetailSerializer, self).create(
+        instance = super(ShoppingDetailSerializer, self).create(
             validated_data=validated_data
         )
         if boolean_attributes:
@@ -337,7 +312,7 @@ class PrivateShoppingDetailSerializer(
     @transaction.atomic
     def update(self, instance, validated_data):
         boolean_attributes = validated_data.pop("boolean_attributes", None)
-        instance = super(PrivateShoppingDetailSerializer, self).update(
+        instance = super(ShoppingDetailSerializer, self).update(
             instance=instance, validated_data=validated_data
         )
         if boolean_attributes is not None:
@@ -350,10 +325,8 @@ class PrivateShoppingDetailSerializer(
         return instance
 
 
-class PrivateGastroDetailSerializer(
-    GastroTagsAttributesSerializerMixin, PrivateBaseDetailSerializer
-):
-    class Meta(PrivateBaseDetailSerializer.Meta):
+class GastroDetailSerializer(GastroTagsAttributesSerializerMixin, BaseDetailSerializer):
+    class Meta(BaseDetailSerializer.Meta):
         pass
 
     @transaction.atomic
@@ -362,7 +335,7 @@ class PrivateGastroDetailSerializer(
         positive_integer_attributes = validated_data.pop(
             "positive_integer_attributes", None
         )
-        instance = super(PrivateGastroDetailSerializer, self).create(
+        instance = super(GastroDetailSerializer, self).create(
             validated_data=validated_data
         )
         if boolean_attributes:
@@ -387,7 +360,7 @@ class PrivateGastroDetailSerializer(
         positive_integer_attributes = validated_data.pop(
             "positive_integer_attributes", None
         )
-        instance = super(PrivateGastroDetailSerializer, self).update(
+        instance = super(GastroDetailSerializer, self).update(
             instance=instance, validated_data=validated_data
         )
         if boolean_attributes is not None:
