@@ -1,5 +1,5 @@
 # build environment
-FROM node:22-alpine as prepare
+FROM node:24-alpine as prepare
 
 ARG ENVIRONMENT=production
 ARG REACT_APP_MAP_API_URL
