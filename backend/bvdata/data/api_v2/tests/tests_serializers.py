@@ -7,10 +7,10 @@ from django.test import TestCase
 
 from bvdata.data.api_v2.serializers import (
     GastroAttributeSerializer,
+    GastroDetailSerializer,
     OpeningHoursSerializer,
-    PrivateGastroDetailSerializer,
-    PrivateShoppingDetailSerializer,
     ShoppingAttributeSerializer,
+    ShoppingDetailSerializer,
     TagListSerializer,
 )
 from bvdata.data.models import (
@@ -241,7 +241,7 @@ class TestShoppingAttributeSerializer(TestCase):
 class TestShoppingDetailSerializer(TestCase):
     def test_create_basic(self) -> None:
         location_input = baselocation_input_fixture()
-        serializer = PrivateShoppingDetailSerializer(data=location_input)
+        serializer = ShoppingDetailSerializer(data=location_input)
         self.assertTrue(serializer.is_valid())
         serializer.validated_data["type"] = LocationTypeChoices.SHOPPING
         instance_serializer = serializer.save()
@@ -255,7 +255,7 @@ class TestShoppingDetailSerializer(TestCase):
             tags_input=shopping_tags_input_fixture(),
             attribute_input=shopping_attribute_input_fixture(),
         )
-        serializer = PrivateShoppingDetailSerializer(data=location_input)
+        serializer = ShoppingDetailSerializer(data=location_input)
         self.assertTrue(serializer.is_valid())
         serializer.validated_data["type"] = LocationTypeChoices.SHOPPING
         instance_serializer = serializer.save()
@@ -294,9 +294,7 @@ class TestShoppingDetailSerializer(TestCase):
             attribute_input=shopping_attribute_input_fixture(),
             tags_input=shopping_tags_input_fixture(),
         )
-        serializer = PrivateShoppingDetailSerializer(
-            instance=instance, data=location_input
-        )
+        serializer = ShoppingDetailSerializer(instance=instance, data=location_input)
         self.assertTrue(serializer.is_valid())
         updated_instance = serializer.save()
         for key, value in location_input.items():
@@ -354,7 +352,7 @@ class TestGastroAttributeSerializer(TestCase):
 class TestGastroDetailSerializer(TestCase):
     def test_create_basic(self) -> None:
         location_input = baselocation_input_fixture()
-        serializer = PrivateGastroDetailSerializer(data=location_input)
+        serializer = GastroDetailSerializer(data=location_input)
         self.assertTrue(serializer.is_valid())
         serializer.validated_data["type"] = LocationTypeChoices.GASTRO
         instance_serializer = serializer.save()
@@ -368,7 +366,7 @@ class TestGastroDetailSerializer(TestCase):
             tags_input=gastro_tags_input_fixture(),
             attribute_input=gastro_attribute_input_fixture(),
         )
-        serializer = PrivateGastroDetailSerializer(data=location_input)
+        serializer = GastroDetailSerializer(data=location_input)
         self.assertTrue(serializer.is_valid())
         serializer.validated_data["type"] = LocationTypeChoices.GASTRO
         instance_serializer = serializer.save()
@@ -411,9 +409,7 @@ class TestGastroDetailSerializer(TestCase):
             attribute_input=gastro_attribute_input_fixture(),
             tags_input=gastro_tags_input_fixture(),
         )
-        serializer = PrivateGastroDetailSerializer(
-            instance=instance, data=location_input
-        )
+        serializer = GastroDetailSerializer(instance=instance, data=location_input)
         self.assertTrue(serializer.is_valid())
         updated_instance = serializer.save()
         for key, value in location_input.items():
