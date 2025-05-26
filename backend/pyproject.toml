@@ -25,7 +25,7 @@ beautifulsoup4 = "^4.12.3"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
-django-debug-toolbar = "^4.4.6"
+django-debug-toolbar = "^5.2.0"
 factory-boy = "^3.3.1"
 flake8 = "^7.1.1"
 ipython = "^8.27.0"
