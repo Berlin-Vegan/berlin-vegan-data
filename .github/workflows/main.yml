@@ -11,6 +11,8 @@ on:
 jobs:
   backend:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     services:
       postgres:
         image: postgres
@@ -32,6 +34,8 @@ jobs:
         run: docker run --network="host" --env DATABASE_HOST=localhost --env SECRET_KEY=nosecret --env EMAIL_GASTROS=test@test.de bvdata-be ./run test
   frontend-test-prod-build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -39,6 +43,9 @@ jobs:
         run: docker build --target builder -f frontend/Dockerfile -t bvdata-fe frontend/
 
   build-push-images:
+    permissions:
+      contents: read
+      packages: write
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main'}}
     needs: [backend, frontend-test-prod-build]
     uses: ./.github/workflows/build-push-images.yml
