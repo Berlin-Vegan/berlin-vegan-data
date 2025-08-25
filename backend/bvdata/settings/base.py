@@ -194,6 +194,7 @@ EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
 EMAIL_FROM = os.environ.get("EMAIL_FROM", "")
 EMAIL_GASTROS = os.environ.get("EMAIL_GASTROS", "")
+EMAIL_USE_TLS = bool(os.environ.get("EMAIL_USE_TLS", True))
 
 sentry_sdk.init(
     dsn=os.environ.get("SENTRY_DSN", None),
