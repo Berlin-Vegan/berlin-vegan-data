@@ -5,6 +5,13 @@ updates:
     directory: "/frontend"
     schedule:
       interval: "daily"
+    groups:
+      frontend-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
 
   # Frontend Docker dependencies
   - package-ecosystem: "docker"
@@ -17,6 +24,13 @@ updates:
     directory: "/backend"
     schedule:
       interval: "daily"
+    groups:
+      backend-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
 
   # Backend Docker dependencies
   - package-ecosystem: "docker"
