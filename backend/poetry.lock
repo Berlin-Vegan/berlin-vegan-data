@@ -688,40 +688,50 @@ files = [
 
 [[package]]
 name = "ipython"
-version = "8.36.0"
+version = "9.9.0"
 description = "IPython: Productive Interactive Computing"
 optional = false
-python-versions = ">=3.10"
+python-versions = ">=3.11"
 groups = ["dev"]
 files = [
-    {file = "ipython-8.36.0-py3-none-any.whl", hash = "sha256:12b913914d010dcffa2711505ec8be4bf0180742d97f1e5175e51f22086428c1"},
-    {file = "ipython-8.36.0.tar.gz", hash = "sha256:24658e9fe5c5c819455043235ba59cfffded4a35936eefceceab6b192f7092ff"},
+    {file = "ipython-9.9.0-py3-none-any.whl", hash = "sha256:b457fe9165df2b84e8ec909a97abcf2ed88f565970efba16b1f7229c283d252b"},
+    {file = "ipython-9.9.0.tar.gz", hash = "sha256:48fbed1b2de5e2c7177eefa144aba7fcb82dac514f09b57e2ac9da34ddb54220"},
 ]
 
 [package.dependencies]
-colorama = {version = "*", markers = "sys_platform == \"win32\""}
-decorator = "*"
-jedi = ">=0.16"
-matplotlib-inline = "*"
+colorama = {version = ">=0.4.4", markers = "sys_platform == \"win32\""}
+decorator = ">=4.3.2"
+ipython-pygments-lexers = ">=1.0.0"
+jedi = ">=0.18.1"
+matplotlib-inline = ">=0.1.5"
 pexpect = {version = ">4.3", markers = "sys_platform != \"win32\" and sys_platform != \"emscripten\""}
 prompt_toolkit = ">=3.0.41,<3.1.0"
-pygments = ">=2.4.0"
-stack_data = "*"
+pygments = ">=2.11.0"
+stack_data = ">=0.6.0"
 traitlets = ">=5.13.0"
 
 [package.extras]
-all = ["ipython[black,doc,kernel,matplotlib,nbconvert,nbformat,notebook,parallel,qtconsole]", "ipython[test,test-extra]"]
+all = ["argcomplete (>=3.0)", "ipython[doc,matplotlib,terminal,test,test-extra]"]
 black = ["black"]
-doc = ["docrepr", "exceptiongroup", "intersphinx_registry", "ipykernel", "ipython[test]", "matplotlib", "setuptools (>=18.5)", "sphinx (>=1.3)", "sphinx-rtd-theme", "sphinxcontrib-jquery", "tomli ; python_version < \"3.11\"", "typing_extensions"]
-kernel = ["ipykernel"]
-matplotlib = ["matplotlib"]
-nbconvert = ["nbconvert"]
-nbformat = ["nbformat"]
-notebook = ["ipywidgets", "notebook"]
-parallel = ["ipyparallel"]
-qtconsole = ["qtconsole"]
-test = ["packaging", "pickleshare", "pytest", "pytest-asyncio (<0.22)", "testpath"]
-test-extra = ["curio", "ipython[test]", "jupyter_ai", "matplotlib (!=3.2.0)", "nbformat", "numpy (>=1.23)", "pandas", "trio"]
+doc = ["docrepr", "exceptiongroup", "intersphinx_registry", "ipykernel", "ipython[matplotlib,test]", "setuptools (>=70.0)", "sphinx (>=8.0)", "sphinx-rtd-theme (>=0.1.8)", "sphinx_toml (==0.0.4)", "typing_extensions"]
+matplotlib = ["matplotlib (>3.9)"]
+test = ["packaging (>=20.1.0)", "pytest (>=7.0.0)", "pytest-asyncio (>=1.0.0)", "setuptools (>=61.2)", "testpath (>=0.2)"]
+test-extra = ["curio", "ipykernel (>6.30)", "ipython[matplotlib]", "ipython[test]", "jupyter_ai", "nbclient", "nbformat", "numpy (>=1.27)", "pandas (>2.1)", "trio (>=0.1.0)"]
+
+[[package]]
+name = "ipython-pygments-lexers"
+version = "1.1.1"
+description = "Defines a variety of Pygments lexers for highlighting IPython code."
+optional = false
+python-versions = ">=3.8"
+groups = ["dev"]
+files = [
+    {file = "ipython_pygments_lexers-1.1.1-py3-none-any.whl", hash = "sha256:a9462224a505ade19a605f71f8fa63c2048833ce50abc86768a0d81d876dc81c"},
+    {file = "ipython_pygments_lexers-1.1.1.tar.gz", hash = "sha256:09c0138009e56b6854f9535736f4171d855c8c08a563a0dcd8022f78355c7e81"},
+]
+
+[package.dependencies]
+pygments = "*"
 
 [[package]]
 name = "isort"
@@ -1678,4 +1688,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "21c71e6a90e5b60f4762822a898a33e1efcfb7727e225fb5e4784f92dc5dff8b"
+content-hash = "a31c6db4fcd85e71155b5d9c50d3c17b9c207cf950d1de739123c491f1e731b0"
