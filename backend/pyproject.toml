@@ -8,7 +8,7 @@ license = "AGPL-3.0"
 [tool.poetry.dependencies]
 python = "^3.12"
 Django = "^5"
-django-crispy-forms = "^1.14.0"
+django-crispy-forms = "^2.5.0"
 gunicorn = "^23"
 django-filter = "^24"
 django-rest-registration = "^0.9.0"
