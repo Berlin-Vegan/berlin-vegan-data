@@ -12,28 +12,28 @@ django-crispy-forms = "^1.14.0"
 gunicorn = "^23"
 django-filter = "^24"
 django-rest-registration = "^0.9.0"
-djangorestframework = "^3.15"
+djangorestframework = "^3.16"
 djangorestframework-camel-case = "^1.4"
 regex = "^2024.9.11"
-sentry-sdk = "^2.14"
-celery = "^5.4"
+sentry-sdk = "^2.49"
+celery = "^5.6"
 redis = "^5.0"
 requests = "^2.32"
-psycopg = {extras = ["binary"], version = "^3.2.3"}
+psycopg = {extras = ["binary"], version = "^3.3.2"}
 pillow = "^12.1.0"
-beautifulsoup4 = "^4.12.3"
+beautifulsoup4 = "^4.14.3"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
 django-debug-toolbar = "^6.1.0"
 factory-boy = "^3.3.1"
-flake8 = "^7.1.1"
+flake8 = "^7.3.0"
 ipython = "^9.9.0"
 isort = "^7.0.0"
 pytest = "^8.3.3"
 pytest-cov = "^7.0.0"
 pytest-django = "^4.9.0"
-pytest-sugar = "^1.0.0"
+pytest-sugar = "^1.1.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
