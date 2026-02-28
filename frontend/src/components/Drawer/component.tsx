@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Divider from '@mui/material/Divider';
@@ -10,7 +10,6 @@ import { styled } from '@mui/material/styles';
 import { drawerWidth } from '@components/PageContainer/styles';
 
 import DrawerList from '../DrawerList';
-import { styles } from './styles';
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({

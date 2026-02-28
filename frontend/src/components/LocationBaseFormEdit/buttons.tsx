@@ -50,7 +50,7 @@ const Buttons = ({ submitForm, isSubmitting, locationUrl }: IButtons) => {
 
   return (
     <Grid container spacing={1} justifyContent="flex-end">
-      <Grid item>
+      <Grid>
         <Button
           variant="contained"
           color="secondary"
@@ -62,7 +62,7 @@ const Buttons = ({ submitForm, isSubmitting, locationUrl }: IButtons) => {
         </Button>
       </Grid>
       {isSubmissionMeta.value ? (
-        <Grid item>
+        <Grid>
           <Button
             variant="contained"
             color="primary"
@@ -77,7 +77,7 @@ const Buttons = ({ submitForm, isSubmitting, locationUrl }: IButtons) => {
       ) : (
         <></>
       )}
-      <Grid item>
+      <Grid>
         <Button
           variant="contained"
           color="primary"

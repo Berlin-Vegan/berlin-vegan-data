@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
+import React, { type Dispatch, type SetStateAction, useContext, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Typography } from '@mui/material';
@@ -6,12 +6,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import clsx from 'clsx';
 import { __, propOr, isEmpty, assoc, ifElse } from 'ramda';
-import useStyles from './styles';
 import {
   AuthContext,
   TYPE_SET_USER_DATA,
   TYPE_USER_LOGIN,
-  UserDispatch,
+  type UserDispatch,
 } from '@/providers/UserProvider';
 import { authorizedFetch } from '@/utils/fetch';
 import { getCSRFToken } from '@/utils/cookie';
@@ -62,7 +61,6 @@ interface IErrorsState {
 }
 
 const LoginForm = () => {
-  const classes = useStyles();
   const { dispatch: userDispatch } = useContext(AuthContext);
   const [formState, setFormState] = useState({ username: '', password: '' });
   const [errorsState, setErrors] = useState<IErrorsState>({
@@ -79,20 +77,21 @@ const LoginForm = () => {
   };
 
   return (
-    <div className={classes.paper}>
-      <Avatar className={classes.avatar}>
+    <div style={{ marginTop: 64, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
         Sign in
       </Typography>
-      <form className={classes.form}>
+      <form style={{ width: '100%', marginTop: 8 }}>
         <Typography
           variant="subtitle1"
-          className={clsx(
-            !errorsState.detail && classes.noError,
-            errorsState.detail && classes.error,
-          )}
+          className={clsx(!errorsState.detail && 'bv-no-error', errorsState.detail && 'bv-error')}
+          sx={{
+            '&.bv-no-error': { display: 'none' },
+            '&.bv-error': { color: 'error.main', textAlign: 'center' },
+          }}
         >
           {errorsState.detail}
         </Typography>
@@ -129,7 +128,7 @@ const LoginForm = () => {
           fullWidth
           variant="contained"
           color="primary"
-          className={classes.submit}
+          sx={{ mt: 3, mb: 2 }}
           onClick={handleButtonClick}
         >
           Sign In

@@ -1,14 +1,18 @@
-import { css } from '@emotion/react';
+import type { SxProps, Theme } from '@mui/material';
 
-export const styles = {
-  flexContainerSpinner: css`
-    display: flex;
-  `,
-  reviewLabelSpinner: css`
-    flex: 1;
-    margin: auto;
-  `,
-  reviewRightSpinner: css`
-    flex: 1;
-  `,
+export const styles: {
+  flexContainerSpinner: SxProps<Theme>;
+  reviewLabelSpinner: SxProps<Theme>;
+  reviewRightSpinner: SxProps<Theme>;
+} = {
+  flexContainerSpinner: {
+    display: 'flex',
+  },
+  reviewLabelSpinner: {
+    flex: 1,
+    margin: 'auto',
+  },
+  reviewRightSpinner: {
+    flex: 1,
+  },
 };

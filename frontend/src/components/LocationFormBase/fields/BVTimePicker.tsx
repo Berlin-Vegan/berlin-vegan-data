@@ -1,37 +1,60 @@
-import { TimePicker as MuiTimePicker } from '@mui/x-date-pickers';
+import { TimePicker as MuiTimePicker } from '@mui/x-date-pickers/TimePicker';
+import type { SxProps } from '@mui/material/styles';
 
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-import { TimePickerProps, fieldToTimePicker } from 'formik-mui-x-date-pickers';
 
 dayjs.extend(customParseFormat);
 
-const timeToStringOrNull = (date: Date | null): string | null =>
-  date === null ? null : dayjs(date).format('HH:mm:ss');
-
-const stringToDate = (stringTime: string | null): Date | string =>
-  stringTime === null ? '' : dayjs(stringTime, 'HH:mm:ss').toDate();
-
-const BVTimePicker = ({ children, ...props }: TimePickerProps) => {
-  const {
-    form: { setFieldValue, setFieldTouched },
-    field: { name },
-  } = props;
-  const handleChange = (date: Date | null) => {
-    setFieldTouched(name, true, false);
-    setFieldValue(name, timeToStringOrNull(date), true);
+type BVTimePickerProps = {
+  field: { name: string; value: string | null };
+  form: {
+    setFieldValue: (field: string, value: unknown, shouldValidate?: boolean) => void;
+    setFieldTouched: (field: string, isTouched?: boolean, shouldValidate?: boolean) => void;
   };
+  label?: string;
+  inputFormat?: string;
+  TextFieldProps?: Record<string, unknown>;
+  sx?: SxProps;
+};
+
+const timeToStringOrNull = (
+  value: dayjs.Dayjs | Date | string | null | undefined,
+): string | null => {
+  if (value == null) return null;
+  const d = dayjs(value);
+  return d.isValid() ? d.format('HH:mm:ss') : null;
+};
+
+const stringToDayjsOrNull = (stringTime: string | null) =>
+  stringTime == null || stringTime === '' ? null : dayjs(stringTime, 'HH:mm:ss');
+
+const BVTimePicker = ({
+  field,
+  form,
+  label,
+  inputFormat = 'HH:mm',
+  TextFieldProps,
+  sx,
+}: BVTimePickerProps) => {
+  const { name, value } = field;
+
+  const handleChange = (newValue: dayjs.Dayjs | null) => {
+    form.setFieldTouched(name, true, false);
+    form.setFieldValue(name, timeToStringOrNull(newValue), true);
+  };
+
+  const helperSlotProps = TextFieldProps ? (TextFieldProps as Record<string, unknown>) : {};
 
   return (
     <MuiTimePicker
-      {...fieldToTimePicker({
-        ...props,
-        field: { ...props.field, value: stringToDate(props.field.value) },
-      })}
+      label={label}
+      value={stringToDayjsOrNull(value)}
       onChange={handleChange}
-    >
-      {children}
-    </MuiTimePicker>
+      sx={sx}
+      slotProps={{ textField: { variant: 'standard', ...helperSlotProps } }}
+      format={inputFormat}
+    />
   );
 };
 

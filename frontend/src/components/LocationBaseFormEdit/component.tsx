@@ -1,4 +1,4 @@
-import React, { FC, FunctionComponent, useContext } from 'react';
+import React, { type FC, type FunctionComponent, useContext } from 'react';
 
 import Grid from '@mui/material/Grid';
 import { grey } from '@mui/material/colors';
@@ -12,17 +12,17 @@ import { useSnackbar } from 'notistack';
 import { defaultTo } from 'ramda';
 
 import { AuthContext } from '@/providers/UserProvider';
+import { DATE_FORMAT } from '@/utils/constants';
 import { authorizedFetch } from '@/utils/fetch';
 
-import LocationBaseType from '../LocationFormBase/locationBaseType';
+import type { LocationBaseType } from '../LocationFormBase/locationBaseType';
 import PaperDefault from '../PaperDefault';
 import Buttons from './buttons';
-import { DATE_FORMAT } from '@/utils/constants';
 
 type LocationBaseFormEditType = {
   label: string;
   locationUrl: string;
-  locationForm: FC<{ children: JSX.Element }>;
+  locationForm: FC<{ children: React.ReactNode }>;
   locationData: LocationBaseType;
   locationFormSchema: Yup.AnySchema;
   setLocationDataState: React.Dispatch<React.SetStateAction<LocationBaseType>>;
@@ -69,16 +69,16 @@ const LocationBaseFormEdit: FunctionComponent<LocationBaseFormEditType> = ({
           {({ submitForm, isSubmitting }) => (
             <Form>
               <Grid container sx={{ color: grey[600] }}>
-                <Grid container item spacing={1} md={6}>
-                  <Grid item>
+                <Grid container spacing={1}>
+                  <Grid>
                     <div>Created: {created ? dayjs(created).format(DATE_FORMAT) : '–'}</div>
                   </Grid>
-                  <Grid item>
+                  <Grid>
                     <div>Updated: {updated ? dayjs(updated).format(DATE_FORMAT) : '–'}</div>
                   </Grid>
                 </Grid>
-                <Grid container item md={6} justifyContent="flex-end">
-                  <Grid item>
+                <Grid container justifyContent="flex-end">
+                  <Grid>
                     <div>Last Editor: {defaultTo('–', lastEditor)}</div>
                   </Grid>
                 </Grid>

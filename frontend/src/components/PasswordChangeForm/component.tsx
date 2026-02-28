@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import SaveIcon from '@mui/icons-material/Save';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
 
-import { Field, Form, Formik } from 'formik';
-import { TextField } from 'formik-mui';
+import { Field, Form, Formik, type FieldProps } from 'formik';
 import { useSnackbar } from 'notistack';
 
 import { AuthContext } from '@/providers/UserProvider';
@@ -64,29 +64,47 @@ const PasswordChangeForm = () => {
     >
       {({ submitForm, isSubmitting }) => (
         <Form>
-          <Grid container spacing={1} direction="column" md={4}>
+          <Grid container spacing={1} direction="column">
             <Typography variant="h5">Change Password</Typography>
-            <Field
-              component={TextField}
-              name="oldPassword"
-              type="password"
-              label="Old Password"
-              required
-            />
-            <Field
-              component={TextField}
-              name="password"
-              type="password"
-              label="New Password"
-              required
-            />
-            <Field
-              component={TextField}
-              name="passwordConfirm"
-              type="password"
-              label="New Password Confirmation"
-              required
-            />
+            <Field name="oldPassword">
+              {({ field, meta }: FieldProps) => (
+                <TextField
+                  {...field}
+                  type="password"
+                  label="Old Password"
+                  required
+                  error={meta.touched && Boolean(meta.error)}
+                  helperText={meta.touched && meta.error}
+                  fullWidth
+                />
+              )}
+            </Field>
+            <Field name="password">
+              {({ field, meta }: FieldProps) => (
+                <TextField
+                  {...field}
+                  type="password"
+                  label="New Password"
+                  required
+                  error={meta.touched && Boolean(meta.error)}
+                  helperText={meta.touched && meta.error}
+                  fullWidth
+                />
+              )}
+            </Field>
+            <Field name="passwordConfirm">
+              {({ field, meta }: FieldProps) => (
+                <TextField
+                  {...field}
+                  type="password"
+                  label="New Password Confirmation"
+                  required
+                  error={meta.touched && Boolean(meta.error)}
+                  helperText={meta.touched && meta.error}
+                  fullWidth
+                />
+              )}
+            </Field>
             <Grid container justifyContent="flex-end" className={classes.saveButton}>
               <Button
                 variant="contained"

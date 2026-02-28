@@ -1,17 +1,27 @@
 import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 
-import { Field, useField } from 'formik';
-import { TextField } from 'formik-mui';
+import { Field, type FieldProps, useField } from 'formik';
 
 const buildField = (
-  <Grid item>
-    <Field component={TextField} name="submitEmail" type="text" label="Submit Email" required />
+  <Grid>
+    <Field name="submitEmail">
+      {({ field, meta }: FieldProps) => (
+        <TextField
+          {...field}
+          type="text"
+          label="Submit Email"
+          required
+          error={meta.touched && Boolean(meta.error)}
+          helperText={meta.touched && meta.error}
+        />
+      )}
+    </Field>
   </Grid>
 );
 
 const SubmitEmailField = () => {
   const [, { value }] = useField('submitEmail');
-
   return value ? buildField : null;
 };
 

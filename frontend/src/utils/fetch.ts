@@ -1,4 +1,4 @@
-import { TYPE_USER_LOGOUT, UserDispatch } from '../providers/UserProvider';
+import { TYPE_USER_LOGOUT, type UserDispatch } from '../providers/UserProvider';
 import { getCSRFToken } from './cookie';
 
 export const authorizedFetch = async (

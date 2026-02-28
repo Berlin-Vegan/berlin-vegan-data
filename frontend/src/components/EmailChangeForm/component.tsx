@@ -3,12 +3,12 @@ import { useContext } from 'react';
 import SaveIcon from '@mui/icons-material/Save';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 
 import * as Yup from 'yup';
-import { Field, Form, Formik } from 'formik';
-import { TextField } from 'formik-mui';
+import { Field, type FieldProps, Form, Formik } from 'formik';
 import { useSnackbar } from 'notistack';
 import { pathOr } from 'ramda';
 
@@ -63,9 +63,21 @@ const EmailChangeForm = () => {
       {({ submitForm, isSubmitting }) => (
         <Form>
           <Grid container spacing={1} direction="column">
-            <Grid container item direction="column" md={4}>
+            <Grid container direction="column">
               <Typography variant="h5">Change Email</Typography>
-              <Field component={TextField} name="email" type="email" label="E-Mail" required />
+              <Field name="email">
+                {({ field, meta }: FieldProps) => (
+                  <TextField
+                    {...field}
+                    type="email"
+                    label="E-Mail"
+                    required
+                    error={meta.touched && Boolean(meta.error)}
+                    helperText={meta.touched && meta.error}
+                    fullWidth
+                  />
+                )}
+              </Field>
               <Grid container justifyContent="flex-end" className={classes.saveButton}>
                 <Button
                   variant="contained"

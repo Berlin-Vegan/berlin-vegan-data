@@ -1,4 +1,4 @@
-import { Context, PropsWithChildren, createContext, useEffect, useReducer } from 'react';
+import { type Context, type PropsWithChildren, createContext, useEffect, useReducer } from 'react';
 
 const TYPE_USER_LOGIN = 'USER_LOGIN';
 const TYPE_USER_LOGOUT = 'USER_LOGOUT';
@@ -6,7 +6,7 @@ const TYPE_SET_USER_DATA = 'SET_USER_DATA';
 const TYPE_UPDATE_USER_EMAIL = 'UPDATE_USER_DATA';
 const LOCALSTORAGE_KEY = 'UserProvider';
 
-type UserData = { id: number; username: string; email: string } | {};
+type UserData = { id: number; username: string; email: string } | object;
 type UserAction =
   | { type: typeof TYPE_USER_LOGIN }
   | { type: typeof TYPE_USER_LOGOUT }

@@ -1,83 +1,56 @@
 import React from 'react';
 
+import { FormHelperText } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
-import MuiSelect from '@mui/material/Select';
-import { FormHelperText } from '@mui/material';
-import { SelectProps as MuiSelectProps } from '@mui/material/Select';
+import MuiSelect, { type SelectProps as MuiSelectProps } from '@mui/material/Select';
+import type { Theme } from '@mui/material/styles';
+import type { SxProps } from '@mui/system';
 
-import { getIn } from 'formik';
-import { SelectProps } from 'formik-mui';
+import type { FieldProps } from 'formik';
 
-export interface BVSelectProps extends SelectProps {
+type BVSelectProps = MuiSelectProps & {
+  label: string;
+  labelId: string;
   readValue: (value: unknown) => unknown;
   setValue: (value: unknown) => unknown;
-}
-
-// modified copy of https://github.com/stackworx/formik-mui/blob/main/packages/formik-mui/src/Select.tsx#L18
-const BVFieldToSelect = (
-  {
-    readValue,
-    setValue,
-    disabled,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    field: { onBlur: _onBlur, onChange: fieldOnChange, ...field },
-    form: { isSubmitting, touched, errors, setFieldTouched, setFieldValue },
-    onClose,
-    ...props
-  }: Omit<BVSelectProps, 'formControl' | 'formHelperText' | 'inputLabel'>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-): MuiSelectProps & { formError: any } => {
-  const fieldError = getIn(errors, field.name);
-  const showError = getIn(touched, field.name) && !!fieldError;
-
-  return {
-    disabled: disabled ?? isSubmitting,
-    error: showError,
-    formError: showError ? fieldError : undefined,
-    onBlur: () => {
-      // no-op
-    },
-    onChange:
-      fieldOnChange ??
-      (() => {
-        // no-op
-      }),
-    // we must use `onClose` instead of `onChange` to be able to trigger validation when users click outside of the select list.
-    onClose:
-      onClose ??
-      (async (e: React.SyntheticEvent) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const dataset = (e.target as any).dataset as DOMStringMap;
-        if (dataset && dataset.value) {
-          // out-of-sync issue since November 2019: https://github.com/formium/formik/issues/2059#issuecomment-890613538
-          // without the await, formik validates with the former value
-          await setFieldValue(field.name, setValue(dataset.value), false);
-        }
-        setFieldTouched(field.name, true, true);
-      }),
-    ...field,
-    value: readValue(field.value),
-    ...props,
-  };
+  children?: React.ReactNode;
+  sxInputLabel?: SxProps<Theme>;
 };
 
-const BVSelect = ({ formControl, inputLabel, formHelperText, ...selectProps }: BVSelectProps) => {
-  const { error, formError, disabled, ...selectFieldProps } = BVFieldToSelect(selectProps);
-  const { children: formHelperTextChildren, ...formHelperTextProps } = formHelperText || {};
-  const shouldDisplayFormHelperText = error || formHelperTextChildren;
+const BVSelect: React.FC<BVSelectProps & FieldProps> = ({
+  field,
+  form,
+  meta,
+  label,
+  labelId,
+  readValue,
+  setValue,
+  children,
+  sxInputLabel,
+  ...props
+}) => {
+  const { name, value, ...restField } = field;
+  const { setFieldValue } = form;
+  const showError = meta && meta.touched && Boolean(meta.error);
 
   return (
-    <FormControl disabled={disabled} error={error} {...formControl}>
-      <InputLabel id={selectFieldProps.labelId} {...inputLabel}>
-        {selectFieldProps.label}
+    <FormControl variant="standard" fullWidth error={showError}>
+      <InputLabel id={labelId} sx={sxInputLabel}>
+        {label}
       </InputLabel>
-      <MuiSelect {...selectFieldProps} />
-      {shouldDisplayFormHelperText && (
-        <FormHelperText {...formHelperTextProps}>
-          {error ? formError : formHelperTextChildren}
-        </FormHelperText>
-      )}
+      <MuiSelect
+        {...restField}
+        {...props}
+        labelId={labelId}
+        id={name}
+        value={readValue(value)}
+        onChange={(e) => setFieldValue(name, setValue(e.target.value))}
+        label={label}
+      >
+        {children}
+      </MuiSelect>
+      {showError && <FormHelperText>{meta.error}</FormHelperText>}
     </FormControl>
   );
 };

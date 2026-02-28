@@ -38,7 +38,7 @@ type OpeningHoursType = {
   sunday: OpeningHoursDayType;
 };
 
-type LocationBaseType = {
+export type LocationBaseType = {
   id?: string;
   created?: string;
   updated?: string;
@@ -67,5 +67,3 @@ type LocationBaseType = {
   openingHours: OpeningHoursType;
   review: string | number;
 };
-
-export default LocationBaseType;

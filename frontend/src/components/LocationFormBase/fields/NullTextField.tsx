@@ -1,39 +1,34 @@
 import React from 'react';
+import TextField, { type TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
+import type { FieldProps } from 'formik';
+import {
+  emptyStringToNull,
+  nullToEmptyString,
+} from '@components/LocationFormBase/fields/constants.ts';
 
-import MuiTextField, { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
+const NullTextField: React.FC<MuiTextFieldProps & FieldProps> = ({
+  field,
+  form,
+  meta,
+  ...props
+}) => {
+  const { name, value, ...restField } = field;
+  const { setFieldValue } = form;
 
-import { TextFieldProps, fieldToTextField } from 'formik-mui';
-
-export const nullToEmptyString = (value: string | null | unknown) => (value === null ? '' : value);
-
-export const emptyStringToNull = (value: string) => (value === '' ? null : value);
-
-const fieldToNullTextField = (props: TextFieldProps): MuiTextFieldProps => {
-  const fieldToTextFieldProps = fieldToTextField(props);
-  return {
-    ...fieldToTextFieldProps,
-    value: nullToEmptyString(fieldToTextFieldProps.value),
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFieldValue(name, emptyStringToNull(event.target.value));
   };
-};
-
-const NullTextField = ({ children, ...props }: TextFieldProps) => {
-  const {
-    form: { setFieldValue },
-    field: { name },
-  } = props;
-
-  const onChange = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = event.target;
-      setFieldValue(name, emptyStringToNull(value));
-    },
-    [setFieldValue, name],
-  );
 
   return (
-    <MuiTextField {...fieldToNullTextField(props)} onChange={onChange}>
-      {children}
-    </MuiTextField>
+    <TextField
+      {...restField}
+      {...props}
+      name={name}
+      value={nullToEmptyString(value)}
+      onChange={handleChange}
+      error={meta && meta.touched && Boolean(meta.error)}
+      helperText={meta && meta.touched && meta.error}
+    />
   );
 };
 

@@ -5,12 +5,12 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 import * as Yup from 'yup';
-import LocationBaseType from '@components/LocationFormBase/locationBaseType';
+import type { LocationBaseType } from '@components/LocationFormBase/locationBaseType';
 import { Form, Formik } from 'formik';
 import { useSnackbar } from 'notistack';
 
 import { AuthContext } from '@/providers/UserProvider';
-import { LocationType } from '@/utils/constants';
+import type { LocationType } from '@/utils/constants';
 import { authorizedFetch } from '@/utils/fetch';
 import { buildFEDetailUrl, buildListUrl } from '@/utils/utils';
 

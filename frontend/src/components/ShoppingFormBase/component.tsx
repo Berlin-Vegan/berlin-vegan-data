@@ -8,7 +8,6 @@ const ShoppingFormBase = ({ children }: PropsWithChildren) => (
     booleanAttrList={SHOPPING_BOOLEAN_ATTRIBUTES}
     tagList={SHOPPING_TAGS}
     positiveIntegerAttrList={[]}
-    veganOption={true}
   >
     {children}
   </LocationFormBase>

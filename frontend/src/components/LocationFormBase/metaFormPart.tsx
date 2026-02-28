@@ -1,22 +1,23 @@
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-import { Field } from 'formik';
-import { CheckboxWithLabel } from 'formik-mui';
+import { Field, type FieldProps } from 'formik';
 
 const metaFormPart = (
   <>
-    <Grid item>
+    <Grid>
       <Typography variant="h5">Meta</Typography>
     </Grid>
-    <Grid container item spacing={1}>
-      <Grid item>
-        <Field
-          component={CheckboxWithLabel}
-          name="hasSticker"
-          Label={{ label: 'Sticker' }}
-          type="checkbox"
-        />
+    <Grid container spacing={1}>
+      <Grid>
+        <Field name="hasSticker">
+          {({ field }: FieldProps) => (
+            <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <input type="checkbox" {...field} checked={!!field.value} />
+              Sticker
+            </label>
+          )}
+        </Field>
       </Grid>
     </Grid>
   </>

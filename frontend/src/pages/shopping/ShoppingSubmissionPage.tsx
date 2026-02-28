@@ -1,5 +1,3 @@
-import React from 'react';
-
 import LocationList from '@/components/LocationList';
 import { SHOPPING } from '@/utils/constants';
 import { buildListUrl } from '@/utils/utils';

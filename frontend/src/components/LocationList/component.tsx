@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import LocationTable from '@components/LocationTable';
 
 import { AuthContext } from '@/providers/UserProvider';
-import { LocationType } from '@/utils/constants';
+import type { LocationType } from '@/utils/constants';
 import { authorizedFetch } from '@/utils/fetch';
 
 type LocationListType = {
@@ -29,9 +29,11 @@ const LocationList = ({ label, url, type }: LocationListType) => {
   }, [dispatch, url]);
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <Typography variant="h6">{`${label} (${data.length})`}</Typography>
-        <LocationTable data={data} type={type} />
+      <Grid sx={{ width: '100%' }}>
+        <Typography variant="h6" sx={{ mb: 1 }}>{`${label} (${data.length})`}</Typography>
+        <Grid sx={{ height: 'calc(100vh - 200px)' }}>
+          <LocationTable data={data} type={type} />
+        </Grid>
       </Grid>
     </Grid>
   );
