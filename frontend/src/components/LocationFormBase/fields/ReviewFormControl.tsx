@@ -1,20 +1,20 @@
 import { useContext, useEffect, useState } from 'react';
 
 import { CircularProgress, FormControl } from '@mui/material';
+import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 
+import BVSelect from '@components/LocationFormBase/fields/BVSelect';
 import { Field } from 'formik';
-import { Select } from 'formik-mui';
 import { isEmpty } from 'ramda';
 
 import { AuthContext } from '@/providers/UserProvider';
-import { Review } from '@/types';
+import type { Review } from '@/types';
 import { authorizedFetch } from '@/utils/fetch';
 import { buildReviewListUrl } from '@/utils/utils';
 
 import { styles } from './styles';
-import BVSelect from '@components/LocationFormBase/fields/BVSelect';
 
 const reviewItem = (reviewId: number, url: string) => (
   <MenuItem value={reviewId} key={reviewId}>
@@ -80,15 +80,15 @@ const ReviewFormControl = () => {
   }, [dispatch]);
 
   return isEmpty(reviews) ? (
-    <div css={styles.flexContainerSpinner}>
-      <div css={styles.reviewLabelSpinner}>
+    <Box sx={styles.flexContainerSpinner}>
+      <Box sx={styles.reviewLabelSpinner}>
         <InputLabel>Review</InputLabel>
-      </div>
-      <div>
+      </Box>
+      <Box>
         <CircularProgress />
-      </div>
-      <div css={styles.reviewRightSpinner} />
-    </div>
+      </Box>
+      <Box sx={styles.reviewRightSpinner} />
+    </Box>
   ) : (
     <ReviewField reviews={reviews} />
   );

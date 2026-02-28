@@ -1,27 +1,39 @@
 import { Grid } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
 
-import { Field } from 'formik';
-import { TextField } from 'formik-mui';
+import { Field, type FieldProps } from 'formik';
 import { map } from 'ramda';
 
 import { buildLabel } from './utils';
-import { styled } from '@mui/material/styles';
 
 const CapitalizeTextField = styled(TextField)({
   '& label': { textTransform: 'capitalize' },
 });
 
 const positiveIntegerInput = (attr: string) => (
-  <Grid container item direction="column" md={3} key={attr}>
-    <Field
-      component={CapitalizeTextField}
-      type="number"
-      label={buildLabel(attr)}
-      name={`attributes.${attr}`}
-      min="1"
-      variant="standard"
-      InputProps={{ inputProps: { min: 0 } }}
-    />
+  <Grid key={attr} size={3}>
+    <Field name={`attributes.${attr}`}>
+      {({ field, meta, form }: FieldProps) => (
+        <CapitalizeTextField
+          {...field}
+          type="number"
+          label={buildLabel(attr)}
+          variant="standard"
+          error={meta.touched && Boolean(meta.error)}
+          helperText={meta.touched && meta.error}
+          fullWidth
+          onChange={(e) => {
+            // Only allow positive integers or empty string
+            const value = e.target.value;
+            form.setFieldValue(
+              field.name,
+              value === '' ? '' : Math.max(1, parseInt(value, 10) || 1),
+            );
+          }}
+        />
+      )}
+    </Field>
   </Grid>
 );
 

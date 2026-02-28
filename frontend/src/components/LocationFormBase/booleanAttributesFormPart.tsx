@@ -1,13 +1,11 @@
 import { Grid } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 
+import BVSelect from '@components/LocationFormBase/fields/BVSelect';
 import { Field } from 'formik';
 import { map } from 'ramda';
 
 import { buildLabel } from './utils';
-import BVSelect from '@components/LocationFormBase/fields/BVSelect';
-import { styled } from '@mui/material/styles';
-import { TextField } from 'formik-mui';
 
 interface IMappingDict {
   [id: string]: boolean | null;
@@ -39,13 +37,13 @@ export const booleanToString = (value: boolean | null | unknown): string => {
 };
 
 const yesNoUnknownInputs = (attr: string) => (
-  <Grid container item direction="column" md={3} key={attr}>
+  <Grid key={attr} size={3}>
     <Field
       component={BVSelect}
       name={`attributes.${attr}`}
       label={buildLabel(attr)}
       variant="standard"
-      inputLabel={{ sx: { textTransform: 'capitalize' } }}
+      sxInputLabel={{ textTransform: 'capitalize' }}
       inputProps={{
         name: `attributes.${attr}`,
         id: `attributes.${attr}-select`,

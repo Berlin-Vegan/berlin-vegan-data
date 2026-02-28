@@ -1,7 +1,5 @@
 import { PropsWithChildren } from 'react';
 
-import { useFormikContext } from 'formik';
-
 import LocationFormBase from '../LocationFormBase';
 import {
   GASTRO_BOOLEAN_ATTRIBUTES,

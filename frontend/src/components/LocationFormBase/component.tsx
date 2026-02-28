@@ -7,7 +7,7 @@ import DetailsFormPart from './detailsFormPart';
 import SubmitEmailField from './fields/SubmitEmailField';
 import GeneralFormPart from './generalFormPart';
 import metaFormPart from './metaFormPart';
-import openingHoursFormPart from './openingHoursFormPart';
+import OpeningHoursFormPart from './OpeningHoursFormPart.tsx';
 import TagsFormPart from './tagsFormPart';
 
 type LocationFormBaseProps = {
@@ -22,12 +22,11 @@ const LocationFormBase = ({
   booleanAttrList,
   positiveIntegerAttrList,
   tagList,
-  veganOption = false,
 }: PropsWithChildren<LocationFormBaseProps>) => (
   <Grid container direction="column" spacing={1}>
     <SubmitEmailField />
-    <GeneralFormPart veganOption={veganOption} />
-    {openingHoursFormPart}
+    <GeneralFormPart />
+    {OpeningHoursFormPart}
     <DetailsFormPart />
     <AttributesFormPart
       booleanAttrList={booleanAttrList}

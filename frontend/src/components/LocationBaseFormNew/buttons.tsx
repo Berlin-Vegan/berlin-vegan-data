@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 
 const buttons = (submitForm: () => void, isSubmitting: boolean) => (
   <Grid container spacing={1} justifyContent="flex-end">
-    <Grid item>
+    <Grid>
       <Button
         variant="contained"
         color="primary"

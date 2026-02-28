@@ -1,22 +1,25 @@
-import { Button, ImageList as MuiImageList, ImageListItem, ImageListItemBar } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { Button, ImageListItem, ImageList as MuiImageList } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
+
+import PaperDefault from '@components/PaperDefault';
+import dayjs from 'dayjs';
+import { enqueueSnackbar } from 'notistack';
+
 import { AuthContext } from '@/providers/UserProvider';
-import { Image } from '@/types';
+import type { Image } from '@/types';
+import { DATE_FORMAT } from '@/utils/constants';
 import { authorizedFetch, authorizedFetchPostFile } from '@/utils/fetch';
 import {
   buildImageDetailUrl,
   buildImageListFilterLocationlUrl,
   buildImageListUrl,
 } from '@/utils/utils';
-import PaperDefault from '@components/PaperDefault';
-import { useParams } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { styled } from '@mui/material/styles';
-import { enqueueSnackbar } from 'notistack';
-import Grid from '@mui/material/Grid';
-import dayjs from 'dayjs';
-import { DATE_FORMAT } from '@/utils/constants';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -90,8 +93,8 @@ const ImageList = () => {
           {imageList.map((item) => (
             <ImageListItem key={item.image}>
               <img srcSet={item.image} src={item.image} loading="lazy" alt="" />
-              <Grid container sx={{ marginTop: '10px' }}>
-                <Grid item xs={6}>
+              <Grid container sx={{ marginTop: '10px', justifyContent: 'space-between' }}>
+                <Grid>
                   <div>
                     Created: {item.uploadDate ? dayjs(item.uploadDate).format(DATE_FORMAT) : '–'}
                   </div>
@@ -101,24 +104,22 @@ const ImageList = () => {
                     Height: {item.height} Width: {item.width}
                   </div>
                 </Grid>
-                <Grid container item xs={6} justifyContent="flex-end">
-                  <Grid item>
-                    <Button
-                      variant="contained"
-                      color="error"
-                      name="delete"
-                      onClick={() => imageDelete(item.id)}
-                    >
-                      Delete
-                    </Button>
-                  </Grid>
+                <Grid>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    name="delete"
+                    onClick={() => imageDelete(item.id)}
+                  >
+                    Delete
+                  </Button>
                 </Grid>
               </Grid>
             </ImageListItem>
           ))}
         </MuiImageList>
         <Grid container justifyContent="center">
-          <Grid item>
+          <Grid>
             <Button
               component="label"
               variant="contained"
@@ -128,7 +129,9 @@ const ImageList = () => {
               Upload image
               <VisuallyHiddenInput
                 type="file"
-                onChange={(event) => uploadImage(event.target.files)}
+                onChange={(event: { target: { files: FileList | null } }) =>
+                  uploadImage(event.target.files)
+                }
                 multiple
               />
             </Button>

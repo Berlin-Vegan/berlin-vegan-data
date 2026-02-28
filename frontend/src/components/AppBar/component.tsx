@@ -3,7 +3,8 @@ import { useContext } from 'react';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Button } from '@mui/material';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import MuiAppBar, { type AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -13,7 +14,7 @@ import { drawerWidth } from '@components/PageContainer/styles';
 import { pathOr } from 'ramda';
 
 import Logo from '@/assets/berlin-vegan-logo.png';
-import { AuthContext, TYPE_USER_LOGOUT, UserDispatch } from '@/providers/UserProvider';
+import { AuthContext, TYPE_USER_LOGOUT, type UserDispatch } from '@/providers/UserProvider';
 import { authorizedFetch } from '@/utils/fetch';
 
 import { styles } from './styles';
@@ -58,7 +59,7 @@ const AppBarComponent = ({ open, toggleDrawer }: AppBarComponentProps) => {
 
   return (
     <AppBar position="absolute" open={open}>
-      <Toolbar css={styles.toolbar}>
+      <Toolbar sx={styles.toolbar}>
         <IconButton
           edge="start"
           color="inherit"
@@ -72,15 +73,15 @@ const AppBarComponent = ({ open, toggleDrawer }: AppBarComponentProps) => {
         >
           <MenuIcon />
         </IconButton>
-        <img src={Logo} alt="Berlin-Vegan Logo" css={styles.logo} />
-        <Typography component="h1" variant="h6" color="inherit" noWrap css={styles.title}>
+        <Box component="img" src={Logo} alt="Berlin-Vegan Logo" sx={styles.logo} />
+        <Typography component="h1" variant="h6" color="inherit" noWrap sx={styles.title}>
           Berlin-Vegan Data
         </Typography>
         <Typography>{username}</Typography>
         <Button
           variant="contained"
           color="error"
-          css={styles.logout}
+          sx={styles.logout}
           startIcon={<ExitToAppIcon />}
           onClick={() => logoutUser(userDispatch)}
         >

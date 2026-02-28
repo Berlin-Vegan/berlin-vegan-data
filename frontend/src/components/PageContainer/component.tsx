@@ -1,13 +1,11 @@
 import { PropsWithChildren, useState } from 'react';
-
 import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 
 import AppBar from '../AppBar';
 import Drawer from '../Drawer';
-import { useStyles } from './styles';
 
 const PageContainer = ({ children }: PropsWithChildren) => {
-  const classes = useStyles();
   const [open, setOpen] = useState(true);
 
   const toggleDrawer = () => {
@@ -15,16 +13,16 @@ const PageContainer = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <div className={classes.root}>
+    <Box sx={{ display: 'flex' }}>
       <AppBar open={open} toggleDrawer={toggleDrawer} />
       <Drawer open={open} toggleDrawer={toggleDrawer} />
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="xl" className={classes.container}>
+      <Box component="main" sx={{ flexGrow: 1, height: '100vh', overflow: 'auto' }}>
+        <Box sx={(theme) => theme.mixins.toolbar} />
+        <Container maxWidth="xl" sx={{ pt: 4, pb: 4 }}>
           <>{children}</>
         </Container>
-      </main>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

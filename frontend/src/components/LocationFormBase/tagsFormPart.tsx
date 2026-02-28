@@ -1,41 +1,47 @@
-import { Chip, FormControl, InputLabel, MenuItem } from '@mui/material';
+import { Chip, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
-import { Field } from 'formik';
-import { Select } from 'formik-mui';
-
-import useStyles from './styles';
-
-const tagMenuItem = (tag: string) => (
-  <MenuItem key={tag} value={tag}>
-    {tag}
-  </MenuItem>
-);
+import { Field, type FieldProps } from 'formik';
 
 const TagsFormPart = ({ tagList }: { tagList: string[] }) => {
-  const classes = useStyles();
   return (
     <>
       <Typography variant="h5">Tags</Typography>
-      <Field
-        component={Select}
-        label="Tags"
-        name="tags"
-        multiple={true}
-        variant="standard"
-        inputProps={{
-          id: 'tags-select',
-          name: 'tags',
-        }}
-        renderValue={(selected: string[]) => (
-          <div className={classes.chips}>
-            {selected.map((value) => (
-              <Chip key={value} label={value} className={classes.chip} />
-            ))}
-          </div>
+      <Field name="tags">
+        {({ field, form, meta }: FieldProps) => (
+          <FormControl variant="standard" fullWidth error={meta.touched && Boolean(meta.error)}>
+            <InputLabel id="tags-select-label">Tags</InputLabel>
+            <Select
+              {...field}
+              labelId="tags-select-label"
+              id="tags-select"
+              multiple
+              label="Tags"
+              value={field.value || []}
+              onChange={(event) => {
+                form.setFieldValue(field.name, event.target.value);
+              }}
+              renderValue={(selected: string[]) => (
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                  {selected.map((value) => (
+                    <Chip key={value} label={value} sx={{ m: 0.5 }} />
+                  ))}
+                </div>
+              )}
+            >
+              {tagList.map((tag) => (
+                <MenuItem key={tag} value={tag}>
+                  {tag}
+                </MenuItem>
+              ))}
+            </Select>
+            {meta.touched && meta.error && (
+              <Typography color="error" variant="caption">
+                {meta.error}
+              </Typography>
+            )}
+          </FormControl>
         )}
-      >
-        {tagList.map((tag) => tagMenuItem(tag))}
       </Field>
     </>
   );

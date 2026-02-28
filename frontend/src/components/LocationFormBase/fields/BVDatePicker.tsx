@@ -1,40 +1,60 @@
 import { DatePicker as MuiDatePicker } from '@mui/x-date-pickers/DatePicker';
+import type { SxProps } from '@mui/material/styles';
 
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-import { DatePickerProps, fieldToDatePicker } from 'formik-mui-x-date-pickers';
 
 dayjs.extend(customParseFormat);
 
-const dateToStringOrNull = (date: Date | null): string | null =>
-  date === null ? null : dayjs(date).format('YYYY-MM-DD');
-
-const stringToDate = (stringDate: string | null): Date | string =>
-  stringDate === null ? '' : dayjs(stringDate, 'YYYY-MM-DD').toDate();
-
-const BVDatePicker = ({ children, ...props }: DatePickerProps) => {
-  const {
-    form: { setFieldValue, setFieldTouched },
-    field: { name },
-  } = props;
-
-  const handleChange = (date: Date | null) => {
-    setFieldTouched(name, true, false);
-    setFieldValue(name, dateToStringOrNull(date), true);
+type BVDatePickerProps = {
+  field: { name: string; value: string | null };
+  form: {
+    setFieldValue: (field: string, value: unknown, shouldValidate?: boolean) => void;
+    setFieldTouched: (field: string, isTouched?: boolean, shouldValidate?: boolean) => void;
   };
+  label?: string;
+  inputFormat?: string;
+  TextFieldProps?: Record<string, unknown>;
+  sx?: SxProps;
+};
+
+const dateToStringOrNull = (
+  date: dayjs.Dayjs | Date | string | null | undefined,
+): string | null => {
+  if (date == null) return null;
+  const d = dayjs(date);
+  return d.isValid() ? d.format('YYYY-MM-DD') : null;
+};
+
+const stringToDayjsOrNull = (stringDate: string | null) =>
+  stringDate == null || stringDate === '' ? null : dayjs(stringDate, 'YYYY-MM-DD');
+
+const BVDatePicker = ({
+  field,
+  form,
+  label,
+  inputFormat = 'DD.MM.YYYY',
+  TextFieldProps,
+  sx,
+}: BVDatePickerProps) => {
+  const { name, value } = field;
+
+  const handleChange = (newValue: dayjs.Dayjs | null) => {
+    form.setFieldTouched(name, true, false);
+    form.setFieldValue(name, dateToStringOrNull(newValue), true);
+  };
+
+  const helperSlotProps = TextFieldProps ? (TextFieldProps as Record<string, unknown>) : {};
 
   return (
     <MuiDatePicker
-      {...fieldToDatePicker({
-        ...props,
-        field: { ...props.field, value: stringToDate(props.field.value) },
-      })}
+      label={label}
+      value={stringToDayjsOrNull(value)}
       onChange={handleChange}
-      textField={{ variant: 'standard' }}
-      inputFormat="DD.MM.YYYY"
-    >
-      {children}
-    </MuiDatePicker>
+      sx={sx}
+      slotProps={{ textField: { variant: 'standard', ...helperSlotProps } }}
+      format={inputFormat}
+    />
   );
 };
 

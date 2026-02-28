@@ -1,13 +1,13 @@
 import {
-  Context,
-  Dispatch,
-  PropsWithChildren,
-  SetStateAction,
+  type Context,
+  type Dispatch,
+  type PropsWithChildren,
+  type SetStateAction,
   createContext,
   useState,
 } from 'react';
 
-import { GridSortModel } from '@mui/x-data-grid';
+import type { GridSortModel } from '@mui/x-data-grid';
 
 interface IFilterContext {
   filterState: GridSortModel;

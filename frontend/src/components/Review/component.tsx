@@ -2,13 +2,14 @@ import { useContext, useEffect, useState } from 'react';
 
 import { ImageList, ImageListItem } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 import PaperDefault from '@components/PaperDefault';
 import { styles } from '@components/Review/styles';
 import { isNil, pathOr } from 'ramda';
 
 import { AuthContext } from '@/providers/UserProvider';
-import { ReviewImage, Review } from '@/types';
+import type { ReviewImage, Review } from '@/types';
 import { authorizedFetch } from '@/utils/fetch';
 import { buildReviewDetailUrl } from '@/utils/utils';
 
@@ -35,11 +36,11 @@ export const ReviewComponent = ({ reviewId }: ReviewComponentType) => {
   }, [reviewId, dispatch]);
 
   return (
-    <div css={styles.review}>
+    <Box sx={styles.review}>
       <PaperDefault>
         <Typography variant="h5">Review</Typography>
         <p>{reviewText}</p>
-        <div css={styles.reviewList}>
+        <Box sx={styles.reviewList}>
           <ImageList rowHeight={310} cols={3}>
             {images.map((item: ReviewImage) => (
               <ImageListItem key={item.url} cols={1}>
@@ -47,13 +48,13 @@ export const ReviewComponent = ({ reviewId }: ReviewComponentType) => {
               </ImageListItem>
             ))}
           </ImageList>
-        </div>
+        </Box>
       </PaperDefault>
-    </div>
+    </Box>
   );
 };
 
-const getReview = (reviewId: null | number) =>
+const GetReview = (reviewId: null | number) =>
   isNil(reviewId) ? null : <ReviewComponent reviewId={reviewId} />;
 
-export default getReview;
+export default GetReview;

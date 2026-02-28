@@ -1,19 +1,19 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { type FC, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import * as Yup from 'yup';
-import getReview from '@components//Review';
+import GetReview from '@components//Review';
+import ImageList from '@components/ImageList';
 import LocationBaseFormEdit from '@components/LocationBaseFormEdit';
-import LocationBaseType from '@components/LocationFormBase/locationBaseType';
+import type { LocationBaseType } from '@components/LocationFormBase/locationBaseType';
 import PaperDefault from '@components/PaperDefault';
 import { isEmpty, pathOr } from 'ramda';
 
 import NotFoundPage from '@/pages/NotFoundPage';
 import { AuthContext } from '@/providers/UserProvider';
-import { LocationType } from '@/utils/constants';
+import type { LocationType } from '@/utils/constants';
 import { authorizedFetch } from '@/utils/fetch';
 import { buildDetailUrl } from '@/utils/utils';
-import ImageList from '@components/ImageList';
 
 type LocationEditType = {
   type: LocationType;
@@ -64,7 +64,7 @@ const LocationEdit: FC<LocationEditType> = ({ type, label, locationForm, locatio
             locationFormSchema={locationFormSchema}
             setLocationDataState={setLocationDataState}
           />
-          {getReview(pathOr(null, ['review'], locationData))}
+          {GetReview(pathOr(null, ['review'], locationData))}
           <ImageList />
         </>
       )}

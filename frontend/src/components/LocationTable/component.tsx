@@ -1,12 +1,13 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { DataGrid, GridColDef, GridEventListener, GridToolbar } from '@mui/x-data-grid';
+import { DataGrid, type GridColDef, type GridEventListener, GridToolbar } from '@mui/x-data-grid';
+
+import { VEGAN_OPTIONS_FIELD } from '@components/LocationFormBase/fields/constants';
 
 import { FilterContext } from '@/providers/FilterProvider';
-import { LocationType, SHOPPING } from '@/utils/constants';
+import { type LocationType, SHOPPING } from '@/utils/constants';
 import { buildFEDetailUrl } from '@/utils/utils';
-import { VEGAN_OPTIONS_FIELD } from '@components/LocationFormBase/fields/constants';
 
 type LocationListData = {
   id: string;
@@ -59,6 +60,7 @@ const LocationTable = ({ data, type }: ILocationTableProps) => {
 
   return (
     <DataGrid
+      sx={{ width: '100%', height: '100%' }}
       rows={data}
       columns={columns}
       disableColumnFilter

@@ -1,5 +1,5 @@
 # build environment
-FROM node:25-alpine as prepare
+FROM node:25-alpine AS prepare
 
 ARG ENVIRONMENT=production
 ARG REACT_APP_MAP_API_URL
@@ -15,7 +15,7 @@ RUN yarn install $(test "$ENVIRONMENT" = production && echo "--production")
 COPY . ./
 
 # build
-FROM prepare as builder
+FROM prepare AS builder
 RUN yarn run build
 
 # production environment
