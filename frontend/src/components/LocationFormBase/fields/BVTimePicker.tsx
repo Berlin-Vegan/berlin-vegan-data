@@ -1,5 +1,5 @@
-import { TimePicker as MuiTimePicker } from '@mui/x-date-pickers/TimePicker';
 import type { SxProps } from '@mui/material/styles';
+import { TimePicker as MuiTimePicker } from '@mui/x-date-pickers/TimePicker';
 
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
