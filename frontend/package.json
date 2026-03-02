@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "dev": "vite",
-    "format": "prettier --write src/**/*.{ts,tsx}",
+    "format": "prettier --write .",
     "lint": "eslint --ext .ts,.tsx src --color",
     "lintformat": "yarn run lint && yarn run format",
     "preview": "vite preview"
@@ -22,21 +22,21 @@
     "@mui/x-date-pickers": "^7.29.4",
     "@sentry/react": "^10.41.0",
     "@vitejs/plugin-react": "^5.1.4",
+    "csstype": "^3.0.10",
     "dayjs": "^1.11.19",
     "formik": "^2.4.9",
     "maplibre-gl": "^5.19.0",
     "notistack": "^3.0.2",
-    "csstype": "^3.0.10",
     "ramda": "^0.32.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-map-gl": "^8.1.0",
     "react-router-dom": "^7.13.1",
-    "yup": "^1.7.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.2",
+    "@eslint/js": "10.0.1",
     "@sentry/types": "^10.41.0",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/node": "^25.3.3",
