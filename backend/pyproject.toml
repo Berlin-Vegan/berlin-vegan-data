@@ -24,7 +24,7 @@ pillow = "^12.1.0"
 beautifulsoup4 = "^4.14.3"
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.8.0"
+black = "^26.1.0"
 django-debug-toolbar = "^6.1.0"
 factory-boy = "^3.3.1"
 flake8 = "^7.3.0"
