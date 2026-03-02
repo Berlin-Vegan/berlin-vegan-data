@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+
 import locationBaseSchema, {
   BASE_BOOLEAN_ATTRIBUTES,
   booleanAttributeSchema,
@@ -17,14 +18,9 @@ export const SHOPPING_TAGS = [
 
 const shoppingTagType = Yup.string().oneOf(SHOPPING_TAGS);
 
-export const SHOPPING_BOOLEAN_ATTRIBUTES = [
-  ...BASE_BOOLEAN_ATTRIBUTES,
-  'webshop',
-];
+export const SHOPPING_BOOLEAN_ATTRIBUTES = [...BASE_BOOLEAN_ATTRIBUTES, 'webshop'];
 
 export const shoppingSchema = locationBaseSchema.shape({
   tags: Yup.array().of(shoppingTagType),
-  attributes: Yup.object().shape(
-    booleanAttributeSchema(SHOPPING_BOOLEAN_ATTRIBUTES),
-  ),
+  attributes: Yup.object().shape(booleanAttributeSchema(SHOPPING_BOOLEAN_ATTRIBUTES)),
 });

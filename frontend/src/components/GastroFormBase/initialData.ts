@@ -1,6 +1,6 @@
 import {
-  initialLocationData,
   initialLocationBooleanAttributeData,
+  initialLocationData,
 } from '../LocationBaseFormNew/initialData';
 
 export const initialGastroLocationBooleanAttributeData = {

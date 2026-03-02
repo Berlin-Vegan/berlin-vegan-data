@@ -1,19 +1,22 @@
 import React, { type Dispatch, type SetStateAction, useContext, useState } from 'react';
-import Avatar from '@mui/material/Avatar';
+
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Typography } from '@mui/material';
-import TextField from '@mui/material/TextField';
+import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+
 import clsx from 'clsx';
-import { __, propOr, isEmpty, assoc, ifElse } from 'ramda';
+import { __, assoc, ifElse, isEmpty, propOr } from 'ramda';
+
 import {
   AuthContext,
   TYPE_SET_USER_DATA,
   TYPE_USER_LOGIN,
   type UserDispatch,
 } from '@/providers/UserProvider';
-import { authorizedFetch } from '@/utils/fetch';
 import { getCSRFToken } from '@/utils/cookie';
+import { authorizedFetch } from '@/utils/fetch';
 
 const getUserData = (userDispatch: UserDispatch) =>
   authorizedFetch(userDispatch, '/api/v1/accounts/profile/').then((res) => res.json());

@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from 'react';
 
 import { ImageList, ImageListItem } from '@mui/material';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 import PaperDefault from '@components/PaperDefault';
 import { styles } from '@components/Review/styles';
 import { isNil, pathOr } from 'ramda';
 
 import { AuthContext } from '@/providers/UserProvider';
-import type { ReviewImage, Review } from '@/types';
+import type { Review, ReviewImage } from '@/types';
 import { authorizedFetch } from '@/utils/fetch';
 import { buildReviewDetailUrl } from '@/utils/utils';
 

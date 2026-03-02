@@ -2,12 +2,12 @@ import { PropsWithChildren } from 'react';
 
 import Grid from '@mui/material/Grid';
 
+import OpeningHoursFormPart from './OpeningHoursFormPart.tsx';
 import AttributesFormPart from './attributesFormPart';
 import DetailsFormPart from './detailsFormPart';
 import SubmitEmailField from './fields/SubmitEmailField';
 import GeneralFormPart from './generalFormPart';
 import metaFormPart from './metaFormPart';
-import OpeningHoursFormPart from './OpeningHoursFormPart.tsx';
 import TagsFormPart from './tagsFormPart';
 
 type LocationFormBaseProps = {

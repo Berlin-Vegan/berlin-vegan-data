@@ -1,10 +1,12 @@
 import React from 'react';
+
 import TextField, { type TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
-import type { FieldProps } from 'formik';
+
 import {
   emptyStringToNull,
   nullToEmptyString,
 } from '@components/LocationFormBase/fields/constants.ts';
+import type { FieldProps } from 'formik';
 
 const NullTextField: React.FC<MuiTextFieldProps & FieldProps> = ({
   field,

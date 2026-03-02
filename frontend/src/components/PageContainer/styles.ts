@@ -1,5 +1,6 @@
-import { type Theme, useTheme } from '@mui/material/styles';
 import { useMemo } from 'react';
+
+import { type Theme, useTheme } from '@mui/material/styles';
 
 export const drawerWidth = 240;
 
